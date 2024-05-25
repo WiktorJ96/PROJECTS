@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rejestracja i logowanie do naszego serwisu. Zarejestruj się lub zaloguj się, aby uzyskać dostęp do wszystkich funkcji.">
+    <meta name="keywords" content="rejestracja, logowanie, formularz, social login, Facebook, Google">
+    <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/">
+    <link rel="stylesheet" href="formularz.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <title>Formularz rejestracji/logowania</title>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Formularz rejestracji/logowania",
+      "description": "Rejestracja i logowanie do naszego serwisu. Zarejestruj się lub zaloguj się, aby uzyskać dostęp do wszystkich funkcji.",
+      "url": "https://wiktorj96.github.io/PROJECTS/"
+    }
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav>
+        </nav>
+        <div class="form-switch">
+            <button type="button" class="switch-to-register">Zarejestruj się</button>
+            <button type="button" class="switch-to-login">Zaloguj się</button>
+        </div>
+        <form id="register-form">
+            <h1>Zarejestruj się</h1>
+            <div class="oauth-buttons">
+                <button type="button" class="facebook-login"><i class="fab fa-facebook-f social-icon"></i>Zarejestruj się z
+                    Facebook</button>
+                <button type="button" class="custom-google-signin"><i class="fab fa-google social-icon"></i>Zarejestruj się z
+                    Google</button>
+            </div>
+            <div class="form-box">
+                <label for="username">Nazwa użytkownika:</label>
+                <input type="text" id="username" placeholder="Podaj nazwę użytkownika">
+                <p class="error-text">BŁĄD</p>
+            </div>
+            <div class="form-box">
+                <label for="password">Hasło:</label>
+                <input type="password" id="password" placeholder="Podaj hasło">
+                <p class="error-text">BŁĄD</p>
+            </div>
+            <div class="form-box">
+                <label for="password2">Powtórz hasło:</label>
+                <input type="password" id="password2" placeholder="Podaj hasło ponownie">
+                <p class="error-text">BŁĄD</p>
+            </div>
+            <div class="form-box">
+                <label for="email">Adres e-mail:</label>
+                <input type="email" id="email" placeholder="Wpisz adres e-mail">
+                <p class="error-text">BŁĄD</p>
+            </div>
+            <div class="control-buttons">
+                <button type="button" class="clear">Wyczyść</button>
+                <button type="submit" class="send">Wyślij</button>
+            </div>
+        </form>
+
+        <form id="login-form" style="display:none;">
+            <h1>Zaloguj się</h1>
+            <div class="oauth-buttons">
+                <button type="button" class="facebook-login"><i class="fab fa-facebook-f social-icon"></i>Zaloguj się z
+                    Facebook</button>
+                <button type="button" class="custom-google-signin"><i class="fab fa-google social-icon"></i>Zaloguj się z
+                    Google</button>
+            </div>
+            <div class="form-box">
+                <label for="login-username">Nazwa użytkownika:</label>
+                <input type="text" id="login-username" placeholder="Podaj nazwę użytkownika">
+                <p class="error-text">error</p>
+            </div>
+            <div class="form-box">
+                <label for="login-password">Hasło:</label>
+                <input type="password" id="login-password" placeholder="Podaj hasło">
+                <p class="error-text">error</p>
+            </div>
+            <div class="control-buttons">
+                <button type="button" class="clear">Wyczyść</button>
+                <button type="submit" class="login-send send">Wyślij</button>
+            </div>
+        </form>
+        <div class="popup">
+            <p>Formularz został wysłany</p>
+            <button type="button" class="close">Zamknij</button>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+    <script src="formularz.js"></script>
+</body>
+
+</html>

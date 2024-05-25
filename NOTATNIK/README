@@ -1,0 +1,3 @@
+Projekt zawiera prosty notatnik który umożliwia zapisywanie notatek w pliku .json na dysku po zamianie 
+<script src="notatnik.js"></script> na <script src="notatnikSERVER.js"></script> 
+i wcześniejszym stworzeniu lokalnego serwera za pomoca Node.js.
