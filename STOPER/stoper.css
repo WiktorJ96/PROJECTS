@@ -44,7 +44,7 @@ body {
     width: 80%;
     max-width: 800px;
     min-width: 300px;
-    background: radial-gradient(circle, rgb(38, 39, 40) 0%, rgb(17, 17, 17) 93%);
+    background: radial-gradient(circle, rgba(38, 39, 40, 0.95) 0%, rgba(17, 17, 17, 0.95) 93%);
     border-radius: 15px;
     box-shadow: 5px 5px 10px black;
     color: #fff;
@@ -353,6 +353,9 @@ footer {
     .palette {
         font-size: 18px;
         padding: 10px;
+    }
+    .palette{
+       right: 50px;
     }
 
     h1 {

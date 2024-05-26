@@ -1,0 +1,12 @@
+{
+    "title": "Projekty JavaScript",
+    "formularzTitle": "Formularz",
+    "formularzDesc": "Responsywny formularz z walidacją do rejestracji i logowania.",
+    "moreInfo": "Więcej informacji",
+    "notatnikTitle": "Notatnik",
+    "notatnikDesc": "Responsywny notatnik z opcją zapisywania notatek w pliku na dysku.",
+    "stoperTitle": "Stoper",
+    "stoperDesc": "Responsywny stoper z archiwum czasów i opcją zmiany koloru.",
+    "wyszukiwarkaTitle": "Wyszukiwarka",
+    "wyszukiwarkaDesc": "Responsywna wyszukiwarka suplementów."
+}

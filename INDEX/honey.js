@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+
     const hexagons = document.querySelectorAll('.hexagon');
 
     hexagons.forEach(hexagon => {
@@ -14,11 +15,22 @@ document.addEventListener('DOMContentLoaded', () => {
             desc.style.opacity = '0';
         });
     });
-});
-document.addEventListener("DOMContentLoaded", function() {
-    const header = document.getElementById("projects-heading");
 
-    header.addEventListener("animationend", function() {
-        header.style.display = "none";
+    const elements = document.querySelectorAll('[data-lang-pl]');
+    const langSwitchPl = document.getElementById('lang-pl');
+    const langSwitchEn = document.getElementById('lang-en');
+
+    langSwitchPl.addEventListener('click', () => switchLanguage('pl'));
+    langSwitchEn.addEventListener('click', () => switchLanguage('en'));
+
+    function switchLanguage(lang) {
+        elements.forEach(el => {
+            el.textContent = el.getAttribute(`data-lang-${lang}`);
+        });
+    }
+
+    document.getElementById('js-projectsJS').addEventListener('click', function () {
+        window.location.href = './INDEX/JSprojects.html';
     });
 });
+

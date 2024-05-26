@@ -1,0 +1,12 @@
+{
+    "title": "JavaScript Projects",
+    "formularzTitle": "Form",
+    "formularzDesc": "Responsive form with validation for registration and login.",
+    "moreInfo": "More information",
+    "notatnikTitle": "Notebook",
+    "notatnikDesc": "Responsive notebook with option to save notes to a file on the disk.",
+    "stoperTitle": "Stopwatch",
+    "stoperDesc": "Responsive stopwatch with time archive and color change option.",
+    "wyszukiwarkaTitle": "Search Engine",
+    "wyszukiwarkaDesc": "Responsive supplement search engine."
+}

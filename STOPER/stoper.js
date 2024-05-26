@@ -34,7 +34,7 @@ const handleStart = () => {
             seconds = 0;
             stopwatch.textContent = `${minutes}:00`;
         }
-    }, 200);
+    }, 1000);
 };
 
 startBtn.addEventListener('click', handleStart);
