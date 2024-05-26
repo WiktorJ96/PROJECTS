@@ -182,3 +182,43 @@ document.addEventListener('DOMContentLoaded', function() {
         onLoad();
     };
 });
+
+                document.addEventListener('DOMContentLoaded', function () {
+                        const langSwitchPl = document.getElementById('lang-pl');
+                        const langSwitchEn = document.getElementById('lang-en');
+
+                        langSwitchPl.addEventListener('click', () => switchLanguage('pl'));
+                        langSwitchEn.addEventListener('click', () => switchLanguage('en'));
+
+                        function switchLanguage(lang) {
+                            fetch(`${lang}.json`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    document.title = data.title;
+                                    const elements = document.querySelectorAll('[data-lang-key]');
+                                    elements.forEach(el => {
+                                        const key = el.getAttribute('data-lang-key');
+                                        el.textContent = data[key];
+                                    });
+                                    const placeholders = document.querySelectorAll('[data-placeholder-key]');
+                placeholders.forEach(el => {
+                    const key = el.getAttribute('data-placeholder-key');
+                    if (data[key]) {
+                        el.setAttribute('placeholder', data[key]);
+                    }
+                });
+
+                const buttons = document.querySelectorAll('[data-button-key]');
+                buttons.forEach(button => {
+                    const key = button.getAttribute('data-button-key');
+                    if (data[key]) {
+                        const icon = button.querySelector('i');
+                        button.innerHTML = '';
+                        button.appendChild(icon);
+                        button.appendChild(document.createTextNode(data[key]));
+                    }
+                });
+                                })
+                                .catch(error => console.error('Error loading language file:', error));
+                        }
+                    });

@@ -32,6 +32,31 @@ body {
     }
 }
 
+.language-switch button:hover {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #333;
+}
+
+.language-switch {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+.language-switch button {
+    background-color: hsla(211, 84%, 51%, 0.895);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: normal;
+}
+
 .wrapper {
     width: 30%;
     min-width: 450px;
