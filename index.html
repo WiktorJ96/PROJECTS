@@ -1,292 +1,357 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Prezentacja projektów wykorzystujących różne języki programowania i frameworki">
-    <meta name="keywords" content="JavaScript, HTML, CSS programming, projects">
-    <meta name="author" content="Wiktor Jurkowski">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="./INDEX/honey.css">
-    <title data-lang-pl="Prezentacja projektów" data-lang-en="Project presentation">Prezentacja projektów</title>
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "name": "Programming Projects Showcase",
-          "url": "https://wiktorj96.github.io/PROJECTS/",
-          "author": {
-            "@type": "Person",
-            "name": "Wiktor Jurkowski"
-          },
-          "description": "Prezentacja projektów wykorzystujących różne języki programowania i frameworki",
-          },
-        </script>
+    <link rel="stylesheet" href="p.css">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
-html,
-body {
-    height: 100%;
-    margin: 0;
-    font-family: "Lato", sans-serif;
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeInBody 1s ease-in forwards;
-    overflow: hidden;
+    #portfolio {
+    padding: 5rem 0;
+    text-align: center;
 }
 
-body {
-    background-image: linear-gradient(to right, rgba(227, 231, 194, 0.4) 40%, hsla(0, 1%, 27%, 0.4) 100%);
+#portfolio h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.portfolio__projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.portfolio__projects figure {
+    position: relative;
+    overflow: hidden;
+    margin: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.portfolio__projects figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.portfolio__projects figure:hover img {
+    transform: scale(1.1);
+}
+
+.portfolio__projects figure figcaption {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-@keyframes fadeInBody {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.portfolio__projects figure:hover figcaption {
+    opacity: 1;
 }
 
-@media (max-width: 1024px) {
-    section {
-        width: 100%;
-        padding: 0 20px;
-    }
-
-    .center {
-        width: 180px;
-    }
-
-    .hexagon,
-    .desc {
-        height: 360px;
-        width: 180px;
-    }
-
-    .desc h2 {
-        margin: 130px 20px 0 20px;
-        font-size: 22px;
-    }
+.portfolio__projects figure figcaption h3 {
+    margin: 0.5rem 0;
 }
 
-@media (max-width: 768px) {
-    main {
-        margin-top: 0;
-    }
-
-    .center {
-        width: 150px;
-        margin: 15px 5px;
-    }
-
-    .hexagon,
-    .desc {
-        height: 300px;
-        width: 150px;
-    }
-
-    .desc h2 {
-        margin: 110px 15px 0 15px;
-        font-size: 18px;
-    }
-
-    .language-switch button {
-        padding: 8px 16px;
-        font-size: 14px;
-    }
+.portfolio__projects figure figcaption p {
+    margin: 0.5rem 0;
 }
 
-@media (max-width: 480px) {
-    .center {
-        width: 120px;
-        margin: 10px 5px;
-    }
-
-    .hexagon,
-    .desc {
-        height: 240px;
-        width: 120px;
-    }
-
-    .desc h2 {
-        margin: 85px 10px 0 10px;
-        font-size: 16px;
-    }
-
-    .language-switch button {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
+.portfolio__projects figure figcaption a {
+    color: #fff;
+    font-size: 2rem;
+    transition: color 0.3s ease;
 }
+
+.portfolio__projects figure figcaption a:hover {
+    color: #00ff6c;
+}
+
 </style>
 <body>
+    <div class="menu-responsive">
+        <nav>
+            <ul>
+                <li><a class="scroll" href="#about"><i class="fa fa-user" aria-hidden="true"></i> O mnie</a></li>
+                <li><a class="scroll" href="#skills"><i class="fa fa-cogs" aria-hidden="true"></i> Umiejętności</a></li>
+                <li><a class="scroll" href="#portfolio"><i class="fa fa-briefcase" aria-hidden="true"></i> Portfolio</a></li>
+                <li><a class="scroll" href="#contact"><i class="fa fa-envelope" aria-hidden="true"></i> Kontakt</a></li>
+            </ul>
+        </nav>
 
-    <header id="projects-heading" class="top-heading centered-header">
-        <h1>PREZENTACJA PROJEKTÓW</h1>
-    </header>
-    <div class="language-switch">
-        <button id="lang-pl">PL</button>
-        <button id="lang-en">EN</button>
     </div>
-    <main>
 
-        <section id="projects" aria-labelledby="projects-heading" aria-label="Main Navigation">
-
-            <div class="hex_row_odd">
-                <div class="center">
-                    <div class="hexagon">
-                        <div class="hex1">
-                            <div class="hex2" id="js-projectsJS"
-                                style="background: url('./imghoney/JS.webp') center no-repeat; background-size:275%;">
-                                <div class="desc">
-                                    <h2 data-lang-pl="PROJEKTY JavaScript" data-lang-en="JavaScript PROJECTS">PROJEKTY JavaScript</h2>
-                                </div>
-                            </div>
-                        </div>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="header__top">
+                    <div class="col-md-6 header__top-brand">
                     </div>
-                </div>
-            </div>
-<!--
-                <div class="center">
-                    <div class="hexagon">
-                        <div class="hex1">
-                            <div class="hex2"
-                                style="background: url('/imghoney/TS.webp') center no-repeat; background-size:115%;">
-                                <div class="desc">
-                                    <h2>TypeScript Projects</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            
-                <div class="center">
-                    <div class="hexagon">
-                        <div class="hex1">
-                            <div class="hex2"
-                                style="background: url('/imghoney/PYTHON.webp') center no-repeat; background-size:115%;">
-                                <div class="desc">
-                                    <h2>Python Projects</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <nav class="col-md-6 header__top--responsive hidden-lg-up">
+                        <ul>
+                            <li><a class="menu-bars" href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
 
+            <div class="header__content">
+                <p class="bold">Witaj !</p>
+                <p>Jestem początkującym <span class="bold">Front-end Developerem</span> i <span class="bold">Web
+                        Designerem</span></p>
+                <a class="btn scroll" href="#portfolio">Projekty</a>
+            </div>
 
-            <div class="hex_row_even">
-                <div class="center">
-                    <div class="hexagon">
-                        <div class="hex1">
-                            <div class="hex2"
-                                style="background: url('') center no-repeat"></div>
-                                <div class="desc">
-                                    <h2>Welcome this is an epic title</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="center">
-                    <div class="hexagon">
-                        <div class="hex1">
-                            <div class="hex2"
-                                style="background: url('') center no-repeat">
-                                <div class="desc">
-                                    <h2>Welcome this is an epic title</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="center">
-                    <div class="hexagon">
-                        <div class="hex1">
-                            <div class="hex2"
-                                style="background: url('') center no-repeat">
-                                <div class="desc">
-                                    <h2>Welcome this is an epic title</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="center">
-                    <div class="hexagon">
-                        <div class="hex1">
-                            <div class="hex2"
-                                style="background: url('') center no-repeat">
-                                <div class="desc">
-                                    <h2>Welcome this is an epic title</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
+            <div class="header__arrow">
+                <a class="scroll" href="#about"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
             </div>
-            
-            <div class="hex_row_odd">
-                <div class="center">
-                    <div class="hexagon">
-                        <div class="hex1">
-                            <div class="hex2"
-                                style="background: url('') center no-repeat">
-                                <div class="desc">
-                                    <h2>Welcome this is an epic title</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h2>O mnie</h2>
+            <hr>
+            <img src="/avatar.webp" width="150px" alt="Avatar">
+            <p class="lead">Designer & Developer</p>
+            <p>Mam na imię<span class="bold"> Wiktor </span> interesuje mnie <strong>projektowanie</strong> i 
+            <strong>tworzenie</strong>
+            <p>stron internetowych oraz aplikacji</p>
+            <p>Moim celem jest <strong>rozwój</strong> na wielu płasczyznach IT</p>
+            <p>W chwili obecnej <strong>stawiam pierwsze kroki</strong> jako <strong>Front-end developer</strong></p>
+            <p>Jednak jestem zmotywowany aby jak najszybciej zdobyc wiedzę</p>
+                 <p>na temat rożnych technologi i językow programowania</p>
+        </div>
+    </section>
+
+<section id="skills">
+    <h2>Umiejętności</h2>
+    <hr>
+    <div class="skill" id="html-skill">
+        <div class="skill-header">
+            <span class="skills__name">HTML</span>
+            <span class="skills__percent">85%</span>
+        </div>
+        <div class="progress-container" style="--progress: 85%;">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+    <div class="skill" id="css-skill">
+        <div class="skill-header">
+            <span class="skills__name">CSS</span>
+            <span class="skills__percent">85%</span>
+        </div>
+        <div class="progress-container" style="--progress: 85%;">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+    <div class="skill" id="js-skill">
+        <div class="skill-header">
+            <span class="skills__name">JavaScript</span>
+            <span class="skills__percent">60%</span>
+        </div>
+        <div class="progress-container" style="--progress: 60%;">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+    <div class="skill" id="react-skill">
+        <div class="skill-header">
+            <span class="skills__name">React</span>
+            <span class="skills__percent">5%</span>
+        </div>
+        <div class="progress-container" style="--progress: 5%;">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+        <div class="skill" id="angular-skill">
+            <div class="skill-header">
+                <span class="skills__name">Angular</span>
+                <span class="skills__percent">5%</span>
+            </div>
+            <div class="progress-container" style="--progress: 5%;">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+</section>
+
+
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <hr>
+        <div class="container">
+            <div class="portfolio__projects row">
+                <div class="col-lg-4 col-md-6">
+                    <figure>
+                        <img src="http://via.placeholder.com/300x250" alt="Project Image">
+                        <figcaption>
+                            <h3>Project Name</h3>
+                            <p>Coming Soon</p>
+                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                        </figcaption>
+                    </figure>
                 </div>
-            
-                <div class="center">
-                    <div class="hexagon">
-                        <div class="hex1">
-                            <div class="hex2"
-                                style="background: url('') center no-repeat">
-                                <div class="desc">
-                                    <h2>Welcome this is an epic title</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-4 col-md-6">
+                    <figure>
+                        <img src="http://via.placeholder.com/300x250" alt="Project Image">
+                        <figcaption>
+                            <h3>Project Name</h3>
+                            <p>Coming Soon</p>
+                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                        </figcaption>
+                    </figure>
                 </div>
-            
-                <div class="center">
-                    <div class="hexagon">
-                        <div class="hex1">
-                            <div class="hex2"
-                                style="background: url('') center no-repeat">
-                                <div class="desc">
-                                    <h2>Welcome this is an epic title</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-4 col-md-6">
+                    <figure>
+                        <img src="http://via.placeholder.com/300x250" alt="Project Image">
+                        <figcaption>
+                            <h3>Project Name</h3>
+                            <p>Coming Soon</p>
+                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <figure>
+                        <img src="http://via.placeholder.com/300x250" alt="Project Image">
+                        <figcaption>
+                            <h3>Project Name</h3>
+                            <p>Coming Soon</p>
+                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <figure>
+                        <img src="http://via.placeholder.com/300x250" alt="Project Image">
+                        <figcaption>
+                            <h3>Project Name</h3>
+                            <p>Coming Soon</p>
+                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <figure>
+                        <img src="http://via.placeholder.com/300x250" alt="Project Image">
+                        <figcaption>
+                            <h3>Project Name</h3>
+                            <p>Coming Soon</p>
+                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                        </figcaption>
+                    </figure>
                 </div>
             </div>
--->
-        </section>
-    </main>
+        </div>
+    </section>
+
+
+    <section id="contact">
+        <div class="container">
+            <p class="lead">Do you like what you see ?</p>
+            <p>Need a <span class="text-animate">web designer ?</span></p>
+            <a class="btn" href="mailto:cyrilgouverneur@protonmail.com">Contact Me</a>
+
+            <div class="contact__social">
+                <a href="https://twitter.com/CyrilGouv" target="_blank"><i class="fa fa-twitter"
+                        aria-hidden="true"></i></a>
+                <a href="https://codepen.io/CyrilG" target="_blank"><i class="fa fa-codepen" aria-hidden="true"></i></a>
+                <a href="https://github.com/Kiril03" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        <p data-lang-pl="2024 W.J Project. Wszelkie prawa zastrzeżone." data-lang-en="2024 W.J Project. All rights reserved.">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
+        <p>&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
     </footer>
-    <script src="./INDEX/honey.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        // Menu Responsive
+        $(".menu-bars").on("click", function (e) {
+            e.stopPropagation();
+            if ($(".menu-responsive").hasClass("show")) {
+                $(".menu-responsive").removeClass("show").addClass("hide");
+            } else {
+                $(".menu-responsive").removeClass("hide").addClass("show");
+            }
+        });
+
+        // Hide menu when clicking outside
+        $(document).on("click", function (e) {
+            if (!$(e.target).closest('.menu-responsive, .menu-bars').length) {
+                if ($(".menu-responsive").hasClass("show")) {
+                    $(".menu-responsive").removeClass("show").addClass("hide");
+                }
+            }
+        });
+
+        // Prevent menu from closing when clicking inside
+        $(".menu-responsive").on("click", function (e) {
+            e.stopPropagation();
+        });
+
+        // Scroll click on menu
+        $(".scroll").on("click", function (e) {
+            e.preventDefault();
+            const target = $(this.hash);
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top
+                }, 1500);
+            }
+        });
+
+        // Progress Bar Animate
+        const progressBars = document.querySelectorAll('.progress-bar');
+        const animateProgressBars = () => {
+            progressBars.forEach(bar => {
+                const value = bar.parentElement.getAttribute('style').split(':')[1];
+                bar.style.width = value;
+            });
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        progressBars.forEach(bar => {
+            observer.observe(bar);
+        });
+
+        // Contact Text Animate
+        const sentences = ["web designer ?", "web developer ?"];
+        let i = 0;
+
+        setInterval(function () {
+            $(".text-animate").fadeOut(function () {
+                $(this).text(sentences[i = (i + 1) % sentences.length]).fadeIn();
+            });
+        }, 2500);
+    });
+
+    </script>
 </body>
+
 </html>
