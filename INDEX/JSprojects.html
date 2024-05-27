@@ -40,9 +40,49 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #fff;
+            background-color: hsla(55, 84%, 51%, 0.1);
             height: 100%;
             overflow: hidden;
+        }
+
+        @media (max-width: 400px) {
+            html,
+            body{
+            overflow-y: auto;
+        }
+            .tile {
+                width: 240px;
+                height: 280px;
+            }
+    
+            .more-info {
+                font-size: 12px;
+                padding: 3px 7px;
+            }
+    
+            .tile .title {
+                font-size: 18px;
+            }
+    
+            .tile .overlay {
+                font-size: 14px;
+            }
+    
+            .tile-icon {
+                font-size: 18px;
+                padding: 3px;
+            }
+    
+            .additional-icon {
+                font-size: 18px;
+            }
+        }
+    
+        @media only screen and (min-width: 600px) and (max-width: 900px) and (orientation: portrait) {
+            .tile {
+                width: 320px;
+                height: 380px;
+            }
         }
     </style>
 </head>

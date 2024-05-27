@@ -128,77 +128,6 @@ h1 {
     font-weight: 800;
 }
 
-@media (max-width: 1024px) {
-    section {
-        width: 100%;
-        padding: 0 20px;
-    }
-
-    .center {
-        width: 180px;
-    }
-
-    .hexagon,
-    .desc {
-        height: 360px;
-        width: 180px;
-    }
-
-    .desc h2 {
-        margin: 130px 20px 0 20px;
-        font-size: 22px;
-    }
-}
-
-@media (max-width: 768px) {
-    main {
-        margin-top: 0;
-    }
-
-    .center {
-        width: 150px;
-        margin: 15px 5px;
-    }
-
-    .hexagon,
-    .desc {
-        height: 300px;
-        width: 150px;
-    }
-
-    .desc h2 {
-        margin: 110px 15px 0 15px;
-        font-size: 18px;
-    }
-
-    .language-switch button {
-        padding: 8px 16px;
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    .center {
-        width: 120px;
-        margin: 10px 5px;
-    }
-
-    .hexagon,
-    .desc {
-        height: 240px;
-        width: 120px;
-    }
-
-    .desc h2 {
-        margin: 85px 10px 0 10px;
-        font-size: 16px;
-    }
-
-    .language-switch button {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-}
 
 
         .container {
@@ -231,17 +160,19 @@ h1 {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 280px;
+            width: 250px;
             height: 300px;
             margin: 10px;
+            top: -15px;
             color: white;
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 25px;
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(0, 0, 0, 0.5);
+            border: 0.1rem solid #555;
             opacity: 0;
             animation: fadeIn 0.5s ease-out forwards;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
         }
     
         .tile:nth-child(1) {
@@ -298,7 +229,6 @@ h1 {
         }
     
         .tile:hover {
-            transform: scale(1.05);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
         }
     
@@ -318,31 +248,10 @@ h1 {
             color: #fff;
             background-color: rgba(0, 0, 0, 0.85);
             padding: 5px;
-            border-radius: 5px;
+            border-radius: 10px;
             transition: transform 0.3s ease-in-out;
         }
-    
-        .more-info {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            background-color: rgba(0, 0, 0, 0.7);
-            transition: background-color 0.3s, transform 0.3s;
-            opacity: 0;
-            z-index: 1;
-        }
-    
-        .more-info:hover {
-            background-color: rgba(0, 0, 0, 0.9);
-            transform: scale(1.1);
-        }
-    
+       
         .tile:hover .more-info {
             opacity: 1;
         }
@@ -387,58 +296,4 @@ h1 {
             font-size: 16px;
         }
     
-        .additional-icon {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 20px;
-            color: rgba(255, 255, 255, 0.8);
-            transition: transform 0.3s ease-in-out;
-            opacity: 0;
-            z-index: 1;
-        }
-    
-        .tile:hover .additional-icon {
-            opacity: 1;
-        }
-    
-        @media (max-width: 400px) {
-            html,
-                body{
-                    overflow: auto;
-            }
-    
-            .tile {
-                width: 240px;
-                height: 280px;
-            }
-    
-            .more-info {
-                font-size: 12px;
-                padding: 3px 7px;
-            }
-    
-            .tile .title {
-                font-size: 18px;
-            }
-    
-            .tile .overlay {
-                font-size: 14px;
-            }
-    
-            .tile-icon {
-                font-size: 18px;
-                padding: 3px;
-            }
-    
-            .additional-icon {
-                font-size: 18px;
-            }
-        }
-    
-        @media only screen and (min-width: 600px) and (max-width: 900px) and (orientation: portrait) {
-            .tile {
-                width: 320px;
-                height: 380px;
-            }
-        }
+        
