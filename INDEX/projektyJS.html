@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="portfolio.css">
+    <title>Projekty JavaScript, HTML, CSS</title>
+</head>
+<style>
+    #portfolio {
+        padding: 1rem 0;
+        text-align: center;
+        background-image: linear-gradient(to right, rgba(228, 224, 141, 0.1) 40%, hsla(0, 1%, 27%, 0.1) 100%);
+        min-height: 100vh;
+    }
+
+    #portfolio h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .portfolio__projects {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .icon-container {
+        display: inline-block;
+        margin: 0 15px;
+    }
+
+    .iconP {
+        font-size: 80px;
+    }
+</style>
+
+<body>
+    <section id="portfolio">
+        <h2>
+            <div class="icon-container">
+                <i class="fab fa-js-square iconP" style="color:#f0db4f;"></i>
+            </div>
+            <div class="icon-container">
+                <i class="fab fa-html5 iconP" style="color:#e34c26;"></i>
+            </div>
+            <div class="icon-container">
+                <i class="fab fa-css3-alt iconP" style="color:#264de4;"></i>
+            </div>
+        </h2>
+        <hr>
+        <div class="container">
+            <div class="portfolio__projects row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <figure>
+                                    <img src="../imghoney/formularz.jpg.png" style="margin-top: 1.5rem;"
+                                        alt="Project Image">
+                                </figure>
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>Formularz</h3>
+                                <p>Responsywny formularz z walidacją.</p>
+                                <a href="../FORMULARZ/formularz.html" class="specific-icon-link"><i
+                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <figure>
+                                    <img src="../imghoney/notatka.png" style="margin-top: 9rem;" alt="Project Image">
+                                </figure>
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>Notatnik</h3>
+                                <p>Responsywny notatnik z opcją zapisywania notatek w pliku na dysku.</p>
+                                <a href="../NOTATNIK/notatnik.html" class="specific-icon-link"><i
+                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <figure>
+                                    <img src="../imghoney/stoper.png" style="margin-top: 9rem;" alt="Project Image">
+                                </figure>
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>Stoper</h3>
+                                <p>Responsywny stoper z archiwum do zapisywania czasów i możliwością zmiany koloru.</p>
+                                <a href="../STOPER/stoper.html" class="specific-icon-link"><i
+                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <figure>
+                                    <img src="../imghoney/wyszukiwarka.png" style="margin-top: 9rem;"
+                                        alt="Project Image">
+                                </figure>
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>Wyszukiwarka</h3>
+                                <p>Responsywna wyszukiwarka.</p>
+                                <a href="../WYSZUKIWARKA/wyszukiwarka.html" class="specific-icon-link"><i
+                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>
