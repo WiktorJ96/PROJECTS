@@ -8,6 +8,7 @@
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -145,13 +146,19 @@ ul>li>ul>li {
 ::-webkit-scrollbar-thumb:hover {
     background-color: #495057;
 }
+footer {
+    color: #222;
+    padding: 10px 20px;
+    text-align: center;
+    margin-top: 1rem;
+    border-radius: 3px;
+}
 
 
 @media (max-width: 1024px) {
     .wrapper {
         width: 80%;
         min-width: 600px;
-        /* Ensure the wrapper is wide enough on tablets */
     }
 
     .header {

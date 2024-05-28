@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" href="kalkulatorKCAL.css?v=1.0">
+  <title>Kalkulator kalorii</title>
+</head>
+<body>
+  
+  <form id="kalkulatorForm">
+    <label for="plec">Wybierz płeć:</label>
+    <select id="plec" onchange="zmienRodzajKalkulatora()">
+      <option value="kobieta">Kobieta</option>
+      <option value="mezczyzna">Mężczyzna</option>
+    </select>
+  
+    <label for="masaCiala">Masa ciała (kg):</label>
+    <input type="number" id="masaCiala" required>
+  
+    <label for="wzrost">Wzrost (cm):</label>
+    <input type="number" id="wzrost" required>
+  
+    <label for="wiek">Wiek (lata):</label>
+    <input type="number" id="wiek" required>
+  
+    <label for="aktywnosc">Stopień aktywności fizycznej:</label>
+    <select id="aktywnosc">
+      <option value="1.2">Brak (osoba chora, leżąca w łóżku)</option>
+      <option value="1.4">Mała (osoba wykonująca pracę siedzącą)</option>
+      <option value="1.6">Umiarkowana (osoba wykonująca pracę na stojąco)</option>
+      <option value="1.75">Duża (osoba prowadząca aktywny tryb życia, regularnie ćwicząca)</option>
+      <option value="2.0">Bardzo duża (osoba prowadząca bardzo aktywny tryb życia, codziennie ćwicząca)</option>
+      <option value="2.4">Osoba zawodowo uprawiająca sport</option>
+    </select>
+
+    <label for="stylZywienia">Styl żywienia:</label>
+    <select id="stylZywienia">
+    <option value="dietaZrownowazona">Dieta zrównoważona</option>
+    <option value="dietaKeto">Dieta ketogeniczna</option>
+    </select>
+  
+    <label for="opcjeSpecjalne">Opcje specjalne:</label>
+    <select id="opcjeSpecjalne">
+      <option value="brak">Brak</option>
+      <option value="redukcja">Redukcja (redukcja o 300 kcal)</option>
+      <option value="masa">Masa (zwiększenie o 300 kcal)</option>
+    </select>
+  
+    <button disabled="" type="button" onclick="obliczWszystko()" id="calculateButton">Oblicz</button>
+  </form>
+  
+  <div class="resultcontainer">
+    <div id="wynik"></div>
+    <div class="makro" id="makroBialko"></div>
+    <div class="makro" id="makroTluszcze"></div>
+    <div class="makro" id="makroWeglowodany"></div>
+  </div>
+
+<footer data-lang-key="footer">
+  <p>&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
+</footer>
+
+  <script src="kalkulatorKCAL.js"></script>
+  
+  </body>
+  </html>

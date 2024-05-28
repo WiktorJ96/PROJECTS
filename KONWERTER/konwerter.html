@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="konwerter.css">
+    <title>Konwerter jednostek</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="input-group">
+            <label for="from-unit">Konwertuj z:</label>
+            <select id="from-unit">
+                <option value="iu">Jednostki międzynarodowe (IU)</option>
+                <option value="mcg">Mikrogramy (mcg)</option>
+                <option value="mg">Miligramy (mg)</option>
+                <option value="g">Gramy (g)</option>
+                <option value="ml">Mililitry (ml)</option>
+                <option value="l">Litry (l)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="to-unit">Konwertuj do:</label>
+            <select id="to-unit">
+                <option value="iu">Jednostki międzynarodowe (IU)</option>
+                <option value="mcg">Mikrogramy (mcg)</option>
+                <option value="mg">Miligramy (mg)</option>
+                <option value="g">Gramy (g)</option>
+                <option value="ml">Mililitry (ml)</option>
+                <option value="l">Litry (l)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="amount">Wartość:</label>
+            <input type="number" id="amount" placeholder="Wpisz wartość">
+        </div>
+        <button onclick="convertUnits()">Konwertuj</button>
+        <button onclick="resetCalculator()">Resetuj</button>
+        <div id="result" class="result"></div>
+        <div id="error" the "error-message"></div>
+    </div>
+
+    <footer data-lang-key="footer">
+        <p>&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script src="konwerter.js"></script>
+</body>
+
+</html>

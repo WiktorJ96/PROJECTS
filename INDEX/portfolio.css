@@ -11,6 +11,33 @@ body {
     font-weight: 700;
 }
 
+.language-switch button:hover {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #333;
+}
+
+.language-switch {
+    display: flex;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    flex-direction: row;
+    z-index: 1000;
+}
+
+.language-switch button {
+    background-color: hsla(0, 0%, 7%, 0.85);
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    margin: 0 5px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: normal;
+}
+
 .btn {
     border: 1px solid #fff;
     border-radius: 0.25rem;
@@ -60,10 +87,19 @@ h2 {
     }
 }
 
+.menu_hamburger {
+    display: flex;
+    position: absolute;
+    top: 1rem;
+    left: 2.5rem;
+    flex-direction: column;
+    z-index: 1000;
+}
+
 .menu-responsive {
-    background-image: linear-gradient(to right, rgba(18, 18, 19, 0.96) 60%, hsla(0, 3%, 13%, 0.99) 140%);
+    background-image: linear-gradient(to right, rgba(18, 18, 19, 0.99) 60%, hsla(0, 3%, 13%, 0.99) 140%);
     padding: 2rem 0;
-    display: none;
+    display: flex;
     position: fixed;
     left: 0;
     top: 0;

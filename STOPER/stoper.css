@@ -16,7 +16,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
-    background-image: linear-gradient(to right, rgba(19, 19, 20, 0.5) 20%, hsla(0, 2%, 56%, 0.5) 100%);
+    background-image: linear-gradient(to right, rgba(230, 235, 239, 0.5) 40%, hsla(0, 1%, 27%, 0.5) 100%);
     padding: 10px;
     margin: 0;
     animation: fadeInBody 1s ease-in forwards;
@@ -302,10 +302,8 @@ button:focus {
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
+    color: #222;
     padding: 10px 20px;
-    width: 100%;
     text-align: center;
     margin-top: auto;
     border-radius: 3px;
