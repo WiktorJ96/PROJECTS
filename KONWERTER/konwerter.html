@@ -6,48 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="konwerter.css">
-    <title>Konwerter jednostek</title>
+    <title data-lang-key="title">Konwerter jednostek</title>
 </head>
 
 <body>
+    <div class="language-switch">
+        <button id="lang-pl">PL</button>
+        <button id="lang-en">EN</button>
+    </div>
     <div class="container">
         <div class="input-group">
-            <label for="from-unit">Konwertuj z:</label>
+            <label for="from-unit" data-lang-key="convert_from">Konwertuj z:</label>
             <select id="from-unit">
-                <option value="iu">Jednostki międzynarodowe (IU)</option>
-                <option value="mcg">Mikrogramy (mcg)</option>
-                <option value="mg">Miligramy (mg)</option>
-                <option value="g">Gramy (g)</option>
-                <option value="ml">Mililitry (ml)</option>
-                <option value="l">Litry (l)</option>
+                <option value="iu" data-lang-key="iu">Jednostki międzynarodowe (IU)</option>
+                <option value="mcg" data-lang-key="mcg">Mikrogramy (mcg)</option>
+                <option value="mg" data-lang-key="mg">Miligramy (mg)</option>
+                <option value="g" data-lang-key="g">Gramy (g)</option>
+                <option value="ml" data-lang-key="ml">Mililitry (ml)</option>
+                <option value="l" data-lang-key="l">Litry (l)</option>
             </select>
         </div>
         <div class="input-group">
-            <label for="to-unit">Konwertuj do:</label>
+            <label for="to-unit" data-lang-key="convert_to">Konwertuj do:</label>
             <select id="to-unit">
-                <option value="iu">Jednostki międzynarodowe (IU)</option>
-                <option value="mcg">Mikrogramy (mcg)</option>
-                <option value="mg">Miligramy (mg)</option>
-                <option value="g">Gramy (g)</option>
-                <option value="ml">Mililitry (ml)</option>
-                <option value="l">Litry (l)</option>
+                <option value="iu" data-lang-key="iu">Jednostki międzynarodowe (IU)</option>
+                <option value="mcg" data-lang-key="mcg">Mikrogramy (mcg)</option>
+                <option value="mg" data-lang-key="mg">Miligramy (mg)</option>
+                <option value="g" data-lang-key="g">Gramy (g)</option>
+                <option value="ml" data-lang-key="ml">Mililitry (ml)</option>
+                <option value="l" data-lang-key="l">Litry (l)</option>
             </select>
         </div>
         <div class="input-group">
-            <label for="amount">Wartość:</label>
-            <input type="number" id="amount" placeholder="Wpisz wartość">
+            <label for="amount" data-lang-key="value">Wartość:</label>
+            <input type="number" id="amount" placeholder="Wpisz wartość" data-placeholder-lang-key="value_placeholder">
         </div>
-        <button onclick="convertUnits()">Konwertuj</button>
-        <button onclick="resetCalculator()">Resetuj</button>
+        <button onclick="convertUnits()" data-lang-key="convert_button">Konwertuj</button>
+        <button onclick="resetCalculator()" data-lang-key="reset_button">Resetuj</button>
         <div id="result" class="result"></div>
-        <div id="error" the "error-message"></div>
+        <div id="error" class="error-message"></div>
     </div>
 
-    <footer data-lang-key="footer">
-        <p>&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
+    <footer>
+        <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
-    <script src="konwerter.js"></script>
+    <script src="konwerter.js">
+    </script>
+    
 </body>
 
 </html>
