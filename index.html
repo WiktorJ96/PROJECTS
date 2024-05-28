@@ -9,79 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
-    #portfolio {
-    padding: 5rem 0;
-    text-align: center;
-}
-
-#portfolio h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.portfolio__projects {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.portfolio__projects figure {
-    position: relative;
-    overflow: hidden;
-    margin: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.portfolio__projects figure img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.portfolio__projects figure:hover img {
-    transform: scale(1.1);
-}
-
-.portfolio__projects figure figcaption {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.portfolio__projects figure:hover figcaption {
-    opacity: 1;
-}
-
-.portfolio__projects figure figcaption h3 {
-    margin: 0.5rem 0;
-}
-
-.portfolio__projects figure figcaption p {
-    margin: 0.5rem 0;
-}
-
-.portfolio__projects figure figcaption a {
-    color: #fff;
-    font-size: 2rem;
-    transition: color 0.3s ease;
-}
-
-.portfolio__projects figure figcaption a:hover {
-    color: #00ff6c;
-}
+    
 
 </style>
 <body>
@@ -198,68 +126,42 @@
         <div class="container">
             <div class="portfolio__projects row">
                 <div class="col-lg-4 col-md-6">
-                    <figure>
-                        <img src="http://via.placeholder.com/300x250" alt="Project Image">
-                        <figcaption>
-                            <h3>Project Name</h3>
-                            <p>Coming Soon</p>
-                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                        </figcaption>
-                    </figure>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <figure>
+                                    <img src="./imghoney/formularz.jpg.png" style="margin-top: 1.5rem;" alt="Project Image">
+                                </figure>
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>Formularz</h3>
+                                <p>Responsywny formularz z walidacją.</p>
+                                <a href="../FORMULARZ/formularz.html"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!-- Repeat the above block for other projects -->
                 <div class="col-lg-4 col-md-6">
-                    <figure>
-                        <img src="http://via.placeholder.com/300x250" alt="Project Image">
-                        <figcaption>
-                            <h3>Project Name</h3>
-                            <p>Coming Soon</p>
-                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <figure>
-                        <img src="http://via.placeholder.com/300x250" alt="Project Image">
-                        <figcaption>
-                            <h3>Project Name</h3>
-                            <p>Coming Soon</p>
-                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <figure>
-                        <img src="http://via.placeholder.com/300x250" alt="Project Image">
-                        <figcaption>
-                            <h3>Project Name</h3>
-                            <p>Coming Soon</p>
-                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <figure>
-                        <img src="http://via.placeholder.com/300x250" alt="Project Image">
-                        <figcaption>
-                            <h3>Project Name</h3>
-                            <p>Coming Soon</p>
-                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <figure>
-                        <img src="http://via.placeholder.com/300x250" alt="Project Image">
-                        <figcaption>
-                            <h3>Project Name</h3>
-                            <p>Coming Soon</p>
-                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
-                        </figcaption>
-                    </figure>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <figure>
+                                    <img src="./imghoney/notatka.png" style="margin-top: 9rem;" alt="Project Image">
+                                </figure>
+                            </div>
+                            <div class="flip-card-back">
+                                <h3>Notatnik</h3>
+                                <p>Responsywny notatnik z opcja zapisywania notatek w pliku na dysku.</p>
+                                <a href="../NOTATNIK/notatnik.html"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
 
 
     <section id="contact">
@@ -280,7 +182,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
     $(document).ready(function () {
-        // Menu Responsive
         $(".menu-bars").on("click", function (e) {
             e.stopPropagation();
             if ($(".menu-responsive").hasClass("show")) {
@@ -290,7 +191,6 @@
             }
         });
 
-        // Hide menu when clicking outside
         $(document).on("click", function (e) {
             if (!$(e.target).closest('.menu-responsive, .menu-bars').length) {
                 if ($(".menu-responsive").hasClass("show")) {
@@ -299,12 +199,10 @@
             }
         });
 
-        // Prevent menu from closing when clicking inside
         $(".menu-responsive").on("click", function (e) {
             e.stopPropagation();
         });
 
-        // Scroll click on menu
         $(".scroll").on("click", function (e) {
             e.preventDefault();
             const target = $(this.hash);
@@ -315,7 +213,6 @@
             }
         });
 
-        // Progress Bar Animate
         const progressBars = document.querySelectorAll('.progress-bar');
         const animateProgressBars = () => {
             progressBars.forEach(bar => {
@@ -337,7 +234,6 @@
             observer.observe(bar);
         });
 
-        // Contact Text Animate
         const sentences = ["web designera", "web developera"];
         let i = 0;
 
