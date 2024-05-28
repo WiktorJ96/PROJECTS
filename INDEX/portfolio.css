@@ -505,6 +505,7 @@ header {
     background-color: #00ff6c;
     text-align: center;
     color: #232323;
+    min-height: 100vh;
 }
 
 #contact .lead {
