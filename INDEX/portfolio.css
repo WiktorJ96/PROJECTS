@@ -371,6 +371,16 @@ header {
     background: linear-gradient(90deg, #e32626,#d92525,#f02929);
 }
 
+.icon {
+    font-size: 30px;
+    margin-right: 8px;
+    transition: color 0.3s;
+}
+        
+.icon:hover {
+    transform: scale(1.1);
+}
+
 #skills .progress-container::before {
     content: '';
     position: absolute;
@@ -384,7 +394,6 @@ header {
     border-radius: 20px;
 }
                                                                  /*PORTFOLIO*/
-/* General styles */
 #portfolio {
     padding: 5rem 0;
     text-align: center;
@@ -510,7 +519,7 @@ header {
 
 .specific-icon{
     font-size: 1.5rem;
-    width: 1.5rem;
+    width: 1.8rem;
     color: #333;
 }
 
