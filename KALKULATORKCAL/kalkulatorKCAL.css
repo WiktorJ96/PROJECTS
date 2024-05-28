@@ -37,6 +37,34 @@
         }
     }
 
+        .language-switch button:hover {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #333;
+        }
+    
+        .language-switch {
+            display: flex;
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 10%;
+            flex-direction: row;
+            z-index: 1000;
+        }
+
+        .language-switch button {
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            margin: 5px;
+            margin-top: -5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
     h1 {
         margin: 2% auto;
         font-size: 2.5rem;

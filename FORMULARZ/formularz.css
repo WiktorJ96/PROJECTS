@@ -336,6 +336,7 @@ footer {
     .wrapper {
         width: 85%;
         min-width: 280px;
+        margin-top: 3.5rem;
     }
 
     form {

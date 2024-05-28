@@ -1,0 +1,15 @@
+{
+    "title": "Projekty JavaScript, HTML, CSS",
+    "form": "Formularz",
+    "form_desc": "Responsywny formularz z walidacją.",
+    "notebook": "Notatnik",
+    "notebook_desc": "Responsywny notatnik z opcją zapisywania notatek w pliku na dysku.",
+    "stopwatch": "Stoper",
+    "stopwatch_desc": "Responsywny stoper z archiwum do zapisywania czasów i możliwością zmiany koloru.",
+    "search": "Wyszukiwarka",
+    "search_desc": "Responsywna wyszukiwarka.",
+    "calorie_calculator": "Kalkulator KCAL",
+    "calorie_calculator_desc": "Responsywny kalkulator kcal z wieloma opcjami",
+    "unit_converter": "Konwerter jednostek",
+    "unit_converter_desc": "Responsywny konwerter jednostek"
+}

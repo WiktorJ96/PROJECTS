@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
   <link rel="stylesheet" href="kalkulatorKCAL.css?v=1.0">
-  <title>Kalkulator kalorii</title>
+  <title data-lang-key="title">Kalkulator kalorii</title>
 </head>
+
 <body>
-  
+  <div class="language-switch">
+    <button id="lang-pl">PL</button>
+    <button id="lang-en">EN</button>
+  </div>
   <form id="kalkulatorForm">
-    <label for="plec">Wybierz płeć:</label>
+    <label for="plec" data-lang-key="select_gender">Wybierz płeć:</label>
     <select id="plec" onchange="zmienRodzajKalkulatora()">
-      <option value="kobieta">Kobieta</option>
-      <option value="mezczyzna">Mężczyzna</option>
+      <option value="kobieta" data-lang-key="female">Kobieta</option>
+      <option value="mezczyzna" data-lang-key="male">Mężczyzna</option>
     </select>
   
-    <label for="masaCiala">Masa ciała (kg):</label>
+    <label for="masaCiala" data-lang-key="weight">Masa ciała (kg):</label>
     <input type="number" id="masaCiala" required>
   
-    <label for="wzrost">Wzrost (cm):</label>
+    <label for="wzrost" data-lang-key="height">Wzrost (cm):</label>
     <input type="number" id="wzrost" required>
   
-    <label for="wiek">Wiek (lata):</label>
+    <label for="wiek" data-lang-key="age">Wiek (lata):</label>
     <input type="number" id="wiek" required>
   
-    <label for="aktywnosc">Stopień aktywności fizycznej:</label>
+    <label for="aktywnosc" data-lang-key="activity_level">Stopień aktywności fizycznej:</label>
     <select id="aktywnosc">
-      <option value="1.2">Brak (osoba chora, leżąca w łóżku)</option>
-      <option value="1.4">Mała (osoba wykonująca pracę siedzącą)</option>
-      <option value="1.6">Umiarkowana (osoba wykonująca pracę na stojąco)</option>
-      <option value="1.75">Duża (osoba prowadząca aktywny tryb życia, regularnie ćwicząca)</option>
-      <option value="2.0">Bardzo duża (osoba prowadząca bardzo aktywny tryb życia, codziennie ćwicząca)</option>
-      <option value="2.4">Osoba zawodowo uprawiająca sport</option>
+      <option value="1.2" data-lang-key="activity_none">Brak (osoba chora, leżąca w łóżku)</option>
+      <option value="1.4" data-lang-key="activity_low">Mała (osoba wykonująca pracę siedzącą)</option>
+      <option value="1.6" data-lang-key="activity_moderate">Umiarkowana (osoba wykonująca pracę na stojąco)</option>
+      <option value="1.75" data-lang-key="activity_high">Duża (osoba prowadząca aktywny tryb życia, regularnie ćwicząca)</option>
+      <option value="2.0" data-lang-key="activity_very_high">Bardzo duża (osoba prowadząca bardzo aktywny tryb życia, codziennie ćwicząca)</option>
+      <option value="2.4" data-lang-key="activity_athlete">Osoba zawodowo uprawiająca sport</option>
     </select>
 
-    <label for="stylZywienia">Styl żywienia:</label>
+    <label for="stylZywienia" data-lang-key="diet_style">Styl żywienia:</label>
     <select id="stylZywienia">
-    <option value="dietaZrownowazona">Dieta zrównoważona</option>
-    <option value="dietaKeto">Dieta ketogeniczna</option>
+      <option value="dietaZrownowazona" data-lang-key="balanced_diet">Dieta zrównoważona</option>
+      <option value="dietaKeto" data-lang-key="keto_diet">Dieta ketogeniczna</option>
     </select>
   
-    <label for="opcjeSpecjalne">Opcje specjalne:</label>
+    <label for="opcjeSpecjalne" data-lang-key="special_options">Opcje specjalne:</label>
     <select id="opcjeSpecjalne">
-      <option value="brak">Brak</option>
-      <option value="redukcja">Redukcja (redukcja o 300 kcal)</option>
-      <option value="masa">Masa (zwiększenie o 300 kcal)</option>
+      <option value="brak" data-lang-key="none">Brak</option>
+      <option value="redukcja" data-lang-key="reduction">Redukcja (redukcja o 300 kcal)</option>
+      <option value="masa" data-lang-key="mass">Masa (zwiększenie o 300 kcal)</option>
     </select>
   
-    <button disabled="" type="button" onclick="obliczWszystko()" id="calculateButton">Oblicz</button>
+    <button type="button" onclick="obliczWszystko()" id="calculateButton" data-lang-key="calculate">Oblicz</button>
   </form>
   
   <div class="resultcontainer">
@@ -58,11 +63,12 @@
     <div class="makro" id="makroWeglowodany"></div>
   </div>
 
-<footer data-lang-key="footer">
-  <p>&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
-</footer>
+  <footer>
+    <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
+  </footer>
 
-  <script src="kalkulatorKCAL.js"></script>
-  
-  </body>
-  </html>
+  <script src="kalkulatorKCAL.js"> 
+  </script>
+
+</body>
+</html>

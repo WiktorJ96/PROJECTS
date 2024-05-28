@@ -177,7 +177,6 @@
             </div>
         </div>
     </section>
-
     <footer>
         <p>&copy; 2024 W.J Project. <span data-lang-key="all_rights_reserved">Wszelkie prawa zastrzeżone.</span></p>
     </footer>
@@ -255,13 +254,13 @@
                     "en": {}
                 };
 
-                fetch('./pl.json')
+                fetch('./INDEX/plINDEX.json')
                     .then(response => response.json())
                     .then(data => {
                         translations['pl'] = data;
                     });
 
-                fetch('./en.json')
+                fetch('./INDEX/enINDEX.json')
                     .then(response => response.json())
                     .then(data => {
                         translations['en'] = data;

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="portfolio.css">
-    <title>Projekty JavaScript, HTML, CSS</title>
+    <title data-lang-key="title">Projekty JavaScript, HTML, CSS</title>
 </head>
 <style>
     #portfolio {
@@ -39,9 +39,13 @@
 </style>
 
 <body>
+    <div class="language-switch">
+        <button id="lang-pl">PL</button>
+        <button id="lang-en">EN</button>
+    </div>
     <section id="portfolio">
 
-        <h2>
+        <h2 data-lang-key="header">
             <div class="icon-container">
                 <i class="fab fa-js-square iconP" style="color:#f0db4f;"></i>
             </div>
@@ -67,9 +71,10 @@
                                 </figure>
                             </div>
                             <div class="flip-card-back">
-                                <h3>Formularz</h3>
-                                <p>Responsywny formularz z walidacją.</p>
-                                <a href="../FORMULARZ/formularz.html" class="specific-icon-link"><i class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                                <h3 data-lang-key="form">Formularz</h3>
+                                <p data-lang-key="form_desc">Responsywny formularz z walidacją.</p>
+                                <a href="../FORMULARZ/formularz.html" class="specific-icon-link"><i
+                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
@@ -84,9 +89,11 @@
                                 </figure>
                             </div>
                             <div class="flip-card-back">
-                                <h3>Notatnik</h3>
-                                <p>Responsywny notatnik z opcją zapisywania notatek w pliku na dysku.</p>
-                                <a href="../NOTATNIK/notatnik.html" class="specific-icon-link"><i class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                                <h3 data-lang-key="notebook">Notatnik</h3>
+                                <p data-lang-key="notebook_desc">Responsywny notatnik z opcją zapisywania notatek w
+                                    pliku na dysku.</p>
+                                <a href="../NOTATNIK/notatnik.html" class="specific-icon-link"><i
+                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
@@ -101,9 +108,11 @@
                                 </figure>
                             </div>
                             <div class="flip-card-back">
-                                <h3>Stoper</h3>
-                                <p>Responsywny stoper z archiwum do zapisywania czasów i możliwością zmiany koloru.</p>
-                                <a href="../STOPER/stoper.html" class="specific-icon-link"><i class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                                <h3 data-lang-key="stopwatch">Stoper</h3>
+                                <p data-lang-key="stopwatch_desc">Responsywny stoper z archiwum do zapisywania czasów i
+                                    możliwością zmiany koloru.</p>
+                                <a href="../STOPER/stoper.html" class="specific-icon-link"><i
+                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
@@ -119,9 +128,10 @@
                                 </figure>
                             </div>
                             <div class="flip-card-back">
-                                <h3>Wyszukiwarka</h3>
-                                <p>Responsywna wyszukiwarka.</p>
-                                <a href="../WYSZUKIWARKA/wyszukiwarka.html" class="specific-icon-link"><i class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                                <h3 data-lang-key="search">Wyszukiwarka</h3>
+                                <p data-lang-key="search_desc">Responsywna wyszukiwarka.</p>
+                                <a href="../WYSZUKIWARKA/wyszukiwarka.html" class="specific-icon-link"><i
+                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
@@ -132,12 +142,14 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <figure>
-                                    <img src="../imghoney/kalkulatorkcal.png" style="margin-top: 13rem;" alt="Project Image">
+                                    <img src="../imghoney/kalkulatorkcal.png" style="margin-top: 13rem;"
+                                        alt="Project Image">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
-                                <h3>Kalkulator KCAL</h3>
-                                <p>Responsywny kalkulator kcal z wieloma opcjami</p>
+                                <h3 data-lang-key="calorie_calculator">Kalkulator KCAL</h3>
+                                <p data-lang-key="calorie_calculator_desc">Responsywny kalkulator kcal z wieloma opcjami
+                                </p>
                                 <a href="../KALKULATORKCAL/kalkulatorKCAL.html" class="specific-icon-link"><i
                                         class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
                             </div>
@@ -150,12 +162,13 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <figure>
-                                    <img src="../imghoney/konwerter.png" style="margin-top: 2.5rem;" alt="Project Image">
+                                    <img src="../imghoney/konwerter.png" style="margin-top: 2.5rem;"
+                                        alt="Project Image">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
-                                <h3>Konwerter jednostek</h3>
-                                <p>Responsywny konwerter jednostek</p>
+                                <h3 data-lang-key="unit_converter">Konwerter jednostek</h3>
+                                <p data-lang-key="unit_converter_desc">Responsywny konwerter jednostek</p>
                                 <a href="../KONWERTER/konwerter.html" class="specific-icon-link"><i
                                         class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
                             </div>
@@ -167,6 +180,39 @@
         </div>
 
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const translations = {
+                "pl": {},
+                "en": {}
+            };
+
+            fetch('pl.json')
+                .then(response => response.json())
+                .then(data => {
+                    translations['pl'] = data;
+                });
+
+            fetch('en.json')
+                .then(response => response.json())
+                .then(data => {
+                    translations['en'] = data;
+                });
+
+            function translatePage(lang) {
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    if (translations[lang][key]) {
+                        element.innerHTML = translations[lang][key];
+                    }
+                });
+            }
+
+            document.getElementById('lang-pl').addEventListener('click', () => translatePage('pl'));
+            document.getElementById('lang-en').addEventListener('click', () => translatePage('en'));
+        });
+    </script>
 </body>
 
 </html>
