@@ -46,8 +46,9 @@
         .language-switch {
             display: flex;
             position: relative;
-            top: 0;
-            left: 0;
+            justify-content: center;
+            justify-self: center;
+            justify-items: center;
             width: 10%;
             flex-direction: row;
             z-index: 1000;
