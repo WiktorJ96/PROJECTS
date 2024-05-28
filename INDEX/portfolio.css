@@ -388,7 +388,7 @@ header {
 #portfolio {
     padding: 5rem 0;
     text-align: center;
-    background-color: #f3f3f3;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 1) 100%);
     min-height: 100vh;
 }
 
@@ -499,9 +499,34 @@ header {
     transform: scale(1.1);
 }
 
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.5rem;
+    border-radius: 30px;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+a i.fa {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+a:hover {
+    background-color: #141514;
+    transform: scale(1.1);
+}
+
+a:hover i.fa {
+    color: #fff;
+}
+
                                                              /*PORTFOLIO*/
 #contact {
-    padding: 5rem 0;
+    display: grid;
+    place-content: center;
+    padding: 1rem 0;
     background-color: #00ff6c;
     text-align: center;
     color: #232323;
@@ -520,9 +545,10 @@ header {
 }
 
 #contact .btn {
-    margin-top: 2.5rem;
+    margin-top: 2.0rem;
     border: 2px solid #232323;
     color: #232323;
+    font-size: 1.2rem;
 }
 
 #contact .btn:hover {
