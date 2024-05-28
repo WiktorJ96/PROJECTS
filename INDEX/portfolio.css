@@ -499,7 +499,7 @@ header {
     transform: scale(1.1);
 }
 
-a {
+.specific-icon-link {
     text-decoration: none;
     display: inline-block;
     padding: 0.5rem;
@@ -508,17 +508,18 @@ a {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-a i.fa {
+.specific-icon{
     font-size: 1.5rem;
+    width: 1.5rem;
     color: #333;
 }
 
-a:hover {
+.specific-icon-link:hover {
     background-color: #141514;
     transform: scale(1.1);
 }
 
-a:hover i.fa {
+.specific-icon-link:hover i.fa {
     color: #fff;
 }
 
