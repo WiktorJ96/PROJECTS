@@ -389,6 +389,7 @@ header {
     padding: 5rem 0;
     text-align: center;
     background-color: #f3f3f3;
+    min-height: 100vh;
 }
 
 #portfolio h2 {
