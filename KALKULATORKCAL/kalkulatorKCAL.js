@@ -113,13 +113,13 @@ function obliczWszystko() {
 
       const translations = {
         "pl": {
-          "result_text": "Twoje dzienne zapotrzebowanie kaloryczne wynosi: ",
+          "result_text": "Twoje zapotrzebowanie kaloryczne wynosi: ",
           "protein": "Białko: ",
           "fats": "Tłuszcze: ",
           "carbs": "Węglowodany: "
         },
         "en": {
-          "result_text": "Your daily calorie requirement is: ",
+          "result_text": "Your calorie requirement is: ",
           "protein": "Protein: ",
           "fats": "Fats: ",
           "carbs": "Carbohydrates: "

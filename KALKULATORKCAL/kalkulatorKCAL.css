@@ -118,38 +118,67 @@
         background-color: #48cb7c;
     }
 
-    .resultcontainer {
-        display: none;
-        background-image: linear-gradient(to right, rgb(233, 245, 238) 0%, hsla(0, 0%, 100%, 0.95) 100%);
-        padding: 25px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        width: 90%;
-        max-width: 600px;
-        margin: 20px auto;
-        color: #424242;
-        text-align: center;
-        border: 1px solid #d2d2d2;
-        line-height: 1.6;
-    }
+   .resultcontainer {
+       display: none;
+       background: linear-gradient(to right, #f0f4f7, #ffffff);
+       padding: 30px;
+       border-radius: 15px;
+       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+       width: 90%;
+       max-width: 600px;
+       margin: 40px auto;
+       color: #424242;
+       text-align: center;
+       border: 1px solid #d2d2d2;
+       line-height: 1.6;
+       transition: all 0.3s ease-in-out;
+   }
 
-    .resultcontainer-visible {
-        display: block;
-    }
+   .resultcontainer-visible {
+       display: block;
+   }
 
-    #wynik,
-    .makro {
-        margin-top: 20px;
-        color: #333333;
-        font-size: 1.1rem;
-        font-weight: bold;
-        letter-spacing: 0.02em;
-    }
+   #wynik,
+   .makro {
+       margin-top: 20px;
+       color: #333333;
+       font-size: 1.2rem;
+       font-weight: 700;
+       letter-spacing: 0.02em;
+   }
 
-    .makro {
-        margin-top: 10px;
-        font-size: 1.1rem;
-    }
+   .makro {
+       margin-top: 15px;
+       font-size: 1.1rem;
+   }
+
+   #wynik {
+       font-size: 1.4rem;
+       color: #2d572c;
+       margin-bottom: 15px;
+   }
+
+   .makro {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       padding: 15px 20px;
+       background-color: #f9f9f9;
+       border-radius: 10px;
+       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+       margin-bottom: 10px;
+   }
+
+   .makro:nth-child(even) {
+       background-color: #e8f5e9;
+   }
+
+   .makro span {
+       display: inline-block;
+       font-weight: 500;
+       font-size: 1rem;
+       color: #555;
+   }
 
     footer {
         color: #222;
