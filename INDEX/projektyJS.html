@@ -36,18 +36,23 @@
     .iconP {
         font-size: 80px;
     }
-    .language-switch{
-        flex-direction: column;
+    @media (max-width: 600px) {
+        .language-switch{
+            position: relative;
+            justify-content: center;
+            justify-self: center;
+            margin-left: 2rem;
+    }
     }
 </style>
 
 <body>
-    <div class="language-switch">
-        <button id="lang-pl">PL</button>
-        <button id="lang-en">EN</button>
-    </div>
+    
     <section id="portfolio">
-
+<div class="language-switch">
+    <button id="lang-pl">PL</button>
+    <button id="lang-en">EN</button>
+</div>
         <h2 data-lang-key="header">
             <div class="icon-container">
                 <i class="fab fa-js-square iconP" style="color:#f0db4f;"></i>

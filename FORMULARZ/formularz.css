@@ -40,7 +40,9 @@ body {
 
 .language-switch {
     display: flex;
-    position: absolute;
+    justify-content: center;
+    justify-self: center;
+    justify-items: center;
     top: 1rem;
     right: 1rem;
     flex-direction: row;
