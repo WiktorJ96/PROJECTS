@@ -226,3 +226,50 @@ colorPicker.addEventListener('click', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', loadNotes);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const translations = {
+                "pl": {},
+                "en": {}
+            };
+
+            fetch('pl.json')
+                .then(response => response.json())
+                .then(data => {
+                    translations['pl'] = data;
+                });
+
+            fetch('en.json')
+                .then(response => response.json())
+                .then(data => {
+                    translations['en'] = data;
+                });
+
+            function translatePage(lang) {
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    if (translations[lang][key]) {
+                        element.innerHTML = translations[lang][key];
+                    }
+                });
+                document.querySelectorAll('[data-placeholder-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-placeholder-lang-key');
+                    if (translations[lang][key]) {
+                        element.placeholder = translations[lang][key];
+                    }
+                });
+                document.querySelectorAll('select option').forEach(option => {
+                    const key = option.getAttribute('data-lang-key');
+                    if (translations[lang][key]) {
+                        option.textContent = translations[lang][key];
+                    }
+                });
+                document.documentElement.lang = lang;
+            }
+
+            document.getElementById('lang-pl').addEventListener('click', () => translatePage('pl'));
+            document.getElementById('lang-en').addEventListener('click', () => translatePage('en'));
+
+            
+            translatePage('pl');
+        });

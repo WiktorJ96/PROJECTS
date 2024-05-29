@@ -391,11 +391,39 @@ body {
 footer {
     background-color: #333;
     color: #fff;
-    padding: 10px 20px;
+    padding: 1px 1px;
     text-align: center;
     width: 100%;
     border-radius: 3px;
     margin-top: auto;
+}
+
+.language-switch button:hover {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #333;
+}
+
+.language-switch {
+    display: flex;
+    position: relative;
+    justify-content: right  ;
+    flex-direction: row;
+    z-index: 1000;
+    margin-top: 10px;
+}
+
+.language-switch button {
+    background-color: #333;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 5px 10px;
+    margin: 5px;
+    margin-top: -5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: normal;
 }
 
 @media (max-width: 600px) {
