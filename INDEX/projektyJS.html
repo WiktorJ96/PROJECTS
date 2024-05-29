@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Projekty w JavaScript, HTML i CSS. Przeglądaj responsywne formularze, notatniki, stopery, wyszukiwarki, kalkulatory kalorii i konwertery jednostek.">
+    <meta name="keywords"
+        content="projekty, JavaScript, HTML, CSS, formularz, notatnik, stoper, wyszukiwarka, kalkulator kalorii, konwerter jednostek">
+    <meta name="author" content="Wiktor Jurkowski">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="portfolio.css">
     <title data-lang-key="title">Projekty JavaScript, HTML, CSS</title>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Projekty JavaScript, HTML, CSS",
+      "description": "Projekty w JavaScript, HTML i CSS. Przeglądaj responsywne formularze, notatniki, stopery, wyszukiwarki, kalkulatory kalorii i konwertery jednostek.",
+      "url": "https://wiktorj96.github.io/PROJECTS/"
+    }
+    </script>
 </head>
 <style>
     #portfolio {
@@ -36,23 +53,23 @@
     .iconP {
         font-size: 80px;
     }
+
     @media (max-width: 600px) {
-        .language-switch{
+        .language-switch {
             position: relative;
             justify-content: center;
             justify-self: center;
             margin-left: 2rem;
-    }
+        }
     }
 </style>
 
 <body>
-    
     <section id="portfolio">
-<div class="language-switch">
-    <button id="lang-pl">PL</button>
-    <button id="lang-en">EN</button>
-</div>
+        <div class="language-switch">
+            <button id="lang-pl" aria-label="Zmień język na polski">PL</button>
+            <button id="lang-en" aria-label="Change language to English">EN</button>
+        </div>
         <h2 data-lang-key="header">
             <div class="icon-container">
                 <i class="fab fa-js-square iconP" style="color:#f0db4f;"></i>
@@ -68,21 +85,21 @@
 
         <div class="container">
             <div class="portfolio__projects row">
-
                 <div class="col-lg-4 col-md-6">
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <figure>
                                     <img src="../imghoney/formularz.jpg.png" style="margin-top: 1.5rem;"
-                                        alt="Project Image">
+                                        alt="Zdjęcie projektu Formularz">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
                                 <h3 data-lang-key="form">Formularz</h3>
                                 <p data-lang-key="form_desc">Responsywny formularz z walidacją.</p>
-                                <a href="../FORMULARZ/formularz.html" class="specific-icon-link"><i
-                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                                <a href="../FORMULARZ/formularz.html" class="specific-icon-link">
+                                    <i class="fa fa-search-plus specific-icon" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -93,15 +110,17 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <figure>
-                                    <img src="../imghoney/notatka.png" style="margin-top: 9rem;" alt="Project Image">
+                                    <img src="../imghoney/notatka.png" style="margin-top: 9rem;"
+                                        alt="Zdjęcie projektu Notatnik">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
                                 <h3 data-lang-key="notebook">Notatnik</h3>
                                 <p data-lang-key="notebook_desc">Responsywny notatnik z opcją zapisywania notatek w
                                     pliku na dysku.</p>
-                                <a href="../NOTATNIK/notatnik.html" class="specific-icon-link"><i
-                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                                <a href="../NOTATNIK/notatnik.html" class="specific-icon-link">
+                                    <i class="fa fa-search-plus specific-icon" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -112,15 +131,17 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <figure>
-                                    <img src="../imghoney/stoper.png" style="margin-top: 9rem;" alt="Project Image">
+                                    <img src="../imghoney/stoper.png" style="margin-top: 9rem;"
+                                        alt="Zdjęcie projektu Stoper">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
                                 <h3 data-lang-key="stopwatch">Stoper</h3>
                                 <p data-lang-key="stopwatch_desc">Responsywny stoper z archiwum do zapisywania czasów i
                                     możliwością zmiany koloru.</p>
-                                <a href="../STOPER/stoper.html" class="specific-icon-link"><i
-                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                                <a href="../STOPER/stoper.html" class="specific-icon-link">
+                                    <i class="fa fa-search-plus specific-icon" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -132,14 +153,15 @@
                             <div class="flip-card-front">
                                 <figure>
                                     <img src="../imghoney/wyszukiwarka.png" style="margin-top: 9rem;"
-                                        alt="Project Image">
+                                        alt="Zdjęcie projektu Wyszukiwarka">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
                                 <h3 data-lang-key="search">Wyszukiwarka</h3>
                                 <p data-lang-key="search_desc">Responsywna wyszukiwarka.</p>
-                                <a href="../WYSZUKIWARKA/wyszukiwarka.html" class="specific-icon-link"><i
-                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                                <a href="../WYSZUKIWARKA/wyszukiwarka.html" class="specific-icon-link">
+                                    <i class="fa fa-search-plus specific-icon" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -151,15 +173,16 @@
                             <div class="flip-card-front">
                                 <figure>
                                     <img src="../imghoney/kalkulatorkcal.png" style="margin-top: 13rem;"
-                                        alt="Project Image">
+                                        alt="Zdjęcie projektu Kalkulator KCAL">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
                                 <h3 data-lang-key="calorie_calculator">Kalkulator KCAL</h3>
-                                <p data-lang-key="calorie_calculator_desc">Responsywny kalkulator kcal z wieloma opcjami
-                                </p>
-                                <a href="../KALKULATORKCAL/kalkulatorKCAL.html" class="specific-icon-link"><i
-                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                                <p data-lang-key="calorie_calculator_desc">Responsywny kalkulator kcal z wieloma
+                                    opcjami.</p>
+                                <a href="../KALKULATORKCAL/kalkulatorKCAL.html" class="specific-icon-link">
+                                    <i class="fa fa-search-plus specific-icon" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -171,22 +194,21 @@
                             <div class="flip-card-front">
                                 <figure>
                                     <img src="../imghoney/konwerter.png" style="margin-top: 2.5rem;"
-                                        alt="Project Image">
+                                        alt="Zdjęcie projektu Konwerter jednostek">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
                                 <h3 data-lang-key="unit_converter">Konwerter jednostek</h3>
-                                <p data-lang-key="unit_converter_desc">Responsywny konwerter jednostek</p>
-                                <a href="../KONWERTER/konwerter.html" class="specific-icon-link"><i
-                                        class="fa fa-search-plus specific-icon" aria-hidden="true"></i></a>
+                                <p data-lang-key="unit_converter_desc">Responsywny konwerter jednostek.</p>
+                                <a href="../KONWERTER/konwerter.html" class="specific-icon-link">
+                                    <i class="fa fa-search-plus specific-icon" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </section>
 
     <script>

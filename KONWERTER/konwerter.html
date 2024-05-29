@@ -4,15 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Konwerter jednostek to narzędzie online do szybkiej i łatwej konwersji jednostek miary, takich jak miligramy, gramy, litry, i więcej.">
+    <meta name="keywords"
+        content="konwerter jednostek, przelicznik, miary, miligramy, gramy, litry, jednostki międzynarodowe">
+    <meta name="author" content="Wiktor Jurkowski">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="konwerter.css">
     <title data-lang-key="title">Konwerter jednostek</title>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Konwerter jednostek",
+            "description": "Konwerter jednostek to narzędzie online do szybkiej i łatwej konwersji jednostek miary, takich jak miligramy, gramy, litry, i więcej.",
+            "url": "https://wiktorj96.github.io/PROJECTS/"
+        }
+    </script>
 </head>
 
 <body>
     <div class="language-switch">
-        <button id="lang-pl">PL</button>
-        <button id="lang-en">EN</button>
+        <button id="lang-pl" aria-label="Zmień język na polski">PL</button>
+        <button id="lang-en" aria-label="Change language to English">EN</button>
     </div>
     <div class="container">
         <div class="input-group">
@@ -51,9 +69,7 @@
         <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
-    <script src="konwerter.js">
-    </script>
-    
+    <script src="konwerter.js"></script>
 </body>
 
 </html>

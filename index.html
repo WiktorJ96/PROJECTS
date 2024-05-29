@@ -1,30 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Projekty w JavaScript, HTML i CSS. Przeglądaj responsywne formularze, notatniki, stopery, wyszukiwarki, kalkulatory kalorii i konwertery jednostek.">
+    <meta name="keywords"
+        content="projekty, JavaScript, HTML, CSS, formularz, notatnik, stoper, wyszukiwarka, kalkulator kalorii, konwerter jednostek">
+    <meta name="author" content="Wiktor Jurkowski">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">>
     <link rel="stylesheet" href="./INDEX/portfolio.css">
     <title>Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Projekty JavaScript, HTML, CSS",
+        "description": "Projekty w JavaScript, HTML i CSS. Przeglądaj responsywne formularze, notatniki, stopery, wyszukiwarki, kalkulatory kalorii i konwertery jednostek.",
+        "url": "https://wiktorj96.github.io/PROJECTS/"
+    }
+    </script>
 </head>
-<style>
-
-</style>
-
 <body>
 
     <div class="menu-responsive">
+
         <nav>
+            
             <ul>
-                <li><a class="scroll" href="#about" data-lang-key="about"><i class="fa fa-user" aria-hidden="true"></i>
-                        <span data-lang-key="about_text">O mnie</span></a></li>
-                <li><a class="scroll" href="#skills" data-lang-key="skills"><i class="fa fa-cogs"
-                            aria-hidden="true"></i> <span data-lang-key="skills_text">Umiejętności</span></a></li>
-                <li><a class="scroll" href="#portfolio" data-lang-key="portfolio"><i class="fa fa-briefcase"
-                            aria-hidden="true"></i> <span data-lang-key="portfolio_text">Portfolio</span></a></li>
-                <li><a class="scroll" href="#contact" data-lang-key="contact"><i class="fa fa-envelope"
-                            aria-hidden="true"></i> <span data-lang-key="contact_text">Kontakt</span></a></li>
+                <li>
+                    <a class="scroll" href="#about">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <span data-lang-key="about">O mnie</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="scroll" href="#skills">
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                        <span data-lang-key="skills">Umiejętności</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="scroll" href="#portfolio">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                        <span data-lang-key="portfolio">Portfolio</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="scroll" href="#contact">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <span data-lang-key="contact">Kontakt</span>
+                    </a>
+                </li>
+                
             </ul>
         </nav>
 
@@ -38,8 +74,7 @@
                         <button id="lang-pl">PL</button>
                         <button id="lang-en">EN</button>
                     </div>
-                    <div class="col-md-6 header__top-brand">
-                    </div>
+                    <div class="col-md-6 header__top-brand"></div>
                     <nav class="col-md-6 header__top--responsive hidden-lg-up menu_hamburger">
                         <ul>
                             <li><a class="menu-bars" href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
@@ -59,7 +94,6 @@
             <div class="header__arrow">
                 <a class="scroll" href="#about"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
             </div>
-
         </div>
     </header>
 
@@ -76,8 +110,8 @@
             <p data-lang-key="my_goal">Moim celem jest <strong data-lang-key="development">rozwój</strong> na wielu
                 płaszczyznach IT</p>
             <p data-lang-key="currently">W chwili obecnej <strong data-lang-key="first_steps">stawiam pierwsze
-                    kroki</strong> jako <strong data-lang-key="frontend_dev">Front-end developer</strong></p>
-            <p data-lang-key="motivated">Jednak jestem zmotywowany aby jak najszybciej zdobyć wiedzę</p>
+                    kroki</strong> jako <strong data-lang-key="frontend_dev">Front-end&nbsp;developer</strong></p>
+            <p data-lang-key="motivated">Jednak jestem <strong>zmotywowany</strong> aby jak najszybciej zdobyć wiedzę</p>
             <p data-lang-key="technologies_languages">na temat rożnych technologii i języków programowania</p>
         </div>
     </section>
@@ -148,7 +182,7 @@
                             <div class="flip-card-front">
                                 <figure>
                                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
-                                        style="margin-top: 1.5rem;" alt="Project Image">
+                                        style="margin-top: 1.5rem;" alt="Zdjęcie projektu JavaScript">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
@@ -162,18 +196,20 @@
                 </div>
             </div>
         </div>
-
     </section>
 
     <section id="contact">
         <div class="container">
             <p class="lead" data-lang-key="if_you_like">Jeśli podobają Ci się moje projekty</p>
-            <p><span class="text-animate" data-lang-key="need_web_designer">I potrzebujesz web designera <br> lub web developera</span></p>
+            <p><span class="text-animate" data-lang-key="need_web_designer">I potrzebujesz web designera <br> lub web
+                    developera</span></p>
             <a class="btn" href="mailto:testyrecenzje@gmail.com" data-lang-key="contact_me">Skontaktuj się</a>
 
             <div class="contact__social">
-                <a href="https://github.com/wiktorj96" target="_blank"><i class="fa fa-github media"
-                        aria-hidden="true"></i></a>
+                <a href="https://github.com/wiktorj96" target="_blank">
+                    <i class="fab fa-github media" aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/in/wiktor-jurkowski-28671630a/" target="_blank">
+                    <i class="fab fa-linkedin media" aria-hidden="true"></i></a>
             </div>
         </div>
     </section>
@@ -183,109 +219,108 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-                $(".menu-bars").on("click", function (e) {
-                    e.stopPropagation();
+            $(".menu-bars").on("click", function (e) {
+                e.stopPropagation();
+                if ($(".menu-responsive").hasClass("show")) {
+                    $(".menu-responsive").removeClass("show").addClass("hide");
+                } else {
+                    $(".menu-responsive").removeClass("hide").addClass("show");
+                }
+            });
+
+            $(document).on("click", function (e) {
+                if (!$(e.target).closest('.menu-responsive, .menu-bars').length) {
                     if ($(".menu-responsive").hasClass("show")) {
                         $(".menu-responsive").removeClass("show").addClass("hide");
-                    } else {
-                        $(".menu-responsive").removeClass("hide").addClass("show");
                     }
-                });
+                }
+            });
 
-                $(document).on("click", function (e) {
-                    if (!$(e.target).closest('.menu-responsive, .menu-bars').length) {
-                        if ($(".menu-responsive").hasClass("show")) {
-                            $(".menu-responsive").removeClass("show").addClass("hide");
-                        }
-                    }
-                });
+            $(".menu-responsive").on("click", function (e) {
+                e.stopPropagation();
+            });
 
-                $(".menu-responsive").on("click", function (e) {
-                    e.stopPropagation();
-                });
+            $(".scroll").on("click", function (e) {
+                e.preventDefault();
+                const target = $(this.hash);
+                if (target.length) {
+                    $('html, body').animate({
+                        scrollTop: target.offset().top
+                    }, 1500);
+                }
+            });
 
-                $(".scroll").on("click", function (e) {
-                    e.preventDefault();
-                    const target = $(this.hash);
-                    if (target.length) {
-                        $('html, body').animate({
-                            scrollTop: target.offset().top
-                        }, 1500);
-                    }
-                });
-
-                const progressBars = document.querySelectorAll('.progress-bar');
-                const animateProgressBars = () => {
-                    progressBars.forEach(bar => {
-                        const value = bar.parentElement.getAttribute('style').split(':')[1];
-                        bar.style.width = value;
-                    });
-                };
-
-                const observer = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('animate');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                });
-
+            const progressBars = document.querySelectorAll('.progress-bar');
+            const animateProgressBars = () => {
                 progressBars.forEach(bar => {
-                    observer.observe(bar);
+                    const value = bar.parentElement.getAttribute('style').split(':')[1];
+                    bar.style.width = value;
                 });
+            };
 
-                let sentences = [];
-                let i = 0;
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
 
-                function updateSentences(lang) {
-                    sentences = translations[lang]['dynamic_sentences'];
-                    i = 0;
-                    clearInterval(sentenceInterval);
-                    sentenceInterval = setInterval(function () {
-                        $(".text-animate").fadeOut(function () {
-                            $(this).text(sentences[i = (i + 1) % sentences.length]).fadeIn();
-                        });
-                    }, 2500);
-                }
+            progressBars.forEach(bar => {
+                observer.observe(bar);
+            });
 
-                const translations = {
-                    "pl": {},
-                    "en": {}
-                };
+            let sentences = [];
+            let i = 0;
 
-                fetch('./INDEX/plINDEX.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        translations['pl'] = data;
-                    });
-
-                fetch('./INDEX/enINDEX.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        translations['en'] = data;
-                    });
-
-                function translatePage(lang) {
-                    document.querySelectorAll('[data-lang-key]').forEach(element => {
-                        const key = element.getAttribute('data-lang-key');
-                        if (translations[lang][key]) {
-                            element.innerHTML = translations[lang][key];
-                        }
-                    });
-                    updateSentences(lang);
-                }
-
-                let sentenceInterval = setInterval(function () {
+            function updateSentences(lang) {
+                sentences = translations[lang]['dynamic_sentences'];
+                i = 0;
+                clearInterval(sentenceInterval);
+                sentenceInterval = setInterval(function () {
                     $(".text-animate").fadeOut(function () {
                         $(this).text(sentences[i = (i + 1) % sentences.length]).fadeIn();
                     });
                 }, 2500);
+            }
 
-                document.getElementById('lang-pl').addEventListener('click', () => translatePage('pl'));
-                document.getElementById('lang-en').addEventListener('click', () => translatePage('en'));
-            });
+            const translations = {
+                "pl": {},
+                "en": {}
+            };
 
+            fetch('./INDEX/plINDEX.json')
+                .then(response => response.json())
+                .then(data => {
+                    translations['pl'] = data;
+                });
+
+            fetch('./INDEX/enINDEX.json')
+                .then(response => response.json())
+                .then(data => {
+                    translations['en'] = data;
+                });
+
+            function translatePage(lang) {
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    if (translations[lang][key]) {
+                        element.innerHTML = translations[lang][key];
+                    }
+                });
+                updateSentences(lang);
+            }
+
+            let sentenceInterval = setInterval(function () {
+                $(".text-animate").fadeOut(function () {
+                    $(this).text(sentences[i = (i + 1) % sentences.length]).fadeIn();
+                });
+            }, 2500);
+
+            document.getElementById('lang-pl').addEventListener('click', () => translatePage('pl'));
+            document.getElementById('lang-en').addEventListener('click', () => translatePage('en'));
+        });
     </script>
 </body>
 

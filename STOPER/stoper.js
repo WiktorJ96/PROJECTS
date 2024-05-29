@@ -16,6 +16,7 @@ const closeModalBtn = document.querySelector('.close');
 let countTime;
 let minutes = 0;
 let seconds = 0;
+let milliseconds = 0;
 
 let timesArr = [];
 
@@ -23,18 +24,20 @@ const handleStart = () => {
     clearInterval(countTime);
 
     countTime = setInterval(() => {
-        if (seconds < 9) {
+        milliseconds++;
+
+        if (milliseconds > 99) {
+            milliseconds = 0;
             seconds++;
-            stopwatch.textContent = `${minutes}:0${seconds}`;
-        } else if (seconds >= 9 && seconds < 59) {
-            seconds++;
-            stopwatch.textContent = `${minutes}:${seconds}`;
-        } else {
-            minutes++;
-            seconds = 0;
-            stopwatch.textContent = `${minutes}:00`;
         }
-    }, 1000);
+
+        if (seconds > 59) {
+            seconds = 0;
+            minutes++;
+        }
+
+        stopwatch.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}:${milliseconds < 10 ? '0' : ''}${milliseconds}`;
+    }, 10);
 };
 
 startBtn.addEventListener('click', handleStart);
@@ -48,7 +51,7 @@ pauseBtn.addEventListener('click', handlePause);
 const handleStop = () => {
     time.innerHTML = `Ostatni czas: ${stopwatch.textContent}`;
 
-    if (stopwatch.textContent !== '0:00') {
+    if (stopwatch.textContent !== '0:00:00') {
         time.style.visibility = 'visible';
         timesArr.push(stopwatch.textContent);
         console.log(timesArr);
@@ -68,7 +71,7 @@ const handleReset = () => {
 resetBtn.addEventListener('click', handleReset);
 
 const clearStuff = () => {
-    stopwatch.textContent = `0:00`;
+    stopwatch.textContent = `0:00:00`;
     clearInterval(countTime);
     timeList.textContent = '';
     seconds = 0;
@@ -138,4 +141,47 @@ modalShadow.addEventListener('click', (event) => {
     }
 });
 
+const translations = {
+                pl: {
+                    title: "Stoper",
+                    instructions: "Instrukcja:",
+                    start: "<i class='fas fa-play' aria-hidden='true'></i> - start",
+                    pause: "<i class='fas fa-pause' aria-hidden='true'></i> - pauza",
+                    stop: "<i class='fas fa-stop' aria-hidden='true'></i> - stop",
+                    reset: "<i class='fas fa-times' aria-hidden='true'></i> - skasuj wszystko (łącznie z archiwum)",
+                    archive: "<strong>archiwum</strong> - zobacz wcześniejsze pomiary",
+                    close: "Zamknij",
+                    history: "Archiwum",
+                    footer: "2024 W.J Project. Wszelkie prawa zastrzeżone.",
+                },
+                en: {
+                    title: "Stopwatch",
+                    instructions: "Instructions:",
+                    start: "<i class='fas fa-play' aria-hidden='true'></i> - start",
+                    pause: "<i class='fas fa-pause' aria-hidden='true'></i> - pause",
+                    stop: "<i class='fas fa-stop' aria-hidden='true'></i> - stop",
+                    reset: "<i class='fas fa-times' aria-hidden='true'></i> - reset all (including history)",
+                    archive: "<strong>history</strong> - see previous records",
+                    close: "Close",
+                    history: "History",
+                    footer: "2024 W.J Project. All rights reserved."
+                }
+            };
 
+            function switchLanguage(language) {
+                document.querySelectorAll('.lang').forEach(element => {
+                    const key = element.getAttribute('key');
+                    element.innerHTML = translations[language][key];
+                });
+                document.querySelectorAll('.buttons button').forEach(button => {
+                    const key = button.innerText.trim();
+                    if (translations[language][key]) {
+                        button.innerText = translations[language][key];
+                    }
+                });
+            }
+
+            document.getElementById('switch-to-pl').addEventListener('click', () => switchLanguage('pl'));
+            document.getElementById('switch-to-en').addEventListener('click', () => switchLanguage('en'));
+
+            switchLanguage('pl');

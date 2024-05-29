@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stoper - Praktyczny stoper</title>
 
-    <meta name="description" content="Stoper to praktyczne narzędzi do mierzenia czasu. Idealne do ćwiczeń, gotowania i innych zadań.">
+    <meta name="description"
+        content="Stoper to praktyczne narzędzi do mierzenia czasu. Idealne do ćwiczeń, gotowania i innych zadań.">
     <meta name="keywords" content="stoper, timer, czasomierz, mierzenie czasu, ćwiczenia, gotowanie">
     <meta name="author" content="Wiktor Jurkowski">
     <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="stoper.css">
 
     <script type="application/ld+json">
@@ -27,6 +29,10 @@
 </head>
 
 <body>
+    <div class="language-switch">
+        <button id="switch-to-pl" aria-label="Switch to Polish">PL</button>
+        <button id="switch-to-en" aria-label="Switch to English">EN</button>
+    </div>
     <div class="wrapper">
         <p class="info" aria-label="Informacje">
             <i class="fas fa-question" aria-hidden="true"></i>
@@ -35,50 +41,54 @@
             <i class="fas fa-paint-brush" aria-hidden="true"></i>
         </p>
         <div class="color-menu" role="radiogroup" aria-labelledby="colorMenuLabel">
-            <label>
-                <input type="radio" name="color" value="#FA1406" checked> Red
+            <label class="color-option red">
+                <input type="radio" name="color" value="#FA1406" checked>
+                <span class="color-dot"></span>
             </label>
-            <label>
-                <input type="radio" name="color" value="#28a745"> Green
+            <label class="color-option green">
+                <input type="radio" name="color" value="#28a745">
+                <span class="color-dot"></span>
             </label>
-            <label>
-                <input type="radio" name="color" value="#007bff"> Blue
+            <label class="color-option blue">
+                <input type="radio" name="color" value="#007bff">
+                <span class="color-dot"></span>
             </label>
-            <label>
-                <input type="radio" name="color" value="#ffc107"> Yellow
+            <label class="color-option yellow">
+                <input type="radio" name="color" value="#ffc107">
+                <span class="color-dot"></span>
             </label>
         </div>
         
-        <h1>Stoper</h1>
-        <p class="stopwatch" aria-live="polite">0:00</p>
-        <p class="time" aria-live="polite">0:00</p>
+        <h1 class="lang" key="title">Stoper</h1>
+        <p class="stopwatch" aria-live="polite">0:00:00</p>
+        <p class="time" aria-live="polite">0:00:00</p>
 
         <div class="buttons">
             <button class="start" aria-label="Start"><i class="fas fa-play" aria-hidden="true"></i></button>
             <button class="pause" aria-label="Pauza"><i class="fas fa-pause" aria-hidden="true"></i></button>
             <button class="stop" aria-label="Stop"><i class="fas fa-stop" aria-hidden="true"></i></button>
             <button class="reset" aria-label="Reset"><i class="fas fa-times" aria-hidden="true"></i></button>
-            <button class="history" aria-label="Archiwum">Archiwum</button>
+            <button class="history lang" key="history" aria-label="Archiwum">Archiwum</button>
         </div>
         <ul class="time-list" aria-label="Lista zapisanych czasów"></ul>
     </div>
 
     <div class="modal-shadow" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">
         <div class="modal">
-            <h3 id="modalTitle">Instrukcja:</h3>
+            <h3 id="modalTitle" class="lang" key="instructions">Instrukcja:</h3>
             <div id="modalDesc">
-                <p><i class="fas fa-play" aria-hidden="true"></i> - start</p>
-                <p><i class="fas fa-pause" aria-hidden="true"></i> - pauza</p>
-                <p><i class="fas fa-stop" aria-hidden="true"></i> - stop</p>
-                <p><i class="fas fa-times" aria-hidden="true"></i> - skasuj wszystko (łącznie z archiwum)</p>
-                <p><strong>archiwum</strong> - zobacz wcześniejsze pomiary</p>
+                <p class="lang" key="start"><i class="fas fa-play" aria-hidden="true"></i> - start</p>
+                <p class="lang" key="pause"><i class="fas fa-pause" aria-hidden="true"></i> - pauza</p>
+                <p class="lang" key="stop"><i class="fas fa-stop" aria-hidden="true"></i> - stop</p>
+                <p class="lang" key="reset"><i class="fas fa-times" aria-hidden="true"></i> - skasuj wszystko (łącznie z archiwum)</p>
+                <p class="lang" key="archive"><strong>archiwum</strong> - zobacz wcześniejsze pomiary</p>
             </div>
-            <button class="close" aria-label="Zamknij">Zamknij</button>
+            <button class="close" aria-label="Zamknij" class="lang" key="close">Zamknij</button>
         </div>
     </div>
-<footer>
-    <p>&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
-</footer>
+    <footer class="lang" key="footer">
+        <p>&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
+    </footer>
     <script src="stoper.js"></script>
 </body>
 

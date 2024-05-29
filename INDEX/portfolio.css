@@ -97,8 +97,7 @@ h2 {
 }
 
 .menu-responsive {
-    background-image: linear-gradient(to right, rgba(18, 18, 19, 0.99) 60%, hsla(0, 3%, 13%, 0.99) 140%);
-    padding: 2rem 0;
+    background-image: linear-gradient(to right, rgba(18, 18, 19) 60%, hsla(0, 3%, 13%) 140%);
     display: flex;
     position: fixed;
     left: 0;
@@ -114,6 +113,7 @@ h2 {
     display: block;
     visibility: visible;
     animation: slideIn 0.3s forwards;
+    border-right: 2px solid #fff;
 }
 
 .menu-responsive.hide {
@@ -148,7 +148,7 @@ h2 {
 }
 
 .menu-responsive ul li {
-    padding: 1.5rem 0;
+    padding: 2rem 0;
 }
 
 .menu-responsive ul li a {
@@ -159,9 +159,15 @@ h2 {
 }
 
 .menu-responsive ul li a:hover {
-    border-bottom: 1px solid #fff;
+    border: 1px solid #fff;
+    padding: 0.8rem 1.3rem;
     color: #fff;
     text-decoration: none;
+}
+
+hr{
+    color: #fff;
+    width: 100%;
 }
 
 header {
@@ -316,7 +322,7 @@ header {
 }
 
 #about p {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: #333;
 }
 
@@ -556,7 +562,7 @@ header {
     display: grid;
     place-content: center;
     padding: 1rem 0;
-    background-color: #00ff6c;
+    background-color: #76dafb;
     text-align: center;
     color: #232323;
     min-height: 100vh;
@@ -577,17 +583,18 @@ header {
     margin-top: 2.0rem;
     border: 2px solid #232323;
     color: #232323;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 500;
 }
 
 #contact .btn:hover {
     background-color: #232323;
-    color: #00ff6c;
+    color: #76dafb;
 }
 
 #contact .contact__social {
     margin-top: 3rem;
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
 #contact .contact__social a {
@@ -607,6 +614,29 @@ footer {
     color: #fff;
 }
 
+@media (max-width: 430px){
+    #about p{
+        font-size: 1.2rem;
+        padding: 0rem 1rem;
+    }
+    #contact p{
+        padding: 0rem 1rem;
+    }
+    #contact .btn {
+        padding: 1rem;
+    }
+    .header__content .btn {
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+    #about p{
+        font-size: 1.5rem;
+        padding: 0.5rem 3.5rem;
+    }
+}
+
 @media (min-width: 47.9em) {
     #contact .lead {
         font-size: 2.05rem;
@@ -616,7 +646,7 @@ footer {
         font-size: 1.85rem;
     }
     .btn{
-        padding: 50px;
+        padding: 1rem;
     }
 }
 
