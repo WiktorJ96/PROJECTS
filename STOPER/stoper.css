@@ -35,22 +35,7 @@ body {
 }
 
 .language-switch {
-    display: flex;
-    position: relative;
-    justify-content: center;
-    flex-direction: row;
-    z-index: 1000;
-    margin-top: 10px;
-}
-
-.language-switch button {
-    background: radial-gradient(circle, rgba(38, 39, 40, 0.95) 0%, rgba(17, 17, 17, 0.95) 93%);
-}
-
-.language-switch button:hover {
-    background: radial-gradient(circle, rgba(245, 246, 247, 0.95) 0%, rgba(251, 250, 250, 0.95) 93%);
-    color: #333;
-    border: 1px solid #333;
+    display: none;
 }
 
 .wrapper {

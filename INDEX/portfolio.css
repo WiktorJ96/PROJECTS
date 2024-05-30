@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 .bold {
@@ -20,8 +21,8 @@ body {
 .language-switch {
     display: flex;
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 1.3rem;
+    right: 0.5rem;
     flex-direction: row;
     z-index: 1000;
 }
@@ -30,12 +31,13 @@ body {
     background-color: hsla(0, 0%, 7%, 0.85);
     color: #fff;
     border: none;
-    padding: 10px 10px;
+    padding: 12px 12px;
     margin: 0 5px 5px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
     font-weight: normal;
+    transition: all 0.3s ease;
 }
 
 .btn {
@@ -94,6 +96,7 @@ h2 {
     left: 2.5rem;
     flex-direction: column;
     z-index: 1000;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .menu-responsive {
@@ -627,6 +630,32 @@ footer {
     }
     .header__content .btn {
         padding: 0.5rem 1rem;
+    }
+    .header__content {
+        padding: 15px;
+        margin-top: 15%;
+    }
+    .language-switch{
+        right: 1.5rem;
+    }
+    .menu_hamburger{
+        left: 2.0rem;
+    }
+    .fa-bars{
+        background-color: #222;
+        padding: 0.5rem 0.5rem;
+        border-radius: 10px;
+        font-size: 2rem;
+        top: 30px;
+        transition: all 0.3s ease;
+    }
+    .fa-bars:hover{
+        color: #fff;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        transform: scale(1.05);
+    }
+    .menu-responsive.show{
+        font-size: 1rem;
     }
 }
 
