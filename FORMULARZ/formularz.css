@@ -32,33 +32,8 @@ body {
     }
 }
 
-.language-switch button:hover {
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #333;
-}
-
 .language-switch {
-    display: flex;
-    justify-content: center;
-    justify-self: center;
-    justify-items: center;
-    top: 1rem;
-    right: 1rem;
-    flex-direction: row;
-    z-index: 1000;
-}
-
-.language-switch button {
-    background-color: hsla(208, 84%, 51%, 0.85);
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: normal;
+    display: none;
 }
 
 .wrapper {

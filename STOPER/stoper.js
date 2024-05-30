@@ -141,47 +141,52 @@ modalShadow.addEventListener('click', (event) => {
     }
 });
 
+// Translation functionality
 const translations = {
-                pl: {
-                    title: "Stoper",
-                    instructions: "Instrukcja:",
-                    start: "<i class='fas fa-play' aria-hidden='true'></i> - start",
-                    pause: "<i class='fas fa-pause' aria-hidden='true'></i> - pauza",
-                    stop: "<i class='fas fa-stop' aria-hidden='true'></i> - stop",
-                    reset: "<i class='fas fa-times' aria-hidden='true'></i> - skasuj wszystko (łącznie z archiwum)",
-                    archive: "<strong>archiwum</strong> - zobacz wcześniejsze pomiary",
-                    close: "Zamknij",
-                    history: "Archiwum",
-                    footer: "2024 W.J Project. Wszelkie prawa zastrzeżone.",
-                },
-                en: {
-                    title: "Stopwatch",
-                    instructions: "Instructions:",
-                    start: "<i class='fas fa-play' aria-hidden='true'></i> - start",
-                    pause: "<i class='fas fa-pause' aria-hidden='true'></i> - pause",
-                    stop: "<i class='fas fa-stop' aria-hidden='true'></i> - stop",
-                    reset: "<i class='fas fa-times' aria-hidden='true'></i> - reset all (including history)",
-                    archive: "<strong>history</strong> - see previous records",
-                    close: "Close",
-                    history: "History",
-                    footer: "2024 W.J Project. All rights reserved."
-                }
-            };
+    pl: {
+        title: "Stoper",
+        instructions: "Instrukcja:",
+        start: "<i class='fas fa-play' aria-hidden='true'></i> - start",
+        pause: "<i class='fas fa-pause' aria-hidden='true'></i> - pauza",
+        stop: "<i class='fas fa-stop' aria-hidden='true'></i> - stop",
+        reset: "<i class='fas fa-times' aria-hidden='true'></i> - skasuj wszystko (łącznie z archiwum)",
+        archive: "<strong>archiwum</strong> - zobacz wcześniejsze pomiary",
+        close: "Zamknij",
+        history: "Archiwum",
+        footer: "2024 W.J Project. Wszelkie prawa zastrzeżone.",
+    },
+    en: {
+        title: "Stopwatch",
+        instructions: "Instructions:",
+        start: "<i class='fas fa-play' aria-hidden='true'></i> - start",
+        pause: "<i class='fas fa-pause' aria-hidden='true'></i> - pause",
+        stop: "<i class='fas fa-stop' aria-hidden='true'></i> - stop",
+        reset: "<i class='fas fa-times' aria-hidden='true'></i> - reset all (including history)",
+        archive: "<strong>history</strong> - see previous records",
+        close: "Close",
+        history: "History",
+        footer: "2024 W.J Project. All rights reserved."
+    }
+};
 
-            function switchLanguage(language) {
-                document.querySelectorAll('.lang').forEach(element => {
-                    const key = element.getAttribute('key');
-                    element.innerHTML = translations[language][key];
-                });
-                document.querySelectorAll('.buttons button').forEach(button => {
-                    const key = button.innerText.trim();
-                    if (translations[language][key]) {
-                        button.innerText = translations[language][key];
-                    }
-                });
-            }
+function switchLanguage(language) {
+    document.querySelectorAll('.lang').forEach(element => {
+        const key = element.getAttribute('key');
+        element.innerHTML = translations[language][key];
+    });
+}
 
-            document.getElementById('switch-to-pl').addEventListener('click', () => switchLanguage('pl'));
-            document.getElementById('switch-to-en').addEventListener('click', () => switchLanguage('en'));
+document.getElementById('switch-to-pl').addEventListener('click', () => {
+    switchLanguage('pl');
+    localStorage.setItem('preferredLanguage', 'pl');
+});
 
-            switchLanguage('pl');
+document.getElementById('switch-to-en').addEventListener('click', () => {
+    switchLanguage('en');
+    localStorage.setItem('preferredLanguage', 'en');
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const lang = localStorage.getItem('preferredLanguage') || 'pl';
+    switchLanguage(lang);
+});

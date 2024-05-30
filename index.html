@@ -25,7 +25,7 @@
     }
     </script>
 </head>
-<body>
+<body data-page="index">
     <div class="menu-responsive">
         <nav>
             <ul>
@@ -212,8 +212,19 @@
     <footer>
         <p>&copy; 2024 W.J Project. <span data-lang-key="all_rights_reserved">Wszelkie prawa zastrzeżone.</span></p>
     </footer>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./translations/translate.js"></script>
     <script>
+        function fetchTranslations(lang, page) {
+                return fetch(`./translations/${page}-${lang}.json`)
+                    .then(response => response.json())
+                    .catch(error => {
+                        console.error(`Error loading translations for ${lang}:`, error);
+                        return {};
+                    });
+            }
+            
         $(document).ready(function () {
             $(".menu-bars").on("click", function (e) {
                 e.stopPropagation();
@@ -267,56 +278,8 @@
                 observer.observe(bar);
             });
 
-            let sentences = [];
-            let i = 0;
-
-            function updateSentences(lang) {
-                sentences = translations[lang]['dynamic_sentences'];
-                i = 0;
-                clearInterval(sentenceInterval);
-                sentenceInterval = setInterval(function () {
-                    $(".text-animate").fadeOut(function () {
-                        $(this).text(sentences[i = (i + 1) % sentences.length]).fadeIn();
-                    });
-                }, 2500);
-            }
-
-            const translations = {
-                "pl": {},
-                "en": {}
-            };
-
-            fetch('./INDEX/plINDEX.json')
-                .then(response => response.json())
-                .then(data => {
-                    translations['pl'] = data;
-                });
-
-            fetch('./INDEX/enINDEX.json')
-                .then(response => response.json())
-                .then(data => {
-                    translations['en'] = data;
-                });
-
-            function translatePage(lang) {
-                document.querySelectorAll('[data-lang-key]').forEach(element => {
-                    const key = element.getAttribute('data-lang-key');
-                    if (translations[lang][key]) {
-                        element.innerHTML = translations[lang][key];
-                    }
-                });
-                updateSentences(lang);
-            }
-
-            let sentenceInterval = setInterval(function () {
-                $(".text-animate").fadeOut(function () {
-                    $(this).text(sentences[i = (i + 1) % sentences.length]).fadeIn();
-                });
-            }, 2500);
-
-            document.getElementById('lang-pl').addEventListener('click', () => translatePage('pl'));
-            document.getElementById('lang-en').addEventListener('click', () => translatePage('en'));
         });
+            
     </script>
 </body>
 
