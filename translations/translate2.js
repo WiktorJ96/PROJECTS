@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const translations = {
         "pl": {},
@@ -42,11 +41,11 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('[data-lang-key]').forEach(element => {
             const key = element.getAttribute('data-lang-key');
             if (translations[lang][key]) {
-                element.textContent = translations[lang][key];
+                element.innerHTML = translations[lang][key];
             }
         });
-        document.querySelectorAll('[data-placeholder-lang-key]').forEach(element => {
-            const key = element.getAttribute('data-placeholder-lang-key');
+        document.querySelectorAll('[data-placeholder-key]').forEach(element => {
+            const key = element.getAttribute('data-placeholder-key');
             if (translations[lang][key]) {
                 element.placeholder = translations[lang][key];
             }

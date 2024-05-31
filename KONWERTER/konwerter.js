@@ -1,4 +1,3 @@
-
 const conversionFactors = {
     'iu': { 'mcg': 0.025, 'mg': 0.000025, 'g': 0.000000025 },
     'mcg': { 'mg': 0.001, 'iu': 40, 'g': 0.000001 },
@@ -8,8 +7,23 @@ const conversionFactors = {
     'l': { 'ml': 1000, 'g': 1000 },
 };
 
+const translations = {
+    'pl': {
+        'error_no_value': 'Proszę podać wartość do przeliczenia.',
+        'error_same_units': 'Jednostki są takie same, wybierz różne jednostki.',
+        'error_no_conversion': 'Nie można przeliczyć pomiędzy tymi jednostkami.',
+        'result_text': '{amount} {fromUnit} to {resultValue} {toUnit}'
+    },
+    'en': {
+        'error_no_value': 'Please provide a value to convert.',
+        'error_same_units': 'Units are the same, choose different units.',
+        'error_no_conversion': 'Cannot convert between these units.',
+        'result_text': '{amount} {fromUnit} is equal to {resultValue} {toUnit}'
+    }
+};
+
 function translate(key, params = {}) {
-    const lang = document.documentElement.lang;
+    const lang = document.documentElement.lang || 'en';
     let text = translations[lang][key] || key;
 
     for (const [paramKey, paramValue] of Object.entries(params)) {
@@ -65,3 +79,6 @@ function resetCalculator() {
     document.getElementById('result').textContent = '';
     document.getElementById('error').textContent = '';
 }
+
+document.getElementById('convertButton').addEventListener('click', convertUnits);
+document.getElementById('resetButton').addEventListener('click', resetCalculator);

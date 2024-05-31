@@ -44,8 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const checkLength = (input, min) => {
+        const lang = localStorage.getItem('preferredLanguage') || 'pl';
         if (input.value.length < min) {
-            showError(input, `Pole musi zawierać co najmniej ${min} znaków.`);
+            showError(input, translations[lang][`min${capitalizeFirstLetter(input.id)}Length`] || `Pole musi zawierać co najmniej ${min} znaków.`);
             return false;
         } else {
             clearError(input);
@@ -56,8 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const checkEmail = input => {
         const emailValue = input.value;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const lang = localStorage.getItem('preferredLanguage') || 'pl';
         if (!emailPattern.test(emailValue)) {
-            showError(input, 'Wpisz poprawny adres e-mail');
+            showError(input, translations[lang].invalidEmail || 'Wpisz poprawny adres e-mail');
             return false;
         } else {
             clearError(input);
@@ -66,8 +68,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const checkPasswords = (password, password2) => {
+        const lang = localStorage.getItem('preferredLanguage') || 'pl';
         if (password.value !== password2.value) {
-            showError(password2, 'Hasła do siebie nie pasują');
+            showError(password2, translations[lang].passwordMismatch || 'Hasła do siebie nie pasują');
             return false;
         } else {
             clearError(password2);
@@ -75,7 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    sendBtn.addEventListener('click', e => {
+    const capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1);
+
+    document.querySelector('.send').addEventListener('click', e => {
         e.preventDefault();
 
         const isFormValid = checkForm([username, password, password2, email]);
@@ -89,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    loginSendBtn.addEventListener('click', e => {
+    document.querySelector('.login-send').addEventListener('click', e => {
         e.preventDefault();
 
         const isFormValid = checkForm([loginUsername, loginPassword]);
