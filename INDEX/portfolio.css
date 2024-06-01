@@ -107,7 +107,7 @@ h2 {
         
 hr {
     color: #fff;
-    width: 75%;
+    width:75%;
 }
 
 .menu-responsive {
@@ -177,11 +177,6 @@ hr {
     padding: 0.8rem 1.3rem;
     color: #fff;
     text-decoration: none;
-}
-
-hr{
-    color: #fff;
-    width: 100%;
 }
 
 header {
