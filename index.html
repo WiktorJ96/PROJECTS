@@ -216,96 +216,115 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./translations/translate.js"></script>
     <script>
-        function fetchTranslations(lang, page) {
-                return fetch(`./translations/${page}-${lang}.json`)
-                    .then(response => response.json())
-                    .catch(error => {
-                        console.error(`Error loading translations for ${lang}:`, error);
-                        return {};
-                    });
+ function fetchTranslations(lang, page) {
+        return fetch(`./translations/${page}-${lang}.json`)
+            .then(response => response.json())
+            .catch(error => {
+                console.error(`Error loading translations for ${lang}:`, error);
+                return {};
+            });
+    }
+
+    $(document).ready(function () {
+        $(".menu-bars").on("click", function (e) {
+            e.stopPropagation();
+            if ($(".menu-responsive").hasClass("show")) {
+                $(".menu-responsive").removeClass("show").addClass("hide");
+            } else {
+                $(".menu-responsive").removeClass("hide").addClass("show");
             }
-            
-        $(document).ready(function () {
-            $(".menu-bars").on("click", function (e) {
-                e.stopPropagation();
+        });
+
+        $(document).on("click", function (e) {
+            if (!$(e.target).closest('.menu-responsive, .menu-bars').length) {
                 if ($(".menu-responsive").hasClass("show")) {
                     $(".menu-responsive").removeClass("show").addClass("hide");
-                } else {
-                    $(".menu-responsive").removeClass("hide").addClass("show");
                 }
-            });
-
-            $(document).on("click", function (e) {
-                if (!$(e.target).closest('.menu-responsive, .menu-bars').length) {
-                    if ($(".menu-responsive").hasClass("show")) {
-                        $(".menu-responsive").removeClass("show").addClass("hide");
-                    }
-                }
-            });
-
-            $(".menu-responsive").on("click", function (e) {
-                e.stopPropagation();
-            });
-
-            $(".scroll").on("click", function (e) {
-                e.preventDefault();
-                const target = $(this.hash);
-                if (target.length) {
-                    $('html, body').animate({
-                        scrollTop: target.offset().top
-                    }, 1500);
-                }
-            });
-
-            const progressBars = document.querySelectorAll('.progress-bar');
-            const animateProgressBars = () => {
-                progressBars.forEach(bar => {
-                    const value = bar.parentElement.getAttribute('style').split(':')[1];
-                    bar.style.width = value;
-                });
-            };
-
-            const langButtons = document.querySelectorAll('.language-switch button');
-            const dynamicText = document.getElementById('dynamic-text');
-            let currentLang = document.documentElement.lang || 'pl'; // Sprawdź domyślny język strony
-
-            const jsonFiles = {
-                'pl': './translations/index-pl.json',
-                'en': './translations/index-en.json'
-            };
-
-            let intervalId;
-
-            function loadDynamicText(lang) {
-                clearInterval(intervalId); 
-                fetch(jsonFiles[lang])
-                    .then(response => response.json())
-                    .then(data => {
-                        const sentences = data.dynamic_sentences;
-                        let index = 0;
-
-                        intervalId = setInterval(() => {
-                            dynamicText.classList.remove('animated');
-                            void dynamicText.offsetWidth;
-                            dynamicText.classList.add('animated');
-                            dynamicText.textContent = sentences[index];
-                            index = (index + 1) % sentences.length;
-                        }, 2500); 
-                    })
-                    .catch(error => console.error('Error loading dynamic sentences:', error));
             }
-
-            langButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    currentLang = this.id === 'lang-pl' ? 'pl' : 'en';
-                    document.documentElement.lang = currentLang;
-                    loadDynamicText(currentLang);
-                });
-            });
-
-            loadDynamicText(currentLang);
         });
-            
+
+        $(".menu-responsive").on("click", function (e) {
+            e.stopPropagation();
+        });
+
+        $(".scroll").on("click", function (e) {
+            e.preventDefault();
+            const target = $(this.hash);
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top
+                }, 1500);
+            }
+        });
+
+        const progressBars = document.querySelectorAll('.progress-bar');
+        const animateProgressBars = () => {
+            progressBars.forEach(bar => {
+                const value = bar.parentElement.style.getPropertyValue('--progress');
+                bar.style.width = value;
+            });
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target.querySelector('.progress-bar');
+                    const value = bar.parentElement.style.getPropertyValue('--progress');
+                    bar.style.width = value;
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const progressContainers = document.querySelectorAll('.progress-container');
+        progressContainers.forEach(container => {
+            observer.observe(container);
+        });
+
+        const langButtons = document.querySelectorAll('.language-switch button');
+        const dynamicText = document.getElementById('dynamic-text');
+
+        let currentLang = localStorage.getItem('lang') || 'pl';
+        document.documentElement.lang = currentLang;
+
+        const jsonFiles = {
+            'pl': './translations/index-pl.json',
+            'en': './translations/index-en.json'
+        };
+
+        let intervalId;
+
+        function loadDynamicText(lang) {
+            clearInterval(intervalId);
+            fetch(jsonFiles[lang])
+                .then(response => response.json())
+                .then(data => {
+                    const sentences = data.dynamic_sentences;
+                    let index = 0;
+
+                    intervalId = setInterval(() => {
+                        dynamicText.classList.remove('animated');
+                        void dynamicText.offsetWidth;
+                        dynamicText.classList.add('animated');
+                        dynamicText.textContent = sentences[index];
+                        index = (index + 1) % sentences.length;
+                    }, 3000);
+                })
+                .catch(error => console.error('Error loading dynamic sentences:', error));
+        }
+
+        langButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                currentLang = this.id === 'lang-pl' ? 'pl' : 'en';
+                localStorage.setItem('lang', currentLang);
+                document.documentElement.lang = currentLang;
+                loadDynamicText(currentLang);
+            });
+        });
+
+        loadDynamicText(currentLang);
+    });
+
     </script>
 </body>
 
