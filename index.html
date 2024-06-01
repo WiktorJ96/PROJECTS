@@ -197,7 +197,7 @@
     <section id="contact">
         <div class="container">
             <p class="lead" data-lang-key="if_you_like">Jeśli podobają Ci się moje projekty</p>
-            <p><span class="text-animate" data-lang-key="need_web_designer">I potrzebujesz web designera <br> lub web
+            <p><span id="dynamic-text" class="text-animate" data-lang-key="need_web_designer">I potrzebujesz web designera <br> lub web
                     developera</span></p>
             <a class="btn" href="mailto:testyrecenzje@gmail.com" data-lang-key="contact_me">Skontaktuj się</a>
 
@@ -265,19 +265,45 @@
                 });
             };
 
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                        observer.unobserve(entry.target);
-                    }
+            const langButtons = document.querySelectorAll('.language-switch button');
+            const dynamicText = document.getElementById('dynamic-text');
+            let currentLang = document.documentElement.lang || 'pl'; // Sprawdź domyślny język strony
+
+            const jsonFiles = {
+                'pl': './translations/index-pl.json',
+                'en': './translations/index-en.json'
+            };
+
+            let intervalId;
+
+            function loadDynamicText(lang) {
+                clearInterval(intervalId); 
+                fetch(jsonFiles[lang])
+                    .then(response => response.json())
+                    .then(data => {
+                        const sentences = data.dynamic_sentences;
+                        let index = 0;
+
+                        intervalId = setInterval(() => {
+                            dynamicText.classList.remove('animated');
+                            void dynamicText.offsetWidth;
+                            dynamicText.classList.add('animated');
+                            dynamicText.textContent = sentences[index];
+                            index = (index + 1) % sentences.length;
+                        }, 2500); 
+                    })
+                    .catch(error => console.error('Error loading dynamic sentences:', error));
+            }
+
+            langButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    currentLang = this.id === 'lang-pl' ? 'pl' : 'en';
+                    document.documentElement.lang = currentLang;
+                    loadDynamicText(currentLang);
                 });
             });
 
-            progressBars.forEach(bar => {
-                observer.observe(bar);
-            });
-
+            loadDynamicText(currentLang);
         });
             
     </script>

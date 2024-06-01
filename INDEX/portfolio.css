@@ -610,6 +610,26 @@ header {
     color: #fff;
 }
 
+ @keyframes fadeIn {
+     from {
+         opacity: 0;
+         transform: translateY(20px);
+     }
+
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ .text-animate {
+     opacity: 0;
+ }
+
+ .text-animate.animated {
+     animation: fadeIn 2s forwards;
+ }
+
 footer {
     padding: 0.5rem 0;
     background-color: #232323;
