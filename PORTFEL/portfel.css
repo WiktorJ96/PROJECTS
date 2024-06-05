@@ -401,6 +401,7 @@ h2.title {
 
 footer{
     margin-top: 1rem;
+    text-align: center;
 }
 
 @media (max-width: 1200px) {
@@ -456,7 +457,7 @@ footer{
     }
 
     h2.title {
-        font-size: 28px;
+        font-size: 26px;
     }
 
     .available-money {
