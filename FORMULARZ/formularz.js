@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
         switchToLoginBtn.classList.add('active');
         switchToRegisterBtn.classList.remove('active');
     });
-
+    /*
     window.fbAsyncInit = function() {
         FB.init({
             appId      : 'YOUR_APP_ID',
@@ -189,6 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, {scope: 'public_profile,email'});
     });
 
+    /*
     // Google API Client
     function onLoad() {
         gapi.load('auth2', function() {
@@ -209,4 +210,5 @@ document.addEventListener('DOMContentLoaded', function() {
     window.onload = function() {
         onLoad();
     };
+    */
 });

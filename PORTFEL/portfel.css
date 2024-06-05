@@ -1,0 +1,470 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;600;700&family=Lato:wght@300;400;700&family=Poppins:wght@300;400;500;600&family=Roboto+Condensed:wght@300;400&family=Ubuntu:wght@300;400;500;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --first-color: #F9F9F9;
+    --second-color: #222;
+    --border-color: rgba(0, 0, 0, .2);
+    --income-color: rgba(19, 200, 109, 0.95);
+    --expense-color: rgba(255, 104, 104, 0.95);
+    --button-bg: #4c4177;
+    --button-hover-bg: #2a5470;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    color: var(--second-color);
+    background-color: var(--first-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    animation: fadeInBody 1s ease-in forwards;
+}
+@keyframes fadeInBody {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.language-switch {
+    display: none;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 40px;
+    height: 220px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--second-color);
+}
+
+header span {
+    color: #c2880d;
+    font-size: 68px;
+}
+
+header p {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--second-color);
+}
+
+header i {
+    color: #bd8815;
+}
+
+hr {
+    width: 100%;
+    margin: 20px 0;
+    color: var(--first-color);
+}
+
+.hrsecond{
+    color: #fff;
+    width: 50%;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+h2.title {
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--second-color);
+}
+
+.titleh2{
+    color: #fff;
+}
+
+.transactions {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.transactions h3 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    text-align: center;
+}
+
+.transaction-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.income-area,
+.expenses-area {
+    flex: 1;
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--first-color);
+    min-width: 300px;
+}
+
+.income-area h3 {
+    color: var(--income-color);
+    font-weight: bold;
+}
+
+.expenses-area h3 {
+    color: var(--expense-color);
+    font-weight: bold;
+}
+
+.transaction {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.transaction:last-child {
+    border-bottom: none;
+}
+
+.transaction-name {
+    font-size: 18px;
+}
+
+.transaction-name i {
+    margin-right: 10px;
+}
+
+.transaction-amount {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.transaction-amount.income {
+    color: var(--income-color);
+}
+
+.transaction-amount.expense {
+    color: var(--expense-color);
+}
+
+.delete {
+    margin-left: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: var(--second-color);
+    cursor: pointer;
+    transition: transform .3s;
+}
+
+.delete:hover {
+    transform: scale(0.9);
+}
+
+.chart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    height: 300px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--first-color);
+}
+
+.chart-container {
+    height: 100%;
+    width: 100%;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 600px;
+    height: 300px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--first-color);
+}
+
+.funds,
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.chartjs-legend-item {
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.chartjs-legend-item:hover {
+    transform: scale(1.1);
+    color: var(--income-color);
+}
+
+.available-money {
+    margin-top: -10px;
+    text-align: center;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-around;
+    margin: 5px 0;
+}
+
+.controls button {
+    padding: 12px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background: var(--button-bg);
+    transition: background-color .3s, transform .3s;
+    cursor: pointer;
+}
+
+.controls button:hover {
+    background-color: var(--button-hover-bg);
+    transform: scale(1.05);
+}
+
+.controls i {
+    margin-right: 10px;
+}
+
+.style-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.color-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.color-buttons button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform .3s;
+    border: none;
+}
+
+.color-buttons button:hover {
+    transform: scale(0.9);
+}
+
+.color-buttons .light {
+    background: #F9F9F9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid black;
+}
+
+.color-buttons .dark {
+    background: #14161F;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid white;
+}
+
+.add-transaction-panel {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: #fff;
+    background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.add-transaction-panel h2.title {
+    margin-bottom: 0;
+    color: var(--first-color);
+}
+
+.add-transaction-panel label {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 26px;
+}
+
+.add-transaction-panel small {
+    margin-bottom: 15px;
+    font-style: italic;
+    color: #ddd;
+}
+
+.add-transaction-panel input,
+.add-transaction-panel select {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+}
+
+.add-transaction-panel input,
+.add-transaction-panel select,
+.add-transaction-panel button {
+    padding: 10px 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.add-transaction-panel input,
+.add-transaction-panel select,
+.add-transaction-panel option {
+    font-size: 18px;
+}
+
+.add-transaction-panel .panel-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.add-transaction-panel button {
+    padding: 15px 40px;
+    font-size: 18px;
+    color: #fff;
+    border: 1px solid #fff;
+    background: none;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+.add-transaction-panel button:hover {
+    background-color: rgb(25, 27, 51);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+footer{
+    margin-top: 1rem;
+}
+
+@media (max-width: 1200px) {
+
+    .options,
+    .chart {
+        width: 45%;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .options,
+    .chart {
+        width: 100%;
+        max-width: 700px;
+    }
+
+    .transaction-list {
+        flex-direction: column;
+    }
+
+    .income-area,
+    .expenses-area {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .controls button {
+        margin-bottom: 10px;
+        width: 80%;
+    }
+
+    .style-selection {
+        align-items: center;
+    }
+}
+
+@media (max-width: 576px) {
+    header h1 {
+        font-size: 48px;
+    }
+
+    header p {
+        font-size: 18px;
+    }
+
+    h2.title {
+        font-size: 28px;
+    }
+
+    .available-money {
+        font-size: 48px;
+    }
+
+    .add-transaction-panel label {
+        font-size: 22px;
+    }
+    
+}

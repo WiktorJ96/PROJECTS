@@ -9,7 +9,9 @@
     "search": "Wyszukiwarka",
     "search_desc": "Responsywna wyszukiwarka.",
     "calorie_calculator": "Kalkulator KCAL",
-    "calorie_calculator_desc": "Responsywny kalkulator kcal z wieloma opcjami",
+    "calorie_calculator_desc": "Responsywny kalkulator kcal z wieloma opcjami.",
     "unit_converter": "Konwerter jednostek",
-    "unit_converter_desc": "Responsywny konwerter jednostek"
+    "unit_converter_desc": "Responsywny konwerter jednostek.",
+    "wallet_h3": "Portfel",
+    "wallet_desc": "Responsywny portfel z wykresem wydatków i opcja zmiany motywu."
 }

@@ -9,7 +9,9 @@
     "search": "Search Engine",
     "search_desc": "Responsive search engine.",
     "calorie_calculator": "Calorie Calculator",
-    "calorie_calculator_desc": "Responsive calorie calculator with many options",
+    "calorie_calculator_desc": "Responsive calorie calculator with many options.",
     "unit_converter": "Unit Converter",
-    "unit_converter_desc": "Responsive unit converter"
+    "unit_converter_desc": "Responsive unit converter.",
+    "wallet_h3": "Wallet",
+    "wallet_desc": "Responsive wallet with expense chart and option to change theme."
 }
