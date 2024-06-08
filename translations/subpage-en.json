@@ -13,5 +13,7 @@
     "unit_converter": "Unit Converter",
     "unit_converter_desc": "Responsive unit converter.",
     "wallet_h3": "Wallet",
-    "wallet_desc": "Responsive wallet with expense chart and option to change theme."
+    "wallet_desc": "Responsive wallet with expense chart and option to change theme.",
+    "todo_h3": "TODO List",
+    "todo_desc": "Responsive TODO list with mandatory tasks in a file on disk."
 }

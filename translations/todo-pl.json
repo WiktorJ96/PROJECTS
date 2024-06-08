@@ -1,0 +1,15 @@
+{
+  "title": "ToDo List",
+  "todoInputPlaceholder": "Wpisz treść zadania...",
+  "addBtn": "Dodaj",
+  "todoListTitle": "Lista zadań:",
+  "alertInfoNoTasks": "Brak zadań na liście.",
+  "popupTitle": "Edytuj zadanie:",
+  "popupInputPlaceholder": "Wprowadź nową treść zadania...",
+  "popupAcceptBtn": "Zatwierdź",
+  "popupCancelBtn": "Anuluj",
+  "alertInfoEmptyTask": "Wpisz treść zadania.",
+  "popupInfoEmptyTask": "Musisz podać jakąś treść",
+  "todo_h3": "TODO Lista",
+  "footer": "2024 W.J Project. Wszelkie prawa zastrzeżone."
+}
