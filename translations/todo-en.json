@@ -11,5 +11,6 @@
   "alertInfoEmptyTask": "Enter task content.",
   "popupInfoEmptyTask": "You must provide some content",
   "todo_h3": "TODO List",
-  "footer": "2024 W.J Project. All rights reserved."
+  "footer": "2024 W.J Project. All rights reserved.",
+  "saveBtn": "Save tasks"
 }

@@ -1,16 +1,17 @@
-let $todoInput; 
-let $alertInfo; 
-let $addBtn; 
-let $ulList; 
-let $newTask; 
-let $allTasks; 
-let $idNumber = 0; 
-let $popup; 
-let $popupInfo; 
-let $editedTodo; 
-let $popupInput; 
-let $addPopupBtn; 
-let $closeTodoBtn; 
+let $todoInput;
+let $alertInfo;
+let $addBtn;
+let $saveBtn;  // Added save button
+let $ulList;
+let $newTask;
+let $allTasks;
+let $idNumber = 0;
+let $popup;
+let $popupInfo;
+let $editedTodo;
+let $popupInput;
+let $addPopupBtn;
+let $closeTodoBtn;
 
 const translations = {
     en: {
@@ -21,6 +22,7 @@ const translations = {
         addBtn: 'Add',
         acceptBtn: 'Accept',
         cancelBtn: 'Cancel',
+        saveBtn: 'Save Tasks'  // Added save button text
     },
     pl: {
         emptyTask: 'Wpisz treść zadania.',
@@ -30,6 +32,7 @@ const translations = {
         addBtn: 'Dodaj',
         acceptBtn: 'Akceptuj',
         cancelBtn: 'Anuluj',
+        saveBtn: 'Zapisz Zadania'  // Added save button text
     }
 };
 
@@ -46,6 +49,7 @@ const translatePage = () => {
     $addBtn.textContent = translations[language].addBtn;
     $addPopupBtn.textContent = translations[language].acceptBtn;
     $closeTodoBtn.textContent = translations[language].cancelBtn;
+    $saveBtn.textContent = translations[language].saveBtn;  // Translate save button
     if ($alertInfo.innerHTML) {
         switch ($alertInfo.innerHTML) {
             case 'Enter the task content.':
@@ -87,6 +91,7 @@ const prepareDOMElements = () => {
     $todoInput = document.querySelector('.todo-input');
     $alertInfo = document.querySelector('.alert-info');
     $addBtn = document.querySelector('.add-btn');
+    $saveBtn = document.querySelector('.save-btn');  // Select save button
     $ulList = document.querySelector('.todo-list ul');
     $allTasks = document.getElementsByTagName('li');
     $popup = document.querySelector('.popup');
@@ -98,10 +103,11 @@ const prepareDOMElements = () => {
 
 const prepareDOMEvents = () => {
     $addBtn.addEventListener('click', addNewTask);
-    $todoInput.addEventListener('keyup', enterCheck)
+    $saveBtn.addEventListener('click', saveTasksToFile);  // Add event listener for save button
+    $todoInput.addEventListener('keyup', enterCheck);
     $ulList.addEventListener('click', checkClick);
     $addPopupBtn.addEventListener('click', changeTodo);
-    $closeTodoBtn.addEventListener('click', closePopup)
+    $closeTodoBtn.addEventListener('click', closePopup);
 }
 
 const addNewTask = () => {
@@ -116,7 +122,7 @@ const addNewTask = () => {
 
             $todoInput.value = '';
             $alertInfo.innerHTML = '';
-            createToolsArea();
+            createToolsArea($newTask);
         } else {
             $alertInfo.innerHTML = translations[language].duplicateTask;
         }
@@ -136,10 +142,10 @@ const enterCheck = (event) => {
     }
 }
 
-const createToolsArea = () => {
+const createToolsArea = (taskElement) => {
     const toolsPanel = document.createElement('div')
     toolsPanel.classList.add('tools')
-    $newTask.appendChild(toolsPanel)
+    taskElement.appendChild(toolsPanel)
 
     const completeBtn = document.createElement('button')
     completeBtn.classList.add('complete')
@@ -182,6 +188,7 @@ const changeTodo = () => {
     if ($popupInput.value !== '') {
         $editedTodo.firstChild.textContent = $popupInput.value;
         $popupInfo.innerText = '';
+        $popup.style.display = 'none';
     } else {
         $popupInfo.innerText = translations[language].emptyPopup;
     }
@@ -194,11 +201,23 @@ const deleteTask = e => {
     if ($ulList.children.length === 0) {
         $alertInfo.innerHTML = translations[language].noTasks;
     }
+
 }
 
 const closePopup = () => {
     $popup.style.display = 'none';
     $popupInfo.innerHTML = '';
+}
+
+const saveTasksToFile = () => {
+    const tasks = Array.from($ulList.getElementsByTagName('li')).map(task => task.firstChild.textContent);
+    const blob = new Blob([tasks.join('\n')], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'tasks.txt';
+    a.click();
+    URL.revokeObjectURL(url);
 }
 
 document.addEventListener('DOMContentLoaded', main);

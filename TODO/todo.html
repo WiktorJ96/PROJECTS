@@ -8,8 +8,9 @@
     <title data-lang-key="title">ToDo List</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=latin-ext"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="todo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="./todo.css">
 </head>
 
 <body data-page="todo">
@@ -17,13 +18,15 @@
     <div class="todo">
         <div class="header">
             <h1 data-lang-key="todo_h3">ToDo List</h1>
-            <input type="text" class="todo-input" placeholder="Wpisz treść zadania..." data-placeholder-key="todoInputPlaceholder">
+            <input type="text" class="todo-input" placeholder="Wpisz treść zadania..."
+                data-placeholder-key="todoInputPlaceholder">
             <button class="add-btn" data-lang-key="addBtn">Add</button>
         </div>
 
         <div class="todo-list">
             <h3 data-lang-key="todoListTitle">Lista zadań:</h3>
             <p class="alert-info" data-lang-key="alertInfoNoTasks">Brak zadań na liście.</p>
+            <button class="save-btn" data-lang-key="saveBtn">Zapisz taski</button>
             <ul>
             </ul>
         </div>
@@ -33,12 +36,13 @@
         <h3 data-lang-key="popupTitle">Edytuj zadanie:</h3>
         <div class="popup-body">
             <p class="popup-info" data-lang-key="popupInfoEmptyTask"></p>
-            <input type="text" class="popup-input" placeholder="Wprowadź nową treść zadania..." data-placeholder-key="popupInputPlaceholder">
+            <input type="text" class="popup-input" placeholder="Wprowadź nową treść zadania..."
+                data-placeholder-key="popupInputPlaceholder">
             <button class="popup-btn accept" data-lang-key="popupAcceptBtn">Zatwierdź</button>
             <button class="popup-btn cancel" data-lang-key="popupCancelBtn">Anuluj</button>
         </div>
     </div>
-    
+
     <footer>
         <div class="language-switch">
             <button id="lang-pl">PL</button>
@@ -47,8 +51,8 @@
         <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
-    <script src="todo.js"></script>
-    <script src="../translations/translate2.js"></script>
+    <script src="todo.js" defer></script>
+    <script src="/translations/translate2.js"></script>
 </body>
 
 </html>
