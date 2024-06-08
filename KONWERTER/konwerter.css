@@ -133,6 +133,10 @@
          }
 
          footer {
-            display: flex;
              color: #222;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: max-content;
          }

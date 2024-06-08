@@ -326,10 +326,11 @@ button:focus {
 
 footer {
     color: #222;
-    padding: 10px 20px;
-    text-align: center;
-    margin-top: auto;
-    border-radius: 3px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: max-content;
 }
 
 @keyframes slideIn {
