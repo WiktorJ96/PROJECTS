@@ -1,3 +1,8 @@
-Projekt zawiera prosty notatnik który umożliwia zapisywanie notatek w pliku .json na dysku po zamianie 
-<script src="notatnik.js"></script> na <script src="notatnikSERVER.js"></script> 
+"PL"
+Projekt zawiera prosty notatnik który umożliwia zapisywanie notatek w pliku .json na dysku,
 i wcześniejszym uruchomieniu serwera za pomoca node.js w folderze node-app.
+
+
+"EN"
+The project includes a simple notebook that allows you to save notes in a .json file on disk,
+and starting the server using node.js in the node-app folder.
