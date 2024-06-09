@@ -1,8 +1,16 @@
 "PL"
-Projekt zawiera prosty notatnik który umożliwia zapisywanie notatek w pliku .json na dysku,
-i wcześniejszym uruchomieniu serwera za pomoca node.js w folderze node-app.
-
+Projekt zawiera prosty notatnik który umożliwia zapisywanie notatek w pliku .json na dysku.
+Instrukcja:
+1. stwórz folder note-app
+2. zainicijum w nim nowy projekt za pomoca npm init -y
+3. zainstaluj pakiety za pomoca npm install express body-parser
+4. wklej do folderu note-app plik server.js
 
 "EN"
-The project includes a simple notebook that allows you to save notes in a .json file on disk,
-and starting the server using node.js in the node-app folder.
+The project includes a simple notebook that allows you to save notes in a .json file on disk.
+Instruction:
+1. create a note-app folder
+2. initialize a new project using npm init -y
+3. install the packages with npm install express body-parser
+4. paste the server.js file into the note-app folder
+
