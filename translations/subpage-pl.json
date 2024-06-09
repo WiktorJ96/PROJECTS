@@ -15,5 +15,5 @@
     "wallet_h3": "Portfel",
     "wallet_desc": "Responsywny portfel z wykresem wydatków i opcja zmiany motywu.",
     "todo_h3": "TODO Lista",
-    "todo_desc": "Responsywna TODO lista z opcją zapisywania tasków w pliku na dysku."
+    "todo_desc": "Responsywna TODO lista z opcją zapisywania tasków w pliku PDF."
 }
