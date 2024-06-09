@@ -1,3 +1,4 @@
+
 let $todoInput;
 let $alertInfo;
 let $addBtn;
@@ -231,26 +232,18 @@ const saveTasksToPDF = () => {
     const tasks = Array.from($ulList.getElementsByTagName('li')).map(task => task.firstChild.textContent);
     let yOffset = 10;
     
-    doc.setFontSize(20);
+    doc.setFontSize(18);
     doc.text("Lista zadań:", 10, yOffset);
     doc.setFontSize(12);
     
     tasks.forEach(task => {
         yOffset += 10;
-        const truncatedTask = truncateText(task, 150); 
-        doc.text(truncatedTask, 10, yOffset);
+        doc.text(task, 10, yOffset); 
     });
 
     doc.save('tasks.pdf');
 }
 
-const truncateText = (text, maxLength) => {
-    if (text.length > maxLength) {
-        return text.substring(0, maxLength - 3) + '...'; 
-    } else {
-        return text;
-    }
-}
 
 
 document.addEventListener('DOMContentLoaded', main);
