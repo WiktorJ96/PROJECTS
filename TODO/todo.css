@@ -380,8 +380,7 @@ footer {
 
     .popup {
         width: 90%;
-        margin: 0 auto;
-        justify-self: center;
+        transform: translate(-50%, -50%);
     }
 
     .popup-body {
