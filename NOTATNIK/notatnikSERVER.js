@@ -252,8 +252,8 @@ document.addEventListener('DOMContentLoaded', loadNotes);
                         element.innerHTML = translations[lang][key];
                     }
                 });
-                document.querySelectorAll('[data-placeholder-lang-key]').forEach(element => {
-                    const key = element.getAttribute('data-placeholder-lang-key');
+                document.querySelectorAll('[data-placeholder-key]').forEach(element => {
+                    const key = element.getAttribute('data-placeholder-key');
                     if (translations[lang][key]) {
                         element.placeholder = translations[lang][key];
                     }
