@@ -223,7 +223,7 @@ const saveTasksToPDF = () => {
     const tasks = Array.from($ulList.getElementsByTagName('li')).map(task => task.firstChild.textContent);
     let yOffset = 10;
     
-    doc.setFontSize(16);
+    doc.setFontSize(20);
     doc.text("Lista zadań:", 10, yOffset);
     doc.setFontSize(12);
     
