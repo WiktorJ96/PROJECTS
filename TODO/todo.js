@@ -116,13 +116,14 @@ const addNewTask = () => {
         if (!isDuplicateTask(taskText)) {
             $idNumber++;
             $newTask = document.createElement('li');
-            $newTask.innerText = taskText;
+            $newTask.innerText = `${$idNumber}. ${taskText}`;
             $newTask.setAttribute('id', `todo-${$idNumber}`);
             $ulList.appendChild($newTask);
 
             $todoInput.value = '';
             $alertInfo.innerHTML = '';
             createToolsArea($newTask);
+            updateTaskNumbers();
         } else {
             $alertInfo.innerHTML = translations[language].duplicateTask;
         }
@@ -133,7 +134,7 @@ const addNewTask = () => {
 
 const isDuplicateTask = (taskText) => {
     const tasks = Array.from($ulList.getElementsByTagName('li'));
-    return tasks.some(task => task.firstChild.textContent === taskText);
+    return tasks.some(task => task.firstChild.textContent.endsWith(taskText));
 }
 
 const enterCheck = (event) => {
@@ -181,14 +182,15 @@ const editTask = e => {
     const oldTodo = e.target.closest('li').id
     $editedTodo = document.getElementById(oldTodo)
     $popup.style.display = 'flex'
-    $popupInput.value = $editedTodo.firstChild.textContent;
+    $popupInput.value = $editedTodo.firstChild.textContent.split('. ')[1];
 }
 
 const changeTodo = () => {
     if ($popupInput.value !== '') {
-        $editedTodo.firstChild.textContent = $popupInput.value;
+        $editedTodo.firstChild.textContent = `${$editedTodo.id.split('-')[1]}. ${$popupInput.value}`;
         $popupInfo.innerText = '';
         $popup.style.display = 'none';
+        updateTaskNumbers();
     } else {
         $popupInfo.innerText = translations[language].emptyPopup;
     }
@@ -202,11 +204,19 @@ const deleteTask = e => {
         $alertInfo.innerHTML = translations[language].noTasks;
     }
 
+    updateTaskNumbers();
 }
 
 const closePopup = () => {
     $popup.style.display = 'none';
     $popupInfo.innerHTML = '';
+}
+
+const updateTaskNumbers = () => {
+    const tasks = Array.from($ulList.getElementsByTagName('li'));
+    tasks.forEach((task, index) => {
+        task.firstChild.textContent = `${index + 1}. ${task.firstChild.textContent.split('. ')[1]}`;
+    });
 }
 
 const saveTasksToPDF = () => {
