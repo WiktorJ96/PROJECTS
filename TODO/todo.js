@@ -1,7 +1,7 @@
 let $todoInput;
 let $alertInfo;
 let $addBtn;
-let $saveBtn;  // Added save button
+let $saveBtn;  // Dodano przycisk zapisu
 let $ulList;
 let $newTask;
 let $allTasks;
@@ -22,7 +22,7 @@ const translations = {
         addBtn: 'Add',
         acceptBtn: 'Accept',
         cancelBtn: 'Cancel',
-        saveBtn: 'Save Tasks'  // Added save button text
+        saveBtn: 'Save Tasks'  // Dodano tekst dla przycisku zapisu
     },
     pl: {
         emptyTask: 'Wpisz treść zadania.',
@@ -32,7 +32,7 @@ const translations = {
         addBtn: 'Dodaj',
         acceptBtn: 'Akceptuj',
         cancelBtn: 'Anuluj',
-        saveBtn: 'Zapisz Zadania'  // Added save button text
+        saveBtn: 'Zapisz zadania'  // Dodano tekst dla przycisku zapisu
     }
 };
 
@@ -49,7 +49,7 @@ const translatePage = () => {
     $addBtn.textContent = translations[language].addBtn;
     $addPopupBtn.textContent = translations[language].acceptBtn;
     $closeTodoBtn.textContent = translations[language].cancelBtn;
-    $saveBtn.textContent = translations[language].saveBtn;  // Translate save button
+    $saveBtn.textContent = translations[language].saveBtn;  // Przetłumacz przycisk zapisu
     if ($alertInfo.innerHTML) {
         switch ($alertInfo.innerHTML) {
             case 'Enter the task content.':
@@ -91,7 +91,7 @@ const prepareDOMElements = () => {
     $todoInput = document.querySelector('.todo-input');
     $alertInfo = document.querySelector('.alert-info');
     $addBtn = document.querySelector('.add-btn');
-    $saveBtn = document.querySelector('.save-btn');  // Select save button
+    $saveBtn = document.querySelector('.save-btn');  // Wybierz przycisk zapisu
     $ulList = document.querySelector('.todo-list ul');
     $allTasks = document.getElementsByTagName('li');
     $popup = document.querySelector('.popup');
@@ -103,7 +103,7 @@ const prepareDOMElements = () => {
 
 const prepareDOMEvents = () => {
     $addBtn.addEventListener('click', addNewTask);
-    $saveBtn.addEventListener('click', saveTasksToFile);  // Add event listener for save button
+    $saveBtn.addEventListener('click', saveTasksToPDF);  // Dodaj nasłuchiwanie zdarzeń dla przycisku zapisu
     $todoInput.addEventListener('keyup', enterCheck);
     $ulList.addEventListener('click', checkClick);
     $addPopupBtn.addEventListener('click', changeTodo);
@@ -209,15 +209,23 @@ const closePopup = () => {
     $popupInfo.innerHTML = '';
 }
 
-const saveTasksToFile = () => {
+const saveTasksToPDF = () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
     const tasks = Array.from($ulList.getElementsByTagName('li')).map(task => task.firstChild.textContent);
-    const blob = new Blob([tasks.join('\n')], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'tasks.txt';
-    a.click();
-    URL.revokeObjectURL(url);
+    let yOffset = 10;
+    
+    doc.setFontSize(16);
+    doc.text("Lista zadań:", 10, yOffset);
+    doc.setFontSize(12);
+    
+    tasks.forEach(task => {
+        yOffset += 10;
+        doc.text(task, 10, yOffset);
+    });
+
+    doc.save('tasks.pdf');
 }
 
 document.addEventListener('DOMContentLoaded', main);
