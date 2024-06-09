@@ -13,3 +13,4 @@ Instruction:
 2. initialize a new project using npm init -y
 3. install the packages with npm install express body-parser
 4. paste the server.js file into the note-app folder
+
