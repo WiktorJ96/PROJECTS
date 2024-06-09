@@ -141,26 +141,34 @@ const enterCheck = (event) => {
 }
 
 const createToolsArea = (taskElement) => {
-    const toolsPanel = document.createElement('div')
-    toolsPanel.classList.add('tools')
+    const toolsPanel = document.createElement('div');
+    toolsPanel.classList.add('tools');
+    taskElement.appendChild(toolsPanel);
+
+    const taskText = document.createElement('div');
+    taskText.classList.add('task-text');
+    taskText.textContent = taskElement.textContent;
+    taskElement.textContent = '';
+    taskElement.appendChild(taskText);
     taskElement.appendChild(toolsPanel)
 
-    const completeBtn = document.createElement('button')
-    completeBtn.classList.add('complete')
-    completeBtn.innerHTML = '<i class="fas fa-check"></i>'
+    const completeBtn = document.createElement('button');
+    completeBtn.classList.add('complete');
+    completeBtn.innerHTML = '<i class="fas fa-check"></i>';
 
-    const editBtn = document.createElement('button')
-    editBtn.classList.add('edit')
-    editBtn.innerHTML = '<i class="fas fa-pen"></i>'
+    const editBtn = document.createElement('button');
+    editBtn.classList.add('edit');
+    editBtn.innerHTML = '<i class="fas fa-pen"></i>';
 
-    const deleteBtn = document.createElement('button')
-    deleteBtn.classList.add('delete')
-    deleteBtn.innerHTML = '<i class="fas fa-times"></i>'
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('delete');
+    deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
 
-    toolsPanel.appendChild(completeBtn)
-    toolsPanel.appendChild(editBtn)
-    toolsPanel.appendChild(deleteBtn)
-}
+    toolsPanel.appendChild(completeBtn);
+    toolsPanel.appendChild(editBtn);
+    toolsPanel.appendChild(deleteBtn);
+};
+
 
 const checkClick = e => {
     if (e.target.classList.value !== '') {
@@ -229,10 +237,20 @@ const saveTasksToPDF = () => {
     
     tasks.forEach(task => {
         yOffset += 10;
-        doc.text(task, 10, yOffset);
+        const truncatedTask = truncateText(task, 150); 
+        doc.text(truncatedTask, 10, yOffset);
     });
 
     doc.save('tasks.pdf');
 }
+
+const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+        return text.substring(0, maxLength - 3) + '...'; 
+    } else {
+        return text;
+    }
+}
+
 
 document.addEventListener('DOMContentLoaded', main);

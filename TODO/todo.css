@@ -166,6 +166,13 @@ h1 {
     display: inline-block;
 }
 
+.task-text {
+    width: calc(100% - 120px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
 .tools button {
     padding: 15px 10px;
     border: none;
