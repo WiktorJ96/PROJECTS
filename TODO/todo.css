@@ -328,7 +328,6 @@ footer {
 
     .tools {
         margin-top: 10px;
-        width: 100%;
         justify-content: flex-end;
         width: auto;
         margin-top: 0;
@@ -338,6 +337,7 @@ footer {
 @media (max-width: 480px) {
     body {
         margin-top: 60px;
+        overflow-x: hidden;
     }
 
     .header {
@@ -390,4 +390,8 @@ footer {
         width: 40%;
         margin: 10px;
     }
+    footer{
+        margin: 0 auto;
+        padding: 1rem;
+}
 }
