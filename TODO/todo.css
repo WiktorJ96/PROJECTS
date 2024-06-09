@@ -380,6 +380,8 @@ footer {
 
     .popup {
         width: 90%;
+        margin: 0 auto;
+        justify-self: center;
     }
 
     .popup-body {
