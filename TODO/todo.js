@@ -1,7 +1,7 @@
 let $todoInput;
 let $alertInfo;
 let $addBtn;
-let $saveBtn;  // Dodano przycisk zapisu
+let $saveBtn; 
 let $ulList;
 let $newTask;
 let $allTasks;
@@ -21,8 +21,7 @@ const translations = {
         emptyPopup: 'You must provide some content.',
         addBtn: 'Add',
         acceptBtn: 'Accept',
-        cancelBtn: 'Cancel',
-        saveBtn: 'Save Tasks'  // Dodano tekst dla przycisku zapisu
+        cancelBtn: 'Cancel',  
     },
     pl: {
         emptyTask: 'Wpisz treść zadania.',
@@ -32,7 +31,6 @@ const translations = {
         addBtn: 'Dodaj',
         acceptBtn: 'Akceptuj',
         cancelBtn: 'Anuluj',
-        saveBtn: 'Zapisz zadania'  // Dodano tekst dla przycisku zapisu
     }
 };
 
@@ -48,8 +46,7 @@ const getSavedLanguage = () => {
 const translatePage = () => {
     $addBtn.textContent = translations[language].addBtn;
     $addPopupBtn.textContent = translations[language].acceptBtn;
-    $closeTodoBtn.textContent = translations[language].cancelBtn;
-    $saveBtn.textContent = translations[language].saveBtn;  // Przetłumacz przycisk zapisu
+    $closeTodoBtn.textContent = translations[language].cancelBtn;  
     if ($alertInfo.innerHTML) {
         switch ($alertInfo.innerHTML) {
             case 'Enter the task content.':
@@ -91,7 +88,7 @@ const prepareDOMElements = () => {
     $todoInput = document.querySelector('.todo-input');
     $alertInfo = document.querySelector('.alert-info');
     $addBtn = document.querySelector('.add-btn');
-    $saveBtn = document.querySelector('.save-btn');  // Wybierz przycisk zapisu
+    $saveBtn = document.querySelector('.save-btn'); 
     $ulList = document.querySelector('.todo-list ul');
     $allTasks = document.getElementsByTagName('li');
     $popup = document.querySelector('.popup');
@@ -103,7 +100,7 @@ const prepareDOMElements = () => {
 
 const prepareDOMEvents = () => {
     $addBtn.addEventListener('click', addNewTask);
-    $saveBtn.addEventListener('click', saveTasksToPDF);  // Dodaj nasłuchiwanie zdarzeń dla przycisku zapisu
+    $saveBtn.addEventListener('click', saveTasksToPDF);  
     $todoInput.addEventListener('keyup', enterCheck);
     $ulList.addEventListener('click', checkClick);
     $addPopupBtn.addEventListener('click', changeTodo);
