@@ -306,6 +306,7 @@ button:focus {
 
 .color-option .color-dot:hover{
     transform: scale(1.5);
+    transition: ease-in-out 0.2s;
 }
 
 .color-option.red .color-dot {
