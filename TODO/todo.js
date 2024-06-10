@@ -1,4 +1,3 @@
-
 let $todoInput;
 let $alertInfo;
 let $addBtn;
@@ -227,18 +226,23 @@ const updateTaskNumbers = () => {
 
 const saveTasksToPDF = () => {
     const { jsPDF } = window.jspdf;
+
     const doc = new jsPDF();
 
     const tasks = Array.from($ulList.getElementsByTagName('li')).map(task => task.firstChild.textContent);
-    let yOffset = 10;
-    
+
     doc.setFontSize(18);
-    doc.text("Lista zadań:", 10, yOffset);
+    doc.text("Lista tasków:", 10, 10);
     doc.setFontSize(12);
-    
-    tasks.forEach(task => {
-        yOffset += 10;
-        doc.text(task, 10, yOffset); 
+
+    const taskData = tasks.map(task => [task]); 
+
+    doc.autoTable({
+        head: [['Tasks:']],
+        body: taskData,
+        startY: 20,
+        margin: { left: 10, right: 10 },
+        styles: { overflow: 'linebreak' }
     });
 
     doc.save('tasks.pdf');

@@ -1,0 +1,9 @@
+"PL"
+Możesz zapisać swoje zadania w pliku PDF i przesłać je lub wydrukować, aby to zrobić
+użyj polecenia 'npm install jspdf jspdf-autotable' w konsoli i zainstaluj biblioteke JS
+która pozwala generować pliki PDF.
+
+"EN"
+You can save your assignments to a PDF file and leave them there, or print them out to save
+command 'npm install jspdf jspdf-autotable' in the console and install the JS library
+which allows you to generate PDF files.

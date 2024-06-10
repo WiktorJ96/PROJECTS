@@ -38,6 +38,7 @@ h1 {
 }
 
 .todo {
+    width: 100%;
     width: 950px;
     text-align: center;
     background: #fff;
@@ -174,8 +175,7 @@ h1 {
 }
 ::-webkit-scrollbar {
     -webkit-appearance: none;
-    width: 5px;
-    height: 2px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -292,6 +292,11 @@ footer {
     left: 50%;
     transform: translateX(-50%);
     bottom: 0;
+    width: 100%;
+}
+footer p {
+    width: 100%;
+    text-align: center;
 }
 
 .language-switch {
@@ -358,6 +363,9 @@ footer {
 }
 
 @media (max-width: 480px) {
+    .todo{
+        width: 90%;
+    }
     .task-text {
             width: calc(200%);
         }

@@ -546,21 +546,19 @@ header {
 .specific-icon-link {
     text-decoration: none;
     display: inline-block;
-    padding: 0.5rem;
-    border-radius: 30px;
-    background-color: #f0f0f0;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.specific-icon{
-    font-size: 1.5rem;
+    padding: 0.6rem;
+    border-radius: 40px;
     width: 1.8rem;
-    color: #333;
+    background-color: #f0f0f0;
+    color: #222;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1.3rem;
 }
 
 .specific-icon-link:hover {
     background-color: #141514;
     transform: scale(1.1);
+    color: #fff;
 }
 
 .specific-icon-link:hover i.fa {
