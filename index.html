@@ -221,7 +221,17 @@
 
     <script src="./translations/translate.js"></script>
  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    function fetchTranslations(lang, page) {
+            return fetch(`./translations/${page}-${lang}.json`)
+                .then(response => response.json())
+                .catch(error => {
+                    console.error(`Error loading translations for ${lang}:`, error);
+                    return {};
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Menu toggle
             const menuBars = document.querySelector('.menu-bars');
             const menuResponsive = document.querySelector('.menu-responsive');
 
@@ -251,7 +261,7 @@
                 e.stopPropagation();
             });
 
-            
+            // Scroll animation
             const scrollLinks = document.querySelectorAll('.scroll');
             scrollLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -266,7 +276,7 @@
                 });
             });
 
-          
+            // Progress bars animation
             const progressBars = document.querySelectorAll('.progress-bar');
             const observerOptions = { threshold: 0.1 };
 
@@ -287,7 +297,7 @@
                 progressObserver.observe(container);
             });
 
-            
+            // Element animation on scroll
             const animateOnScroll = (entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -306,7 +316,9 @@
                 '#about hr',
                 '#portfolio h2',
                 '#portfolio hr',
-                '#portfolio .flip-card'
+                '#portfolio .flip-card',
+                '.header__content p',
+                '.header__content a'
             ];
 
             elementsToAnimate.forEach(selector => {
@@ -317,7 +329,7 @@
                 });
             });
 
-           
+            // Dynamic text loading
             const langButtons = document.querySelectorAll('.language-switch button');
             const dynamicText = document.getElementById('dynamic-text');
 
@@ -350,15 +362,34 @@
                     .catch(error => console.error('Error loading dynamic sentences:', error));
             }
 
+            function applyTranslations(translations) {
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    if (translations[key]) {
+                        element.textContent = translations[key];
+                    }
+                });
+            }
+
+            function loadTranslations(lang) {
+                fetchTranslations(lang, 'index')
+                    .then(translations => {
+                        applyTranslations(translations);
+                    })
+                    .catch(error => console.error('Error loading translations:', error));
+            }
+
             langButtons.forEach(button => {
                 button.addEventListener('click', function () {
                     currentLang = this.id === 'lang-pl' ? 'pl' : 'en';
                     localStorage.setItem('lang', currentLang);
                     document.documentElement.lang = currentLang;
+                    loadTranslations(currentLang);
                     loadDynamicText(currentLang);
                 });
             });
 
+            loadTranslations(currentLang);
             loadDynamicText(currentLang);
         });
 
