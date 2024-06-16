@@ -355,7 +355,7 @@
                             dynamicText.classList.remove('animated');
                             void dynamicText.offsetWidth;
                             dynamicText.classList.add('animated');
-                            dynamicText.textContent = sentences[index];
+                            dynamicText.innerHTML = sentences[index];
                             index = (index + 1) % sentences.length;
                         }, 3000);
                     })
@@ -366,7 +366,7 @@
                 document.querySelectorAll('[data-lang-key]').forEach(element => {
                     const key = element.getAttribute('data-lang-key');
                     if (translations[key]) {
-                        element.textContent = translations[key];
+                        element.innerHTML = translations[key];
                     }
                 });
             }
@@ -392,6 +392,7 @@
             loadTranslations(currentLang);
             loadDynamicText(currentLang);
         });
+
 
  </script>
 

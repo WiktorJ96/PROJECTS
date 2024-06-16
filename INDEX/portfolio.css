@@ -281,7 +281,8 @@ header {
 }
 
 .header__content .btn {
-    margin-top: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     text-decoration: none;
 }
 
