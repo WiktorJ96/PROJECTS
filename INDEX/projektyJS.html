@@ -10,6 +10,7 @@
         content="projekty, JavaScript, HTML, CSS, formularz, notatnik, stoper, wyszukiwarka, kalkulator kalorii, konwerter jednostek">
     <meta name="author" content="Wiktor Jurkowski">
     <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="portfolio.css">
@@ -26,6 +27,47 @@
     </script>
 </head>
 <style>
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-slideInFromRight {
+    animation: slideInFromRight 1.5s ease-out forwards;
+    opacity: 1;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+@keyframes slideInFromTop {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-slideInFromTop {
+    animation: slideInFromTop 0.8s ease-out forwards;
+    opacity: 1;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+
     #portfolio {
         padding: 0.5rem 0;
         text-align: center;
@@ -255,6 +297,41 @@
                         return {};
                     });
             }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+                const observerOptions = { threshold: 0.1 };
+
+                const animateOnScroll = (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add(entry.target.dataset.animationClass);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                };
+
+                const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+
+            
+                const headerIcons = document.querySelectorAll('h2[data-lang-key="header"] .icon-container');
+                headerIcons.forEach((icon, index) => {
+                    icon.classList.add('hidden');
+                    icon.dataset.animationClass = 'animate-slideInFromTop';
+                    icon.style.animationDelay = `${index * 0.2}s`;
+                    observer.observe(icon);
+                });
+
+                
+                const portfolioCards = document.querySelectorAll('.portfolio__projects .flip-card');
+                portfolioCards.forEach((card, index) => {
+                    card.classList.add('hidden');
+                    card.dataset.animationClass = 'animate-slideInFromRight';
+                    card.style.animationDelay = `${index * 0.2}s`;
+                    observer.observe(card);
+                });
+            });
+
     </script>
 </body>
 

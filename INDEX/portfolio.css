@@ -89,6 +89,58 @@ h2 {
     }
 }
 
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.language-switch button {
+    animation: slideInRight 1s ease-out forwards;
+}
+
+.header__top-brand {
+    animation: slideInRight 1.5s ease-out forwards;
+}
+
+.menu_hamburger ul {
+    animation: slideInLeft 1.5s ease-out forwards;
+}
+
+@keyframes slideInUp {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.header__content {
+    animation: slideInUp 1.5s ease-out forwards;
+}
+
 .menu_hamburger {
     display: flex;
     position: absolute;
@@ -309,6 +361,15 @@ header {
     .header__arrow {
         margin-top: 8rem;
     }
+}
+
+.animate-slideInUp {
+    animation: slideInUp 1.5s ease-out forwards;
+    opacity: 1;
+}
+
+.hidden {
+    opacity: 0;
 }
 
 #about {
