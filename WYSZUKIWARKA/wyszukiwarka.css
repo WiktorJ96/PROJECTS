@@ -155,6 +155,9 @@ footer {
     transform: translateX(-50%);
     bottom: 0;
 }
+.language-switch {
+    display: none;
+}
 
 
 @media (max-width: 1024px) {
