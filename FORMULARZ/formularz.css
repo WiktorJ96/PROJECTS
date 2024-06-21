@@ -13,20 +13,32 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: rgb(233, 233, 233);
     margin: 0 auto;
-    background-image: linear-gradient(to right, rgba(46, 102, 170, 0.3) 60%, hsla(0, 0%, 100%, 0.4) 140%);
     padding: 20px 0px;
     animation: fadeInBody 1s ease-in forwards;
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
 }
+
 @keyframes fadeInBody {
     0% {
         opacity: 0;
         transform: translateY(20px);
-
     }
 
     100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
         opacity: 1;
         transform: translateY(0);
     }
@@ -40,10 +52,11 @@ body {
     width: 30%;
     min-width: 450px;
     max-width: 600px;
-    background-image: linear-gradient(to right, rgb(250, 251, 252) 60%, hsla(0, 0%, 100%, 0.95) 140%);
-    box-shadow: 0 0 10px #000;
+    background-image: linear-gradient(to right, #ffffff 0%, #f8f9fa 100%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border-radius: 3px;
     margin: 20px 0;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .form-switch {
@@ -56,27 +69,24 @@ body {
     font-family: 'Poppins', sans-serif;
     background: none;
     border: none;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-radius: 20px;
     color: #222;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
-    transition: color 0.3s, background-color 0.3s;
+    transition: all 0.3s ease;
     margin: 0 10px;
     margin-bottom: -25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.form-switch button:hover {
-    color: #fff;
-    background-image: linear-gradient(120deg, hsla(218, 83%, 52%, 0.82) 50%, hsla(0, 0%, 0%, 0.95) 300%);
-}
-
+.form-switch button:hover,
 .form-switch button.active {
     color: #fff;
-    background-image: linear-gradient(120deg, hsla(218, 83%, 52%, 0.82) 50%, hsla(0, 0%, 0%, 0.95) 300%);
-    cursor: default;
+    background-image: linear-gradient(120deg, #4facfe 0%, #009dfe 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 form {
@@ -88,7 +98,8 @@ form {
 h1 {
     margin-bottom: 30px;
     text-align: center;
-    color: #222;
+    font-weight: 600;
+    color: #2c3e50;
 }
 
 .form-box {
@@ -96,20 +107,46 @@ h1 {
     margin-bottom: 15px;
     color: #333;
     font-size: 18px;
+    animation: fadeIn 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.form-box:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.form-box:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.form-box:nth-child(3) {
+    animation-delay: 0.3s;
 }
 
 .form-box label {
     display: inline-block;
     margin-bottom: 5px;
+    font-weight: 500;
+    color: #34495e;
 }
 
 .form-box input {
     width: 100%;
     padding: 10px;
     font-size: 15px;
-    border: 1px solid rgba(0, 0, 0, 0.75);
+    border: 2px solid #e0e0e0;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.form-box input:focus {
+    border-color: #4facfe;
+    box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.2);
+}
+
+.form-box input:hover {
+    border-color: #b0b0b0;
 }
 
 .form-box.error {
@@ -117,8 +154,8 @@ h1 {
 }
 
 .form-box.error input {
-    border: 1px solid rgba(65, 105, 225, 0.85);
-    background-color: rgba(65, 105, 225, 0.1);
+    border-color: #ff4757;
+    background-color: rgba(255, 71, 87, 0.05);
 }
 
 .error-text {
@@ -149,14 +186,15 @@ h1 {
     font-size: 14px;
     letter-spacing: 0.5px;
     width: 100px;
-    background-image: linear-gradient(120deg, hsla(218, 83%, 52%, 0.82) 80%, hsla(0, 0%, 0%, 0.95) 300%);
+    background-image: linear-gradient(120deg, #4facfe 0%, #009dfe 100%);
     color: #fff;
-    border: 1px solid rgba(212, 212, 212, 0.8);
-    border-radius: 5px;
+    border: none;
+    border-radius: 25px;
     cursor: pointer;
-    transition: width .3s ease-in-out, background-color .3s ease-in-out;
+    transition: all 0.3s ease;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .login-send:hover,
@@ -164,8 +202,9 @@ h1 {
 .clear:hover,
 .close:hover {
     width: 120px;
-    background-image: linear-gradient(to right, rgba(25, 25, 26, 0.95) 90%, hsla(0, 0%, 100%, 0.95) 200%);
-    color: #fff;
+    background-image: linear-gradient(120deg, #0062cc 0%, #0096c7 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .popup {
@@ -213,34 +252,30 @@ h1 {
     padding: 10px;
     font-size: 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
     text-align: center;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .oauth-buttons button.facebook-login {
-    background-image: linear-gradient(to right, #2b5ac0, #354870);
+    background-image: linear-gradient(to right, #3b5998, #4c70ba);
     color: white;
 }
 
-.oauth-buttons button.facebook-login:hover {
-    background-color: #2d4373;
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
 .oauth-buttons .custom-google-signin {
-    background-image: linear-gradient(to right, #cb4432, #bc3c25);
+    background-image: linear-gradient(to right, #ea4335, #fbbc05);
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.oauth-buttons button:hover,
 .oauth-buttons .custom-google-signin:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .social-icon {

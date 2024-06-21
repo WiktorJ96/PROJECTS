@@ -45,15 +45,19 @@ body {
     border-radius: 0.25rem;
     color: #f5faf7;
     text-transform: uppercase;
-    transition: all 0.3s;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: inline-block;
     cursor: pointer;
     background: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
 }
 
 .btn:hover {
     background-color: #fff;
     color: #232323;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 h2 {
@@ -91,7 +95,7 @@ h2 {
 
 @keyframes slideInLeft {
     0% {
-        transform: translateX(-100%);
+        transform: translateX(-100px);
         opacity: 0;
     }
 
@@ -103,7 +107,7 @@ h2 {
 
 @keyframes slideInRight {
     0% {
-        transform: translateX(100%);
+        transform: translateX(100px);
         opacity: 0;
     }
 
@@ -127,7 +131,7 @@ h2 {
 
 @keyframes slideInUp {
     0% {
-        transform: translateY(100%);
+        transform: translateY(100px);
         opacity: 0;
     }
 
@@ -156,10 +160,10 @@ h2 {
     margin-inline: auto;
     margin-top: 1rem;
 }
-        
+
 .menu-responsive hr {
     color: #fff;
-    width:75%;
+    width: 75%;
 }
 
 .menu-responsive {
@@ -173,6 +177,7 @@ h2 {
     transform: translateX(-100%);
     visibility: hidden;
     z-index: 10000;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .menu-responsive.show {
@@ -220,7 +225,7 @@ h2 {
 .menu-responsive ul li a {
     font-size: 1.25rem;
     color: #fff;
-    transition: all 0.3s;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     text-decoration: none;
 }
 
@@ -230,6 +235,7 @@ h2 {
     padding: 0.8rem 1.3rem;
     color: #fff;
     text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 header {
@@ -244,6 +250,7 @@ header {
     align-items: center;
     text-align: center;
     color: #fff;
+    background-attachment: fixed;
 }
 
 .header__top {
@@ -270,9 +277,9 @@ header {
     margin: 0 auto;
     font-size: 1.8rem;
     text-align: center;
-    background-color: hsla(0, 0%, 4%, 0.8);
+    background-color: hsla(0, 0%, 4%, 0.9);
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px;
 }
 
 .header__content p {
@@ -446,7 +453,7 @@ header {
     font-size: 1.125rem;
     color: #f3f3f3;
     position: relative;
-    background-color: #373737;
+    background: linear-gradient(to right, #f0f0f0, #e0e0e0);
     border-radius: 20px;
     overflow: hidden;
     height: 1.125rem;
@@ -458,7 +465,7 @@ header {
     border-radius: 20px;
     box-shadow: 0 3px 3px -5px rgba(0, 0, 0, 0.2), 0 2px 5px rgba(0, 0, 0, 0.2);
     width: 0;
-    transition: width 2s ease-in-out;
+    transition: width 1.5s cubic-bezier(0.1, 0.5, 0.1, 1);
 }
 
 #skills .progress-container .progress-bar.animate {
@@ -482,7 +489,7 @@ header {
 }
 
 #angular-skill .progress-bar {
-    background: linear-gradient(90deg, #e32626,#d92525,#f02929);
+    background: linear-gradient(90deg, #e32626, #d92525, #f02929);
 }
 
 .icon {
@@ -490,7 +497,7 @@ header {
     margin-right: 8px;
     transition: color 0.3s;
 }
-        
+
 .icon:hover {
     transform: scale(1.1);
 }
