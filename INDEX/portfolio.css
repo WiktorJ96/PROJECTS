@@ -252,6 +252,10 @@ h2 {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+#header{
+    height: 100dvh;
+}
+
 header {
     background-image: url(../imghoney/bglink.webp);
     background-size: cover;
@@ -407,7 +411,7 @@ header {
 #about {
     padding: 4rem 0;
     text-align: center;
-    /* min-height: 100dvh */
+    height: 100dvh;
 }
 
 #about img {
@@ -440,7 +444,7 @@ header {
     padding: 1rem;
     text-align: center;
     color: #f3f3f3;
-    /* min-height: 100dvh */
+    height: 100dvh;
 }
 
 #skills h2 {
@@ -643,7 +647,7 @@ header {
     padding: 2.5rem 0;
     text-align: center;
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 1) 100%);
-    /* min-height: 100dvh */
+    height: 100dvh;
 }
 
 #portfolio h2 {
@@ -767,7 +771,7 @@ header {
     background-color: #76dafb;
     text-align: center;
     color: #232323;
-    min-height: 85dvh;
+    height: 100dvh;
 }
 
 #contact .lead {
