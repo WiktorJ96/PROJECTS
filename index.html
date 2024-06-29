@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description"
         content="Portfolio - Front-end Developer i Web Designer. Projekty w JavaScript, HTML i CSS.">
     <meta name="keywords"
@@ -31,7 +31,12 @@
     }
     </script>
 </head>
-
+<style>
+#header, #about, #skills, #portfolio, #contact {
+    min-height: calc(var(--vh, 1vh) * 100);
+    overflow-y: auto;
+}
+</style>
 <body data-page="index">
     <a href="#main-content" class="skip-link" style="top: -50%;">Przejdź do głównej treści</a>
 
@@ -347,6 +352,20 @@
     </footer>
 
     <script src="./translations/translate.js"></script>
+    <script>
+        function setFullHeight() {
+                const sections = document.querySelectorAll('#header, #about, #skills, #portfolio, #contact');
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+                sections.forEach(section => {
+                    section.style.minHeight = `calc(var(--vh, 1vh) * 100)`;
+                });
+            }
+
+            window.addEventListener('resize', setFullHeight);
+            setFullHeight();
+    </script>
  <script>
     function fetchTranslations(lang, page) {
             return fetch(`./translations/${page}-${lang}.json`)
