@@ -5,32 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Projekty w JavaScript, HTML i CSS. Przeglądaj responsywne formularze, notatniki, stopery, wyszukiwarki, kalkulatory kalorii i konwertery jednostek.">
+        content="Portfolio - Front-end Developer i Web Designer. Projekty w JavaScript, HTML i CSS.">
     <meta name="keywords"
-        content="projekty, JavaScript, HTML, CSS, formularz, notatnik, stoper, wyszukiwarka, kalkulator kalorii, konwerter jednostek">
+        content="Wiktor Jurkowski, Front-end Developer, Web Designer, JavaScript, HTML, CSS, portfolio">
     <meta name="author" content="Wiktor Jurkowski">
     <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="./INDEX/portfolio.css">
-    <title>Portfolio</title>
-    
+    <title>Portfolio - Front-end Developer i Web Designer</title>
+
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Projekty JavaScript, HTML, CSS",
-        "description": "Projekty w JavaScript, HTML i CSS. Przeglądaj responsywne formularze, notatniki, stopery, wyszukiwarki, kalkulatory kalorii i konwertery jednostek.",
-        "url": "https://wiktorj96.github.io/PROJECTS/"
+        "@type": "Person",
+        "name": "Wiktor Jurkowski",
+        "jobTitle": "Front-end Developer & Web Designer",
+        "url": "https://wiktorj96.github.io/PROJECTS/",
+        "sameAs": [
+            "https://github.com/wiktorj96",
+            "https://www.linkedin.com/in/wiktor-jurkowski-28671630a/"
+        ]
     }
     </script>
 </head>
+
 <body data-page="index">
+    <a href="#main-content" class="skip-link" style="top: -50%;">Przejdź do głównej treści</a>
+
     <div class="menu-responsive">
-        <nav>
+        <nav aria-label="Menu główne">
             <div class="logo">
-                <img src="./imghoney/logo3.svg" alt="">
+                <img src="./imghoney/logo3.svg" alt="Logo Wiktor Jurkowski">
                 <hr>
             </div>
             <ul>
@@ -40,31 +48,30 @@
                         <span data-lang-key="about">O mnie</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a class="scroll" href="#skills">
                         <i class="fa fa-cogs" aria-hidden="true"></i>
                         <span data-lang-key="skills">Umiejętności</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a class="scroll" href="#portfolio">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
                         <span data-lang-key="portfolio">Portfolio</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a class="scroll" href="#contact">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
                         <span data-lang-key="contact">Kontakt</span>
                     </a>
                 </li>
-                
+
             </ul>
         </nav>
-
     </div>
 
     <header>
@@ -98,105 +105,220 @@
         </div>
     </header>
 
-    <section id="about">
-        <div class="container">
-            <h2 data-lang-key="about">O mnie</h2>
-            <hr>
-            <img src="./imghoney/avatar.webp" width="150px" alt="Avatar">
-            <p class="lead" data-lang-key="designer_dev">Designer & Developer</p>
-            <p data-lang-key="my_name_is">Mam na imię<span class="bold"> Wiktor </span> interesuje mnie <strong
-                    data-lang-key="designing">projektowanie</strong> i <strong
-                    data-lang-key="creating">tworzenie</strong></p>
-            <p data-lang-key="websites_apps">stron internetowych oraz aplikacji</p>
-            <p data-lang-key="my_goal">Moim celem jest <strong data-lang-key="development">rozwój</strong> na wielu
-                płaszczyznach IT</p>
-            <p data-lang-key="currently">W chwili obecnej <strong data-lang-key="first_steps">stawiam pierwsze
-                    kroki</strong> jako <strong data-lang-key="frontend_dev">Front-end&nbsp;developer</strong></p>
-            <p data-lang-key="motivated">Jednak jestem <strong>zmotywowany</strong> aby jak najszybciej zdobyć wiedzę</p>
-            <p data-lang-key="technologies_languages">na temat rożnych technologii i języków programowania</p>
+    <main id="main-content">
+        <section id="about">
+            <div class="container">
+                <h1 data-lang-key="about">O mnie</h1>
+                <hr>
+                <img src="./imghoney/avatar.webp" width="150" height="150" alt="Zdjęcie profilowe Wiktora Jurkowskiego">
+                <p class="lead" data-lang-key="designer_dev">Designer & Developer</p>
+                <p data-lang-key="my_name_is">Mam na imię<span class="bold"> Wiktor </span> interesuje mnie <strong
+                        data-lang-key="designing">projektowanie</strong> i <strong
+                        data-lang-key="creating">tworzenie</strong></p>
+                <p data-lang-key="websites_apps">stron internetowych oraz aplikacji</p>
+                <p data-lang-key="my_goal">Moim celem jest <strong data-lang-key="development">rozwój</strong> na wielu
+                    płaszczyznach IT</p>
+                <p data-lang-key="currently">W chwili obecnej <strong data-lang-key="first_steps">stawiam pierwsze
+                        kroki</strong> jako <strong data-lang-key="frontend_dev">Front-end&nbsp;developer</strong></p>
+                <p data-lang-key="motivated">Jednak jestem <strong>zmotywowany</strong> aby jak najszybciej zdobyć
+                    wiedzę</p>
+                <p data-lang-key="technologies_languages">na temat rożnych technologii i języków programowania</p>
             </div>
-    </section>
+        </section>
 
-    <section id="skills">
-        <h2 data-lang-key="skills">Umiejętności</h2>
-        <hr>
-        <div class="skill" id="html-skill">
-            <div class="skill-header">
-                <span class="skills__name"><i class="fab fa-html5 icon" style="color:#e34c26;"></i><span
-                        data-lang-key="html">HTML</span></span>
-                <span class="skills__percent">85%</span>
+        <section id="skills" aria-label="Umiejętności">
+            <div class="skills-header">
+                <button class="scroll-button left" aria-label="Przewiń umiejętności w lewo">
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <h2 data-lang-key="skills">Umiejętności</h2>
+                <button class="scroll-button right" aria-label="Przewiń umiejętności w prawo">
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                </button>
             </div>
-            <div class="progress-container" style="--progress: 85%;">
-                <div class="progress-bar"></div>
+            <hr>
+            <div class="skills-container">
+                <div class="skills-page">
+
+                    <div class="skill" id="html-skill">
+                        <div class="skill-header">
+                            <span class="skills__name">
+                                <i class="fab fa-html5 icon" style="color:#e34c26;"></i>
+                                <span data-lang-key="html">HTML</span>
+                                <a href="./SKILLS/html-skills.html" class="skill-button">
+                                    <i class="fas fa-mouse-pointer"></i>
+                                    <i data-feather="click"></i>
+                                    <span class="click-text">click</span>
+                                </a>
+                            </span>
+                            <span class="skills__percent">85%</span>
+                        </div>
+                        <div class="progress-container" style="--progress: 85%;">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill" id="css-skill">
+                        <div class="skill-header">
+                            <span class="skills__name">
+                                <i class="fab fa-css3-alt icon" style="color:#264de4;"></i>
+                                <span data-lang-key="css">CSS</span>
+                                <a href="./SKILLS/css-skills.html" class="skill-button">
+                                    <i class="fas fa-mouse-pointer"></i>
+                                    <span class="click-text">click</span>
+                                </a>
+                            </span>
+                            <span class="skills__percent">85%</span>
+                        </div>
+                        <div class="progress-container" style="--progress: 85%;">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill" id="js-skill">
+                        <div class="skill-header">
+                            <span class="skills__name">
+                                <i class="fab fa-js-square icon" style="color:#f0db4f;"></i>
+                                <span data-lang-key="javascript">JavaScript</span>
+                                <a href="./SKILLS/js-skills.html" class="skill-button">
+                                    <i class="fas fa-mouse-pointer"></i>
+                                    <span class="click-text">click</span>
+                                </a>
+                            </span>
+                            <span class="skills__percent">50%</span>
+                        </div>
+                        <div class="progress-container" style="--progress: 50%;">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill" id="react-skill">
+                        <div class="skill-header">
+                            <span class="skills__name">
+                                <i class="fab fa-react icon" style="color:#61dafb;"></i>
+                                <span data-lang-key="react">React</span>
+                                <a href="react-skills.html" class="skill-button">
+                                    <i class="fas fa-mouse-pointer"></i>
+                                    <span class="click-text">click</span>
+                                </a>
+                            </span>
+                            <span class="skills__percent">5%</span>
+                        </div>
+                        <div class="progress-container" style="--progress: 5%;">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="skill" id="angular-skill">
+                        <div class="skill-header">
+                            <span class="skills__name">
+                                <i class="fab fa-angular icon" style="color:#dd0031;"></i>
+                                <span data-lang-key="angular">Angular</span>
+                                <a href="angular-skills.html" class="skill-button">
+                                    <i class="fas fa-mouse-pointer"></i>
+                                    <span class="click-text">click</span>
+                                </a>
+                            </span>
+                            <span class="skills__percent">5%</span>
+                        </div>
+                        <div class="progress-container" style="--progress: 5%;">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div> -->
+
+                </div>
+                <div class="skills-page">
+
+                    <div class="skill" id="docker-skill">
+                        <div class="skill-header">
+                            <span class="skills__name">
+                                <i class="fab fa-docker icon" style="color:#a6c4dc;"></i>
+                                <span data-lang-key="docker">Docker</span>
+                                <a href="docker-skills.html" class="skill-button">
+                                    <i class="fas fa-mouse-pointer"></i>
+                                    <span class="click-text">click</span>
+                                </a>
+                            </span>
+                            <span class="skills__percent">50%</span>
+                        </div>
+                        <div class="progress-container" style="--progress: 50%;">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill" id="figma-skill">
+                        <div class="skill-header">
+                            <span class="skills__name">
+                                <i class="fab fa-figma icon" style="color:#F24E1E;"></i>
+                                <span data-lang-key="figma">Figma</span>
+                                <a href="figma-skills.html" class="skill-button">
+                                    <i class="fas fa-mouse-pointer"></i>
+                                    <span class="click-text">click</span>
+                                </a>
+                            </span>
+                            <span class="skills__percent">50%</span>
+                        </div>
+                        <div class="progress-container" style="--progress: 50%;">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-        <div class="skill" id="css-skill">
-            <div class="skill-header">
-                <span class="skills__name"><i class="fab fa-css3-alt icon" style="color:#264de4;"></i><span
-                        data-lang-key="css">CSS</span></span>
-                <span class="skills__percent">85%</span>
-            </div>
-            <div class="progress-container" style="--progress: 85%;">
-                <div class="progress-bar"></div>
-            </div>
-        </div>
-        <div class="skill" id="js-skill">
-            <div class="skill-header">
-                <span class="skills__name"><i class="fab fa-js-square icon" style="color:#f0db4f;"></i><span
-                        data-lang-key="javascript">JavaScript</span></span>
-                <span class="skills__percent">50%</span>
-            </div>
-            <div class="progress-container" style="--progress: 50%;">
-                <div class="progress-bar"></div>
-            </div>
-        </div>
-        <div class="skill" id="react-skill">
-            <div class="skill-header">
-                <span class="skills__name"><i class="fab fa-react icon" style="color:#61dafb;"></i><span
-                        data-lang-key="react">React</span></span>
-                <span class="skills__percent">5%</span>
-            </div>
-            <div class="progress-container" style="--progress: 5%;">
-                <div class="progress-bar"></div>
-            </div>
-        </div>
-        <div class="skill" id="angular-skill">
-            <div class="skill-header">
-                <span class="skills__name"><i class="fab fa-angular icon" style="color:#dd0031;"></i><span
-                        data-lang-key="angular">Angular</span></span>
-                <span class="skills__percent">5%</span>
-            </div>
-            <div class="progress-container" style="--progress: 5%;">
-                <div class="progress-bar"></div>
-            </div>
-        </div>
-    </section>
+        </section>
 
     <section id="portfolio">
         <h2 data-lang-key="portfolio">Portfolio</h2>
         <hr>
         <div class="container">
             <div class="portfolio__projects row">
+
                 <div class="col-lg-4 col-md-6">
                     <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <figure>
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
-                                        style="margin-top: 1.5rem;" alt="Zdjęcie projektu JavaScript">
-                                </figure>
-                            </div>
-                            <div class="flip-card-back">
-                                <h3 data-lang-key="js_projects">Projekty JavaScript</h3>
-                                <p data-lang-key="based_on_js_html_css">Projekty bazujące na JS, HTML i CSS</p>
-                                <a href="./INDEX/projektyJS.html" class="specific-icon-link"><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <figure>
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
+                                            style="margin-top: 1.5rem;" alt="Zdjęcie projektu JavaScript">
+                                    </figure>
+                                </div>
+                                <div class="flip-card-back">
+                                    <h3 data-lang-key="js_projects">Projekty JavaScript</h3>
+                                    <p data-lang-key="based_on_js_html_css">Projekty bazujące na JS, HTML i CSS</p>
+                                    <a href="./INDEX/projektyJS.html" class="specific-icon-link"><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                    </div>
+
+                    <!-- <div class="col-lg-4 col-md-6">
+                        <div class="flip-card">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <figure>
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Logo Figma"
+                                                style="margin-top: 1.5rem; width: 100px; height: auto;">
+                                        </figure>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <h3 data-lang-key="figma_projects">Projekty Figma</h3>
+                                        <p data-lang-key="figma_based">Projekty stron internetowych w Figmie</p>
+                                        <a href="./INDEX/projektyJS.html" class="specific-icon-link"><i class="fas fa-arrow-right"
+                                                aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    </div>
+                    </div>
+                    </section>
+                    
+
 
     <section id="contact">
         <div class="container">
@@ -231,7 +353,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Menu toggle
+          
             const menuBars = document.querySelector('.menu-bars');
             const menuResponsive = document.querySelector('.menu-responsive');
 
@@ -261,7 +383,7 @@
                 e.stopPropagation();
             });
 
-            // Scroll animation
+            
             const scrollLinks = document.querySelectorAll('.scroll');
             scrollLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -276,7 +398,7 @@
                 });
             });
 
-            // Progress bars animation
+           
             const progressBars = document.querySelectorAll('.progress-bar');
             const observerOptions = { threshold: 0.1 };
 
@@ -297,7 +419,7 @@
                 progressObserver.observe(container);
             });
 
-            // Element animation on scroll
+            
             const animateOnScroll = (entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -329,7 +451,7 @@
                 });
             });
 
-            // Dynamic text loading
+            
             const langButtons = document.querySelectorAll('.language-switch button');
             const dynamicText = document.getElementById('dynamic-text');
 
@@ -391,7 +513,50 @@
 
             loadTranslations(currentLang);
             loadDynamicText(currentLang);
+
         });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                    const container = document.querySelector('#skills .skills-container');
+                    const leftButton = document.querySelector('#skills .scroll-button.left');
+                    const rightButton = document.querySelector('#skills .scroll-button.right');
+
+                    if (container && leftButton && rightButton) {
+                        leftButton.addEventListener('click', () => {
+                            container.scrollBy({ left: -250, behavior: 'smooth' });
+                        });
+
+                        rightButton.addEventListener('click', () => {
+                            container.scrollBy({ left: 250, behavior: 'smooth' });
+                        });
+
+                        
+                        container.addEventListener('scroll', () => {
+                            leftButton.style.display = container.scrollLeft > 0 ? 'block' : 'none';
+                            rightButton.style.display =
+                                container.scrollLeft < container.scrollWidth - container.clientWidth
+                                    ? 'block' : 'none';
+                        });
+
+                        
+                        leftButton.style.display = 'none';
+
+                        
+                        function checkScrollNeeded() {
+                            if (container.scrollWidth > container.clientWidth) {
+                                rightButton.style.display = 'block';
+                            } else {
+                                leftButton.style.display = 'none';
+                                rightButton.style.display = 'none';
+                            }
+                        }
+
+                        
+                        checkScrollNeeded();
+                        window.addEventListener('resize', checkScrollNeeded);
+                    }
+                });
+        
  </script>
 
 

@@ -1,0 +1,62 @@
+ body {
+     background: linear-gradient(135deg, #f3f4f6 0%, #e2e8f0 100%);
+     font-family: 'Poppins', sans-serif;
+     animation: fadeIn 1s ease-in-out;
+     overflow-x: hidden;
+     margin-top: -25px;
+     overflow: auto;
+ }
+
+ @keyframes fadeIn {
+     from {
+         opacity: 0;
+     }
+
+     to {
+         opacity: 1;
+     }
+ }
+
+ .skill-icon {
+     font-size: 3rem;
+     color: #007bff;
+     transition: transform 0.3s, color 0.3s;
+ }
+
+ .skill-icon:hover {
+     transform: rotate(15deg) scale(1.1);
+     color: #0056b3;
+ }
+
+ .skill-card {
+     border: none;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     transition: transform 0.3s, box-shadow 0.3s;
+     border-radius: 15px;
+     overflow: hidden;
+     background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+ }
+
+ .skill-card:hover {
+     transform: scale(1.05) rotate(2deg);
+     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+ }
+
+ .container {
+     max-width: 1200px;
+ }
+
+ .difficulty-icon {
+     font-size: 1.2rem;
+     color: #28a745;
+     transition: transform 0.3s, color 0.3s;
+ }
+
+ .difficulty-icon:hover {
+     transform: scale(1.2);
+     color: #218838;
+ }
+
+ .card-footer .badge {
+     font-size: 0.8rem;
+ }

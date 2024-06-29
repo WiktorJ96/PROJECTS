@@ -13,9 +13,25 @@ body {
 }
 
 .language-switch button:hover {
-    background-color: #fff;
+    background-color: hsla(0, 0%, 100%, 0.92);
     color: #333;
-    border: 1px solid #333;
+}
+
+.language-switch button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #333;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.language-switch button:hover::before {
+    opacity: 1;
+    transform: scale(1.1);
 }
 
 .language-switch {
@@ -38,7 +54,11 @@ body {
     font-size: 16px;
     font-weight: normal;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
+
+
 
 .btn {
     border: 1px solid #fff;
@@ -54,7 +74,7 @@ body {
 }
 
 .btn:hover {
-    background-color: #fff;
+    background-color: hsla(0, 0%, 100%, 0.92);
     color: #232323;
     transform: translateY(-3px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
@@ -141,9 +161,6 @@ h2 {
     }
 }
 
-.header__content {
-    animation: slideInUp 1.5s ease-out forwards;
-}
 
 .menu_hamburger {
     display: flex;
@@ -273,12 +290,13 @@ header {
 }
 
 .header__content {
+    animation: slideInUp 1.5s ease-out forwards;
+    background: linear-gradient(to bottom, hsla(0, 0%, 10%, 0.92), hsla(0, 0%, 4%, 0.92));
     width: 80%;
     margin: 0 auto;
     font-size: 1.8rem;
     text-align: center;
-    background-color: hsla(0, 0%, 4%, 0.9);
-    border-radius: 10px;
+    border-radius: 7px;
     padding: 20px;
 }
 
@@ -383,7 +401,7 @@ header {
 #about {
     padding: 4rem 0;
     text-align: center;
-    min-height: 100vh;
+    min-height: 98vh;
 }
 
 #about img {
@@ -410,9 +428,9 @@ header {
     text-decoration: underline;
     transition: all 0.3s;
 }
-
+                                                                /* UMIEJETNOSCI */
 #skills {
-    background-color: hsla(0, 0%, 13%, 0.95);
+    background: linear-gradient(45deg, #1a1a1a, #2c2c2c);
     padding: 1rem;
     text-align: center;
     color: #f3f3f3;
@@ -473,23 +491,31 @@ header {
 }
 
 #html-skill .progress-bar {
-    background: linear-gradient(90deg, #e37526f1, #d96a25ee, #f08929f1);
+    background: linear-gradient(90deg, #FF6B6B, #ff7253, #FFA94D);
 }
 
 #css-skill .progress-bar {
-    background: linear-gradient(90deg, #264de4, #246bd8, #2965f1);
+    background: linear-gradient(90deg, #4e6ec8, #83c0fa, #4e81c8);
 }
 
 #js-skill .progress-bar {
-    background: linear-gradient(90deg, #f0db4f, #ebc22f, #f7df1e);
+    background: linear-gradient(90deg, #FFD700, #ffea00, #ffc400);
 }
 
 #react-skill .progress-bar {
-    background: linear-gradient(90deg, #268fe4, #2499d8, #2997f1);
+    background: linear-gradient(90deg, #00C9FF, #92FE9D, #00C9FF);
 }
 
 #angular-skill .progress-bar {
-    background: linear-gradient(90deg, #e32626, #d92525, #f02929);
+    background: linear-gradient(90deg, #FF416C, #FF4B2B, #FF416C);
+}
+
+#docker-skill .progress-bar {
+    background: linear-gradient(90deg, #0DB7ED, #384D54, #0DB7ED);
+}
+
+#figma-skill .progress-bar {
+    background: linear-gradient(90deg, #FF7262, #F24E1E, #FF7262);
 }
 
 .icon {
@@ -500,6 +526,7 @@ header {
 
 .icon:hover {
     transform: scale(1.1);
+    transition:  ease-out 0.3s;
 }
 
 #skills .progress-container::before {
@@ -513,6 +540,89 @@ header {
     z-index: -1;
     filter: blur(5px);
     border-radius: 20px;
+}
+
+.skill-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 0.1px 5px;
+    margin-left: 10px;
+    font-size: 0.7em;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.skill-button:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.skill-button .material-icons-outlined {
+    font-size: 16px;
+    margin-right: 4px;
+}
+
+.click-text {
+    font-size: 0.9em;
+}
+
+.skills-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.scroll-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 10px;
+    color: #fff;
+}
+
+.skills-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.skills-container::-webkit-scrollbar {
+    display: none;
+}
+
+.skills-page {
+    flex: 0 0 100%;
+    width: 100%;
+    scroll-snap-align: start;
+}
+
+.skill {
+    width: calc(100% - 40px);
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: white;
+    padding: 8px;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
 }
                                                                  /*PORTFOLIO*/
 #portfolio {
@@ -532,6 +642,7 @@ header {
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
+    margin: 2rem;
 }
 
 .flip-card {
@@ -792,3 +903,6 @@ footer {
         font-size: 2.25rem;
     }
 }
+
+
+        
