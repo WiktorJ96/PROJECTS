@@ -345,6 +345,18 @@
     </footer>
 
     <script src="./translations/translate.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+                function setHeight() {
+                    document.querySelectorAll('section').forEach(section => {
+                        section.style.minHeight = `${window.innerHeight}px`;
+                    });
+                }
+
+                window.addEventListener('resize', setHeight);
+                setHeight();
+            });
+    </script>
  <script>
     function fetchTranslations(lang, page) {
             return fetch(`./translations/${page}-${lang}.json`)
