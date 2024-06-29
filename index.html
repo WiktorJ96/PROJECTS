@@ -78,18 +78,20 @@
         <div class="container">
             <div class="row">
                 <div class="header__top">
-                    <div class="language-switch">
-                        <button id="lang-pl">PL</button>
-                        <button id="lang-en">EN</button>
+                    <div class="header__top-content">
+                        <nav class="header__top--responsive hidden-lg-up menu_hamburger">
+                            <ul>
+                                <li><a class="menu-bars" href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </nav>
+                        <div class="language-switch">
+                            <button id="lang-pl">PL</button>
+                            <button id="lang-en">EN</button>
+                        </div>
                     </div>
-                    <div class="col-md-6 header__top-brand"></div>
-                    <nav class="col-md-6 header__top--responsive hidden-lg-up menu_hamburger">
-                        <ul>
-                            <li><a class="menu-bars" href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
+            
 
             <div class="header__content">
                 <p class="bold" data-lang-key="welcome">Witaj !</p>
@@ -343,6 +345,17 @@
     </footer>
 
     <script src="./translations/translate.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        function setVH() {
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+
+            window.addEventListener('resize', setVH);
+            setVH();
+        });
+    </script>
  <script>
     function fetchTranslations(lang, page) {
             return fetch(`./translations/${page}-${lang}.json`)
@@ -565,3 +578,5 @@
 </body>
 
 </html>
+
+
