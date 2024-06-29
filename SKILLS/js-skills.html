@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Umiejętności JavaScript</title>
+    <title data-lang-key="page_title">Umiejętności JavaScript</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./skills.css">
     <style>
@@ -18,12 +18,17 @@
     </style>
 </head>
 
-<body class="bg-light">
+<body class="bg-light" data-page="JS">
+    <div class="language-switch">
+        <button id="lang-pl">PL</button>
+        <button id="lang-en">EN</button>
+    </div>
 
     <div class="loader" id="loader"></div>
 
     <div class="container py-5">
-        <img src="https://cdn.jsdelivr.net/npm/programming-languages-logos/src/javascript/javascript.png" alt="JavaScript Logo" class="js-logo mb-4">
+        <img src="https://cdn.jsdelivr.net/npm/programming-languages-logos/src/javascript/javascript.png"
+            alt="JavaScript Logo" class="js-logo mb-4">
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
@@ -31,14 +36,15 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-code skill-icon mb-3"></i>
-                        <h5 class="card-title">Znajomość podstaw:</h5>
-                        <p class="card-text">składnia JS, instrukcje, komentarze, typy danych (proste i referencyjne), zmienne (const, let, var), operatory, literały, właściwości i metody typów prostych
-                        </p>
+                        <h5 class="card-title" data-lang-key="basics_title">Znajomość podstaw:</h5>
+                        <p class="card-text" data-lang-key="basics_desc">składnia JS, instrukcje, komentarze, typy
+                            danych (proste i referencyjne), zmienne (const, let, var), operatory, literały, właściwości
+                            i metody typów prostych</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
                     </div>
                 </div>
             </div>
@@ -47,13 +53,14 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-database skill-icon mb-3"></i>
-                        <h5 class="card-title">Struktury kontrolne:</h5>
-                        <p class="card-text">instrukcje warunkowe (if, switch), pętle (for, while, do...while), operatory warunkowe</p>
+                        <h5 class="card-title" data-lang-key="control_structures_title">Struktury kontrolne:</h5>
+                        <p class="card-text" data-lang-key="control_structures_desc">instrukcje warunkowe (if, switch),
+                            pętle (for, while, do...while), operatory warunkowe</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
                     </div>
                 </div>
             </div>
@@ -62,13 +69,14 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-cogs skill-icon mb-3"></i>
-                        <h5 class="card-title">Funkcje:</h5>
-                        <p class="card-text">definiowanie i wywoływanie funkcji, zwracanie wartości, wartości domyślne, callbacks, obiekt arguments, operator rest</p>
+                        <h5 class="card-title" data-lang-key="functions_title">Funkcje:</h5>
+                        <p class="card-text" data-lang-key="functions_desc">definiowanie i wywoływanie funkcji,
+                            zwracanie wartości, wartości domyślne, callbacks, obiekt arguments, operator rest</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
                     </div>
                 </div>
             </div>
@@ -77,13 +85,14 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-code-branch skill-icon mb-3"></i>
-                        <h5 class="card-title">Zaawansowane koncepcje JS:</h5>
-                        <p class="card-text">hoisting, zakres (scope) - globalny i lokalny, closures</p>
+                        <h5 class="card-title" data-lang-key="advanced_concepts_title">Zaawansowane koncepcje JS:</h5>
+                        <p class="card-text" data-lang-key="advanced_concepts_desc">hoisting, zakres (scope) - globalny
+                            i lokalny, closures</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-warning"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Średni"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_medium" title="Średni"></i></span>
                     </div>
                 </div>
             </div>
@@ -92,13 +101,14 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-briefcase skill-icon mb-3"></i>
-                        <h5 class="card-title">Struktury danych:</h5>
-                        <p class="card-text">tablice i metody tablicowe, obiekty</p>
+                        <h5 class="card-title" data-lang-key="data_structures_title">Struktury danych:</h5>
+                        <p class="card-text" data-lang-key="data_structures_desc">tablice i metody tablicowe, obiekty
+                        </p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-warning"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Średni"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_medium" title="Średni"></i></span>
                     </div>
                 </div>
             </div>
@@ -107,13 +117,14 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-object-group skill-icon mb-3"></i>
-                        <h5 class="card-title">DOM (Document Object Model):</h5>
-                        <p class="card-text">pobieranie elementów, modyfikacja elementów, obsługa zdarzeń</p>
+                        <h5 class="card-title" data-lang-key="dom_title">DOM (Document Object Model):</h5>
+                        <p class="card-text" data-lang-key="dom_desc">pobieranie elementów, modyfikacja elementów,
+                            obsługa zdarzeń</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-warning"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Średni"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_medium" title="Średni"></i></span>
                     </div>
                 </div>
             </div>
@@ -122,13 +133,14 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-tools skill-icon mb-3"></i>
-                        <h5 class="card-title">Programowanie obiektowe (OOP):</h5>
-                        <p class="card-text">podstawy OOP w JavaScript, klasy i dziedziczenie</p>
+                        <h5 class="card-title" data-lang-key="oop_title">Programowanie obiektowe (OOP):</h5>
+                        <p class="card-text" data-lang-key="oop_desc">podstawy OOP w JavaScript, klasy i dziedziczenie
+                        </p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-danger"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Trudny"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_hard" title="Trudny"></i></span>
                     </div>
                 </div>
             </div>
@@ -137,13 +149,13 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-tools skill-icon mb-3"></i>
-                        <h5 class="card-title">Programowanie asynchroniczne:</h5>
-                        <p class="card-text">callbacks, promises, async/await, fetch API</p>
+                        <h5 class="card-title" data-lang-key="async_title">Programowanie asynchroniczne:</h5>
+                        <p class="card-text" data-lang-key="async_desc">callbacks, promises, async/await, fetch API</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-danger"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Trudny"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_hard" title="Trudny"></i></span>
                     </div>
                 </div>
             </div>
@@ -152,13 +164,16 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-tools skill-icon mb-3"></i>
-                        <h5 class="card-title">Praktyczne umiejętności projektowe:</h5>
-                        <p class="card-text">manipulacja DOM, obsługa zdarzeń, tworzenie interaktywnych elementów strony, praca z LocalStorage, tworzenie gier, walidacja formularzy, praca z Canvas</p>
+                        <h5 class="card-title" data-lang-key="practical_skills_title">Praktyczne umiejętności
+                            projektowe:</h5>
+                        <p class="card-text" data-lang-key="practical_skills_desc">manipulacja DOM, obsługa zdarzeń,
+                            tworzenie interaktywnych elementów strony, praca z LocalStorage, tworzenie gier, walidacja
+                            formularzy, praca z Canvas</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-danger"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Trudny"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_hard" title="Trudny"></i></span>
                     </div>
                 </div>
             </div>
@@ -167,6 +182,7 @@
     </div>
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="../translations/translate2.js"></script>
 </body>
 
 </html>

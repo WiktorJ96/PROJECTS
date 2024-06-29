@@ -1,0 +1,11 @@
+{
+  "page_title": "Umiejętności HTML",
+  "basics_title": "Podstawy HTML:",
+  "basics_desc": "struktura dokumentu HTML, najważniejsze znaczniki HTML, atrybuty znaczników, prawidłowa budowa sekcji <head>, tworzenie struktury strony",
+  "advanced_title": "Zaawansowane HTML:",
+  "advanced_desc": "semantyczne znaczniki HTML5, tworzenie formularzy, osadzanie multimediów",
+  "accessibility_title": "Dostępność i Semantyka:",
+  "accessibility_desc": "implementacja ARIA roles i atrybutów, zapewnianie zgodności z WCAG.",
+  "seo_title": "SEO i Wydajność:",
+  "seo_desc": "optymalizacja metadanych, struktura nagłówków, przyjazne SEO URL, szybkość ładowania strony, Schema.org, Open Graph, optymalizacja treści."
+}

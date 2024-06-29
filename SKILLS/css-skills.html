@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Umiejętności CSS</title>
+    <title data-lang-key="page_title">Umiejętności CSS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./skills.css">
     <style>
@@ -17,13 +17,17 @@
         }
     </style>
 </head>
-
-<body class="bg-light">
+<div class="language-switch">
+    <button id="lang-pl">PL</button>
+    <button id="lang-en">EN</button>
+</div>
+<body class="bg-light" data-page="css">
 
     <div class="loader" id="loader"></div>
 
     <div class="container py-5">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS Logo" class="css-logo mb-4">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS Logo"
+            class="css-logo mb-4">
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
@@ -31,14 +35,14 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-code skill-icon mb-3"></i>
-                        <h5 class="card-title">Podstawy CSS:</h5>
-                        <p class="card-text">składnia CSS, selektory CSS, sposoby dodawania stylów do HTML, kaskadowość i specyficzność, dziedziczenie w CSS
-                        </p>
+                        <h5 class="card-title" data-lang-key="css_basics_title">Podstawy CSS:</h5>
+                        <p class="card-text" data-lang-key="css_basics_desc">składnia CSS, selektory CSS, sposoby
+                            dodawania stylów do HTML, kaskadowość i specyficzność, dziedziczenie w CSS</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
                     </div>
                 </div>
             </div>
@@ -47,13 +51,15 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-database skill-icon mb-3"></i>
-                        <h5 class="card-title">Stylizacja tekstu i fontów:</h5>
-                        <p class="card-text">właściwości fontów (font-size, color, font-style, font-weight, etc.), stylizacja tekstu (text-indent, text-align, text-transform, line-height), korzystanie z Google Fonts</p>
+                        <h5 class="card-title" data-lang-key="text_styling_title">Stylizacja tekstu i fontów:</h5>
+                        <p class="card-text" data-lang-key="text_styling_desc">właściwości fontów (font-size, color,
+                            font-style, font-weight, etc.), stylizacja tekstu (text-indent, text-align, text-transform,
+                            line-height), korzystanie z Google Fonts</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
                     </div>
                 </div>
             </div>
@@ -62,13 +68,15 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-cogs skill-icon mb-3"></i>
-                        <h5 class="card-title">Model pudełkowy i układ strony:</h5>
-                        <p class="card-text">box model (margin, padding, border), box-sizing, elementy blokowe i liniowe, właściwość display, pozycjonowanie elementów (float, flexbox, grid)</p>
+                        <h5 class="card-title" data-lang-key="box_model_title">Model pudełkowy i układ strony:</h5>
+                        <p class="card-text" data-lang-key="box_model_desc">box model (margin, padding, border),
+                            box-sizing, elementy blokowe i liniowe, właściwość display, pozycjonowanie elementów (float,
+                            flexbox, grid)</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
                     </div>
                 </div>
             </div>
@@ -77,13 +85,14 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-code-branch skill-icon mb-3"></i>
-                        <h5 class="card-title">Kolory i jednostki:</h5>
-                        <p class="card-text">systemy kolorów (RGB, HEX, HSL), jednostki w CSS (px, em, rem, %, vw/vh)</p>
+                        <h5 class="card-title" data-lang-key="colors_units_title">Kolory i jednostki:</h5>
+                        <p class="card-text" data-lang-key="colors_units_desc">systemy kolorów (RGB, HEX, HSL),
+                            jednostki w CSS (px, em, rem, %, vw/vh)</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
                     </div>
                 </div>
             </div>
@@ -92,13 +101,14 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-briefcase skill-icon mb-3"></i>
-                        <h5 class="card-title">Zaawansowane CSS:</h5>
-                        <p class="card-text">pseudoklasy i pseudoelementy, zaawansowane selektory CSS, responsywne projektowanie</p>
+                        <h5 class="card-title" data-lang-key="advanced_css_title">Zaawansowane CSS:</h5>
+                        <p class="card-text" data-lang-key="advanced_css_desc">pseudoklasy i pseudoelementy,
+                            zaawansowane selektory CSS, responsywne projektowanie</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
                     </div>
                 </div>
             </div>
@@ -107,13 +117,16 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-tools skill-icon mb-3"></i>
-                        <h5 class="card-title">Techniki stylizacji i animacji:</h5>
-                        <p class="card-text" style="display: inline;">wykorzystanie zmiennych CSS z użyciem selektora <p style="color: #0051ff; display: inline;">:root</p>, tworzenie złożonych animacji CSS z wykorzystaniem <p style="color: #aa00ff; display: inline;">@keyframes</p></p>
+                        <h5 class="card-title" data-lang-key="styling_animation_title">Techniki stylizacji i animacji:
+                        </h5>
+                        <p class="card-text" data-lang-key="styling_animation_desc">wykorzystanie zmiennych CSS z
+                            użyciem selektora <span style="color: #0051ff;">:root</span>, tworzenie złożonych animacji
+                            CSS z wykorzystaniem <span style="color: #aa00ff;">@keyframes</span></p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
                     </div>
                 </div>
             </div>
@@ -122,13 +135,15 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-object-group skill-icon mb-3"></i>
-                        <h5 class="card-title">Zasoby i narzędzia:</h5>
-                        <p class="card-text">korzystanie z Google Fonts, źródła darmowych grafik i wideo, narzędzia do tworzenia schematów kolorów, podstawy pracy z programami graficznymi</p>
+                        <h5 class="card-title" data-lang-key="resources_tools_title">Zasoby i narzędzia:</h5>
+                        <p class="card-text" data-lang-key="resources_tools_desc">korzystanie z Google Fonts, źródła
+                            darmowych grafik i wideo, narzędzia do tworzenia schematów kolorów, podstawy pracy z
+                            programami graficznymi</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
                     </div>
                 </div>
             </div>
@@ -137,13 +152,15 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-tools skill-icon mb-3"></i>
-                        <h5 class="card-title">Praktyczne umiejętności:</h5>
-                        <p class="card-text">tworzenie layoutów stron, stylizacja przycisków i menu, praca z projektami graficznymi (mockup), debugowanie kodu CSS, optymalizacja kodu CSS</p>
+                        <h5 class="card-title" data-lang-key="practical_skills_title">Praktyczne umiejętności:</h5>
+                        <p class="card-text" data-lang-key="practical_skills_desc">tworzenie layoutów stron, stylizacja
+                            przycisków i menu, praca z projektami graficznymi (mockup), debugowanie kodu CSS,
+                            optymalizacja kodu CSS</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
                         <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
                     </div>
                 </div>
             </div>
@@ -152,6 +169,7 @@
     </div>
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="../translations/translate2.js"></script>
 </body>
 
 </html>

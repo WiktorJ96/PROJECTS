@@ -1,0 +1,19 @@
+{
+  "page_title": "CSS Skills",
+  "css_basics_title": "CSS Basics:",
+  "css_basics_desc": "CSS syntax, CSS selectors, ways to add styles to HTML, cascading and specificity, inheritance in CSS",
+  "text_styling_title": "Text and Font Styling:",
+  "text_styling_desc": "font properties (font-size, color, font-style, font-weight, etc.), text styling (text-indent, text-align, text-transform, line-height), using Google Fonts",
+  "box_model_title": "Box Model and Page Layout:",
+  "box_model_desc": "box model (margin, padding, border), box-sizing, block and inline elements, display property, element positioning (float, flexbox, grid)",
+  "colors_units_title": "Colors and Units:",
+  "colors_units_desc": "color systems (RGB, HEX, HSL), CSS units (px, em, rem, %, vw/vh)",
+  "advanced_css_title": "Advanced CSS:",
+  "advanced_css_desc": "pseudo-classes and pseudo-elements, advanced CSS selectors, responsive design",
+  "styling_animation_title": "Styling and Animation Techniques:",
+  "styling_animation_desc": "using CSS variables with <span style=\"color: #0051ff;\">:root</span> selector, creating complex CSS animations with <span style=\"color: #aa00ff;\">@keyframes</span>",
+  "resources_tools_title": "Resources and Tools:",
+  "resources_tools_desc": "using Google Fonts, sources of free graphics and video, color scheme creation tools, basics of working with graphic programs",
+  "practical_skills_title": "Practical Skills:",
+  "practical_skills_desc": "creating page layouts, styling buttons and menus, working with graphic designs (mockup), debugging CSS code, optimizing CSS code"
+}

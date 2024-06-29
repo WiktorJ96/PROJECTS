@@ -1,0 +1,11 @@
+{
+  "page_title": "HTML Skills",
+  "basics_title": "HTML Basics:",
+  "basics_desc": "HTML document structure, most important HTML tags, tag attributes, proper structure of the <head> section, creating page structure",
+  "advanced_title": "Advanced HTML:",
+  "advanced_desc": "Semantic HTML5 tags, form creation, embedding multimedia",
+  "accessibility_title": "Accessibility and Semantics:",
+  "accessibility_desc": "Implementation of ARIA roles and attributes, ensuring WCAG compliance.",
+  "seo_title": "SEO and Performance:",
+  "seo_desc": "Metadata optimization, header structure, SEO-friendly URLs, page load speed, Schema.org, Open Graph, content optimization."
+}

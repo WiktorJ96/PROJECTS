@@ -5,6 +5,7 @@
      overflow-x: hidden;
      margin-top: -25px;
      overflow: auto;
+     height: 100vh;
  }
 
  @keyframes fadeIn {
@@ -59,4 +60,7 @@
 
  .card-footer .badge {
      font-size: 0.8rem;
+ }
+ .language-switch{
+    display: none;
  }

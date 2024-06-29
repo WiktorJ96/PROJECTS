@@ -1,0 +1,21 @@
+{
+  "page_title": "Umiejętności JavaScript",
+  "basics_title": "Znajomość podstaw:",
+  "basics_desc": "składnia JS, instrukcje, komentarze, typy danych (proste i referencyjne), zmienne (const, let, var), operatory, literały, właściwości i metody typów prostych",
+  "control_structures_title": "Struktury kontrolne:",
+  "control_structures_desc": "instrukcje warunkowe (if, switch), pętle (for, while, do...while), operatory warunkowe",
+  "functions_title": "Funkcje:",
+  "functions_desc": "definiowanie i wywoływanie funkcji, zwracanie wartości, wartości domyślne, callbacks, obiekt arguments, operator rest",
+  "advanced_concepts_title": "Zaawansowane koncepcje JS:",
+  "advanced_concepts_desc": "hoisting, zakres (scope) - globalny i lokalny, closures",
+  "data_structures_title": "Struktury danych:",
+  "data_structures_desc": "tablice i metody tablicowe, obiekty",
+  "dom_title": "DOM (Document Object Model):",
+  "dom_desc": "pobieranie elementów, modyfikacja elementów, obsługa zdarzeń",
+  "oop_title": "Programowanie obiektowe (OOP):",
+  "oop_desc": "podstawy OOP w JavaScript, klasy i dziedziczenie",
+  "async_title": "Programowanie asynchroniczne:",
+  "async_desc": "callbacks, promises, async/await, fetch API",
+  "practical_skills_title": "Praktyczne umiejętności projektowe:",
+  "practical_skills_desc": "manipulacja DOM, obsługa zdarzeń, tworzenie interaktywnych elementów strony, praca z LocalStorage, tworzenie gier, walidacja formularzy, praca z Canvas"
+}
