@@ -345,17 +345,6 @@
     </footer>
 
     <script src="./translations/translate.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-        function setVH() {
-                let vh = window.innerHeight * 0.01;
-                document.documentElement.style.setProperty('--vh', `${vh}px`);
-            }
-
-            window.addEventListener('resize', setVH);
-            setVH();
-        });
-    </script>
  <script>
     function fetchTranslations(lang, page) {
             return fetch(`./translations/${page}-${lang}.json`)
