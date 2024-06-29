@@ -31,7 +31,25 @@
     }
     </script>
 </head>
+<style>
+    .javascript-label {
+  display: inline;
+}
 
+.javascript-label-short {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .javascript-label {
+    display: none;
+  }
+  
+  .javascript-label-short {
+    display: inline;
+  }
+}
+</style>
 <body data-page="index">
     <a href="#main-content" class="skip-link" style="top: -50%;">Przejdź do głównej treści</a>
 
@@ -179,7 +197,8 @@
                         <div class="skill-header">
                             <span class="skills__name">
                                 <i class="fab fa-js-square icon" style="color:#f0db4f;"></i>
-                                <span data-lang-key="javascript">JavaScript</span>
+                                <span data-lang-key="javascript">JS</span>
+                                <span class="javascript-label-short" data-lang-key="javascript_short">JS</span>
                                 <a href="./SKILLS/js-skills.html" class="skill-button">
                                     <i class="fas fa-mouse-pointer"></i>
                                     <span class="click-text">click</span>

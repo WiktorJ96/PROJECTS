@@ -291,7 +291,7 @@ header {
 
 .header__content {
     animation: slideInUp 1.5s ease-out forwards;
-    background: linear-gradient(to bottom, hsla(0, 0%, 10%, 0.92), hsla(0, 0%, 4%, 0.92));
+    background: linear-gradient(to bottom, hsla(0, 0%, 10%, 0.94), hsla(0, 0%, 4%, 0.94));
     width: 80%;
     margin: 0 auto;
     font-size: 1.8rem;
