@@ -253,8 +253,8 @@ h2 {
 }
 
 #header{
-    min-height: 120dvh;
-    min-height: 120vh;
+    min-height: 105dvh;
+    min-height: 105vh;
 }
 
 header {
@@ -410,8 +410,10 @@ header {
 }
 
 #about {
-    padding: 4rem 0;
+    padding: 1rem 0;
     text-align: center;
+    min-height: 105dvh;
+    min-height: 105vh;
 }
 
 #about img {
@@ -444,8 +446,8 @@ header {
     padding: 1rem;
     text-align: center;
     color: #f3f3f3;
-    min-height: 120dvh;
-    min-height: 120vh;
+    min-height: 105dvh;
+    min-height: 105vh;
 }
 
 #skills h2 {
@@ -645,11 +647,11 @@ header {
 }
                                                                  /*PORTFOLIO*/
 #portfolio {
-    padding: 2.5rem 0;
+    padding: 0.5rem 0;
     text-align: center;
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 1) 100%);
-    min-height: 120dvh;
-    min-height: 120vh;
+    min-height: 105dvh;
+    min-height: 105vh;
 }
 
 #portfolio h2 {
@@ -844,7 +846,11 @@ footer {
     color: #fff;
 }
 
-@media (max-width: 440px){
+@media (max-width: 500px){
+    #header, #about, #skills, #portfolio, #contact {
+        min-height: 120dvh;
+        min-height: 120vh;
+    }
     #about p{
         font-size: 1.2rem;
         padding: 0rem 1rem;
@@ -853,7 +859,7 @@ footer {
         padding: 0rem 1rem;
     }
     #contact .btn {
-        padding: 1rem;
+        padding: 1rem
     }
     .header__content .btn {
         padding: 0.5rem 1rem;
@@ -894,6 +900,14 @@ footer {
 }
 
 @media (min-width: 700px) and (max-width: 900px) {
+    #header,
+        #about,
+        #skills,
+        #portfolio,
+        #contact {
+            min-height: 115dvh;
+            min-height: 115vh;
+        }
     #about p{
         font-size: 1.5rem;
         padding: 0.5rem 3.5rem;
