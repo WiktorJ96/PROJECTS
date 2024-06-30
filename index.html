@@ -32,9 +32,13 @@
     </script>
 </head>
 <style>
+:root {
+    --vh: 1vh;
+    --footer-height: 50px;
+}
+
 #header, #about, #skills, #portfolio, #contact {
-    min-height: calc(var(--vh, 1vh) * 100);
-    overflow-y: auto;
+    min-height: calc((var(--vh, 1vh) * 100) - var(--footer-height));
 }
 </style>
 <body data-page="index">
@@ -79,8 +83,9 @@
         </nav>
     </div>
 
-    <section id="header">
+    
     <header>
+        <section id="header">
         <div class="container">
             <div class="row">
                 <div class="header__top">
@@ -96,6 +101,8 @@
                         </div>
                     </div>
                 </div>
+
+                
             </div>
             
 
@@ -111,8 +118,9 @@
                 <a class="scroll" href="#about"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
             </div>
         </div>
+        </section>
     </header>
-    </section>
+    
 
     <main id="main-content">
         <section id="about">
@@ -353,18 +361,15 @@
 
     <script src="./translations/translate.js"></script>
     <script>
-        function setFullHeight() {
-                const sections = document.querySelectorAll('#header, #about, #skills, #portfolio, #contact');
-                const vh = window.innerHeight * 0.01;
+        function setVH() {
+                let vh = window.innerHeight * 0.01;
+                let footerHeight = document.querySelector('footer').offsetHeight;
                 document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-                sections.forEach(section => {
-                    section.style.minHeight = `calc(var(--vh, 1vh) * 100)`;
-                });
+                document.documentElement.style.setProperty('--footer-height', `${footerHeight}px`);
             }
 
-            window.addEventListener('resize', setFullHeight);
-            setFullHeight();
+            setVH();
+            window.addEventListener('resize', setVH);
     </script>
  <script>
     function fetchTranslations(lang, page) {
