@@ -1,5 +1,5 @@
 {
-    "title": "Projekty JavaScript, HTML, CSS",
+    "title_js": "Projekty JavaScript, HTML, CSS",
     "form": "Formularz",
     "form_desc": "Responsywny formularz z walidacją.",
     "notebook": "Notatnik",
@@ -15,5 +15,9 @@
     "wallet_h3": "Portfel",
     "wallet_desc": "Responsywny portfel z wykresem wydatków i opcja zmiany motywu.",
     "todo_h3": "TODO Lista",
-    "todo_desc": "Responsywna TODO lista z opcją zapisywania tasków w pliku PDF."
+    "todo_desc": "Responsywna TODO lista z opcją zapisywania tasków w pliku PDF.",
+
+    "Dashboard": "Dashboard",
+    "Dashboard_desc": "Minimalistyczny Dashboard z wykresem",
+    "title_figma": "Projekty Figma"
 }
