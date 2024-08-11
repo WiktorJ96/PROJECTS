@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="page_title">Umiejętności Figma</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./skills.css">
+    <style>
+        .figma-logo {
+            display: block;
+            margin: 0 auto;
+            max-width: 60px;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<div class="language-switch">
+    <button id="lang-pl">PL</button>
+    <button id="lang-en">EN</button>
+</div>
+<body class="bg-light" data-page="figma">
+
+    <div class="loader" id="loader"></div>
+
+    <div class="container py-5">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma Logo"
+            class="figma-logo mb-4">
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-desktop skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="figma_basics_title">Podstawy Figmy:</h5>
+                        <p class="card-text" data-lang-key="figma_basics_desc">Znajomość interfejsu i narzędzi Figmy</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-palette skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="color_management_title">Zarządzanie kolorami:</h5>
+                        <p class="card-text" data-lang-key="color_management_desc">Tworzenie biblioteki kolorów, dobieranie kolorów głównych, dopełniających, odcieni i gradientów</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-warning"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-lang-key="difficulty_medium" title="Średni"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-font skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="typography_title">Typografia:</h5>
+                        <p class="card-text" data-lang-key="typography_desc">Tworzenie biblioteki fontów, wykorzystanie Google Fonts, funkcje związane z tekstem w Figmie</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-warning"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-lang-key="difficulty_medium" title="Średni"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-image skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="image_handling_title">Praca z obrazami:</h5>
+                        <p class="card-text" data-lang-key="image_handling_desc">Importowanie i kadrowanie zdjęć, usuwanie tła, tworzenie efektów, maskowanie, praca z ikonami</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-warning"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-lang-key="difficulty_medium" title="Średni"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-th skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="layout_design_title">Projektowanie layoutów:</h5>
+                        <p class="card-text" data-lang-key="layout_design_desc">Wykorzystanie siatki (grid) w projektowaniu, tworzenie Key Visual dla kampanii</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-danger"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-lang-key="difficulty_hard" title="Trudny"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-mobile-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="responsive_design_title">Projektowanie responsywne:</h5>
+                        <p class="card-text" data-lang-key="responsive_design_desc">Tworzenie grafik dla różnych formatów (Instagram, Facebook, LinkedIn, reklamy Google)</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-danger"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-lang-key="difficulty_hard" title="Trudny"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-paint-brush skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="advanced_techniques_title">Zaawansowane techniki:</h5>
+                        <p class="card-text" data-lang-key="advanced_techniques_desc">Tworzenie spójnych kampanii reklamowych, implementacja CTA (Call to Action) w projektach</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-danger"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-lang-key="difficulty_hard" title="Trudny"></i></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="../translations/translate2.js"></script>
+</body>
+
+</html>
