@@ -4,7 +4,7 @@
      animation: fadeIn 1s ease-in-out;
      overflow-x: hidden;
      margin-top: -25px;
-     overflow: hidden;
+     overflow: auto;
      height: 100vh;
  }
 
