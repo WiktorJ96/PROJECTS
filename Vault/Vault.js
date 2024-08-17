@@ -257,7 +257,7 @@ const checkCategory = transaction => {
             categoryIcon = '<i class="fas fa-film"></i>';
             break;
         default:
-            categoryIcon = '<i class="fas fa-question-circle"></i>'; // default icon if category is not matched
+            categoryIcon = '<i class="fas fa-question-circle"></i>'; 
             break;
     }
 };
@@ -371,9 +371,9 @@ const createNewTransaction = () => {
     });
 
     lightBtn.addEventListener('click', () => {
-        root.style.setProperty('--first-color', '#F9F9F9');
-        root.style.setProperty('--second-color', '#14161F');
-        root.style.setProperty('--border-color', '0, 0, 0, .2');
+        root.style.setProperty('--first-color', '#F5F7FA');
+        root.style.setProperty('--second-color', '##1E2A3A');
+        root.style.setProperty('--border-color', 'rgba(0, 0, 0, 0.15)');
 
         balanceChart.options.plugins.title.color = '#333';
         balanceChart.options.scales.x.title.color = '#333';

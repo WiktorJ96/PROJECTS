@@ -7,13 +7,13 @@
 }
 
 :root {
-    --first-color: #F9F9F9;
-    --second-color: #222;
-    --border-color: rgba(0, 0, 0, .2);
-    --income-color: rgba(19, 200, 109, 0.95);
-    --expense-color: rgba(255, 104, 104, 0.95);
-    --button-bg: #4c4177;
-    --button-hover-bg: #2a5470;
+    --first-color: #F5F7FA;
+    --second-color: #1E2A3A;
+    --border-color: rgba(0, 0, 0, 0.15);
+    --income-color: rgba(16, 185, 129, 0.95);
+    --expense-color: rgba(239, 68, 68, 0.95);
+    --button-bg: hsla(243, 52%, 46%, 0.85);
+    --button-hover-bg: hsla(245, 55%, 43%, 0.925);
 }
 
 body {
@@ -288,32 +288,38 @@ h2.title {
 
 .color-buttons {
     display: flex;
-    gap: 20px;
+    gap: 30px;
+    padding: 20px;
+    justify-content: center;
 }
 
 .color-buttons button {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     cursor: pointer;
-    transition: transform .3s;
+    transition: all 0.3s ease;
     border: none;
+    outline: none;
 }
 
 .color-buttons button:hover {
-    transform: scale(0.9);
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.color-buttons button:active {
+    transform: scale(0.95);
 }
 
 .color-buttons .light {
-    background: #F9F9F9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid black;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow: 5px 5px 10px #d9d9d9, -5px -5px 10px rgba(255, 255, 255, 0.6);
 }
 
 .color-buttons .dark {
-    background: #14161F;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid white;
+    background: linear-gradient(145deg, #1a1d29, #16181f);
+    box-shadow: 5px 5px 10px #0f1015, -5px -5px 10px hsla(229, 24%, 13%, 0.6);
 }
 
 .add-transaction-panel {
