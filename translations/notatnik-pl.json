@@ -1,8 +1,8 @@
 {
-    "title": "Notatnik - Zarządzaj swoimi notatkami",
-    "meta_description": "MyNotes - Twój osobisty notatnik. Zarządzaj notatkami, planuj zadania i organizuj swoje życie.",
+    "title": "ThoughtSpace",
+    "meta_description": "ThoughtSpace - Twój osobisty notatnik. Zarządzaj notatkami, planuj zadania i organizuj swoje życie.",
     "meta_keywords": "notatnik, zarządzanie notatkami, planowanie, organizacja, zadania",
-    "h1": "MyNotes",
+    "h1": "ThoughtSpace",
     "search_placeholder": "Szukaj notatek...",
     "category_filter_label": "Filtruj według kategorii",
     "category_filter_all": "Wszystkie",

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="ThoughtSpace - Twój osobisty notatnik. Zarządzaj notatkami, planuj zadania i organizuj swoje życie."
+        data-lang-key="meta_description">
+    <meta name="keywords" content="notatnik, zarządzanie notatkami, planowanie, organizacja, zadania"
+        data-lang-key="meta_keywords">
+    <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/">
+    <title data-lang-key="title">ThoughtSpace</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
+    <link rel="stylesheet" href="notatnik.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "ThoughtSpace",
+      "description": "MyNotes - Twój osobisty notatnik. Zarządzaj notatkami, planuj zadania i organizuj swoje życie.",
+      "url": "https://wiktorj96.github.io/PROJECTS/"
+    }
+    </script>
+</head>
+
+<body data-page="notatnik">
+    <header>
+        <nav role="navigation">
+            <div id="search-section" class="menu">
+                <h1><i class="fas fa-sticky-note" aria-hidden="true"></i> <span data-lang-key="h1">ThoughtSpace</span></h1>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <input type="text" id="search" placeholder="Szukaj notatek..." aria-label="Szukaj notatek"
+                        data-placeholder-key="search_placeholder">
+                </div>
+                <div class="filter-container">
+                    <label for="category-filter" data-lang-key="category_filter_label">Filtruj według kategorii</label>
+                    <select id="category-filter">
+                        <option value="all" data-lang-key="category_filter_all">Wszystkie</option>
+                        <option value="Zakupy" data-lang-key="category_filter_zakupy">Zakupy</option>
+                        <option value="Praca" data-lang-key="category_filter_praca">Praca</option>
+                        <option value="Plany" data-lang-key="category_filter_plany">Plany</option>
+                        <option value="Siłownia" data-lang-key="category_filter_silownia">Siłownia</option>
+                        <option value="Inne" data-lang-key="category_filter_inne">Inne</option>
+                    </select>
+                </div>
+                <div class="menu-buttons">
+                    <button class="add icon" aria-label="Dodaj notatkę"><i class="fas fa-plus" aria-hidden="true"></i>
+                        <span data-lang-key="add_note_button">Dodaj</span></button>
+                    <button class="delete-all icon" aria-label="Usuń wszystkie notatki"><i class="fas fa-trash-alt"
+                            aria-hidden="true"></i> <span data-lang-key="delete_all_button">Usuń
+                            wszystkie</span></button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="notes-section" class="note-area" aria-label="Sekcja notatek">
+        </section>
+
+        <section id="add-note-section" class="note-panel" aria-labelledby="add-note-heading">
+            <h2 id="add-note-heading" data-lang-key="add_note_heading">Dodaj notatkę</h2>
+            <label for="title" data-lang-key="title_label">Wpisz tytuł notatki</label>
+            <input type="text" id="title" placeholder="Wpisz tytuł" data-placeholder-lang-key="title_placeholder">
+
+            <label for="category" data-lang-key="category_label">Wybierz kategorię</label>
+            <select id="category">
+                <option value="Inne" data-lang-key="category_filter_inne">Inne</option>
+                <option value="Zakupy" data-lang-key="category_filter_zakupy">Zakupy</option>
+                <option value="Praca" data-lang-key="category_filter_praca">Praca</option>
+                <option value="Plany" data-lang-key="category_filter_plany">Plany</option>
+                <option value="Siłownia" data-lang-key="category_filter_silownia">Siłownia</option>
+            </select>
+
+            <label for="color" data-lang-key="color_label">Wybierz kolor notatki</label>
+            <div id="color-picker" class="color-picker">
+                <button class="color-option" data-color="Kolor1"
+                    style="background: linear-gradient(135deg, #ffecd2, #fcb69f);" aria-label="Kolor 1"></button>
+                <button class="color-option" data-color="Kolor2"
+                    style="background: linear-gradient(135deg, #d4fc79, #96e6a1);" aria-label="Kolor 2"></button>
+                <button class="color-option" data-color="Kolor3"
+                    style="background: linear-gradient(135deg, #cfd9df, #e2ebf0);" aria-label="Kolor 3"></button>
+                <button class="color-option" data-color="Kolor4"
+                    style="background: linear-gradient(135deg, #f3e7e9, #e3eeff);" aria-label="Kolor 4"></button>
+                <button class="color-option" data-color="Kolor5"
+                    style="background: linear-gradient(135deg, #fbc2eb, #a6c1ee);" aria-label="Kolor 5"></button>
+            </div>
+
+            <label for="editor" data-lang-key="content_label">Wpisz treść notatki</label>
+            <div id="editor" style="height: 200px; background-color: white;"></div>
+
+            <p class="error" aria-live="polite" data-lang-key="error_message">Uzupełnij wszystkie pola!</p>
+
+            <div class="panel-buttons">
+                <button class="save icon" aria-label="Zapisz notatkę"><i class="fas fa-save" aria-hidden="true"></i>
+                    <span data-lang-key="save_button">Zapisz</span></button>
+                <button class="cancel icon" aria-label="Anuluj notatkę"><i class="far fa-window-close"
+                        aria-hidden="true"></i> <span data-lang-key="cancel_button">Anuluj</span></button>
+            </div>
+        </section>
+
+        <div id="confirm-modal" class="modal" role="dialog" aria-labelledby="confirm-modal-heading">
+            <div class="modal-content">
+                <h2 id="confirm-modal-heading" data-lang-key="confirm_heading">Potwierdzenie</h2>
+                <p data-lang-key="confirm_message">Czy na pewno chcesz usunąć tę notatkę?</p>
+                <button id="confirm-yes" class="confirm-btn" data-lang-key="confirm_yes">Tak</button>
+                <button id="confirm-no" class="confirm-btn" data-lang-key="confirm_no">Nie</button>
+            </div>
+        </div>
+
+        <div id="confirm-all-modal" class="modal" role="dialog" aria-labelledby="confirm-all-modal-heading">
+            <div class="modal-content">
+                <h2 id="confirm-all-modal-heading" data-lang-key="confirm_all_heading">Potwierdzenie</h2>
+                <p data-lang-key="confirm_all_message">Czy na pewno chcesz usunąć wszystkie notatki?</p>
+                <button id="confirm-all-yes" class="confirm-btn" data-lang-key="confirm_yes">Tak</button>
+                <button id="confirm-all-no" class="confirm-btn" data-lang-key="confirm_no">Nie</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="language-switch">
+            <button id="lang-pl">PL</button>
+            <button id="lang-en">EN</button>
+        </div>
+        <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="ThoughtSpace.js"></script>
+    <script src="../translations/translate2.js"></script>
+</body>
+</html>

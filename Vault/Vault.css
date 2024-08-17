@@ -61,19 +61,23 @@ header h1 {
     color: var(--second-color);
 }
 
-header span {
-    color: #c2880d;
-    font-size: 68px;
-}
-
 header p {
     font-size: 24px;
     font-weight: 400;
     color: var(--second-color);
 }
 
-header i {
-    color: #bd8815;
+.gradient-icon {
+    background: linear-gradient(135deg, #FFD700, #B22222); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 68px;
+}
+.gradient-text {
+    background: linear-gradient(135deg, #FFD700, #B22222);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 68px;
 }
 
 hr {

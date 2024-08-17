@@ -1,0 +1,26 @@
+"PL"
+
+Aplikacja posiada wszystkie potrzebne funkcje do zadowalającego korzystania z notatnika takie jak, filtr notatek, wyszukiwarka, Quill (edytor tekstowy) oraz inne podstawowe funkcje niezbędne dla notatnika. Notatki mogą być zapisywane w pliku .json po odpowiedniej konfiguracji opisanej poniżej.
+
+
+Projekt zawiera prosty notatnik który umożliwia zapisywanie notatek w pliku .json na dysku.
+Instrukcja:
+1. stwórz folder note-app
+2. zainicijum w nim nowy projekt za pomoca 'npm init -y'
+3. zainstaluj pakiety za pomoca 'npm install express body-parser'
+4. wklej do folderu note-app plik server.js dostepny w folderze NOTATNIK
+5. uruchom server za pomoca CMD wpisujac komende 'node server.js'
+
+
+
+"EN"
+
+The application has all the necessary functions for satisfactory use of the notebook, such as a note filter, search engine, Quill (text editor) and other basic functions necessary for a notebook. Notes can be saved in a .json file after appropriate configuration described below.
+
+The project includes a simple notebook that allows you to save notes in a .json file on disk.
+Instruction:
+1. create a note-app folder
+2. initialize a new project using npm init -y
+3. install the packages with npm install express body-parser
+4. paste the server.js file into the note-app folder
+

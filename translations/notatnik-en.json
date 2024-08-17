@@ -1,8 +1,8 @@
 {
-    "title": "Notebook - Manage Your Notes",
-    "meta_description": "MyNotes - Your personal notebook. Manage notes, plan tasks, and organize your life.",
+    "title": "ThoughtSpace",
+    "meta_description": "ThoughtSpace - Your personal notebook. Manage notes, plan tasks, and organize your life.",
     "meta_keywords": "notebook, note management, planning, organization, tasks",
-    "h1": "MyNotes",
+    "h1": "ThoughtSpace",
     "search_placeholder": "Search notes...",
     "category_filter_label": "Filter by category",
     "category_filter_all": "All",
