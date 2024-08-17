@@ -17,5 +17,5 @@
   "async_title": "Asynchronous Programming:",
   "async_desc": "callbacks, promises, async/await, fetch API",
   "practical_skills_title": "Practical Design Skills:",
-  "practical_skills_desc": "DOM manipulation, event handling, creating interactive page elements, working with LocalStorage, game development, form validation, working with Canvas"
+  "practical_skills_desc": "creating interactive page elements, working with LocalStorage, game development, form validation, working with Canvas"
 }

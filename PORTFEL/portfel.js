@@ -22,9 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let moneyArr = [0];
     let transactions = [];
     let balanceHistory = [];
-    let currencyCode = 'USD';  // ISO 4217 currency code
-    let currencySymbol = '$';  // Currency symbol
-
+    let currencyCode = 'USD';  
+    let currencySymbol = '$';  
     window.selectCategory = () => {
         selectedCategory = categorySelect.options[categorySelect.selectedIndex].text;
     };
@@ -269,10 +268,10 @@ const createNewTransaction = () => {
     newTransaction.classList.add('transaction');
     newTransaction.setAttribute('id', ID);
 
-    selectCategory(); // Ensure selectedCategory is set
-    console.log("Selected Category:", selectedCategory); // Debugging
-    checkCategory(selectedCategory); // Set categoryIcon based on selectedCategory
-    console.log("Category Icon:", categoryIcon); // Debugging
+    selectCategory();
+    console.log("Selected Category:", selectedCategory); 
+    checkCategory(selectedCategory); 
+    console.log("Category Icon:", categoryIcon);
 
     newTransaction.innerHTML = `                   
         <p class="transaction-name">${categoryIcon} ${nameInput.value}</p>

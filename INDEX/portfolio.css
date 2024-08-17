@@ -213,7 +213,7 @@ h2 {
     position: fixed;
     left: 0;
     top: 0;
-    height: 100vh;
+    height: 200vh;
     width: 250px;
     transform: translateX(-100%);
     visibility: hidden;
@@ -872,6 +872,109 @@ footer {
     text-align: center;
     color: #fff;
 }
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-slideInFromRight {
+    animation: slideInFromRight 1.5s ease-out forwards;
+    opacity: 1;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+@keyframes slideInFromTop {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-slideInFromTop {
+    animation: slideInFromTop 0.8s ease-out forwards;
+    opacity: 1;
+}
+
+.hidden {
+    opacity: 0;
+}
+    #portfolio_figma {
+        padding: 0.5rem 0;
+        text-align: center;
+        background: linear-gradient(45deg, #ffffff, #f2f2f2, #ffffff);
+        min-height: 100vh;
+    }
+
+    #portfolio_figma h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .portfolio_figma__projects {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .icon-container {
+        display: inline-block;
+        margin: 0 15px;
+    }
+
+    .iconFigma {
+        width: 46px;
+    }
+
+    #portfolioJS_HTML_CSS {
+        padding: 0.5rem 0;
+        text-align: center;
+        background: linear-gradient(45deg, #ffffff, #f2f2f2, #ffffff);
+        min-height: 100vh;
+    }
+
+    #portfolioJS_HTML_CSS h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .portfolioJS_HTML_CSS__projects {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .icon-container {
+        display: inline-block;
+        margin: 0 15px;
+    }
+
+    .iconJS_HTML_CSS {
+        font-size: 80px;
+         filter: grayscale(8%);
+    }
+    .language-switch_portfolio {
+        display: none;
+    }
+    @media (max-width: 440px) {
+        body {
+            overflow-x: hidden;
+        }
+    }
 
 @media (max-width: 500px){
     #header, #about, #skills, #portfolio, #contact {

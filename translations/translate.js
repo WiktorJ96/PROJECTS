@@ -1,13 +1,18 @@
-/*
+
 function fetchTranslations(lang, page) {
-    return fetch(`/translations/${page}-${lang}.json`)
+    return fetch(`./translations/${page}-${lang}.json`)
         .then(response => response.json())
         .catch(error => {
-            console.error(`Error loading translations for ${lang}:`, error);
             return {};
         });
 }
-*/
+        function fetchTranslations(lang, page) {
+                return fetch(`../translations/${page}-${lang}.json`)
+                    .then(response => response.json())
+                    .catch(error => {
+                        return {};
+                    });
+            }
 
 function setLanguage(lang) {
     localStorage.setItem('preferredLanguage', lang);

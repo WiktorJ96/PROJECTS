@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,106 +25,34 @@
     }
     </script>
 </head>
-<style>
-@keyframes slideInFromRight {
-    0% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-.animate-slideInFromRight {
-    animation: slideInFromRight 1.5s ease-out forwards;
-    opacity: 1;
-}
-
-.hidden {
-    opacity: 0;
-}
-
-@keyframes slideInFromTop {
-    0% {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.animate-slideInFromTop {
-    animation: slideInFromTop 0.8s ease-out forwards;
-    opacity: 1;
-}
-
-.hidden {
-    opacity: 0;
-}
-
-
-    #portfolio {
-        padding: 0.5rem 0;
-        text-align: center;
-        background: linear-gradient(45deg, #ffffff, #f2f2f2, #ffffff);
-        min-height: 100vh;
-    }
-
-    #portfolio h2 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .portfolio__projects {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 2rem;
-    }
-
-    .icon-container {
-        display: inline-block;
-        margin: 0 15px;
-    }
-
-    .iconP {
-        font-size: 80px;
-    }
-    .language-switch {
-        display: none;
-    }
-    @media (max-width: 440px) {
-        body {
-            overflow-x: hidden;
-        }
-    }
-</style>
-
 <body data-page="subpage">
-    <section id="portfolio">
-        <div class="language-switch">
+    <main id="portfolioJS_HTML_CSS">
+
+        <nav>
+        <div class="language-switch_portfolio">
             <button id="lang-pl" aria-label="Zmień język na polski">PL</button>
             <button id="lang-en" aria-label="Change language to English">EN</button>
         </div>
-        <h2 data-lang-key="header">
-            <div class="icon-container">
-                <i class="fab fa-js-square iconP" style="color:#f0db4f;"></i>
-            </div>
-            <div class="icon-container">
-                <i class="fab fa-html5 iconP" style="color:#e34c26;"></i>
-            </div>
-            <div class="icon-container">
-                <i class="fab fa-css3-alt iconP" style="color:#264de4;"></i>
-            </div>
-        </h2>
-        <hr>
+        </nav>
 
+        <section>
+        <h1 data-lang-key="header">
+            <div class="icon-container">
+                <i class="fab fa-js-square iconJS_HTML_CSS" style="color:#f0db4f;" aria-hidden="true"></i>
+            </div>
+            <div class="icon-container">
+                <i class="fab fa-html5 iconJS_HTML_CSS" style="color:#e34c26;" aria-hidden="true"></i>
+            </div>
+            <div class="icon-container">
+                <i class="fab fa-css3-alt iconJS_HTML_CSS" style="color:#264de4;" aria-hidden="true"></i>
+            </div>
+        </h1>
+        <hr>
+        </section>
+
+        <section>
         <div class="container">
-            <div class="portfolio__projects row">
+            <div class="portfolioJS_HTML_CSS__projects row">
                 <div class="col-lg-4 col-md-6">
                     <div class="flip-card">
                         <div class="flip-card-inner">
@@ -291,53 +218,10 @@
 
             </div>
         </div>
-    </section>
+        </section> 
+    </main>
     <script src="../translations/translate.js"></script>
-    <script>
-        function fetchTranslations(lang, page) {
-                return fetch(`../translations/${page}-${lang}.json`)
-                    .then(response => response.json())
-                    .catch(error => {
-                        console.error(`Error loading translations for ${lang}:`, error);
-                        return {};
-                    });
-            }
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-                const observerOptions = { threshold: 0.1 };
-
-                const animateOnScroll = (entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add(entry.target.dataset.animationClass);
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                };
-
-                const observer = new IntersectionObserver(animateOnScroll, observerOptions);
-
-            
-                const headerIcons = document.querySelectorAll('h2[data-lang-key="header"] .icon-container');
-                headerIcons.forEach((icon, index) => {
-                    icon.classList.add('hidden');
-                    icon.dataset.animationClass = 'animate-slideInFromTop';
-                    icon.style.animationDelay = `${index * 0.2}s`;
-                    observer.observe(icon);
-                });
-
-                
-                const portfolioCards = document.querySelectorAll('.portfolio__projects .flip-card');
-                portfolioCards.forEach((card, index) => {
-                    card.classList.add('hidden');
-                    card.dataset.animationClass = 'animate-slideInFromRight';
-                    card.style.animationDelay = `${index * 0.2}s`;
-                    observer.observe(card);
-                });
-            });
-
-    </script>
+    <script src="portfolio.js"></script>
 </body>
 
 </html>
