@@ -22,7 +22,129 @@ body {
     flex-direction: column;
     color: var(--deep-dark);
     font-family: 'Poppins', sans-serif;
+    
 }
+
+.animate-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+.header {
+            padding: 40px;
+            border-radius: 5px 5px 0 0;
+            background-image: linear-gradient(135deg, #09a1f9 0%, #0d47a1 100%);
+            box-shadow: 0 5px 15px rgba(9, 161, 249, 0.3);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .chorelyIcon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+            border-radius: 50%;
+            font-size: 28px;
+            color: #ffffff;
+            box-shadow: 
+                0 4px 15px rgba(9, 161, 249, 0.3),
+                inset 0 2px 5px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 5px rgba(9, 161, 249, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.18);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: morphBackground 10s infinite, floating 3s ease-in-out infinite;
+        }
+
+        .chorelyIcon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: rotate 6s linear infinite;
+        }
+
+        .chorelyIcon::after {
+            content: '\f00c'; 
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chorely {
+            font-size: 35px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-left: 15px;
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.1),
+                0 0 5px rgba(255, 255, 255, 0.3); 
+            transition: all 0.3s ease;
+        }
+
+        @keyframes morphBackground {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+            75% { border-radius: 40% 60% 30% 70% / 70% 30% 60% 40%; }
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
 h1 {
     margin-bottom: 20px;
@@ -47,12 +169,6 @@ h1 {
     display: flex;
     flex-direction: column;
     align-self: center;
-}
-
-.header {
-    padding: 40px;
-    border-radius: 5px 5px 0 0;
-    background-image: linear-gradient(340deg, #e9bf04c7 0%, #09a1f9d4 90%);
 }
 
 .todo-input {
@@ -151,7 +267,7 @@ h1 {
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: linear-gradient(340deg, #e9bf04c7 0%, #09a1f9d4 90%);
+    background-image: linear-gradient(135deg, #09a1f9 0%, #0d47a1 100%);
     z-index: -1;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
@@ -340,17 +456,21 @@ h1 {
 }
 
 footer {    
-    width: max-content;
-    color: #222;
+    width: 950px;
+    width: 100%;
+    color: whitesmoke;
     padding: 10px 20px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
     bottom: 0;
-    width: 100%;
+    width: 62.5%;
+    background-image: linear-gradient(135deg, #09a1f9 0%, #0d47a1 100%);
+    border-radius: 8px;
 }
 footer p {
     width: 100%;
+    width: 950px;
     text-align: center;
 }
 
@@ -419,7 +539,7 @@ footer p {
 
 @media (max-width: 480px) {
     .todo{
-        width: 90%;
+        width: 99%;
     }
     .task-text {
             width: calc(200%);
@@ -480,7 +600,8 @@ footer p {
         margin: 10px;
     }
     footer{
+        width: min-content;
         margin: 0 auto;
-        padding: 1rem;
+        padding: 0.8rem;
 }
 }

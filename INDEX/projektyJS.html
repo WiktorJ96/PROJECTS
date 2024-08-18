@@ -25,6 +25,95 @@
     }
     </script>
 </head>
+<style>
+    /* napisy w flipcard */
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 22px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .chorelyIcon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+            border-radius: 50%;
+            font-size: 14px;
+            color: #ffffff;
+            box-shadow: 
+                0 4px 15px rgba(9, 161, 249, 0.3),
+                inset 0 2px 5px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 5px rgba(9, 161, 249, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.18);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: morphBackground 10s infinite, floating 3s ease-in-out infinite;
+        }
+
+        .chorelyIcon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: rotate 6s linear infinite;
+        }
+
+        .chorelyIcon::after {
+            content: '\f00c'; 
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chorely {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-left: 15px;
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.1),
+                0 0 5px rgba(255, 255, 255, 0.3); 
+            transition: all 0.3s ease;
+        }
+
+        @keyframes morphBackground {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+            75% { border-radius: 40% 60% 30% 70% / 70% 30% 60% 40%; }
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 <body data-page="subpage">
     <main id="portfolioJS_HTML_CSS">
 
@@ -201,16 +290,19 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <figure>
-                                    <img src="../imghoney/todolista.png" style="margin-top: 6rem; filter: grayscale(20%);"
+                                    <img src="../imghoney/Chorely.png" style="filter: grayscale(20%);"
                                         alt="Zdjęcie projektu TODO Lista">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
-                                <h3 data-lang-key="todo_h3">TODO Lista</h3>
-                                <p data-lang-key="todo_desc">Responsywna TODO lista z opcją zapisywania tasków w pliku PDF.</p>
-                                <a href="../TODO/todo.html" class="specific-icon-link">
-                                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                </a>
+                                <div class="logo-container">
+                            <div class="chorelyIcon"></div>
+                            <span class="chorely">Chorely</span>
+                            </div>
+                            <p data-lang-key="todo_desc">Responsywna TODO lista z opcją zapisywania tasków w pliku PDF.</p>
+                            <a href="../Chorely/Chorely.html" class="specific-icon-link">
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
                             </div>
                         </div>
                     </div>
