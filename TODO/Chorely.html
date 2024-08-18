@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title data-lang-key="title">ToDo List</title>
+    <title data-lang-key="title">Chorely</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=latin-ext"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-    <link rel="stylesheet" href="./todo.css">
+    <link rel="stylesheet" href="./Chorely.css">
 </head>
 <body data-page="todo">
 
     <div class="todo">
         <div class="header">
-            <h1 data-lang-key="todo_h3">ToDo List</h1>
+            <h1 data-lang-key="todo_h3"><i class="fas fa-check"></i>CHORELY</h1>
             <input type="text" class="todo-input" placeholder="Wpisz treść zadania..."
                 data-placeholder-key="todoInputPlaceholder">
             <button class="add-btn" data-lang-key="addBtn">Dodaj</button>
@@ -25,7 +25,7 @@
         <div class="todo-list">
             <h3 data-lang-key="todoListTitle">Lista zadań:</h3>
             <p class="alert-info" data-lang-key="alertInfoNoTasks">Brak zadań na liście.</p>
-            <button class="save-btn" data-lang-key="saveBtn">Zapisz taski w PDF</button>
+            <button class="save-btn"><span class="btn-display" data-lang-key="saveBtn1">Zapisz w PDF</span><span class="btn-displaynone" data-lang-key="saveBtn2">✓ Zapisz</span></button>
             <ul>
             </ul>
         </div>
@@ -50,8 +50,8 @@
         <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
     </footer>
     
-    <script src="todo.js" defer></script>
-    <script src="/translations/translate2.js"></script>
+    <script src="Chorely.js" defer></script>
+    <script src="../translations/translate2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </body>

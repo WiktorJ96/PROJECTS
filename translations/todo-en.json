@@ -1,5 +1,5 @@
 {
-  "title": "ToDo List",
+  "title": "CHORELY",
   "todoInputPlaceholder": "Enter task content...",
   "addBtn": "Add",
   "todoListTitle": "Task List:",
@@ -10,7 +10,8 @@
   "popupCancelBtn": "Cancel",
   "alertInfoEmptyTask": "Enter task content.",
   "popupInfoEmptyTask": "You must provide some content",
-  "todo_h3": "TODO List",
+  "todo_h3": "<i class='fas fa-check'></i>CHORELY",
   "footer": "2024 W.J Project. All rights reserved.",
-  "saveBtn": "Save tasks in PDF"
+  "saveBtn1": "Save tasks in PDF",
+  "saveBtn2": "✓ Save"
 }

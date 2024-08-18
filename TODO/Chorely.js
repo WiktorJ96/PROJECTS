@@ -12,6 +12,11 @@ let $editedTodo;
 let $popupInput;
 let $addPopupBtn;
 let $closeTodoBtn;
+const saveButton = document.querySelector('.save-btn');
+    const btnDisplay = saveButton.querySelector('.btn-display');
+    const btnDisplayNone = saveButton.querySelector('.btn-displaynone');
+    let timeoutId;
+    let isHovered = false;
 
 const translations = {
     en: {
@@ -224,6 +229,36 @@ const updateTaskNumbers = () => {
     });
 }
 
+function showHoverState() {
+        btnDisplay.style.display = 'none';
+        btnDisplayNone.style.display = 'inline';
+    }
+
+    function showNormalState() {
+        btnDisplay.style.display = 'inline';
+        btnDisplayNone.style.display = 'none';
+    }
+
+    saveButton.addEventListener('mouseenter', function() {
+        isHovered = true;
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            if (isHovered) {
+                showHoverState();
+            }
+        }, 100);
+    });
+
+    saveButton.addEventListener('mouseleave', function() {
+        isHovered = false;
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            if (!isHovered) {
+                showNormalState();
+            }
+        }, 300); 
+    });
+
 const saveTasksToPDF = () => {
     const { jsPDF } = window.jspdf;
 
@@ -232,13 +267,12 @@ const saveTasksToPDF = () => {
     const tasks = Array.from($ulList.getElementsByTagName('li')).map(task => task.firstChild.textContent);
 
     doc.setFontSize(18);
-    doc.text("Lista tasków:", 10, 10);
     doc.setFontSize(12);
 
     const taskData = tasks.map(task => [task]); 
 
     doc.autoTable({
-        head: [['Tasks:']],
+        head: [['Zadania/Tasks:']],
         body: taskData,
         startY: 20,
         margin: { left: 10, right: 10 },
