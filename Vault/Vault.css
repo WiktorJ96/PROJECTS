@@ -314,12 +314,12 @@ h2.title {
 
 .color-buttons .light {
     background: linear-gradient(145deg, #ffffff, #e6e6e6);
-    box-shadow: 5px 5px 10px #d9d9d9, -5px -5px 10px rgba(255, 255, 255, 0.6);
+    box-shadow: 5px 5px 10px hwb(0 85% 15% / 0.2), -5px -5px 10px rgba(255, 255, 255, 0.2);
 }
 
 .color-buttons .dark {
     background: linear-gradient(145deg, #1a1d29, #16181f);
-    box-shadow: 5px 5px 10px #0f1015, -5px -5px 10px hsla(229, 24%, 13%, 0.6);
+    box-shadow: 5px 5px 10px hwb(230 6% 92% / 0.2), -5px -5px 10px hsla(229, 24%, 13%, 0.2);
 }
 
 .add-transaction-panel {

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="portfolio.css">
     <title data-lang-key="title_js">Projekty JavaScript, HTML, CSS</title>
 
@@ -28,6 +29,7 @@
 <style>
     /* napisy w flipcard */
 
+    /* CHORELY */
         .logo-container {
             display: flex;
             align-items: center;
@@ -113,6 +115,31 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* VAULT */
+        .gradient-icon {
+    background: linear-gradient(135deg, #FFD700, #B22222); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 68px;
+}
+.gradient-text {
+    background: linear-gradient(135deg, #FFD700, #B22222);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 68px;
+}
+
+.flip-card-back h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 28px;
+}
+
+.flip-card-back .gradient-icon,
+.flip-card-back .gradient-text {
+    font-size: 28px;
+}
     </style>
 <body data-page="subpage">
     <main id="portfolioJS_HTML_CSS">
@@ -142,21 +169,45 @@
         <section>
         <div class="container">
             <div class="portfolioJS_HTML_CSS__projects row">
+
                 <div class="col-lg-4 col-md-6">
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <figure>
-                                    <img src="../imghoney/formularz.png" style="margin-top: 2rem; filter: grayscale(20%);"
-                                        alt="Zdjęcie projektu Formularz">
+                                    <img src="../imghoney/Vault.png" style="filter: grayscale(10%);"
+                                        alt="Zdjęcie projektu Wallet">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
-                                <h3 data-lang-key="form">Formularz</h3>
-                                <p data-lang-key="form_desc">Responsywny formularz z walidacją.</p>
-                                <a href="../FORMULARZ/formularz.html" class="specific-icon-link">
+                                <h1><i class="fas fa-vault gradient-icon" aria-hidden="true"></i> <span class="gradient-text">V</span>ault</h1>
+                                <p data-lang-key="wallet_desc">Responsywny portfel z wykresem salda i opcja zmiany motywu.</p>
+                                <a href="../Vault/Vault.html" class="specific-icon-link">
                                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
                                 </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <figure>
+                                    <img src="../imghoney/Chorely.png" style="filter: grayscale(10%);"
+                                        alt="Zdjęcie projektu TODO Lista">
+                                </figure>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="logo-container">
+                            <div class="chorelyIcon"></div>
+                            <span class="chorely">Chorely</span>
+                            </div>
+                            <p data-lang-key="todo_desc">Responsywna TODO lista z opcją zapisywania tasków w pliku PDF.</p>
+                            <a href="../Chorely/Chorely.html" class="specific-icon-link">
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
                             </div>
                         </div>
                     </div>
@@ -176,6 +227,26 @@
                                 <p data-lang-key="notebook_desc">Responsywny notatnik z opcją zapisywania notatek w
                                     pliku na dysku.</p>
                                 <a href="../ThoughtSpace/ThoughtSpace.html" class="specific-icon-link">
+                                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <figure>
+                                    <img src="../imghoney/formularz.png" style="margin-top: 2rem; filter: grayscale(20%);"
+                                        alt="Zdjęcie projektu Formularz">
+                                </figure>
+                            </div>
+                            <div class="flip-card-back">
+                                <h3 data-lang-key="form">Formularz</h3>
+                                <p data-lang-key="form_desc">Responsywny formularz z walidacją.</p>
+                                <a href="../FORMULARZ/formularz.html" class="specific-icon-link">
                                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -265,48 +336,6 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <figure>
-                                    <img src="../imghoney/wallet.png" style="margin-top: 3rem; filter: grayscale(20%);"
-                                        alt="Zdjęcie projektu Wallet">
-                                </figure>
-                            </div>
-                            <div class="flip-card-back">
-                                <h3 data-lang-key="wallet_h3">Vault</h3>
-                                <p data-lang-key="wallet_desc">Responsywny portfel z wykresem wydatków i opcja zmiany motywu.</p>
-                                <a href="../Vault/Vault.html" class="specific-icon-link">
-                                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <figure>
-                                    <img src="../imghoney/Chorely.png" style="filter: grayscale(20%);"
-                                        alt="Zdjęcie projektu TODO Lista">
-                                </figure>
-                            </div>
-                            <div class="flip-card-back">
-                                <div class="logo-container">
-                            <div class="chorelyIcon"></div>
-                            <span class="chorely">Chorely</span>
-                            </div>
-                            <p data-lang-key="todo_desc">Responsywna TODO lista z opcją zapisywania tasków w pliku PDF.</p>
-                            <a href="../Chorely/Chorely.html" class="specific-icon-link">
-                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                            </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>
