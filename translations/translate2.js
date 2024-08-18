@@ -4,27 +4,27 @@ document.addEventListener('DOMContentLoaded', function () {
         "en": {}
     };
 
-    fetch('pl.json')
-        .then(response => response.json())
-        .then(data => {
-            translations['pl'] = data;
-        });
-
-    fetch('en.json')
-        .then(response => response.json())
-        .then(data => {
-            translations['en'] = data;
-        });
+    function fetchTranslations(lang) {
+        const page = document.body.getAttribute('data-page') || 'wallet';
+        return fetch(`../translations/${page}-${lang}.json`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.error(`Error loading translations for ${lang}:`, error);
+                return {};
+            });
+    }
 
     function loadTranslations(lang) {
-        const page = document.body.getAttribute('data-page');
-        fetch(`../translations/${page}-${lang}.json`)
-            .then(response => response.json())
+        return fetchTranslations(lang)
             .then(data => {
                 translations[lang] = data;
                 translatePage(lang);
-            })
-            .catch(error => console.error(`Error loading translations for ${lang}:`, error));
+            });
     }
 
     function setLanguage(lang) {
@@ -42,25 +42,45 @@ document.addEventListener('DOMContentLoaded', function () {
             const key = element.getAttribute('data-lang-key');
             if (translations[lang][key]) {
                 element.innerHTML = translations[lang][key];
+            } else {
+                console.warn(`Missing translation for key: ${key}`);
+                element.innerHTML = `[${key}]`;
             }
         });
         document.querySelectorAll('[data-placeholder-key]').forEach(element => {
             const key = element.getAttribute('data-placeholder-key');
             if (translations[lang][key]) {
                 element.placeholder = translations[lang][key];
+            } else {
+                console.warn(`Missing placeholder translation for key: ${key}`);
             }
         });
         document.querySelectorAll('select option').forEach(option => {
             const key = option.getAttribute('data-lang-key');
             if (translations[lang][key]) {
                 option.textContent = translations[lang][key];
+            } else if (key) {
+                console.warn(`Missing option translation for key: ${key}`);
+                option.textContent = `[${key}]`;
             }
         });
         document.documentElement.lang = lang;
     }
 
-    document.getElementById('lang-pl').addEventListener('click', () => setLanguage('pl'));
-    document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
+    const langPl = document.getElementById('lang-pl');
+    const langEn = document.getElementById('lang-en');
+
+    if (langPl) {
+        langPl.addEventListener('click', () => setLanguage('pl'));
+    } else {
+        console.warn('Polish language button not found');
+    }
+
+    if (langEn) {
+        langEn.addEventListener('click', () => setLanguage('en'));
+    } else {
+        console.warn('English language button not found');
+    }
 
     loadPreferredLanguage();
 });

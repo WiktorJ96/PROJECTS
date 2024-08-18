@@ -116,6 +116,7 @@ h2.title {
 .transactions {
     width: 100%;
     max-width: 1000px;
+    margin: 0 auto;
 }
 
 .transactions h3 {
@@ -203,7 +204,7 @@ h2.title {
     gap: 20px;
     padding: 20px;
     width: 100%;
-    max-width: 600px;
+    max-width: 580px;
     height: 300px;
     border: 1px solid var(--border-color);
     border-radius: 10px;
@@ -222,7 +223,7 @@ h2.title {
     gap: 20px;
     padding: 40px;
     width: 100%;
-    max-width: 600px;
+    max-width:600px;
     height: 300px;
     border: 1px solid var(--border-color);
     border-radius: 10px;

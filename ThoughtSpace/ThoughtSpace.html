@@ -29,7 +29,101 @@
     </script>
 </head>
 <style>
-    
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to bottom right, #F5F7FA, #E6E9F0);
+    overflow: hidden;
+    animation: fadeInBody 1s ease-in forwards;
+}
+
+@keyframes fadeInBody {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    height: 100px;
+    background: linear-gradient(to right, #F2E8CF, #E6D7B9);
+    color: #4A4A4A;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.menu input[type="text"] {
+    padding: 10px 15px;
+    margin-right: 20px;
+    border-radius: 5px;
+    border: 1px solid #D1C3A3;
+    font-size: 14px;
+    transition: border-color .3s, box-shadow .3s;
+    background-color: #FFFFFF;
+}
+
+.menu input[type="text"]:focus {
+    border-color: #A39171;
+    box-shadow: 0 0 5px rgba(163, 145, 113, 0.1);
+}
+
+.menu button,
+.note-panel .save,
+.note-panel .cancel {
+    padding: 12px 25px;
+    background: linear-gradient(to bottom, #D1C3A3, #BFB393);
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #4A4A4A;
+    cursor: pointer;
+    transition: background-color .3s, color .3s, transform .3s;
+}
+
+.menu button:hover,
+.note-panel .save:hover,
+.note-panel .cancel:hover {
+    background: linear-gradient(to bottom, #C1B393, #AFA383);
+    color: #2A2A2A;
+    transform: translateY(-2px);
+}
+
+/* ... (pozostała część kodu pozostaje bez zmian) ... */
+
+footer {
+    background: linear-gradient(to right, #F2E8CF, #E6D7B9);
+    color: #4A4A4A;
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+    border-radius: 3px;
+    margin-top: auto;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Pozostała część kodu CSS pozostaje bez zmian */
 </style>
 <body data-page="notatnik">
     <header>
