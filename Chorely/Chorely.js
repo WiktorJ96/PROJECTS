@@ -262,11 +262,90 @@ function showHoverState() {
 const saveTasksToPDF = () => {
     const { jsPDF } = window.jspdf;
 
+   
+    const canvas = document.createElement('canvas');
+    const pdfWidth = 210;  
+    const pdfHeight = 297; 
+    const scale = 10;      
+    canvas.width = pdfWidth * scale;
+    canvas.height = pdfHeight * scale;
+    const ctx = canvas.getContext('2d');
+
+    
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.rotate(Math.PI / 4);  
+    ctx.translate(-canvas.width / 2, -canvas.height / 2);
+
+    
+    ctx.globalAlpha = 0.45;
+
+   
+    const logoWidth = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height) * 0.7;
+    const logoHeight = 180 * scale * 0.7;
+    const startX = (canvas.width - logoWidth) / 2;
+    const startY = (canvas.height - logoHeight) / 2;
+
+   
+    const gradient = ctx.createLinearGradient(startX, startY, startX + logoWidth, startY + logoHeight);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.1)');
+    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.2)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(startX, startY, logoWidth, logoHeight);
+
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    
+    const iconSize = 80 * scale * 0.7;
+    const iconOffsetX = iconSize * 0.9; 
+    const iconGradient = ctx.createRadialGradient(
+        centerX - iconOffsetX, centerY, 0,
+        centerX - iconOffsetX, centerY, iconSize / 2
+    );
+    iconGradient.addColorStop(0, 'rgba(9, 161, 249, 0.3)');
+    iconGradient.addColorStop(1, 'rgba(9, 161, 249, 0.2)');
+    
+    ctx.beginPath();
+    ctx.arc(centerX - iconOffsetX, centerY, iconSize / 2, 0, 2 * Math.PI);
+    ctx.fillStyle = iconGradient;
+    ctx.fill();
+
+   
+    ctx.font = `bold ${40 * scale * 0.7}px "Font Awesome 5 Free"`;
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('\uf00c', centerX - iconOffsetX, centerY);
+
+    
+    const textOffsetX = iconSize * 0.7; 
+    ctx.font = `bold ${32 * scale * 0.7}px Arial`;
+    
+    
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+    ctx.shadowBlur = 10 * scale * 0.7;
+    ctx.shadowOffsetX = 2 * scale * 0.7;
+    ctx.shadowOffsetY = 2 * scale * 0.7;
+    
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.fillText('CHORELY', centerX + textOffsetX, centerY);
+
+    
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+
+    
     const doc = new jsPDF();
 
+    
+    const imgData = canvas.toDataURL('image/png');
+    doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+    
     const tasks = Array.from($ulList.getElementsByTagName('li')).map(task => task.firstChild.textContent);
 
-    doc.setFontSize(18);
     doc.setFontSize(12);
 
     const taskData = tasks.map(task => [task]); 
@@ -276,7 +355,11 @@ const saveTasksToPDF = () => {
         body: taskData,
         startY: 20,
         margin: { left: 10, right: 10 },
-        styles: { overflow: 'linebreak' }
+        styles: { overflow: 'linebreak' },
+        theme: 'grid',
+        headStyles: { fillColor: [9, 161, 249], textColor: 255 },
+        bodyStyles: { textColor: 0 },
+        alternateRowStyles: { fillColor: [240, 240, 240] }
     });
 
     doc.save('tasks.pdf');
