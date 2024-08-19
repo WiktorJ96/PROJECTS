@@ -33,13 +33,38 @@ body {
     }
 }
 
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 20px;
+        width: 60%;
+        max-width: 300px; 
+        overflow: visible; 
+    }
+    .logo-svg {
+        width: 100%; 
+        height: auto; 
+    }
+    .logo-text {
+        font-family: 'Arial', sans-serif;
+        font-size: 32px; 
+        font-weight: bold;
+    }
+    .logo-text-thought {
+        fill: #eaeef2;
+    }
+    .logo-text-space {
+        fill: #e2be4a;
+    }
+
 .menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
     height: 100px;
-    background: linear-gradient(to right, #F2E8CF, #E6D7B9);
+    background: linear-gradient(135deg, #222, #1a1a1a);
     color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -62,7 +87,7 @@ body {
 .note-panel .save,
 .note-panel .cancel {
     padding: 12px 25px;
-    background: #444;
+    background-color: rgba(255, 255, 255, 0.1);
     border: none;
     border-radius: 5px;
     font-size: 14px;
@@ -389,7 +414,7 @@ body {
 }
 
 footer {
-    background-color: #333;
+    background: linear-gradient(135deg, #222, #1a1a1a);
     color: #fff;
     padding: 1rem;
     text-align: center;

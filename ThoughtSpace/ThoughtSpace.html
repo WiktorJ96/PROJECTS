@@ -28,134 +28,70 @@
     }
     </script>
 </head>
-<style>
-    * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(to bottom right, #F5F7FA, #E6E9F0);
-    overflow: hidden;
-    animation: fadeInBody 1s ease-in forwards;
-}
-
-@keyframes fadeInBody {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    height: 100px;
-    background: linear-gradient(to right, #F2E8CF, #E6D7B9);
-    color: #4A4A4A;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.menu input[type="text"] {
-    padding: 10px 15px;
-    margin-right: 20px;
-    border-radius: 5px;
-    border: 1px solid #D1C3A3;
-    font-size: 14px;
-    transition: border-color .3s, box-shadow .3s;
-    background-color: #FFFFFF;
-}
-
-.menu input[type="text"]:focus {
-    border-color: #A39171;
-    box-shadow: 0 0 5px rgba(163, 145, 113, 0.1);
-}
-
-.menu button,
-.note-panel .save,
-.note-panel .cancel {
-    padding: 12px 25px;
-    background: linear-gradient(to bottom, #D1C3A3, #BFB393);
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #4A4A4A;
-    cursor: pointer;
-    transition: background-color .3s, color .3s, transform .3s;
-}
-
-.menu button:hover,
-.note-panel .save:hover,
-.note-panel .cancel:hover {
-    background: linear-gradient(to bottom, #C1B393, #AFA383);
-    color: #2A2A2A;
-    transform: translateY(-2px);
-}
-
-/* ... (pozostała część kodu pozostaje bez zmian) ... */
-
-footer {
-    background: linear-gradient(to right, #F2E8CF, #E6D7B9);
-    color: #4A4A4A;
-    padding: 1rem;
-    text-align: center;
-    width: 100%;
-    border-radius: 3px;
-    margin-top: auto;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
-}
-
-/* Pozostała część kodu CSS pozostaje bez zmian */
-</style>
 <body data-page="notatnik">
     <header>
-        <nav role="navigation">
-            <div id="search-section" class="menu">
-                <h1><i class="fas fa-sticky-note" aria-hidden="true"></i> <span data-lang-key="h1">ThoughtSpace</span></h1>
-                <div class="search-container">
-                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
-                    <input type="text" id="search" placeholder="Szukaj notatek..." aria-label="Szukaj notatek"
-                        data-placeholder-key="search_placeholder">
-                </div>
-                <div class="filter-container">
-                    <label for="category-filter" data-lang-key="category_filter_label">Filtruj według kategorii</label>
-                    <select id="category-filter">
-                        <option value="all" data-lang-key="category_filter_all">Wszystkie</option>
-                        <option value="Zakupy" data-lang-key="category_filter_zakupy">Zakupy</option>
-                        <option value="Praca" data-lang-key="category_filter_praca">Praca</option>
-                        <option value="Plany" data-lang-key="category_filter_plany">Plany</option>
-                        <option value="Siłownia" data-lang-key="category_filter_silownia">Siłownia</option>
-                        <option value="Inne" data-lang-key="category_filter_inne">Inne</option>
-                    </select>
-                </div>
-                <div class="menu-buttons">
-                    <button class="add icon" aria-label="Dodaj notatkę"><i class="fas fa-plus" aria-hidden="true"></i>
-                        <span data-lang-key="add_note_button">Dodaj</span></button>
-                    <button class="delete-all icon" aria-label="Usuń wszystkie notatki"><i class="fas fa-trash-alt"
-                            aria-hidden="true"></i> <span data-lang-key="delete_all_button">Usuń
-                            wszystkie</span></button>
-                </div>
+    <nav role="navigation">
+        <div id="search-section" class="menu">
+
+            <div class="logo-container">
+    <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+        <defs>
+            <linearGradient id="noteGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#e2be4a;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#e2cc5d;stop-opacity:1" />
+            </linearGradient>
+            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#333" flood-opacity="0.3"/>
+            </filter>
+        </defs>
+        
+        <g transform="translate(20,20)" filter="url(#shadow)">
+            <path d="M0,10 C0,4.5 4.5,0 10,0 H50 C55.5,0 60,4.5 60,10 V70 C60,75.5 55.5,80 50,80 H10 C4.5,80 0,75.5 0,70 Z" fill="url(#noteGradient)" />
+            
+            <path d="M5,5 Q7.5,2.5 10,5 T15,5 T20,5 T25,5 T30,5 T35,5 T40,5 T45,5 T50,5 T55,5" stroke="#2c3e50" stroke-width="2" fill="none" />
+            
+            <path d="M10,20 H50 M10,35 H50 M10,50 H50 M10,65 H50" stroke="#ffffff" stroke-width="1" opacity="0.9" />
+        </g>
+        
+        <g transform="translate(100,50)" filter="url(#shadow)">
+            <text class="logo-text">
+                <tspan class="logo-text-thought">Thought</tspan>
+                <tspan class="logo-text-space" x="0" dy="1.2em">Space</tspan>
+            </text>
+        </g>
+
+        <g opacity="0.3">
+            <circle cx="10" cy="90" r="4" fill="#e2cc5d" />
+            <circle cx="270" cy="30" r="6" fill="#e2cc5d" />
+        </g>
+    </svg>
+</div>
+            <div class="search-container">
+                <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                <input type="text" id="search" placeholder="Szukaj notatek..." aria-label="Szukaj notatek"
+                    data-placeholder-key="search_placeholder">
             </div>
-        </nav>
-    </header>
+            <div class="filter-container">
+                <label for="category-filter" data-lang-key="category_filter_label">Filtruj według kategorii</label>
+                <select id="category-filter">
+                    <option value="all" data-lang-key="category_filter_all">Wszystkie</option>
+                    <option value="Zakupy" data-lang-key="category_filter_zakupy">Zakupy</option>
+                    <option value="Praca" data-lang-key="category_filter_praca">Praca</option>
+                    <option value="Plany" data-lang-key="category_filter_plany">Plany</option>
+                    <option value="Siłownia" data-lang-key="category_filter_silownia">Siłownia</option>
+                    <option value="Inne" data-lang-key="category_filter_inne">Inne</option>
+                </select>
+            </div>
+            <div class="menu-buttons">
+                <button class="add icon" aria-label="Dodaj notatkę"><i class="fas fa-plus" aria-hidden="true"></i>
+                    <span data-lang-key="add_note_button">Dodaj</span></button>
+                <button class="delete-all icon" aria-label="Usuń wszystkie notatki"><i class="fas fa-trash-alt"
+                        aria-hidden="true"></i> <span data-lang-key="delete_all_button">Usuń
+                        wszystkie</span></button>
+            </div>
+        </div>
+    </nav>
+</header>
 
     <main>
         <section id="notes-section" class="note-area" aria-label="Sekcja notatek">
