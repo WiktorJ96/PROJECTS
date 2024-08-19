@@ -766,6 +766,7 @@ header {
     padding: 1rem;
     box-sizing: border-box;
 }
+
 /* CHORELY */
 .chorely-container {
             display: flex;
@@ -847,8 +848,9 @@ header {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        /* VAULT */
-        .gradient-icon {
+
+/* VAULT */
+.gradient-icon {
     background: linear-gradient(135deg, #FFD700, #B22222); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -871,14 +873,82 @@ header {
 .flip-card-back .gradient-text {
     font-size: 28px;
 }
-/* ThoughSpace */
 
+/* ThoughSpace */
     .logo-text-thought {
         fill: #eaeef2;
     }
     .logo-text-space {
         fill: hsla(39, 100%, 50%);
     }
+
+/* EcoTrack */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    background: linear-gradient(135deg, #e6f2e6 0%, hsla(120, 41%, 83%, 0.8) 100%);
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.logo:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.logo-icon {
+    position: relative;
+    width: 48px;
+    height: 42px;
+}
+
+.main-leaf {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 34px;
+    color: #2e7d32;
+    transition: all 0.3s ease;
+    animation: leafPulse 2s ease-in-out infinite;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+@keyframes leafPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.logo-icon::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle at 30% 30%, #ffffff, rgba(255,255,255,0.5));
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: dewdropMove 3s ease-in-out infinite;
+    margin-left: 10px;
+}
+
+@keyframes dewdropMove {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(3px, 3px); }
+}
 
 .portfolio__projects figure {
     position: relative;

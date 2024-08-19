@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rejestracja i logowanie do EcoTrack. Śledź swoje ekologiczne nawyki i dbaj o planetę." data-lang-key="description">
+    <meta name="keywords" content="ecotrack, rejestracja, logowanie, ekologia, zielone nawyki" data-lang-key="keywords">
+    <meta name="author" content="EcoTrack Team">
+    <link rel="canonical" href="https://ecotrack.example.com/">
+    <link rel="stylesheet" href="EcoTrack.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <title data-lang-key="title">EcoTrack - Rejestracja/Logowanie</title>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "EcoTrack - Rejestracja/Logowanie",
+      "description": "Rejestracja i logowanie do EcoTrack. Śledź swoje ekologiczne nawyki i dbaj o planetę.",
+      "url": "https://ecotrack.example.com/"
+    }
+    </script>
+</head>
+<body data-page="form">
+    <div class="language-switch">
+        <button id="lang-pl">PL</button>
+        <button id="lang-en">EN</button>
+    </div>
+    <div class="wrapper">
+        <nav>
+    <div class="logo">
+    <div class="logo-icon">
+        <i class="fas fa-leaf main-leaf"></i>
+    </div>
+    <div class="logo-text">
+        <span>Eco</span><span style="color: #222;">Track</span>
+    </div>
+    </div>
+    </nav>
+        <div class="form-switch">
+            <button type="button" class="switch-to-register" data-lang-key="switchToRegister">Zarejestruj się</button>
+            <button type="button" class="switch-to-login" data-lang-key="switchToLogin">Zaloguj się</button>
+        </div>
+        <form id="register-form">
+            <div class="oauth-buttons">
+                <button type="button" class="facebook-login" data-lang-key="facebookRegister"><i
+                        class="fab fa-facebook-f social-icon"></i>Zarejestruj się z Facebook</button>
+                <button type="button" class="custom-google-signin" data-lang-key="googleRegister"><i
+                        class="fab fa-google social-icon"></i>Zarejestruj się z Google</button>
+            </div>
+            <div class="form-box">
+                <label for="username" data-lang-key="usernameLabel">Nazwa użytkownika:</label>
+                <input type="text" id="username" placeholder="Twoja nazwa w EcoTrack"
+                    data-placeholder-key="usernamePlaceholder">
+                <p class="error-text" data-lang-key="error">BŁĄD</p>
+            </div>
+            <div class="form-box">
+                <label for="password" data-lang-key="passwordLabel">Hasło:</label>
+                <input type="password" id="password" placeholder="Silne hasło dla bezpieczeństwa"
+                    data-placeholder-key="passwordPlaceholder">
+                <p class="error-text" data-lang-key="error">BŁĄD</p>
+            </div>
+            <div class="form-box">
+                <label for="password2" data-lang-key="repeatPasswordLabel">Powtórz hasło:</label>
+                <input type="password" id="password2" placeholder="Potwierdź swoje hasło"
+                    data-placeholder-key="repeatPasswordPlaceholder">
+                <p class="error-text" data-lang-key="error">BŁĄD</p>
+            </div>
+            <div class="form-box">
+                <label for="email" data-lang-key="emailLabel">Adres e-mail:</label>
+                <input type="email" id="email" placeholder="Twój adres e-mail" data-placeholder-key="emailPlaceholder">
+                <p class="error-text" data-lang-key="error">BŁĄD</p>
+            </div>
+            <div class="control-buttons">
+                <button type="button" class="clear" data-lang-key="clear">Wyczyść</button>
+                <button type="submit" class="send" data-lang-key="send">Dołącz do EcoTrack</button>
+            </div>
+        </form>
+
+        <form id="login-form" style="display:none;">
+            <div class="oauth-buttons">
+                <button type="button" class="facebook-login" data-lang-key="facebookLogin"><i
+                        class="fab fa-facebook-f social-icon"></i>Zaloguj się z Facebook</button>
+                <button type="button" class="custom-google-signin" data-lang-key="googleLogin"><i
+                        class="fab fa-google social-icon"></i>Zaloguj się z Google</button>
+            </div>
+            <div class="form-box">
+                <label for="login-username" data-lang-key="usernameLabel">Nazwa użytkownika:</label>
+                <input type="text" id="login-username" placeholder="Twoja nazwa w EcoTrack"
+                    data-placeholder-key="usernamePlaceholder">
+                <p class="error-text" data-lang-key="error">BŁĄD</p>
+            </div>
+            <div class="form-box">
+                <label for="login-password" data-lang-key="passwordLabel">Hasło:</label>
+                <input type="password" id="login-password" placeholder="Twoje hasło EcoTrack"
+                    data-placeholder-key="passwordPlaceholder">
+                <p class="error-text" data-lang-key="error">BŁĄD</p>
+            </div>
+            <div class="control-buttons">
+                <button type="button" class="clear" data-lang-key="clear">Wyczyść</button>
+                <button type="submit" class="login-send send" data-lang-key="send">Zaloguj się</button>
+            </div>
+        </form>
+        <div class="popup">
+            <p data-lang-key="formSent">Witaj w EcoTrack! Możesz teraz śledzić swoje ekologiczne nawyki.</p>
+            <button type="button" class="close" data-lang-key="close">Zamknij</button>
+        </div>
+    </div>
+    <footer data-lang-key="footer">
+        <p>&copy; 2024 EcoTrack. Wspólnie dbamy o naszą planetę.</p>
+    </footer>
+    <script src="EcoTrack.js"></script>
+    <script src="../translations/translate2.js"></script>
+</body>
+
+</html>

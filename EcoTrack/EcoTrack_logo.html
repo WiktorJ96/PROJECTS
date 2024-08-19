@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack Logo</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: linear-gradient(135deg, #e6f2e6 0%, #d5e4d5 100%);
+            font-family: Arial, sans-serif;
+        }
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    background: linear-gradient(135deg, #e6f2e6 0%, #c3e6c3 100%);
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.logo:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.logo-icon {
+    position: relative;
+    width: 48px;
+    height: 42px;
+}
+
+.main-leaf {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 55px;
+    color: #2e7d32;
+    transition: all 0.3s ease;
+    animation: leafPulse 2s ease-in-out infinite;
+    margin-top: 0px;
+    margin-left: -20px;
+}
+
+.logo-text {
+    font-size: 50px;
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+@keyframes leafPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.logo-icon::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(circle at 30% 30%, #ffffff, rgba(255,255,255,0.5));
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: dewdropMove 3s ease-in-out infinite;
+}
+
+@keyframes dewdropMove {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(3px, 3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .logo, .main-leaf, .logo-icon::after {
+        animation: none;
+        transition: none;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <div class="logo-icon">
+            <i class="fas fa-leaf main-leaf"></i>
+        </div>
+        <div class="logo-text">
+            <span>Eco</span><span style="color: #222;">Track</span>
+        </div>
+    </div>
+</body>
+</html>
