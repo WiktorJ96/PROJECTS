@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHORELY Logo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: linear-gradient(135deg, #09a1f9 0%, #0d47a1 100%);
+            font-family: Arial, sans-serif;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .chorelyIcon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+            border-radius: 50%;
+            font-size: 28px;
+            color: #ffffff;
+            box-shadow: 
+                0 4px 15px rgba(9, 161, 249, 0.3),
+                inset 0 2px 5px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 5px rgba(9, 161, 249, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.18);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: morphBackground 10s infinite, floating 3s ease-in-out infinite;
+        }
+
+        .chorelyIcon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: rotate 6s linear infinite;
+        }
+
+        .chorelyIcon::after {
+            content: '\f00c'; 
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chorely {
+            font-size: 35px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-left: 15px;
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.1),
+                0 0 5px rgba(255, 255, 255, 0.3); 
+            transition: all 0.3s ease;
+        }
+
+        @keyframes morphBackground {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+            75% { border-radius: 40% 60% 30% 70% / 70% 30% 60% 40%; }
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container animate-in delay-3">
+        <div class="chorelyIcon"></div>
+        <span class="chorely">CHORELY</span>
+    </div>
+</body>
+</html>

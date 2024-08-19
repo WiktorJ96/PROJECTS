@@ -4,6 +4,17 @@
     padding: 0;
 }
 
+:root {
+    --primary-color: #ffa500;
+    --primary-dark: #ff8c00; 
+    --secondary-color: #ffd700; 
+    --secondary-dark: #ffc200; 
+    --cancel-color: #ff6347; 
+    --cancel-dark: #e64a19; 
+    --text-light: #ffffff;
+    --text-dark: #333333;
+}
+
 html,
 body {
     height: 100%;
@@ -15,7 +26,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #f3f3f3;
     overflow: hidden;
     animation: fadeInBody 1s ease-in forwards;
@@ -55,7 +66,7 @@ body {
         fill: #eaeef2;
     }
     .logo-text-space {
-        fill: #e2be4a;
+        fill: #FFA500;
     }
 
 .menu {
@@ -87,21 +98,64 @@ body {
 .note-panel .save,
 .note-panel .cancel {
     padding: 12px 25px;
-    background-color: rgba(255, 255, 255, 0.1);
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 14px;
-    color: #fff;
+    font-weight: bold;
+    color: var(--text-light);
     cursor: pointer;
-    transition: background-color .3s, color .3s, transform .3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.note-panel .save {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
 }
 
 .menu button:hover,
-.note-panel .save:hover,
-.note-panel .cancel:hover {
-    background-color: #555;
-    color: #ddd;
+.note-panel .save:hover {
+     background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
     transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.note-panel .cancel {
+    background: linear-gradient(135deg, #7F8C8D, #566573);
+}
+
+.note-panel .cancel:hover {
+    background: linear-gradient(135deg, var(--cancel-dark), var(--cancel-color));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.menu button:active,
+.note-panel .save:active,
+.note-panel .cancel:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu button:focus,
+.note-panel .save:focus,
+.note-panel .cancel:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
+}
+
+.note-panel .cancel:focus {
+    box-shadow: 0 0 0 3px rgba(7, 7, 7, 0.4);
+}
+.add{
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+}
+.delete-all {
+    background: linear-gradient(135deg, #7F8C8D, #566573);
+}
+.menu .delete-all:hover {
+    background: linear-gradient(135deg, var(--cancel-dark), var(--cancel-color));
 }
 
 .icon {

@@ -204,7 +204,11 @@ h2 {
 
 .menu-responsive hr {
     color: #fff;
-    width: 75%;
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(to right, transparent, #333, transparent);
+    margin: 20px 0;
 }
 
 .menu-responsive {
@@ -762,6 +766,119 @@ header {
     padding: 1rem;
     box-sizing: border-box;
 }
+/* CHORELY */
+.chorely-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 22px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .chorelyIcon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+            border-radius: 50%;
+            font-size: 14px;
+            color: #ffffff;
+            box-shadow: 
+                0 4px 15px rgba(9, 161, 249, 0.3),
+                inset 0 2px 5px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 5px rgba(9, 161, 249, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.18);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: morphBackground 10s infinite, floating 3s ease-in-out infinite;
+        }
+
+        .chorelyIcon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: rotate 6s linear infinite;
+        }
+
+        .chorelyIcon::after {
+            content: '\f00c'; 
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chorely {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-left: 15px;
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.1),
+                0 0 5px rgba(255, 255, 255, 0.3); 
+            transition: all 0.3s ease;
+        }
+
+        @keyframes morphBackground {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+            75% { border-radius: 40% 60% 30% 70% / 70% 30% 60% 40%; }
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* VAULT */
+        .gradient-icon {
+    background: linear-gradient(135deg, #FFD700, #B22222); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 68px;
+}
+.gradient-text {
+    background: linear-gradient(135deg, #FFD700, #B22222);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 68px;
+}
+
+.flip-card-back h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 28px;
+}
+
+.flip-card-back .gradient-icon,
+.flip-card-back .gradient-text {
+    font-size: 28px;
+}
+/* ThoughSpace */
+
+    .logo-text-thought {
+        fill: #eaeef2;
+    }
+    .logo-text-space {
+        fill: hsla(39, 100%, 50%);
+    }
 
 .portfolio__projects figure {
     position: relative;
@@ -930,10 +1047,28 @@ footer {
         gap: 2rem;
     }
 
-    .icon-container {
-        display: inline-block;
-        margin: 0 15px;
+        @keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
     }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.icon-container {
+    display: inline-block;
+    margin: 0 15px;
+    animation: slideInFromLeft 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.icon-container:nth-child(1) { animation-delay: 0s; }
+.icon-container:nth-child(2) { animation-delay: 0.4s; }
+.icon-container:nth-child(3) { animation-delay: 0.6s; }
+.icon-container:nth-child(4) { animation-delay: 0.8s; }
 
     .iconFigma {
         width: 46px;
@@ -962,11 +1097,38 @@ footer {
         display: inline-block;
         margin: 0 15px;
     }
-
-    .iconJS_HTML_CSS {
-        font-size: 80px;
-         filter: grayscale(8%);
+    .line {
+    border: none;
+    height: 1px;
+    background-image: linear-gradient(to right, transparent, #333, transparent);
+    margin: 20px 0;
     }
+    .iconCSS{
+    background-image: linear-gradient(135deg, hsla(193, 95%, 68%, 0.9), hsla(228, 78%, 52%, 0.9), hsla(235, 66%, 30%, 0.9));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    }
+    .iconJS{
+    background-image: linear-gradient(135deg, hsla(51, 100%, 50%, 0.9), hsla(39, 100%, 50%, 0.9));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    }
+    .iconHTML{
+    background-image: linear-gradient(135deg, hsla(0, 100%, 71%, 0.9), hsla(0, 100%, 50%, 0.9), hsla(0, 100%, 27%, 0.9));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    }
+    .iconJS_HTML_CSS {
+    font-size: 80px;
+    filter: grayscale(8%);
+}
+
     .language-switch_portfolio {
         display: none;
     }
