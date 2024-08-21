@@ -186,15 +186,43 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <figure>
-                                    <img src="../imghoney/stoper.png" style="margin-top: 8rem; filter: grayscale(10%);"
+                                    <img src="../imghoney/LuxeChrono.png" style="filter: grayscale(10%);"
                                         alt="Zdjęcie projektu Stoper">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
-                                <h3 data-lang-key="stopwatch">Stoper</h3>
-                                <p data-lang-key="stopwatch_desc">Responsywny stoper z archiwum do zapisywania czasów i
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="150" height="100">
+    <defs>
+        <linearGradient id="watchGoldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#e6c66e;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#f9d777;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#e6c66e;stop-opacity:1" />
+        </linearGradient>
+        <filter id="watchSoftGlow" height="300%" width="300%" x="-75%" y="-75%">
+            <feMorphology operator="dilate" radius="1" in="SourceAlpha" result="thicken" />
+            <feGaussianBlur in="thicken" stdDeviation="1.5" result="blurred" />
+            <feFlood flood-color="#e6c66e" result="glowColor" />
+            <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
+            <feMerge>
+                <feMergeNode in="softGlow_colored"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <g transform="translate(100,70)" filter="url(#watchSoftGlow)">
+        <text x="0" y="-10" fill="url(#watchGoldGradient)" font-family="'Baskerville', serif" font-size="60" font-weight="bold" text-anchor="middle">LUXE</text>
+        <text x="0" y="25" fill="#ffffff" font-family="'Helvetica Neue', sans-serif" font-size="30" letter-spacing="2" text-anchor="middle">CHRONO</text>
+    </g>
+    
+    <g transform="translate(100,5)">
+        <path d="M-5,0 L0,-5 L5,0 L0,5 Z" fill="none" stroke="#e6c66e" stroke-width="0.5"/>
+        <text x="0" y="1" fill="#e6c66e" font-family="'Baskerville', serif" font-size="25" text-anchor="middle" alignment-baseline="middle">∞</text>
+    </g>
+</svg>
+                                <p data-lang-key="stopwatch_desc">Responsywny zegarek z archiwum do zapisywania czasów i
                                     możliwością zmiany koloru.</p>
-                                <a href="../STOPER/stoper.html" class="specific-icon-link">
+                                <a href="../LuxeChrono/LuxeChrono.html" class="specific-icon-link">
                                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
                                 </a>
                             </div>
