@@ -49,6 +49,52 @@ body {
 display: none;
 }
 
+.hour-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hour-marker {
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    width: 2px;
+    height: 15px;
+    background: var(--secondary-color);
+    transform-origin: 25% 194px; 
+    z-index: 100000;
+    animation: fadeIn 2s ease-out;
+}
+
+.hour-marker::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+
+.hour-marker.main-marker {
+    width: 3px;
+    height: 20px;
+}
+
+.hour-marker.main-marker::before {
+    width: 6px;
+    height: 6px;
+}
+
+.watch-face.hide-markers .hour-markers {
+    display: none;
+}
+
 .watch-face {
     position: relative;
     margin: auto;
@@ -158,27 +204,6 @@ display: none;
     margin: 0 auto;
 }
 
-.hour-markers {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.hour-marker {
-    position: absolute;
-    width: 2px;
-    height: 15px;
-    background: var(--secondary-color);
-    left: 50%;
-    transform-origin: 50% 230px;
-}
-
-.hour-marker:nth-child(3n) {
-    height: 20px;
-    width: 4px;
-}
 
 .inner-ring {
     position: absolute;
@@ -325,26 +350,6 @@ button:active {
     to { transform: scale(1); }
 }
 
-@media (max-width: 500px) {
-    .watch-face {
-        width: 345px;
-        height: 345px;
-    }
-
-    .hour-marker {
-        transform-origin: 50% 161px;
-    }
-
-    .stopwatch, .minutnik-display {
-        font-size: 2.3em;
-    }
-
-    button {
-        font-size: 0.805em;
-        padding: 7px 14px;
-    }
-}
-
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -465,3 +470,27 @@ button:active {
     to { opacity: 0; visibility: hidden; }
 }
 
+@media (max-width: 500px) {
+    .watch-face {
+        width: 345px;
+        height: 345px;
+    }
+
+    .hour-marker {
+        top: 8%;
+        left: 50%;
+        transform-origin: 25% 144px; 
+    }
+
+    .stopwatch, .minutnik-display {
+        font-size: 2.3em;
+    }
+
+    button {
+        font-size: 0.805em;
+        padding: 7px 14px;
+    }
+    .logo-container{
+        top: 15px;
+    }
+}

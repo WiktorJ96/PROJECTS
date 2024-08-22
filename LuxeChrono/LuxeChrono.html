@@ -120,82 +120,22 @@
 
     <div id="main-content" style="display: none;">
     <div class="watch-face">
-      <div id="clock-section" class="section active">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-    <defs>
-        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
-            <stop offset="50%" style="stop-color:#f9d777;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
-        </linearGradient>
-        <radialGradient id="crystalGradient" cx="50%" cy="50%" r="50%" fx="25%" fy="25%">
-            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1" />
-            <stop offset="100%" style="stop-color:#d4af37;stop-opacity:0.3" />
-        </radialGradient>
-        <linearGradient id="bezelGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#f9d777;stop-opacity:1" />
-            <stop offset="50%" style="stop-color:#d4af37;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#8b7d3a;stop-opacity:1" />
-        </linearGradient>
-    </defs>
-    
-    <g transform="translate(300, 200) scale(2.35)">
-
-        <circle cx="0" cy="0" r="155" fill="none" stroke="url(#bezelGradient)" stroke-width="10"/>
-        
-        <circle cx="0" cy="0" r="150" fill="url(#faceGradient)"/>
-        
-        <g id="hourMarkers">
-            <line x1="0" y1="-130" x2="0" y2="-145" stroke="#d4af37" stroke-width="3"/>
-            <circle cx="0" cy="-137.5" r="2" fill="#f9d777"/>
-        </g>
-        
-        <text x="0" y="-40" fill="#d4af37" font-family="'Baskerville', serif" font-size="24" font-weight="bold" text-anchor="middle">LUXE</text>
-        <text x="0" y="60" fill="#8b7d3a" font-family="'Helvetica Neue', sans-serif" font-size="12" letter-spacing="2" text-anchor="middle">SWISS MADE</text>
-        
-        <circle cx="0" cy="0" r="150" fill="url(#crystalGradient)" filter="url(#softGlow)" opacity="0.5"/>
-    </g>
-    
-    <path d="M510,200 L530,200 L535,205 L535,215 L530,220 L510,220 Z" fill="url(#bezelGradient)" stroke="#d4af37" stroke-width="1"/>
-    
-    <rect x="150" y="350" width="300" height="30" fill="url(#bezelGradient)" stroke="#d4af37" stroke-width="1"/>
-    <path d="M150,370 Q300,390 450,370" fill="none" stroke="#f9d777" stroke-width="2"/>
-    
-    <text x="300" y="370" fill="#8b7d3a" font-family="'Cormorant Garamond', serif" font-size="14" text-anchor="middle">ESTABLISHED 1888 • LIMITED EDITION</text>
-
-     <g transform="translate(300, 200) scale(2.50)" filter="url(#softGlow)">
-
-        <path id="mainHourHand" d="M-2,-15 C-2,-30 -1.5,-60 0,-65 C1.5,-60 2,-30 2,-15 L1.5,0 L-1.5,0 Z" fill="url(#hourHandGradient)" stroke="#d4af37" stroke-width="0.5"/>
-        
-        <path id="mainMinuteHand" d="M-1.5,-20 C-1.5,-40 -1,-85 0,-95 C1,-85 1.5,-40 1.5,-20 L1,0 L-1,0 Z" fill="url(#minuteHandGradient)" stroke="#f9d777" stroke-width="0.5"/>
-        
-        <g id="mainSecondHand">
-            <line x1="0" y1="20" x2="0" y2="-110" stroke="#a50000" stroke-width="0.5"/>
-            <circle cx="0" cy="-85" r="3" fill="#d00000"/>
-            <circle cx="0" cy="15" r="2" fill="#d00000"/>
-        </g>
-
-        <circle cx="0" cy="0" r="5" fill="url(#goldGradient)" stroke="#d4af37" stroke-width="0.5"/>
-        <circle cx="0" cy="0" r="2" fill="#d4af37"/>
-    </g>
-</svg>
-            </div>
-            
+      
       <div class="watch-face-glass"></div>
         <div class="hour-markers">
-            <div class="hour-marker" style="transform: rotate(0deg);"></div>
-            <div class="hour-marker" style="transform: rotate(30deg);"></div>
-            <div class="hour-marker" style="transform: rotate(60deg);"></div>
-            <div class="hour-marker" style="transform: rotate(90deg);"></div>
-            <div class="hour-marker" style="transform: rotate(120deg);"></div>
-            <div class="hour-marker" style="transform: rotate(150deg);"></div>
-            <div class="hour-marker" style="transform: rotate(180deg);"></div>
-            <div class="hour-marker" style="transform: rotate(210deg);"></div>
-            <div class="hour-marker" style="transform: rotate(240deg);"></div>
-            <div class="hour-marker" style="transform: rotate(270deg);"></div>
-            <div class="hour-marker" style="transform: rotate(300deg);"></div>
-            <div class="hour-marker" style="transform: rotate(330deg);"></div>
-        </div>
+    <div class="hour-marker main-marker" style="transform: rotate(0deg);"></div>
+    <div class="hour-marker" style="transform: rotate(30deg);"></div>
+    <div class="hour-marker" style="transform: rotate(60deg);"></div>
+    <div class="hour-marker main-marker" style="transform: rotate(90deg);"></div>
+    <div class="hour-marker" style="transform: rotate(120deg);"></div>
+    <div class="hour-marker" style="transform: rotate(150deg);"></div>
+    <div class="hour-marker main-marker" style="transform: rotate(180deg);"></div>
+    <div class="hour-marker" style="transform: rotate(210deg);"></div>
+    <div class="hour-marker" style="transform: rotate(240deg);"></div>
+    <div class="hour-marker main-marker" style="transform: rotate(270deg);"></div>
+    <div class="hour-marker" style="transform: rotate(300deg);"></div>
+    <div class="hour-marker" style="transform: rotate(330deg);"></div>
+</div>
     <div class="inner-ring"></div>
 
     <div class="watch-content">
@@ -255,6 +195,63 @@
         </div>
     </div>
 </div>
+
+<div id="clock-section" class="section active">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 0 800 400">
+    <defs>
+        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#f9d777;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
+        </linearGradient>
+        <radialGradient id="crystalGradient" cx="50%" cy="50%" r="50%" fx="25%" fy="25%">
+            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1" />
+            <stop offset="100%" style="stop-color:#d4af37;stop-opacity:0.3" />
+        </radialGradient>
+        <linearGradient id="bezelGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#f9d777;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#d4af37;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#8b7d3a;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    
+    <g transform="translate(300, 200) scale(2.43)">
+
+        <circle cx="0" cy="0" r="155" fill="none" stroke="url(#bezelGradient)" stroke-width="10"/>
+        
+        <circle cx="0" cy="0" r="150" fill="url(#faceGradient)"/>
+      
+        
+        <text x="0" y="-40" fill="#d4af37" font-family="'Baskerville', serif" font-size="24" font-weight="bold" text-anchor="middle">LUXE</text>
+        <text x="0" y="60" fill="#8b7d3a" font-family="'Helvetica Neue', sans-serif" font-size="12" letter-spacing="2" text-anchor="middle">SWISS MADE</text>
+        
+        <circle cx="0" cy="0" r="150" fill="url(#crystalGradient)" filter="url(#softGlow)" opacity="0.5"/>
+    </g>
+    
+    <path d="M510,200 L530,200 L535,205 L535,215 L530,220 L510,220 Z" fill="url(#bezelGradient)" stroke="#d4af37" stroke-width="1"/>
+    
+    <rect x="150" y="360" width="300" height="30" fill="url(#bezelGradient)" stroke="#d4af37" stroke-width="1"/>
+    <path d="M150,370 Q300,390 450,370" fill="none" stroke="#f9d777" stroke-width="2"/>
+    
+    <text x="300" y="380" fill="#8b7d3a" font-family="'Cormorant Garamond', serif" font-size="14" text-anchor="middle">ESTABLISHED 1888 • LIMITED EDITION</text>
+
+     <g transform="translate(300, 200) scale(2.50)" filter="url(#softGlow)">
+
+        <path id="mainHourHand" d="M-2,-15 C-2,-30 -1.5,-60 0,-65 C1.5,-60 2,-30 2,-15 L1.5,0 L-1.5,0 Z" fill="url(#hourHandGradient)" stroke="#d4af37" stroke-width="0.5"/>
+        
+        <path id="mainMinuteHand" d="M-1.5,-20 C-1.5,-40 -1,-85 0,-95 C1,-85 1.5,-40 1.5,-20 L1,0 L-1,0 Z" fill="url(#minuteHandGradient)" stroke="#f9d777" stroke-width="0.5"/>
+        
+        <g id="mainSecondHand">
+            <line x1="0" y1="20" x2="0" y2="-110" stroke="#a50000" stroke-width="0.5"/>
+            <circle cx="0" cy="-85" r="3" fill="#d00000"/>
+            <circle cx="0" cy="15" r="2" fill="#d00000"/>
+        </g>
+
+        <circle cx="0" cy="0" r="5" fill="url(#goldGradient)" stroke="#d4af37" stroke-width="0.5"/>
+        <circle cx="0" cy="0" r="2" fill="#d4af37"/>
+    </g>
+</svg>
+            </div>
 </div>
     <script src="LuxeChrono.js"></script>
     <script>
