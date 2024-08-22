@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function toggleMusic() {
         audio.paused ? audio.play() : audio.pause();
-        elements.buttons.musicToggle.textContent = audio.paused ? '🔊' : '🔇';
+        elements.buttons.musicToggle.textContent = audio.paused ? '🔇' : '🔊';
     }
 
     elements.buttons.start.addEventListener('click', startTimer);
