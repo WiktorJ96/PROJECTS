@@ -130,29 +130,26 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function showSection(sectionId) {
-        elements.sections.forEach(section => section.classList.remove('active'));
-        const activeSection = document.getElementById(sectionId);
-        if (activeSection) {
-            activeSection.classList.add('active');
+    elements.sections.forEach(section => section.classList.remove('active'));
+    const activeSection = document.getElementById(sectionId);
+    if (activeSection) {
+        activeSection.classList.add('active');
         
-            const watchFace = document.querySelector('.watch-face');
-            if (sectionId === 'clock-section') {
-                watchFace.classList.add('clock-active');
-            } else {
-                watchFace.classList.remove('clock-active');
-            }
-
-            if (sectionId === 'options-section') {
-                elements.sectionSwitcher.classList.add('active');
-                showSubsection('stopwatch-section');
-            } else {
-                elements.sectionSwitcher.classList.remove('active');
-            }
-        }
         if (sectionId === 'clock-section') {
+            elements.watchFace.classList.add('clock-active');
             updateClock();
+        } else {
+            elements.watchFace.classList.remove('clock-active');
+        }
+
+        if (sectionId === 'options-section') {
+            elements.sectionSwitcher.classList.add('active');
+            showSubsection('stopwatch-section');
+        } else {
+            elements.sectionSwitcher.classList.remove('active');
         }
     }
+}
 
     function showSubsection(subsectionId) {
         elements.subsections.forEach(subsection => subsection.style.display = 'none');
@@ -200,18 +197,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startAnimation() {
-        elements.introOverlay.style.opacity = '0';
-    
-        setTimeout(() => {
-            elements.introOverlay.style.display = 'none';
-            elements.logoShowcase.classList.add('fade-in-out');
-        }, 1000);
+    elements.introOverlay.style.opacity = '0';
 
-        setTimeout(() => {
-            elements.logoShowcase.classList.remove('fade-in-out');
-            elements.mainContent.style.opacity = '1';
-        }, 4000);
-    }
+    setTimeout(() => {
+        elements.introOverlay.style.display = 'none';
+        elements.logoShowcase.classList.add('fade-in-out');
+    }, 1000);
+
+    setTimeout(() => {
+        elements.logoShowcase.classList.remove('fade-in-out');
+        elements.logoShowcase.style.display = 'none';
+        
+        elements.mainContent.style.display = 'block';
+        elements.mainContent.style.opacity = '1';
+        elements.buttons.switchButton.style.display = 'block';
+        elements.buttons.switchButton.style.opacity = '1';
+        
+        elements.watchFace.classList.add('animate');
+    }, 4000);
+}
 
     function toggleMusic() {
         audio.paused ? audio.play() : audio.pause();

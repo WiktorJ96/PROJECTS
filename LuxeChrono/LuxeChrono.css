@@ -19,6 +19,9 @@ body {
     min-height: 100vh;
     margin: 0;
 }
+#options-section, #stopwatch-section, #timer-section {
+    z-index: 100000;
+}
 
 .section {
     display: none;
@@ -32,6 +35,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    animation: fadeIn 2s ease-out;
 }
 .section-switcher {
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -65,7 +69,7 @@ display: none;
     align-items: center;
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    animation: fadeIn 2s ease-out, subtle-rotate 10s infinite linear;
+    animation: fadeIn 2s ease-out;
 }
 
 .watch-face svg {
@@ -198,6 +202,10 @@ display: none;
 
 #switch-button{
     padding: 13px 5px;
+    opacity: 0;
+    transition: opacity 1s ease;
+    display: block; 
+    cursor: pointer;
 }
 
 .buttons {
@@ -428,9 +436,14 @@ button:active {
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
     transition: transform 0.3s ease;
+}
+
+.music-icon{
+    position: relative;
+    right: 3px;
 }
 
 #start-music {

@@ -6,10 +6,6 @@
     <title>Luxe Chrono</title>
     <link rel="stylesheet" href="LuxeChrono.css">
 </head>
-    <style>
-        
-        
-    </style>
 <body>
   <div id="intro-overlay">
         <button id="start-music">▶</button>
@@ -119,7 +115,7 @@
     <audio id="background-music" loop>
     <source src="../music/Orbiting Knowhere - The Whole Other.mp3" type="audio/mpeg">
 </audio>
-<button id="music-toggle" class="music-button">🔊</button>
+<button id="music-toggle" class="music-button"><span class="music-icon">🔊</span></button>
 
 
     <div id="main-content" style="display: none;">
@@ -132,67 +128,56 @@
             <stop offset="50%" style="stop-color:#f9d777;stop-opacity:1" />
             <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
         </linearGradient>
-        <radialGradient id="faceGradient" cx="50%" cy="50%" r="50%" fx="25%" fy="25%">
-            <stop offset="0%" style="stop-color:#2a2a2a;stop-opacity:0.8" />
-            <stop offset="50%" style="stop-color:#1a1a1a;stop-opacity:0.9" />
-            <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:1" />
+        <radialGradient id="crystalGradient" cx="50%" cy="50%" r="50%" fx="25%" fy="25%">
+            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1" />
+            <stop offset="100%" style="stop-color:#d4af37;stop-opacity:0.3" />
         </radialGradient>
-        <filter id="softGlow" height="300%" width="300%" x="-75%" y="-75%">
-            <feMorphology operator="dilate" radius="1" in="SourceAlpha" result="thicken" />
-            <feGaussianBlur in="thicken" stdDeviation="3" result="blurred" />
-            <feFlood flood-color="#d4af37" result="glowColor" />
-            <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
-            <feMerge>
-                <feMergeNode in="softGlow_colored"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-        <linearGradient id="hourHandGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#8b7d3a;stop-opacity:1" />
-        </linearGradient>
-        <linearGradient id="minuteHandGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id="bezelGradient" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" style="stop-color:#f9d777;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#d4af37;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#8b7d3a;stop-opacity:1" />
         </linearGradient>
     </defs>
     
     <g transform="translate(300, 200) scale(2.35)">
-        <circle cx="0" cy="0" r="150" fill="none" stroke="url(#goldGradient)" stroke-width="10" filter="url(#softGlow)"/>
-        <circle cx="0" cy="0" r="140" fill="none" stroke="#d4af37" stroke-width="1"/>
-        <circle cx="0" cy="0" r="135" fill="url(#faceGradient)"/>
 
+        <circle cx="0" cy="0" r="155" fill="none" stroke="url(#bezelGradient)" stroke-width="10"/>
+        
+        <circle cx="0" cy="0" r="150" fill="url(#faceGradient)"/>
+        
         <g id="hourMarkers">
-            <line x1="0" y1="-130" x2="0" y2="-120" stroke="#d4af37" stroke-width="2"/>
-        </g>
-        <use href="#hourMarkers" transform="rotate(30)"/>
-        <use href="#hourMarkers" transform="rotate(60)"/>
-        <use href="#hourMarkers" transform="rotate(90)"/>
-        <use href="#hourMarkers" transform="rotate(120)"/>
-        <use href="#hourMarkers" transform="rotate(150)"/>
-        <use href="#hourMarkers" transform="rotate(180)"/>
-        <use href="#hourMarkers" transform="rotate(210)"/>
-        <use href="#hourMarkers" transform="rotate(240)"/>
-        <use href="#hourMarkers" transform="rotate(270)"/>
-        <use href="#hourMarkers" transform="rotate(300)"/>
-        <use href="#hourMarkers" transform="rotate(330)"/>
-        
-        <text x="0" y="-30" fill="#d4af37" font-family="'Baskerville', serif" font-size="24" font-weight="bold" text-anchor="middle">LUXE</text>
-        <text x="0" y="50" fill="#8b7d3a" font-family="'Helvetica Neue', sans-serif" font-size="12" letter-spacing="2" text-anchor="middle">SWISS MADE</text>
-        <g transform="translate(0, -160) scale(0.425)" filter="url(#softGlow)">
-            <path d="M-15,0 L0,-25 L15,0 L0,25 Z" fill="none" stroke="#d4af37" stroke-width="1.5"/>
-
+            <line x1="0" y1="-130" x2="0" y2="-145" stroke="#d4af37" stroke-width="3"/>
+            <circle cx="0" cy="-137.5" r="2" fill="#f9d777"/>
         </g>
         
-        <g filter="url(#softGlow)">
-            <path id="mainHourHand" d="M-5,10 L0,-70 L5,10 Z" fill="url(#hourHandGradient)" stroke="#d4af37" stroke-width="1" transform="rotate(0)"/>
-            <path id="mainMinuteHand" d="M-3,15 L0,-100 L3,15 Z" fill="url(#minuteHandGradient)" stroke="#f9d777" stroke-width="1" transform="rotate(0)"/>
-            <line id="mainSecondHand" x1="0" y1="20" x2="0" y2="-110" stroke="#ff0000" stroke-width="1.5" stroke-linecap="round" transform="rotate(0)"/>
-        </g>
-        <circle cx="0" cy="0" r="8" fill="#d4af37"/>
+        <text x="0" y="-40" fill="#d4af37" font-family="'Baskerville', serif" font-size="24" font-weight="bold" text-anchor="middle">LUXE</text>
+        <text x="0" y="60" fill="#8b7d3a" font-family="'Helvetica Neue', sans-serif" font-size="12" letter-spacing="2" text-anchor="middle">SWISS MADE</text>
+        
+        <circle cx="0" cy="0" r="150" fill="url(#crystalGradient)" filter="url(#softGlow)" opacity="0.5"/>
     </g>
     
-    <text x="300" y="380" fill="#8b7d3a" font-family="'Cormorant Garamond', serif" font-size="14" text-anchor="middle">ESTABLISHED 1888 • LIMITED EDITION</text>
+    <path d="M510,200 L530,200 L535,205 L535,215 L530,220 L510,220 Z" fill="url(#bezelGradient)" stroke="#d4af37" stroke-width="1"/>
+    
+    <rect x="150" y="350" width="300" height="30" fill="url(#bezelGradient)" stroke="#d4af37" stroke-width="1"/>
+    <path d="M150,370 Q300,390 450,370" fill="none" stroke="#f9d777" stroke-width="2"/>
+    
+    <text x="300" y="370" fill="#8b7d3a" font-family="'Cormorant Garamond', serif" font-size="14" text-anchor="middle">ESTABLISHED 1888 • LIMITED EDITION</text>
+
+     <g transform="translate(300, 200) scale(2.50)" filter="url(#softGlow)">
+
+        <path id="mainHourHand" d="M-2,-15 C-2,-30 -1.5,-60 0,-65 C1.5,-60 2,-30 2,-15 L1.5,0 L-1.5,0 Z" fill="url(#hourHandGradient)" stroke="#d4af37" stroke-width="0.5"/>
+        
+        <path id="mainMinuteHand" d="M-1.5,-20 C-1.5,-40 -1,-85 0,-95 C1,-85 1.5,-40 1.5,-20 L1,0 L-1,0 Z" fill="url(#minuteHandGradient)" stroke="#f9d777" stroke-width="0.5"/>
+        
+        <g id="mainSecondHand">
+            <line x1="0" y1="20" x2="0" y2="-110" stroke="#a50000" stroke-width="0.5"/>
+            <circle cx="0" cy="-85" r="3" fill="#d00000"/>
+            <circle cx="0" cy="15" r="2" fill="#d00000"/>
+        </g>
+
+        <circle cx="0" cy="0" r="5" fill="url(#goldGradient)" stroke="#d4af37" stroke-width="0.5"/>
+        <circle cx="0" cy="0" r="2" fill="#d4af37"/>
+    </g>
 </svg>
             </div>
             
