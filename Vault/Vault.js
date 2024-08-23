@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
     const income = document.querySelector('.income-area');
     const outcome = document.querySelector('.expenses-area');
     const money = document.querySelector('.available-money');
@@ -8,6 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveBtn = document.querySelector('.save');
     const cancelBtn = document.querySelector('.cancel');
     const deleteAllBtn = document.querySelector('.delete-all');
+    const modal = document.getElementById('confirmationModal');
+    const confirmDeleteBtn = document.getElementById('confirmDelete');
+    const cancelDeleteBtn = document.getElementById('cancelDelete');
+    const deleteTransactionModal = document.getElementById('deleteTransactionModal');
+    const confirmDeleteTransactionBtn = document.getElementById('confirmDeleteTransaction');
+    const cancelDeleteTransactionBtn = document.getElementById('cancelDeleteTransaction');
     const lightBtn = document.querySelector('.light');
     const darkBtn = document.querySelector('.dark');
 
@@ -15,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const amountInput = document.querySelector('#amount');
     const categorySelect = document.querySelector('#category');
 
+    let transactionToDeleteId = null;
     let root = document.documentElement;
     let ID = 0;
     let categoryIcon;
@@ -275,8 +283,12 @@ const createNewTransaction = () => {
 
     newTransaction.innerHTML = `                   
         <p class="transaction-name">${categoryIcon} ${nameInput.value}</p>
-        <p class="transaction-amount ${parseFloat(amountInput.value) > 0 ? 'income' : 'expense'}">${amountInput.value}${currencySymbol}
-        <button class="delete" onclick="deleteTransaction(${ID})"><i class="fas fa-times"></i></button></p>
+        <p class="transaction-amount ${parseFloat(amountInput.value) > 0 ? 'income' : 'expense'}">
+            ${amountInput.value}${currencySymbol}
+            <button class="delete" onclick="showDeleteTransactionModal(${ID})">
+                <i class="fas fa-times"></i>
+            </button>
+        </p>
     `;
 
     if (parseFloat(amountInput.value) > 0) {
@@ -298,7 +310,55 @@ const createNewTransaction = () => {
     clearInputs();
 };
 
+    
+    confirmDeleteTransactionBtn.addEventListener('click', () => {
+        if (transactionToDeleteId !== null) {
+            deleteTransaction(transactionToDeleteId);
+            transactionToDeleteId = null;
+        }
+        deleteTransactionModal.style.display = 'none';
+    });
 
+    cancelDeleteTransactionBtn.addEventListener('click', () => {
+        hideModal(deleteTransactionModal);
+        transactionToDeleteId = null;
+    });
+
+    const showModal = (modal) => {
+        modal.classList.add('show');
+    };
+
+    const hideModal = (modal) => {
+        modal.classList.remove('show');
+    };
+
+    window.showDeleteTransactionModal = (id) => {
+        transactionToDeleteId = id;
+        showModal(deleteTransactionModal);
+    };
+
+    confirmDeleteTransactionBtn.addEventListener('click', () => {
+        if (transactionToDeleteId !== null) {
+            deleteTransaction(transactionToDeleteId);
+            transactionToDeleteId = null;
+        }
+        hideModal(deleteTransactionModal);
+    });
+
+    cancelDeleteTransactionBtn.addEventListener('click', () => {
+        hideModal(deleteTransactionModal);
+        transactionToDeleteId = null;
+    });
+
+    window.onclick = function(event) {
+        if (event.target == deleteTransactionModal) {
+            hideModal(deleteTransactionModal);
+            transactionToDeleteId = null;
+        }
+        if (event.target == modal) {
+            hideModal(modal);
+        }
+    };
 
     const getCurrentBalance = () => {
         return moneyArr.reduce((acc, curr) => acc + curr, 0);
@@ -342,16 +402,16 @@ const createNewTransaction = () => {
         balanceChart.update();
     };
 
-    window.deleteTransaction = (id) => {
-        const transactionIndex = transactions.findIndex(transaction => transaction.id === id);
-        if (transactionIndex > -1) {
-            transactions.splice(transactionIndex, 1);
-            moneyArr.splice(transactionIndex + 1, 1);
-            document.getElementById(id).remove();
-            updateBalance();
-            updateChart();
-        }
-    };
+    const deleteTransaction = (id) => {
+    const transactionIndex = transactions.findIndex(transaction => transaction.id === id);
+    if (transactionIndex > -1) {
+        transactions.splice(transactionIndex, 1);
+        moneyArr.splice(transactionIndex + 1, 1);
+        document.getElementById(id).remove();
+        updateBalance();
+        updateChart();
+    }
+};
 
     addBtn.addEventListener('click', showPanel);
     cancelBtn.addEventListener('click', closePanel);
@@ -361,6 +421,10 @@ const createNewTransaction = () => {
     });
 
     deleteAllBtn.addEventListener('click', () => {
+        showModal(modal);
+    });
+
+    confirmDeleteBtn.addEventListener('click', () => {
         income.innerHTML = `<h3>${selectedLanguage === 'pl' ? 'Przychód' : 'Income'}</h3>`;
         outcome.innerHTML = `<h3>${selectedLanguage === 'pl' ? 'Wydatki' : 'Expenses'}</h3>`;
         money.textContent = `0${currencySymbol}`;
@@ -368,13 +432,58 @@ const createNewTransaction = () => {
         moneyArr = [0];
         balanceHistory = [];
         updateChart();
+        hideModal(modal);
     });
 
-    lightBtn.addEventListener('click', () => {
-        root.style.setProperty('--first-color', '#F5F7FA');
-        root.style.setProperty('--second-color', '##1E2A3A');
-        root.style.setProperty('--border-color', 'rgba(0, 0, 0, 0.15)');
+    cancelDeleteBtn.addEventListener('click', () => {
+        hideModal(modal);
+    });
 
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+
+lightBtn.addEventListener('click', () => {
+
+    root.style.setProperty('--first-color', '#F5F7FA');
+    root.style.setProperty('--second-color', '#1E2A3A');
+    root.style.setProperty('--border-color', 'rgba(0, 0, 0, 0.15)');
+
+    body.style.backgroundColor = 'var(--light-bg-primary)';
+    body.style.backgroundImage = `
+        repeating-linear-gradient(0deg, 
+            var(--light-bg-primary), 
+            var(--light-bg-primary) 15px, 
+            var(--light-bg-secondary) 15px, 
+            var(--light-bg-secondary) 16px
+        ),
+        repeating-linear-gradient(90deg, 
+            var(--light-bg-primary), 
+            var(--light-bg-primary) 15px, 
+            var(--light-bg-secondary) 15px, 
+            var(--light-bg-secondary) 16px
+        )
+    `;
+    body.style.boxShadow = `
+        inset 0 0 50px var(--light-shadow-strong),
+        inset 0 0 100px var(--light-shadow-light)
+    `;
+
+    const style = document.createElement('style');
+    style.textContent = `
+        body::after {
+            background: radial-gradient(circle at 50% 50%, 
+                var(--light-highlight) 0%, 
+                transparent 60%
+            );
+        }
+    `;
+    document.head.appendChild(style);
+
+    if (typeof balanceChart !== 'undefined') {
         balanceChart.options.plugins.title.color = '#333';
         balanceChart.options.scales.x.title.color = '#333';
         balanceChart.options.scales.y.title.color = '#333';
@@ -384,13 +493,49 @@ const createNewTransaction = () => {
         balanceChart.options.scales.y.grid.color = 'rgba(0, 0, 0, 0.1)';
         balanceChart.options.plugins.legend.labels.color = '#333';
         balanceChart.update();
-    });
+    }
 
-    darkBtn.addEventListener('click', () => {
-        root.style.setProperty('--first-color', '#222');
-        root.style.setProperty('--second-color', '#F9F9F9');
-        root.style.setProperty('--border-color', 'rgba(255, 255, 255, 0.4)');
+    body.classList.remove('dark-theme');
+});
 
+darkBtn.addEventListener('click', () => {
+
+    root.style.setProperty('--first-color', '#222');
+    root.style.setProperty('--second-color', '#F9F9F9');
+    root.style.setProperty('--border-color', 'rgba(255, 255, 255, 0.4)');
+
+    body.style.backgroundColor = 'var(--dark-bg-primary)';
+    body.style.backgroundImage = `
+        repeating-linear-gradient(0deg, 
+            var(--dark-bg-primary), 
+            var(--dark-bg-primary) 15px, 
+            var(--dark-bg-secondary) 15px, 
+            var(--dark-bg-secondary) 16px
+        ),
+        repeating-linear-gradient(90deg, 
+            var(--dark-bg-primary), 
+            var(--dark-bg-primary) 15px, 
+            var(--dark-bg-secondary) 15px, 
+            var(--dark-bg-secondary) 16px
+        )
+    `;
+    body.style.boxShadow = `
+        inset 0 0 50px var(--dark-shadow-strong),
+        inset 0 0 100px var(--dark-shadow-light)
+    `;
+
+    const style = document.createElement('style');
+    style.textContent = `
+        body::after {
+            background: radial-gradient(circle at 50% 50%, 
+                var(--dark-highlight) 0%, 
+                transparent 60%
+            );
+        }
+    `;
+    document.head.appendChild(style);
+
+    if (typeof balanceChart !== 'undefined') {
         balanceChart.options.plugins.title.color = '#FFF';
         balanceChart.options.scales.x.title.color = '#FFF';
         balanceChart.options.scales.y.title.color = '#FFF';
@@ -400,7 +545,10 @@ const createNewTransaction = () => {
         balanceChart.options.scales.y.grid.color = 'rgba(255, 255, 255, 0.2)';
         balanceChart.options.plugins.legend.labels.color = '#FFF';
         balanceChart.update();
-    });
+    }
+
+    body.classList.add('dark-theme');
+});
 
     const setLanguage = (language) => {
         console.log("Setting language to:", language);

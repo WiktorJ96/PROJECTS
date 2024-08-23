@@ -31,7 +31,9 @@
     }
     </script>
 </head>
+<style>
 
+</style>
 <body data-page="wallet">
 
     <header>
@@ -86,6 +88,7 @@
     </main>
 
     <div class="add-transaction-panel" aria-labelledby="add-transaction-title">
+        
         <h2 class="titleh2" id="add-transaction-title" data-lang-key="add_transaction_panel_title">Dodaj nową transakcję
         </h2>
         <hr class="hrsecond">
@@ -115,7 +118,31 @@
             <button class="cancel" aria-label="Anuluj" data-lang-key="cancel_button"><i class="far fa-window-close"
                     aria-hidden="true"></i> Anuluj</button>
         </div>
+        
     </div>
+
+    <div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <h2>Potwierdzenie</h2>
+        <p>Czy na pewno chcesz usunąć wszystkie transakcje?</p>
+        <div class="modal-buttons">
+            <button id="confirmDelete">Tak, usuń</button>
+            <button id="cancelDelete">Anuluj</button>
+        </div>
+    </div>
+</div>
+
+<div id="deleteTransactionModal" class="modal">
+    <div class="modal-content">
+        <h2>Potwierdzenie</h2>
+        <p>Czy na pewno chcesz usunąć tę transakcję?</p>
+        <div class="modal-buttons">
+            <button id="confirmDeleteTransaction">Tak, usuń</button>
+            <button id="cancelDeleteTransaction">Anuluj</button>
+        </div>
+    </div>
+</div>
+
 <footer>
     <div class="language-switch">
         <button id="lang-pl">PL</button>
