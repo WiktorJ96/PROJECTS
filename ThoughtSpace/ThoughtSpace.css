@@ -811,8 +811,8 @@ footer::after {
 
     .note {
         position: relative;
-        left: 45%;
-        transform: translateX(-50%);
+        left: 10%;
+        
     }
 
     .note-area {
@@ -820,16 +820,8 @@ footer::after {
     }
 }
 
-@media (hover: none), (max-width: 768px) {
-    .note:active, .note-header:active, .note-body:active {
-        transform: none;
-        box-shadow: none;
-    }
-    .note:hover, .note-header:hover, .note-body:hover {
-        transform: none;
-        box-shadow: none;
-    }
-}
+
+
 
 
 
