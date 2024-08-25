@@ -1,11 +1,29 @@
+ ::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f4f4f4; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #b0b0b0; 
+    border-radius: 10px;
+    border: 3px solid #f4f4f4; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #8e8e8e;
+}
+
  body {
-     background: linear-gradient(135deg, #f3f4f6 0%, #e2e8f0 100%);
+     background: linear-gradient(135deg, #aaaaaa 0%, #e2e8f0 100%);
      font-family: 'Poppins', sans-serif;
      animation: fadeIn 1s ease-in-out;
      overflow-x: hidden;
      margin-top: -25px;
      overflow: auto;
-     height: 100vh;
+     height: 100%;
  }
 
  @keyframes fadeIn {
@@ -19,14 +37,13 @@
  }
 
  .skill-icon {
-     font-size: 3rem;
-     color: #007bff;
+     font-size: 2rem;
+     color: hsla(0, 0%, 16%, 0.9);
      transition: transform 0.3s, color 0.3s;
  }
 
  .skill-icon:hover {
      transform: rotate(15deg) scale(1.1);
-     color: #0056b3;
  }
 
  .skill-card {
@@ -64,3 +81,30 @@
  .language-switch{
     display: none;
  }
+ .iconCSS{
+    background-image: linear-gradient(135deg, hsla(193, 95%, 68%, 0.9), hsla(228, 78%, 52%, 0.9), hsla(235, 66%, 30%, 0.9));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    }
+    .iconJS{
+    background-image: linear-gradient(135deg, hsla(51, 100%, 50%, 0.9), hsla(39, 100%, 50%, 0.9));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    }
+    .iconHTML{
+    background-image: linear-gradient(135deg, hsla(0, 100%, 71%, 0.9), hsla(0, 100%, 50%, 0.9), hsla(0, 100%, 27%, 0.9));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    }
+    .icon {
+        font-size: 100px;
+        display: block;
+        text-align-last: center;
+        margin-bottom: 20px;
+    }
