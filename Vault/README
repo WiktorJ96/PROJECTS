@@ -1,9 +1,7 @@
-PL:
+"PL"
 
-Aplikacja pozwala na zarządzanie wydatkami i obserwowanie zmian salda swojego konta na wykresie. 
-Każdy przychód lub wydatek może być przydzielony do osobnej kategori.
+Vault to aplikacja do zarządzania finansami, umożliwiająca śledzenie wydatków oraz monitorowanie zmian salda konta poprzez przejrzyste wykresy. Każdy przychód i wydatek można przypisać do odpowiednich kategorii, co ułatwia analizę i kontrolę finansów.
 
-EN:
+"EN"
 
-The application allows you to manage your expenses and observe changes in your account balance on a chart. 
-Each income or expense can be assigned to a separate category.
+Vault is a finance management application that allows users to track expenses and monitor account balance changes through clear charts. Every income and expense can be assigned to specific categories, making financial analysis and control easier.

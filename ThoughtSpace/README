@@ -1,9 +1,7 @@
 "PL"
 
-Aplikacja posiada wszystkie potrzebne funkcje do zadowalającego korzystania z notatnika takie jak, filtr notatek, wyszukiwarka, Quill (edytor tekstowy) oraz inne podstawowe funkcje niezbędne dla notatnika. Notatki mogą być zapisywane w pliku .json po odpowiedniej konfiguracji opisanej poniżej.
+ThoughtSpace to wszechstronna aplikacja notatnikowa, oferująca zaawansowane funkcje takie jak filtracja notatek, wyszukiwarka oraz integracja z edytorem tekstowym Quill. Aplikacja umożliwia tworzenie, edytowanie oraz organizowanie notatek w prosty i efektywny sposób. Dodatkowo, notatki można zapisać w formacie .json zgodnie z konfiguracją opisaną w pliku README.
 
-
-Projekt zawiera prosty notatnik który umożliwia zapisywanie notatek w pliku .json na dysku.
 Instrukcja:
 1. stwórz folder note-app
 2. zainicijum w nim nowy projekt za pomoca 'npm init -y'
@@ -15,9 +13,8 @@ Instrukcja:
 
 "EN"
 
-The application has all the necessary functions for satisfactory use of the notebook, such as a note filter, search engine, Quill (text editor) and other basic functions necessary for a notebook. Notes can be saved in a .json file after appropriate configuration described below.
+ThoughtSpace is a versatile notepad application offering advanced features such as note filtering, a search function, and integration with the Quill text editor. The application allows users to easily create, edit, and organize their notes in a simple and efficient way. Additionally, notes can be saved in .json format, following the configuration described in the README file.
 
-The project includes a simple notebook that allows you to save notes in a .json file on disk.
 Instruction:
 1. create a note-app folder
 2. initialize a new project using npm init -y

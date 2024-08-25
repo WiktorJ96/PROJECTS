@@ -1,9 +1,7 @@
 "PL"
-Możesz zapisać swoje zadania w pliku PDF i przesłać je lub wydrukować, aby to zrobić
-użyj polecenia 'npm install jspdf jspdf-autotable' w konsoli i zainstaluj biblioteke JS
-która pozwala generować pliki PDF.
+
+Chorely to aplikacja typu „to-do”, stworzona do zarządzania zadaniami. Umożliwia łatwe dodawanie, edytowanie, usuwanie oraz odznaczanie zadań jako wykonane. Aplikacja pozwala również na eksport listy zadań do pliku PDF z automatycznie generowaną tabelą, co ułatwia organizację i archiwizację pracy.
 
 "EN"
-You can save your assignments to a PDF file and leave them there, or print them out to save
-command 'npm install jspdf jspdf-autotable' in the console and install the JS library
-which allows you to generate PDF files.
+
+Chorely is a to-do list application designed for task management. It allows users to easily add, edit, delete, and mark tasks as completed. The app also enables exporting the task list to a PDF file with an automatically generated table, facilitating organization and task archiving.
