@@ -162,6 +162,7 @@ main{
 .menu-buttons {
     display: flex;
     gap: 10px;
+    margin-left: 15px;
 }
 
 .menu button {
@@ -355,7 +356,7 @@ main{
 .filter-container {
     display: flex;
     align-items: center;
-    margin-right: 15px;
+    margin-right: 25px;
 }
 
 .filter-icon {
@@ -820,11 +821,16 @@ footer::after {
 }
 
 @media (hover: none), (max-width: 768px) {
-    .note:hover {
+    .note:active, .note-header:active, .note-body:active {
+        transform: none;
+        box-shadow: none;
+    }
+    .note:hover, .note-header:hover, .note-body:hover {
         transform: none;
         box-shadow: none;
     }
 }
+
 
 
 
