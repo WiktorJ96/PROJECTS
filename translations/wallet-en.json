@@ -35,5 +35,10 @@
     "history_chart_tooltip_label": "$",
     "history_chart_income_area_label": "Income:",
     "history_chart_expense_area_label": "Expenses:",
-    "footer": "2024 W.J Project. All rights reserved."
+    "footer": "2024 W.J Project. All rights reserved.",
+    "modal-content-h2": "Confirmation",
+    "modal-content-p": "Are you sure you want to delete all transactions?",
+    "modal-content-p2": "Are you sure you want to delete this transaction?",
+    "modal-content-confirm-button": "Confirm",
+    "modal-content-cancel-button": "Cancel"
 }

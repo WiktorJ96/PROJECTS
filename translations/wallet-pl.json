@@ -35,5 +35,10 @@
     "history_chart_tooltip_label": "zł",
     "history_chart_income_area_label": "Przychód:",
     "history_chart_expense_area_label": "Wydatki:",
-    "footer": "2024 W.J Project. Wszelkie prawa zastrzeżone."
+    "footer": "2024 W.J Project. Wszelkie prawa zastrzeżone.",
+    "modal-content-h2": "Potwierdzenie",
+    "modal-content-p": "Czy na pewno chcesz usunąć wszystkie transakcje?",
+    "modal-content-p2": "Czy na pewno chcesz usunąć tę transakcję?",
+    "modal-confirm-button": "Tak",
+    "modal-cancel-button": "Nie"
 }

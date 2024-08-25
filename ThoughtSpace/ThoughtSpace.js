@@ -191,11 +191,11 @@ deleteAllBtn.addEventListener('click', deleteAllNotes);
 
 const setNoteColor = (note, color) => {
     const gradients = {
-        'Kolor1': 'linear-gradient(135deg, #ffecd2, #fcb69f)',
-        'Kolor2': 'linear-gradient(135deg, #d4fc79, #96e6a1)',
-        'Kolor3': 'linear-gradient(135deg, #cfd9df, #e2ebf0)',
-        'Kolor4': 'linear-gradient(135deg, #f3e7e9, #e3eeff)',
-        'Kolor5': 'linear-gradient(135deg, #fbc2eb, #a6c1ee)'
+        'Kolor1': 'linear-gradient(135deg, #ffffd8, #fff9c4)',  
+        'Kolor2': 'linear-gradient(135deg, #e8f5e9, #c8e6c9)',  
+        'Kolor3': 'linear-gradient(135deg, #e3f2fd, #bbdefb)',  
+        'Kolor4': 'linear-gradient(135deg, #ffebee, #ffcdd2)', 
+        'Kolor5': 'linear-gradient(135deg, #fff3e0, #ffe0b2)'   
     };
     note.style.backgroundImage = gradients[color] || 'linear-gradient(135deg, #ffffff, #f0f0f0)';
 }

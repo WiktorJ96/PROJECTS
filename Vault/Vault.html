@@ -37,6 +37,8 @@
 <body data-page="wallet">
 
     <header>
+        <nav aria-label="breadcrumb">
+        </nav>
         <div class="style-selection" aria-label="Wybór stylu">
             <div class="color-buttons">
                 <button class="light" aria-label="Jasny motyw"></button>
@@ -49,9 +51,7 @@
     </header>
 
     <main>
-        <nav aria-label="breadcrumb">
-        </nav>
-
+        
         <section class="transactions" aria-labelledby="transaction-list-title">
             <h2 class="title" id="transaction-list-title" data-lang-key="transactions_section_title">Lista transakcji
             </h2>
@@ -123,22 +123,22 @@
 
     <div id="confirmationModal" class="modal">
     <div class="modal-content">
-        <h2>Potwierdzenie</h2>
-        <p>Czy na pewno chcesz usunąć wszystkie transakcje?</p>
+        <h2 data-lang-key="modal-content-h2">Potwierdzenie</h2>
+        <p data-lang-key="modal-content-p">Czy na pewno chcesz usunąć wszystkie transakcje?</p>
         <div class="modal-buttons">
-            <button id="confirmDelete">Tak, usuń</button>
-            <button id="cancelDelete">Anuluj</button>
+            <button id="confirmDelete" data-lang-key="modal-content-confirm-button">Tak</button>
+            <button id="cancelDelete" data-lang-key="modal-content-cancel-button">Anuluj</button>
         </div>
     </div>
 </div>
 
 <div id="deleteTransactionModal" class="modal">
     <div class="modal-content">
-        <h2>Potwierdzenie</h2>
-        <p>Czy na pewno chcesz usunąć tę transakcję?</p>
+        <h2 data-lang-key="modal-content-h2">Potwierdzenie</h2>
+        <p data-lang-key="modal-content-p2">Czy na pewno chcesz usunąć tę transakcję?</p>
         <div class="modal-buttons">
-            <button id="confirmDeleteTransaction">Tak, usuń</button>
-            <button id="cancelDeleteTransaction">Anuluj</button>
+            <button id="confirmDeleteTransaction" data-lang-key="modal-content-confirm-button">Tak</button>
+            <button id="cancelDeleteTransaction" data-lang-key="modal-content-confirm-button">Anuluj</button>
         </div>
     </div>
 </div>

@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    <link rel="stylesheet" href="./INDEX/portfolio.css">
+    <link rel="stylesheet" href="./SUBPAGES/portfolio.css">
     <title>Portfolio - Front-end Developer i Web Designer</title>
 
     <script type="application/ld+json">
@@ -34,6 +34,7 @@
 <body data-page="index">
     <a href="#main-content" class="skip-link" style="top: -50%;">Przejdź do głównej treści</a>
 
+    <header class="index-header">
     <div class="menu-responsive">
         <nav aria-label="Menu główne" role="menu">
             <div class="logo">
@@ -47,35 +48,29 @@
                         <span data-lang-key="about">O mnie</span>
                     </a>
                 </li>
-
                 <li>
                     <a class="scroll" href="#skills">
                         <i class="fa fa-cogs" aria-hidden="true"></i>
                         <span data-lang-key="skills">Umiejętności</span>
                     </a>
                 </li>
-
                 <li>
                     <a class="scroll" href="#portfolio">
                         <i class="fa fa-briefcase" aria-hidden="true"></i>
                         <span data-lang-key="portfolio">Portfolio</span>
                     </a>
                 </li>
-
                 <li>
                     <a class="scroll" href="#contact">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
                         <span data-lang-key="contact">Kontakt</span>
                     </a>
                 </li>
-
             </ul>
         </nav>
     </div>
 
-    
-    <header>
-        <section id="header">
+    <section id="header">
         <div class="container">
             <div class="row">
                 <div class="header__top">
@@ -86,21 +81,20 @@
                             </ul>
                         </nav>
                         <div class="language-switch">
-                            <button id="lang-pl">PL</button>
-                            <button id="lang-en">EN</button>
+                            <button id="lang-pl" aria-label="Zmień język na polski">PL</button>
+                            <button id="lang-en" aria-label="Zmień język na angielski">EN</button>
                         </div>
                     </div>
                 </div>
-
-                
             </div>
-            
 
             <div class="header__content">
                 <p class="bold" data-lang-key="welcome">Witaj !</p>
-                <p><span data-lang-key="intro">Jestem początkującym</span> <span class="bold"
-                        data-lang-key="frontend_dev">Front-end Developerem</span> & <span class="bold"
-                        data-lang-key="web_designer">Web Designerem</span></p>
+                <p>
+                    <span data-lang-key="intro">Jestem początkującym</span> 
+                    <span class="bold" data-lang-key="frontend_dev">Front-end Developerem</span> & 
+                    <span class="bold" data-lang-key="web_designer">Web Designerem</span>
+                </p>
                 <a class="btn scroll" href="#portfolio" data-lang-key="projects">Projekty</a>
             </div>
 
@@ -108,8 +102,9 @@
                 <a class="scroll" href="#about"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
             </div>
         </div>
-        </section>
-    </header>
+    </section>
+</header>
+
     
 
     <main id="main-content">
@@ -264,9 +259,9 @@
                                     <span class="click-text">click</span>
                                 </a>
                             </span>
-                            <span class="skills__percent">80%</span>
+                            <span class="skills__percent">70%</span>
                         </div>
-                        <div class="progress-container" style="--progress: 80%;">
+                        <div class="progress-container" style="--progress: 70%;">
                             <div class="progress-bar"></div>
                         </div>
                     </div>
@@ -294,7 +289,7 @@
                                 <div class="flip-card-back">
                                     <h3 data-lang-key="js_projects">Projekty JavaScript</h3>
                                     <p data-lang-key="based_on_js_html_css">Projekty bazujące na JS, HTML i CSS</p>
-                                    <a href="./INDEX/projektyJS.html" class="specific-icon-link"><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                                    <a href="./SUBPAGES/projektyJS.html" class="specific-icon-link"><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -314,7 +309,7 @@
                                     <div class="flip-card-back">
                                         <h3 data-lang-key="figma_projects">Projekty Figma</h3>
                                         <p data-lang-key="figma_based">Projekty w edytorze Figma</p>
-                                        <a href="./INDEX/projektyFIGMA.html" class="specific-icon-link"><i class="fas fa-arrow-right"
+                                        <a href="./SUBPAGES/projektyFIGMA.html" class="specific-icon-link"><i class="fas fa-arrow-right"
                                                 aria-hidden="true"></i></a>
                                     </div>
                                 </div>

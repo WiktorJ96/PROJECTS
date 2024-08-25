@@ -288,7 +288,7 @@ h2 {
     min-height: 105vh;
 }
 
-header {
+.index-header {
     background-image: url(../imghoney/bglink.webp);
     background-size: cover;
     background-repeat: no-repeat;
@@ -883,7 +883,7 @@ header {
     }
 
 /* EcoTrack */
-.logo {
+.logo-EcoTrack {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -902,7 +902,7 @@ header {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-.logo-icon {
+.logo-icon-EcoTrack {
     position: relative;
     width: 48px;
     height: 42px;
