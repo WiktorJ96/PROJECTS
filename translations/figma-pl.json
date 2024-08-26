@@ -1,0 +1,17 @@
+{
+    "page_title": "Umiejętności Figma",
+    "figma_basics_title": "Podstawy Figmy:",
+    "figma_basics_desc": "Znajomość interfejsu i narzędzi Figmy",
+    "color_management_title": "Zarządzanie kolorami:",
+    "color_management_desc": "Tworzenie biblioteki kolorów, dobieranie kolorów głównych, dopełniających, odcieni i gradientów",
+    "typography_title": "Typografia:",
+    "typography_desc": "Tworzenie biblioteki fontów, wykorzystanie Google Fonts, funkcje związane z tekstem w Figmie",
+    "image_handling_title": "Praca z obrazami:",
+    "image_handling_desc": "Importowanie i kadrowanie zdjęć, usuwanie tła, tworzenie efektów, maskowanie, praca z ikonami",
+    "layout_design_title": "Projektowanie layoutów:",
+    "layout_design_desc": "Wykorzystanie siatki (grid) w projektowaniu, tworzenie Key Visual dla kampanii",
+    "responsive_design_title": "Projektowanie responsywne:",
+    "responsive_design_desc": "Tworzenie grafik dla różnych formatów (Instagram, Facebook, LinkedIn, reklamy Google)",
+    "advanced_techniques_title": "Zaawansowane techniki:",
+    "advanced_techniques_desc": "Tworzenie spójnych kampanii reklamowych, implementacja CTA (Call to Action) w projektach"
+}

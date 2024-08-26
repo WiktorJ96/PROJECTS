@@ -1,0 +1,17 @@
+{
+    "page_title": "Figma Skills",
+    "figma_basics_title": "Figma Basics:",
+    "figma_basics_desc": "Familiarity with the Figma interface and tools",
+    "color_management_title": "Color Management:",
+    "color_management_desc": "Creating a color library, choosing primary, complementary colors, shades, and gradients",
+    "typography_title": "Typography:",
+    "typography_desc": "Creating a font library, using Google Fonts, text-related features in Figma",
+    "image_handling_title": "Working with Images:",
+    "image_handling_desc": "Importing and cropping images, removing backgrounds, creating effects, masking, working with icons",
+    "layout_design_title": "Layout Design:",
+    "layout_design_desc": "Using grid in design, creating Key Visual for campaigns",
+    "responsive_design_title": "Responsive Design:",
+    "responsive_design_desc": "Creating graphics for different formats (Instagram, Facebook, LinkedIn, Google Ads)",
+    "advanced_techniques_title": "Advanced Techniques:",
+    "advanced_techniques_desc": "Creating cohesive ad campaigns, implementing CTA (Call to Action) in designs"
+}
