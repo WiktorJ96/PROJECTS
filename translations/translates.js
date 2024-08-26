@@ -67,20 +67,23 @@ document.addEventListener('DOMContentLoaded', function () {
         document.documentElement.lang = lang;
     }
 
-    const langPl = document.getElementById('lang-pl');
-    const langEn = document.getElementById('lang-en');
+    function addLanguageListeners() {
+        const langPl = document.getElementById('lang-pl');
+        const langEn = document.getElementById('lang-en');
 
-    if (langPl) {
-        langPl.addEventListener('click', () => setLanguage('pl'));
-    } else {
-        console.warn('Polish language button not found');
+        if (langPl) {
+            langPl.addEventListener('click', () => setLanguage('pl'));
+        } else {
+            console.warn('Polish language button not found');
+        }
+
+        if (langEn) {
+            langEn.addEventListener('click', () => setLanguage('en'));
+        } else {
+            console.warn('English language button not found');
+        }
     }
 
-    if (langEn) {
-        langEn.addEventListener('click', () => setLanguage('en'));
-    } else {
-        console.warn('English language button not found');
-    }
-
+    addLanguageListeners();
     loadPreferredLanguage();
 });

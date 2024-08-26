@@ -19,6 +19,11 @@ body {
     min-height: 100vh;
     margin: 0;
 }
+
+.language-switch{
+    display: none;
+}
+
 #options-section, #stopwatch-section, #timer-section {
     z-index: 100000;
 }
@@ -231,6 +236,8 @@ display: none;
     transition: opacity 1s ease;
     display: block; 
     cursor: pointer;
+    position: relative;
+    left: -0.4%;
 }
 
 .buttons {
@@ -492,5 +499,57 @@ button:active {
     }
     .logo-container{
         top: 15px;
+    }
+    #switch-button {
+        left: -0.8%;
+    }
+}
+
+@media (max-width: 412px) {
+    .watch-face {
+        width: 300px;
+        height: 300px;
+    }
+
+    .hour-marker {
+        transform-origin: 25% 125px;
+    }
+
+    .stopwatch, .minutnik-display {
+        font-size: 2em;
+    }
+
+    button {
+        font-size: 0.75em;
+        padding: 6px 12px;
+    }
+
+    .logo-container {
+        top: 10px;
+        width: 80px;
+        height: 80px;
+    }
+
+    .watch-content {
+        width: 90%;
+        height: 90%;
+    }
+
+    .inner-ring {
+        width: 90%;
+        height: 90%;
+    }
+
+    .time-list {
+        width: 80%;
+    }
+
+    #minutnik-input {
+        width: 70%;
+    }
+
+    .section-switcher button {
+        font-size: 0.8em;
+        padding: 4px 8px;
     }
 }
