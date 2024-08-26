@@ -39,6 +39,6 @@
     "modal-content-h2": "Potwierdzenie",
     "modal-content-p": "Czy na pewno chcesz usunąć wszystkie transakcje?",
     "modal-content-p2": "Czy na pewno chcesz usunąć tę transakcję?",
-    "modal-confirm-button": "Tak",
-    "modal-cancel-button": "Nie"
+    "modal-content-confirm-button": "Tak",
+    "modal-content-cancel-button": "Nie"
 }
