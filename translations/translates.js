@@ -5,19 +5,28 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     function fetchTranslations(lang) {
-        const page = document.body.getAttribute('data-page') || 'wallet';
-        return fetch(`../translations/${page}-${lang}.json`)
+    const page = document.body.getAttribute('data-page');
+    const paths = [
+        `../translations/${page}-${lang}.json`,
+        `./translations/${page}-${lang}.json`
+    ];
+
+    const fetchPromises = paths.map(path => 
+        fetch(path)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.json();
             })
-            .catch(error => {
-                console.error(`Error loading translations for ${lang}:`, error);
-                return {};
-            });
-    }
+    );
+
+    return Promise.any(fetchPromises)
+        .catch(error => {
+            console.error(`Error loading translations for ${lang}:`, error);
+            return {};
+        });
+}
 
     function loadTranslations(lang) {
         return fetchTranslations(lang)
