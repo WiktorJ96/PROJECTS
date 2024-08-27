@@ -26,6 +26,8 @@ jobs:
       run: npm ci
     - name: Run tests
       run: npm test
+    - name: List spec directory
+      run: ls -R spec
       continue-on-error: true
     - name: Display error log if test fails
       if: failure()
