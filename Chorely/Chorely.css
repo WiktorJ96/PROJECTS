@@ -53,7 +53,7 @@ body {
             }
         }
 
-.header {
+        .header {
             padding: 40px;
             border-radius: 5px 5px 0 0;
             background-image: linear-gradient(135deg, #09a1f9 0%, #0d47a1 100%);
@@ -169,7 +169,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-self: center;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .todo-input {
