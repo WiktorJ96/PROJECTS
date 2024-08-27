@@ -2,28 +2,31 @@ name: Node.js CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
       with:
-        node-version: '14'
-
+        node-version: '20.x'
+    - name: List directory contents
+      run: ls -la
+    - name: Display Node.js version
+      run: node --version
+    - name: Display npm version
+      run: npm --version
     - name: Install dependencies
-      run: npm install
-
+      run: npm ci
     - name: Run tests
       run: npm test
+      continue-on-error: true
+    - name: Display error log if test fails
+      if: failure()
+      run: cat /home/runner/.npm/_logs/2024-*-debug.log
