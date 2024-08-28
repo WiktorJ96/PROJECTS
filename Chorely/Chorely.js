@@ -1,22 +1,352 @@
-let $todoInput;
-let $alertInfo;
-let $addBtn;
-let $saveBtn; 
-let $ulList;
-let $newTask;
-let $allTasks;
-let $idNumber = 0;
-let $popup;
-let $popupInfo;
-let $editedTodo;
-let $popupInput;
-let $addPopupBtn;
-let $closeTodoBtn;
-const saveButton = document.querySelector('.save-btn');
-    const btnDisplay = saveButton.querySelector('.btn-display');
-    const btnDisplayNone = saveButton.querySelector('.btn-displaynone');
-    let timeoutId;
-    let isHovered = false;
+class TodoList {
+    constructor() {
+        this.tasks = [];
+        this.idNumber = 0;
+    }
+
+    addNewTask(taskText) {
+        taskText = taskText.trim();
+        if (taskText !== '' && !this.isDuplicateTask(taskText)) {
+            this.idNumber++;
+            const newTask = {
+                id: this.idNumber,
+                text: taskText,
+                completed: false
+            };
+            this.tasks.push(newTask);
+            return newTask;
+        }
+        return null;
+    }
+
+    isDuplicateTask(taskText) {
+        return this.tasks.some(task => task.text === taskText);
+    }
+
+    completeTask(taskId) {
+        const task = this.tasks.find(t => t.id === taskId);
+        if (task) {
+            task.completed = !task.completed;
+            return task;
+        }
+        return null;
+    }
+
+    editTask(taskId, newText) {
+        const task = this.tasks.find(t => t.id === taskId);
+        if (task && newText.trim() !== '') {
+            task.text = newText.trim();
+            return task;
+        }
+        return null;
+    }
+
+    deleteTask(taskId) {
+        const index = this.tasks.findIndex(t => t.id === taskId);
+        if (index !== -1) {
+            return this.tasks.splice(index, 1)[0];
+        }
+        return null;
+    }
+
+    getAllTasks() {
+        return [...this.tasks];
+    }
+}
+
+class TodoListUI {
+    constructor(todoList) {
+        this.todoList = todoList;
+        this.todoInput = document.querySelector('.todo-input');
+        this.alertInfo = document.querySelector('.alert-info');
+        this.addBtn = document.querySelector('.add-btn');
+        this.ulList = document.querySelector('.todo-list ul');
+        this.saveBtn = document.querySelector('.save-btn');
+        this.popup = document.querySelector('.popup');
+        this.popupInfo = document.querySelector('.popup-info');
+        this.popupInput = document.querySelector('.popup-input');
+        this.addPopupBtn = document.querySelector('.accept');
+        this.closeTodoBtn = document.querySelector('.cancel');
+        
+        this.editedTodo = null;
+
+        this.bindEvents();
+    }
+
+    bindEvents() {
+        this.addBtn.addEventListener('click', () => this.addNewTask());
+        this.todoInput.addEventListener('keyup', (e) => this.enterCheck(e));
+        this.ulList.addEventListener('click', (e) => this.checkClick(e));
+        this.addPopupBtn.addEventListener('click', () => this.changeTodo());
+        this.closeTodoBtn.addEventListener('click', () => this.closePopup());
+        this.saveBtn.addEventListener('click', () => this.saveTasksToPDF());
+    }
+
+    addNewTask() {
+        const taskText = this.todoInput.value;
+        const newTask = this.todoList.addNewTask(taskText);
+        if (newTask) {
+            this.createTaskElement(newTask);
+            this.todoInput.value = '';
+            this.alertInfo.innerHTML = '';
+        } else if (taskText.trim() === '') {
+            this.alertInfo.innerHTML = translations[language].emptyTask;
+        } else {
+            this.alertInfo.innerHTML = translations[language].duplicateTask;
+        }
+    }
+
+    createTaskElement(task) {
+        const newTask = document.createElement('li');
+        newTask.setAttribute('id', `todo-${task.id}`);
+        newTask.innerHTML = `
+            <div class="task-text">${task.id}. ${task.text}</div>
+            <div class="tools">
+                <button class="complete"><i class="fas fa-check"></i></button>
+                <button class="edit"><i class="fas fa-pen"></i></button>
+                <button class="delete"><i class="fas fa-times"></i></button>
+            </div>
+        `;
+        this.ulList.appendChild(newTask);
+        this.updateTaskNumbers();
+    }
+
+    enterCheck(e) {
+        if (e.key === 'Enter') {
+            this.addNewTask();
+        }
+    }
+
+    checkClick(e) {
+        if (e.target.closest('button')) {
+            const taskElement = e.target.closest('li');
+            const taskId = parseInt(taskElement.id.split('-')[1]);
+            
+            if (e.target.closest('button').classList.contains('complete')) {
+                this.toggleCompleteTask(taskId, taskElement);
+            } else if (e.target.closest('button').classList.contains('edit')) {
+                this.editTask(taskId, taskElement);
+            } else if (e.target.closest('button').classList.contains('delete')) {
+                this.deleteTask(taskId, taskElement);
+            }
+        }
+    }
+
+    toggleCompleteTask(taskId, taskElement) {
+        const updatedTask = this.todoList.completeTask(taskId);
+        if (updatedTask) {
+            taskElement.classList.toggle('completed');
+            const completeButton = taskElement.querySelector('.complete');
+            if (completeButton) {
+                completeButton.classList.toggle('completed');
+            }
+            this.updateTaskAppearance(taskElement, updatedTask);
+            this.updateTaskNumbers(); 
+        }
+    }
+
+    updateTaskAppearance(taskElement, task) {
+        const taskTextElement = taskElement.querySelector('.task-text');
+        if (taskTextElement) {
+            taskTextElement.textContent = task.text;
+            taskTextElement.style.textDecoration = task.completed ? 'line-through' : 'none';
+        }
+    }
+
+    editTask(taskId, taskElement) {
+        const task = this.todoList.getAllTasks().find(t => t.id === taskId);
+        if (task) {
+            this.editedTodo = taskElement;
+            this.popup.style.display = 'flex';
+            this.popupInput.value = task.text;
+        } else {
+            console.error('Task not found');
+        }
+    }
+
+    changeTodo() {
+        if (this.popupInput.value !== '') {
+            const taskId = parseInt(this.editedTodo.id.split('-')[1]);
+            const updatedTask = this.todoList.editTask(taskId, this.popupInput.value);
+            if (updatedTask) {
+                this.updateTaskAppearance(this.editedTodo, updatedTask);
+                this.closePopup();
+                this.updateTaskNumbers();
+            }
+        } else {
+            this.popupInfo.innerText = translations[language].emptyPopup;
+        }
+    }
+
+    deleteTask(taskId, taskElement) {
+        const deletedTask = this.todoList.deleteTask(taskId);
+        if (deletedTask) {
+            taskElement.remove();
+            this.updateTaskNumbers();
+        }
+        if (this.todoList.getAllTasks().length === 0) {
+            this.alertInfo.innerHTML = translations[language].noTasks;
+        }
+    }
+
+    closePopup() {
+        this.popup.style.display = 'none';
+        this.popupInfo.innerHTML = '';
+    }
+
+     updateTaskNumbers() {
+        const tasks = this.todoList.getAllTasks();
+        tasks.forEach((task, index) => {
+            const taskElement = document.getElementById(`todo-${task.id}`);
+            if (taskElement) {
+                const taskTextElement = taskElement.querySelector('.task-text');
+                if (taskTextElement) {
+                    taskTextElement.textContent = `${index + 1}. ${task.text}`;
+                    taskTextElement.style.textDecoration = task.completed ? 'line-through' : 'none';
+                }
+            }
+        });
+    }
+
+    saveTasksToPDF() {
+        const { jsPDF } = window.jspdf;
+
+        const canvas = document.createElement('canvas');
+        const pdfWidth = 210;  
+        const pdfHeight = 297; 
+        const scale = 10;      
+        canvas.width = pdfWidth * scale;
+        canvas.height = pdfHeight * scale;
+        const ctx = canvas.getContext('2d');
+
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate(Math.PI / 4);  
+        ctx.translate(-canvas.width / 2, -canvas.height / 2);
+
+        const bgGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        bgGradient.addColorStop(0, 'rgba(240, 248, 255, 0.8)');  
+        bgGradient.addColorStop(1, 'rgba(230, 230, 250, 0.8)');  
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const logoWidth = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height) * 0.7;
+        const logoHeight = 180 * scale * 0.7;
+        const startX = (canvas.width - logoWidth) / 2;
+        const startY = (canvas.height - logoHeight) / 2;
+
+        const logoGradient = ctx.createLinearGradient(startX, startY, startX + logoWidth, startY + logoHeight);
+        logoGradient.addColorStop(0, 'rgba(135, 206, 250, 0.2)');  
+        logoGradient.addColorStop(1, 'rgba(70, 130, 180, 0.3)');   
+        ctx.fillStyle = logoGradient;
+        
+        ctx.beginPath();
+        ctx.moveTo(startX, startY + 30 * scale);
+        ctx.lineTo(startX, startY + logoHeight - 30 * scale);
+        ctx.quadraticCurveTo(startX, startY + logoHeight, startX + 30 * scale, startY + logoHeight);
+        ctx.lineTo(startX + logoWidth - 30 * scale, startY + logoHeight);
+        ctx.quadraticCurveTo(startX + logoWidth, startY + logoHeight, startX + logoWidth, startY + logoHeight - 30 * scale);
+        ctx.lineTo(startX + logoWidth, startY + 30 * scale);
+        ctx.quadraticCurveTo(startX + logoWidth, startY, startX + logoWidth - 30 * scale, startY);
+        ctx.lineTo(startX + 30 * scale, startY);
+        ctx.quadraticCurveTo(startX, startY, startX, startY + 30 * scale);
+        ctx.fill();
+
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        const iconSize = 80 * scale * 0.7;
+        const iconOffsetX = iconSize * 0.9; 
+        const iconGradient = ctx.createRadialGradient(
+            centerX - iconOffsetX, centerY, 0,
+            centerX - iconOffsetX, centerY, iconSize / 2
+        );
+        iconGradient.addColorStop(0, 'rgba(30, 144, 255, 0.8)'); 
+        iconGradient.addColorStop(1, 'rgba(0, 191, 255, 0.6)');   
+        
+        ctx.beginPath();
+        ctx.arc(centerX - iconOffsetX, centerY, iconSize / 2, 0, 2 * Math.PI);
+        ctx.fillStyle = iconGradient;
+        ctx.fill();
+
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+        ctx.shadowBlur = 10 * scale * 0.7;
+        ctx.shadowOffsetX = 3 * scale * 0.7;
+        ctx.shadowOffsetY = 3 * scale * 0.7;
+
+        ctx.font = `bold ${40 * scale * 0.7}px "Font Awesome 5 Free"`;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('\uf00c', centerX - iconOffsetX, centerY);
+
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+        ctx.shadowBlur = 5 * scale * 0.7;
+        ctx.shadowOffsetX = 2 * scale * 0.7;
+        ctx.shadowOffsetY = 2 * scale * 0.7;
+
+        const textOffsetX = iconSize * 0.7; 
+        ctx.font = `bold ${32 * scale * 0.7}px Arial`;
+        
+        const textGradient = ctx.createLinearGradient(
+            centerX + textOffsetX - 50 * scale * 0.7, centerY,
+            centerX + textOffsetX + 50 * scale * 0.7, centerY
+        );
+        textGradient.addColorStop(0, 'rgba(25, 25, 112, 0.9)');
+        textGradient.addColorStop(1, 'rgba(70, 130, 180, 0.9)'); 
+        
+        ctx.fillStyle = textGradient;
+        ctx.fillText('CHORELY', centerX + textOffsetX, centerY);
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.lineWidth = 1 * scale * 0.7;
+        ctx.strokeText('CHORELY', centerX + textOffsetX, centerY);
+
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+
+        const doc = new jsPDF();
+
+        const imgData = canvas.toDataURL('image/png');
+        doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+        const tasks = this.todoList.getAllTasks().map(task => ({
+            text: task.text,
+            completed: task.completed
+        }));
+
+        doc.setFontSize(12);
+
+        doc.autoTable({
+            head: [['Zadania/Tasks:']],
+            body: tasks.map(task => [
+                {
+                    content: task.text,
+                    styles: {
+                        textDecoration: task.completed ? 'line-through' : 'none',
+                        textColor: task.completed ? [255, 0, 0] : [0, 0, 0]
+                    }
+                }
+            ]),
+            startY: 20,
+            margin: { left: 10, right: 10 },
+            styles: { overflow: 'linebreak' },
+            theme: 'grid',
+            headStyles: { fillColor: [30, 144, 255], textColor: 255 },  
+            alternateRowStyles: { fillColor: [240, 248, 255] },  
+            didDrawCell: function(data) {
+                if (data.section === 'body' && tasks[data.row.index].completed) {
+                    const { x, y, width, height } = data.cell;
+                    doc.setDrawColor(255, 0, 0);  
+                    doc.line(x, y + height / 2, x + width, y + height / 2);
+                }
+            }
+        });
+
+        doc.save('tasks.pdf');
+    }
+
+}
 
 const translations = {
     en: {
@@ -30,7 +360,7 @@ const translations = {
     },
     pl: {
         emptyTask: 'Wpisz treść zadania.',
-        duplicateTask: 'Task już istnieje.',
+        duplicateTask: 'Zadanie już istnieje.',
         noTasks: 'Brak zadań na liście.',
         emptyPopup: 'Musisz podać jakąś treść.',
         addBtn: 'Dodaj',
@@ -48,31 +378,7 @@ const getSavedLanguage = () => {
     return localStorage.getItem('language') || getBrowserLanguage();
 }
 
-const translatePage = () => {
-    $addBtn.textContent = translations[language].addBtn;
-    $addPopupBtn.textContent = translations[language].acceptBtn;
-    $closeTodoBtn.textContent = translations[language].cancelBtn;  
-    if ($alertInfo.innerHTML) {
-        switch ($alertInfo.innerHTML) {
-            case 'Enter the task content.':
-            case 'Wpisz treść zadania.':
-                $alertInfo.innerHTML = translations[language].emptyTask;
-                break;
-            case 'Task already exists.':
-            case 'Task już istnieje.':
-                $alertInfo.innerHTML = translations[language].duplicateTask;
-                break;
-            case 'No tasks on the list.':
-            case 'Brak zadań na liście.':
-                $alertInfo.innerHTML = translations[language].noTasks;
-                break;
-            case 'You must provide some content.':
-            case 'Musisz podać jakąś treść.':
-                $alertInfo.innerHTML = translations[language].emptyPopup;
-                break;
-        }
-    }
-}
+let language = getSavedLanguage();
 
 const setLanguage = (lang) => {
     localStorage.setItem('language', lang);
@@ -81,290 +387,30 @@ const setLanguage = (lang) => {
     translatePage();
 }
 
-let language = getSavedLanguage();
+const translatePage = () => {
+    const todoListUI = window.todoListUI; 
+    if (todoListUI) {
+        todoListUI.addBtn.textContent = translations[language].addBtn;
+        todoListUI.addPopupBtn.textContent = translations[language].acceptBtn;
+        todoListUI.closeTodoBtn.textContent = translations[language].cancelBtn;
+        
+        if (todoListUI.alertInfo.innerHTML) {
+            Object.keys(translations.en).forEach(key => {
+                if (todoListUI.alertInfo.innerHTML === translations.en[key] || 
+                    todoListUI.alertInfo.innerHTML === translations.pl[key]) {
+                    todoListUI.alertInfo.innerHTML = translations[language][key];
+                }
+            });
+        }
+    }
+}
 
-const main = () => {
-    prepareDOMElements();
-    prepareDOMEvents();
+document.addEventListener('DOMContentLoaded', () => {
+    const todoList = new TodoList();
+    window.todoListUI = new TodoListUI(todoList);
     translatePage();
-}
-
-const prepareDOMElements = () => {
-    $todoInput = document.querySelector('.todo-input');
-    $alertInfo = document.querySelector('.alert-info');
-    $addBtn = document.querySelector('.add-btn');
-    $saveBtn = document.querySelector('.save-btn'); 
-    $ulList = document.querySelector('.todo-list ul');
-    $allTasks = document.getElementsByTagName('li');
-    $popup = document.querySelector('.popup');
-    $popupInfo = document.querySelector('.popup-info');
-    $popupInput = document.querySelector('.popup-input');
-    $addPopupBtn = document.querySelector('.accept');
-    $closeTodoBtn = document.querySelector('.cancel');
-}
-
-const prepareDOMEvents = () => {
-    $addBtn.addEventListener('click', addNewTask);
-    $saveBtn.addEventListener('click', saveTasksToPDF);  
-    $todoInput.addEventListener('keyup', enterCheck);
-    $ulList.addEventListener('click', checkClick);
-    $addPopupBtn.addEventListener('click', changeTodo);
-    $closeTodoBtn.addEventListener('click', closePopup);
-}
-
-const addNewTask = () => {
-    const taskText = $todoInput.value.trim();
-    if (taskText !== '') {
-        if (!isDuplicateTask(taskText)) {
-            $idNumber++;
-            $newTask = document.createElement('li');
-            $newTask.innerText = `${$idNumber}. ${taskText}`;
-            $newTask.setAttribute('id', `todo-${$idNumber}`);
-            $ulList.appendChild($newTask);
-
-            $todoInput.value = '';
-            $alertInfo.innerHTML = '';
-            createToolsArea($newTask);
-            updateTaskNumbers();
-        } else {
-            $alertInfo.innerHTML = translations[language].duplicateTask;
-        }
-    } else {
-        $alertInfo.innerHTML = translations[language].emptyTask;
-    }
-}
-
-const isDuplicateTask = (taskText) => {
-    const tasks = Array.from($ulList.getElementsByTagName('li'));
-    return tasks.some(task => task.firstChild.textContent.endsWith(taskText));
-}
-
-const enterCheck = (event) => {
-    if (event.key === 'Enter') {
-        addNewTask();
-    }
-}
-
-const createToolsArea = (taskElement) => {
-    const toolsPanel = document.createElement('div');
-    toolsPanel.classList.add('tools');
-    taskElement.appendChild(toolsPanel);
-
-    const taskText = document.createElement('div');
-    taskText.classList.add('task-text');
-    taskText.textContent = taskElement.textContent;
-    taskElement.textContent = '';
-    taskElement.appendChild(taskText);
-    taskElement.appendChild(toolsPanel)
-
-    const completeBtn = document.createElement('button');
-    completeBtn.classList.add('complete');
-    completeBtn.innerHTML = '<i class="fas fa-check"></i>';
-
-    const editBtn = document.createElement('button');
-    editBtn.classList.add('edit');
-    editBtn.innerHTML = '<i class="fas fa-pen"></i>';
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.classList.add('delete');
-    deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
-
-    toolsPanel.appendChild(completeBtn);
-    toolsPanel.appendChild(editBtn);
-    toolsPanel.appendChild(deleteBtn);
-};
-
-
-const checkClick = e => {
-    if (e.target.classList.value !== '') {
-        if (e.target.closest('button').classList.contains('complete')) {
-            e.target.closest('li').classList.toggle('completed');
-            e.target.closest('button').classList.toggle('completed');
-        } else if (e.target.closest('button').classList.contains('edit')) {
-            editTask(e);
-        } else if (e.target.closest('button').classList.contains('delete')) {
-            deleteTask(e);
-        }
-    }
-}
-
-const editTask = e => {
-    const oldTodo = e.target.closest('li').id
-    $editedTodo = document.getElementById(oldTodo)
-    $popup.style.display = 'flex'
-    $popupInput.value = $editedTodo.firstChild.textContent.split('. ')[1];
-}
-
-const changeTodo = () => {
-    if ($popupInput.value !== '') {
-        $editedTodo.firstChild.textContent = `${$editedTodo.id.split('-')[1]}. ${$popupInput.value}`;
-        $popupInfo.innerText = '';
-        $popup.style.display = 'none';
-        updateTaskNumbers();
-    } else {
-        $popupInfo.innerText = translations[language].emptyPopup;
-    }
-}
-
-const deleteTask = e => {
-    const deleteTodo = e.target.closest('li');
-    deleteTodo.remove();
-
-    if ($ulList.children.length === 0) {
-        $alertInfo.innerHTML = translations[language].noTasks;
-    }
-
-    updateTaskNumbers();
-}
-
-const closePopup = () => {
-    $popup.style.display = 'none';
-    $popupInfo.innerHTML = '';
-}
-
-const updateTaskNumbers = () => {
-    const tasks = Array.from($ulList.getElementsByTagName('li'));
-    tasks.forEach((task, index) => {
-        task.firstChild.textContent = `${index + 1}. ${task.firstChild.textContent.split('. ')[1]}`;
-    });
-}
-
-function showHoverState() {
-        btnDisplay.style.display = 'none';
-        btnDisplayNone.style.display = 'inline';
-    }
-
-    function showNormalState() {
-        btnDisplay.style.display = 'inline';
-        btnDisplayNone.style.display = 'none';
-    }
-
-    saveButton.addEventListener('mouseenter', function() {
-        isHovered = true;
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-            if (isHovered) {
-                showHoverState();
-            }
-        }, 100);
-    });
-
-    saveButton.addEventListener('mouseleave', function() {
-        isHovered = false;
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-            if (!isHovered) {
-                showNormalState();
-            }
-        }, 300); 
-    });
-
-const saveTasksToPDF = () => {
-    const { jsPDF } = window.jspdf;
-
-   
-    const canvas = document.createElement('canvas');
-    const pdfWidth = 210;  
-    const pdfHeight = 297; 
-    const scale = 10;      
-    canvas.width = pdfWidth * scale;
-    canvas.height = pdfHeight * scale;
-    const ctx = canvas.getContext('2d');
-
-    
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.rotate(Math.PI / 4);  
-    ctx.translate(-canvas.width / 2, -canvas.height / 2);
-
-    
-    ctx.globalAlpha = 0.45;
-
-   
-    const logoWidth = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height) * 0.7;
-    const logoHeight = 180 * scale * 0.7;
-    const startX = (canvas.width - logoWidth) / 2;
-    const startY = (canvas.height - logoHeight) / 2;
-
-   
-    const gradient = ctx.createLinearGradient(startX, startY, startX + logoWidth, startY + logoHeight);
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.1)');
-    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.2)');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(startX, startY, logoWidth, logoHeight);
-
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-
-    
-    const iconSize = 80 * scale * 0.7;
-    const iconOffsetX = iconSize * 0.9; 
-    const iconGradient = ctx.createRadialGradient(
-        centerX - iconOffsetX, centerY, 0,
-        centerX - iconOffsetX, centerY, iconSize / 2
-    );
-    iconGradient.addColorStop(0, 'rgba(9, 161, 249, 0.3)');
-    iconGradient.addColorStop(1, 'rgba(9, 161, 249, 0.2)');
-    
-    ctx.beginPath();
-    ctx.arc(centerX - iconOffsetX, centerY, iconSize / 2, 0, 2 * Math.PI);
-    ctx.fillStyle = iconGradient;
-    ctx.fill();
-
-   
-    ctx.font = `bold ${40 * scale * 0.7}px "Font Awesome 5 Free"`;
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('\uf00c', centerX - iconOffsetX, centerY);
-
-    
-    const textOffsetX = iconSize * 0.7; 
-    ctx.font = `bold ${32 * scale * 0.7}px Arial`;
-    
-    
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-    ctx.shadowBlur = 10 * scale * 0.7;
-    ctx.shadowOffsetX = 2 * scale * 0.7;
-    ctx.shadowOffsetY = 2 * scale * 0.7;
-    
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-    ctx.fillText('CHORELY', centerX + textOffsetX, centerY);
-
-    
-    ctx.shadowColor = 'transparent';
-    ctx.shadowBlur = 0;
-    ctx.shadowOffsetX = 0;
-    ctx.shadowOffsetY = 0;
-
-    
-    const doc = new jsPDF();
-
-    
-    const imgData = canvas.toDataURL('image/png');
-    doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-
-    
-    const tasks = Array.from($ulList.getElementsByTagName('li')).map(task => task.firstChild.textContent);
-
-    doc.setFontSize(12);
-
-    const taskData = tasks.map(task => [task]); 
-
-    doc.autoTable({
-        head: [['Zadania/Tasks:']],
-        body: taskData,
-        startY: 20,
-        margin: { left: 10, right: 10 },
-        styles: { overflow: 'linebreak' },
-        theme: 'grid',
-        headStyles: { fillColor: [9, 161, 249], textColor: 255 },
-        bodyStyles: { textColor: 0 },
-        alternateRowStyles: { fillColor: [240, 240, 240] }
-    });
-
-    doc.save('tasks.pdf');
-}
+});
 
 
 
-document.addEventListener('DOMContentLoaded', main);
+
