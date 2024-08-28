@@ -151,6 +151,7 @@ class TodoListUI {
             taskTextElement.textContent = task.text;
             taskTextElement.style.textDecoration = task.completed ? 'line-through' : 'none';
         }
+        this.updateTaskNumbers(); 
     }
 
     editTask(taskId, taskElement) {

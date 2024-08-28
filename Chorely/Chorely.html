@@ -1,59 +1,73 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title data-lang-key="title">Chorely</title>
+    <title>Chorely</title>
+    <meta name="description" content="Chorely to aplikacja do zarządzania zadaniami, która pomoże Ci zorganizować codzienne obowiązki." data-lang-key="meta_description">
+    <meta name="keywords" content="zarządzanie zadaniami, lista zadań, produktywność, organizacja, planowanie" data-lang-key="meta_keywords">
     <link rel="icon" href="./Chorely_icon.svg" type="image/svg+xml">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=latin-ext"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link rel="stylesheet" href="./Chorely.css">
+    <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/Chorely/Chorely.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Chorely",
+      "description": "Aplikacja do zarządzania zadaniami",
+      "url": "https://wiktorj96.github.io/PROJECTS/Chorely/Chorely.html",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "All"
+    }
+    </script>
 </head>
 <body data-page="todo">
+    
 
-    <div class="todo animate-in delay-1">
-        <div class="header animate-in delay-1">
-            <h1>
-    <div class="logo-container animate-in delay-3" >
-        <div class="chorelyIcon"></div>
-        <span class="chorely">CHORELY</span>
-    </div>
-</h1>
-            <input type="text" class="todo-input" placeholder="Wpisz treść zadania..."
-                data-placeholder-key="todoInputPlaceholder">
-            <button class="add-btn" data-lang-key="addBtn">Dodaj</button>
-        </div>
+    <main class="todo animate-in delay-1">
+        <section class="header animate-in delay-1" aria-labelledby="add-task-header">
+            <header>
+        <h1>
+            <div class="logo-container animate-in delay-3" aria-label="Logo Chorely">
+                <div class="chorelyIcon" role="img" aria-label="Ikona Chorely"></div>
+                <span class="chorely">CHORELY</span>
+            </div>
+        </h1>
+    </header>
+            <input type="text" id="todo-input" class="todo-input" placeholder="Wpisz treść zadania..." data-placeholder-key="todoInputPlaceholder">
+            <button class="add-btn" data-lang-key="addBtn" aria-label="Dodaj zadanie">Dodaj</button>
+        </section>
 
-        <div class="todo-list animate-in delay-2">
-            <h3 data-lang-key="todoListTitle">Lista zadań:</h3>
-            <p class="alert-info" data-lang-key="alertInfoNoTasks">Brak zadań na liście.</p>
-            <button class="save-btn"><span class="btn-display" data-lang-key="saveBtn1">Zapisz w PDF</span><span class="btn-displaynone" data-lang-key="saveBtn2">✓ Zapisz</span></button>
-            <ul>
-            </ul>
-        </div>
-        
-    </div>
+        <section class="todo-list animate-in delay-2" aria-labelledby="todo-list-header">
+            <h2 id="todo-list-header" data-lang-key="todoListTitle">Lista zadań:</h2>
+            <p class="alert-info" data-lang-key="alertInfoNoTasks" role="status" aria-live="polite">Brak zadań na liście.</p>
+            <button class="save-btn" aria-label="Zapisz listę zadań w PDF">
+                <span class="btn-display" data-lang-key="saveBtn1">Zapisz w PDF</span>
+                <span class="btn-displaynone" data-lang-key="saveBtn2">✓ Zapisz</span>
+            </button>
+            <ul aria-label="Lista zadań" role="list"></ul>
+        </section>
+    </main>
 
-    <div class="popup">
-        <h3 class="edit_h3" data-lang-key="popupTitle">Edytuj zadanie:</h3>
+    <div class="popup" role="dialog" aria-labelledby="popup-title" aria-hidden="true">
+        <h3 id="popup-title" class="edit_h3" data-lang-key="popupTitle">Edytuj zadanie:</h3>
         <div class="popup-body">
-            <p class="popup-info" data-lang-key="popupInfoEmptyTask"></p>
-            <input type="text" class="popup-input" placeholder="Wprowadź nową treść zadania..."
-                data-placeholder-key="popupInputPlaceholder">
-            <button class="popup-btn accept" data-lang-key="popupAcceptBtn">Zatwierdź</button>
-            <button class="popup-btn cancel" data-lang-key="popupCancelBtn">Anuluj</button>
+            <label for="popup-input" class="visually-hidden" data-lang-key="popupInputLabel">Wprowadź nową treść zadania</label>
+            <input type="text" id="popup-input" class="popup-input" placeholder="Wprowadź nową treść zadania..." data-placeholder-key="popupInputPlaceholder">
+            <button class="popup-btn accept" data-lang-key="popupAcceptBtn" aria-label="Zatwierdź edycję zadania">Zatwierdź</button>
+            <button class="popup-btn cancel" data-lang-key="popupCancelBtn" aria-label="Anuluj edycję zadania">Anuluj</button>
         </div>
     </div>
 
     <footer>
-        <div class="language-switch">
-            <button id="lang-pl">PL</button>
-            <button id="lang-en">EN</button>
-        </div>
+        <nav class="language-switch" aria-label="Zmiana języka">
+            <button id="lang-pl" aria-label="Zmień język na polski">PL</button>
+            <button id="lang-en" aria-label="Zmień język na angielski">EN</button>
+        </nav>
         <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
@@ -62,5 +76,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 </body>
-
 </html>

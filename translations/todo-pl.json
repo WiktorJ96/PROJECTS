@@ -1,16 +1,22 @@
 {
-  "title": "CHORELY",
+  "meta_description": "Chorely to aplikacja do zarządzania zadaniami, która pomoże Ci zorganizować codzienne obowiązki.",
+  "meta_keywords": "zarządzanie zadaniami, lista zadań, produktywność, organizacja, planowanie",
+  "todoInputLabel": "Wpisz treść zadania",
   "todoInputPlaceholder": "Wpisz treść zadania...",
   "addBtn": "Dodaj",
   "todoListTitle": "Lista zadań:",
   "alertInfoNoTasks": "Brak zadań na liście.",
+  "saveBtn1": "Zapisz w PDF",
+  "saveBtn2": "✓ Zapisz",
   "popupTitle": "Edytuj zadanie:",
+  "popupInputLabel": "Wprowadź nową treść zadania",
   "popupInputPlaceholder": "Wprowadź nową treść zadania...",
   "popupAcceptBtn": "Zatwierdź",
   "popupCancelBtn": "Anuluj",
-  "alertInfoEmptyTask": "Wpisz treść zadania.",
-  "popupInfoEmptyTask": "Musisz podać jakąś treść",
-  "footer": "2024 W.J Project. Wszelkie prawa zastrzeżone.",
-  "saveBtn1": "Zapisz taski w PDF",
-  "saveBtn2": "✓ Zapisz"
+  "footer": "© 2024 W.J Project. Wszelkie prawa zastrzeżone.",
+  "langPL": "PL",
+  "langEN": "EN",
+  "completeTask": "Oznacz jako wykonane",
+  "editTask": "Edytuj zadanie",
+  "deleteTask": "Usuń zadanie"
 }
