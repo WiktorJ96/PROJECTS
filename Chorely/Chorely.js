@@ -412,6 +412,14 @@ document.addEventListener('DOMContentLoaded', () => {
     translatePage();
 });
 
-
+module.exports = {
+    TodoList,
+    TodoListUI,
+    translations,
+    getBrowserLanguage,
+    getSavedLanguage,
+    setLanguage,
+    translatePage
+};
 
 
