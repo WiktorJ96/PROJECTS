@@ -4,23 +4,53 @@ Chorely to aplikacja typu „to-do”, stworzona do zarządzania zadaniami.
 Umożliwia łatwe dodawanie, edytowanie, usuwanie oraz odznaczanie zadań jako wykonane.
 Aplikacja pozwala również na eksport listy zadań do pliku PDF z automatycznie generowaną tabelą, co ułatwia organizację i archiwizację pracy.
 
+
 Ogólna struktura i organizacja
-	1. Modułowość: Kod jest dobrze zorganizowany w klasy (TodoError, TodoList, TodoListUI), co sprzyja modułowości i ułatwia utrzymanie.
-	2. Separacja logiki: Rozdzielenie logiki biznesowej (TodoList) od interfejsu użytkownika (TodoListUI).
-	3. Obsługa błędów: Implementacja własnej klasy TodoError do obsługi błędów.
+
+	1.Modułowość: Kod JavaScript jest dobrze zorganizowany w klasy (TodoError, TodoList, TodoListUI), co sprzyja modułowości i ułatwia utrzymanie.
+	2.Separacja logiki: Rozdzielenie logiki biznesowej (TodoList) od interfejsu użytkownika (TodoListUI) w JavaScript.
+	3.Obsługa błędów: Implementacja własnej klasy TodoError do obsługi błędów w JavaScript.
+	4.Struktura HTML: Prawidłowe użycie struktury HTML5 z semantycznymi tagami jak <header>, <main>, <section>, <footer>.
+
 Jakość kodu
-	1. Spójność: Kod jest spójny w stylu i formatowaniu, co ułatwia czytanie i utrzymanie.
-	2. Nazewnictwo: Nazwy zmiennych i funkcji są opisowe i zgodne z konwencją camelCase.
-	3. Komentarze: Kod zawiera komentarze JSDoc, co ułatwia dokumentację i zrozumienie funkcji.
-	4. Czystość kodu: Metody są krótkie i mają pojedyncze odpowiedzialności, co jest zgodne z zasadą Single Responsibility Principle.
+
+	1.Spójność: Kod JavaScript jest spójny w stylu i formatowaniu, co ułatwia czytanie i utrzymanie.
+	2.Nazewnictwo: Nazwy zmiennych i funkcji w JavaScript są opisowe i zgodne z konwencją camelCase.
+	3.Komentarze: Kod JavaScript zawiera komentarze JSDoc, co ułatwia dokumentację i zrozumienie funkcji.
+	4.Czystość kodu: Metody JavaScript są krótkie i mają pojedyncze odpowiedzialności, zgodnie z zasadą Single Responsibility Principle.
+	5.Semantyka HTML: Odpowiednie użycie atrybutów ARIA i ról dla lepszej dostępności.
+
 Funkcjonalność i bezpieczeństwo
-	1. Walidacja danych wejściowych: Implementacja metody sanitizeInput() pokazuje dbałość o bezpieczeństwo i zapobieganie atakom XSS.
-	2. Obsługa duplikatów: Sprawdzanie duplikatów zadań przed dodaniem nowego zapewnia integralność danych.
-	3. Internacjonalizacja: Implementacja systemu tłumaczeń (translations) z myślą o globalnym zasięgu.
-	4. Responsywność: Kod UI zawiera obsługę zdarzeń, co sugeruje responsywny interfejs użytkownika.
+
+	1.Walidacja danych wejściowych: Implementacja metody sanitizeInput() w JavaScript pokazuje dbałość o bezpieczeństwo i zapobieganie atakom XSS.
+	2.Obsługa duplikatów: Sprawdzanie duplikatów zadań przed dodaniem nowego zapewnia integralność danych.
+	3.Internacjonalizacja: Implementacja systemu tłumaczeń (translations) z myślą o globalnym zasięgu, widoczna zarówno w JavaScript, jak i w atrybutach data-lang-key w HTML.
+	4.Responsywność: Kod UI zawiera obsługę zdarzeń, co sugeruje responsywny interfejs użytkownika.
+	5.Content Security Policy: Implementacja CSP w meta tagu HTML dla zwiększenia bezpieczeństwa strony.
+
 Zaawansowane funkcje
-	1. Eksport do PDF: Funkcji saveTasksToPDF() pozwala zapisywać liste zadań do pliku PDF.
-Obsługa canvas: Wykorzystanie Canvas do tworzenia tła PDF.
+
+	1.Eksport do PDF: Funkcja saveTasksToPDF() pozwala zapisywać listę zadań do pliku PDF.
+	2.Obsługa canvas: Wykorzystanie Canvas do tworzenia tła PDF.
+	3.Edycja zadań: Implementacja mechanizmu edycji zadań poprzez popup w HTML i JavaScript.
+
+SEO i metadane
+
+	1.Optymalizacja SEO: Użycie odpowiednich metatagów, w tym description i keywords.
+	2.Schema.org: Zastosowanie strukturyzowanych danych schema.org dla lepszego indeksowania.
+	3.Canonical URL: Użycie tagu canonical dla uniknięcia duplikacji treści.
+
+Wydajność i kompatybilność
+
+	1.Zewnętrzne zasoby: Linkowanie do zewnętrznych zasobów CSS i JavaScript z CDN dla poprawy wydajności.
+	2.Normalizacja CSS: Użycie normalize.css dla spójności wyświetlania w różnych przeglądarkach.
+	3.Responsywność: Zastosowanie meta viewport dla dostosowania do urządzeń mobilnych.
+
+Dostępność
+
+	1.ARIA: Rozbudowane użycie atrybutów ARIA dla poprawy dostępności aplikacji.
+	2.Semantyczne HTML: Prawidłowe użycie znaczników HTML5 dla lepszej struktury i dostępności.
+	3.Etykiety formularzy: Poprawne użycie znaczników <label> dla pól formularza.
 
 
 
@@ -30,20 +60,50 @@ Chorely is a to-do list application designed for task management.
 It allows users to easily add, edit, delete, and mark tasks as completed.
 The app also enables exporting the task list to a PDF file with an automatically generated table, facilitating organization and task archiving.
 
-Overall structure and organization
-	1. Modularity: The code is well equipped with classes (TodoError, TodoList, TodoListUI) which ensures modularity and makes it easier to maintain.
-	2. Logic Separation: Separation of the business logic (TodoList) from the user interface (TodoListUI).
-	3. Error Handling: Implement your own TodoError class for error handling.
+
+General structure and organization
+
+	1. Modularity: JavaScript code is well-organized into classes (TodoError, TodoList, TodoListUI), which promotes modularity and facilitates maintenance.
+	2. Logic separation: Separation of business logic (TodoList) from user interface (TodoListUI) in JavaScript.
+	3. Error handling: Implementation of a custom TodoError class for error handling in JavaScript.
+	4. HTML structure: Proper use of HTML5 structure with semantic tags such as <header>, <main>, <section>, <footer>.
+
 Code quality
-	1. Consistency: Code is consistent in style and formatting, making it easier to reproduce and maintain.
-	2. Naming: Variable names and descriptive functions follow the camelCase convention.
-	3. Comments: The code contains JSDoc comments to help explain and understand the functions.
-	4. Code Cleanliness: Methods are short and accessible, which is consistent with the Single Responsibility Principle.
-Functionality and safety
-	1. Specified data validation: Implementing sanitizeInput() methods poses security risks and prevents XSS attacks.
-	2. Duplicate handling: Checking for duplicate tasks before releasing a new one ensures data integrity.
-	3. Internationalization: Implementation of a translation (translation) system with a global principle in mind.
-	4. Responsiveness: The UI code includes event handling, which means a responsive user interface.
+
+	1. Consistency: JavaScript code is consistent in style and formatting, which facilitates reading and maintenance.
+	2. Naming: Variable and function names in JavaScript are descriptive and follow camelCase convention.
+	3. Comments: JavaScript code includes JSDoc comments, which facilitates documentation and understanding of functions.
+	4. Code cleanliness: JavaScript methods are short and have single responsibilities, in line with the Single Responsibility Principle.
+	5. HTML semantics: Appropriate use of ARIA attributes and roles for better accessibility.
+
+Functionality and security
+
+	1. Input validation: Implementation of the sanitizeInput() method in JavaScript shows attention to security and prevention of XSS attacks.
+	2. Duplicate handling: Checking for duplicate tasks before adding a new one ensures data integrity.
+	3. Internationalization: Implementation of a translation system (translations) with global reach in mind, visible in both JavaScript and data-lang-key attributes in HTML.
+	4. Responsiveness: UI code includes event handling, suggesting a responsive user interface.
+	5. Content Security Policy: Implementation of CSP in HTML meta tag for increased page security.
+
 Advanced features
-	1. Export to PDF: The saveTasksToPDF() function allows you to save the task list to a PDF file.
-Canvas support: Canvas treatment for creating PDF backgrounds.
+
+	1. PDF export: The saveTasksToPDF() function allows saving the task list to a PDF file.
+	2. Canvas handling: Use of Canvas to create PDF backgrounds.
+	3. Task editing: Implementation of a task editing mechanism via popup in HTML and JavaScript.
+
+SEO and metadata
+
+	1. SEO optimization: Use of appropriate meta tags, including description and keywords.
+	2. Schema.org: Application of schema.org structured data for better indexing.
+	3. Canonical URL: Use of canonical tag to avoid content duplication.
+
+Performance and compatibility
+
+	1. External resources: Linking to external CSS and JavaScript resources from CDN for improved performance.
+	2. CSS normalization: Use of normalize.css for consistent display across different browsers.
+	3. Responsiveness: Application of meta viewport for adaptation to mobile devices.
+
+Accessibility
+
+	1. ARIA: Extensive use of ARIA attributes to improve application accessibility.
+	2. Semantic HTML: Proper use of HTML5 tags for better structure and accessibility.
+	3. Form labels: Correct use of <label> tags for form fields.
