@@ -538,70 +538,92 @@ footer p {
 }
 
 @media (max-width: 480px) {
-    .todo{
-        width: max-content;
-    }
-    .task-text {
-            width: calc(200%);
-        }
     body {
-        margin-top: 60px;
-        overflow-x: hidden;
+        margin-top: 0;
+        overflow-x: visible;
+    }
+
+    .todo {
+        width: 100%;
+        max-width: 100%;
+        margin: auto 0; 
+        height: 100vh;
+        
     }
 
     .header {
-        padding: 20px;
+        position: fixed;
+        border-radius: 0px;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        z-index: 1000;
+        background-image: linear-gradient(135deg, #09a1f9 0%, #0d47a1 100%);
     }
 
     .todo-input {
-        width: 85%;
+        width: 100%;
         margin-bottom: 10px;
     }
 
     .add-btn {
-        width: 40%;
+        width: 100%;
         padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .todo-list {
+        margin-top: 50%;
+        overflow: auto;
     }
 
     .todo-list ul {
-        padding-left: 20px;
+        padding-left: 0;
     }
 
     .todo-list li {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-left: auto;
-        padding: 5px;
-        text-wrap: nowrap;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .task-text {
+        width: 100%;
+        margin-bottom: 10px;
     }
 
     .tools {
-        display: flex;
-        justify-content: end;
         width: 100%;
+        display: flex;
+        justify-content: space-between;
     }
 
     .tools button {
-        font-size: medium;
-        padding: 10px 10px;
+        font-size: 14px;
+        padding: 5px 10px;
     }
 
     .popup {
-        width: 100%;
+        width: 95%;
     }
 
     .popup-body {
-        flex-direction: row;
+        flex-direction: column;
     }
 
     .popup-btn {
-        width: 40%;
-        margin: 10px;
+        width: 100%;
+        margin: 5px 0;
     }
-    footer{
-        width: min-content;
-        margin: 0 auto;
-        padding: 0.8rem;
-}
+
+    footer {
+        width: 95%;
+        padding: 10px;
+        position: relative;
+        left: 0;
+        transform: none;
+        margin: 20px auto;
+    }
 }
