@@ -1,7 +1,49 @@
 "PL"
 
-Chorely to aplikacja typu „to-do”, stworzona do zarządzania zadaniami. Umożliwia łatwe dodawanie, edytowanie, usuwanie oraz odznaczanie zadań jako wykonane. Aplikacja pozwala również na eksport listy zadań do pliku PDF z automatycznie generowaną tabelą, co ułatwia organizację i archiwizację pracy.
+Chorely to aplikacja typu „to-do”, stworzona do zarządzania zadaniami.
+Umożliwia łatwe dodawanie, edytowanie, usuwanie oraz odznaczanie zadań jako wykonane.
+Aplikacja pozwala również na eksport listy zadań do pliku PDF z automatycznie generowaną tabelą, co ułatwia organizację i archiwizację pracy.
+
+Ogólna struktura i organizacja
+	1. Modułowość: Kod jest dobrze zorganizowany w klasy (TodoError, TodoList, TodoListUI), co sprzyja modułowości i ułatwia utrzymanie.
+	2. Separacja logiki: Rozdzielenie logiki biznesowej (TodoList) od interfejsu użytkownika (TodoListUI).
+	3. Obsługa błędów: Implementacja własnej klasy TodoError do obsługi błędów.
+Jakość kodu
+	1. Spójność: Kod jest spójny w stylu i formatowaniu, co ułatwia czytanie i utrzymanie.
+	2. Nazewnictwo: Nazwy zmiennych i funkcji są opisowe i zgodne z konwencją camelCase.
+	3. Komentarze: Kod zawiera komentarze JSDoc, co ułatwia dokumentację i zrozumienie funkcji.
+	4. Czystość kodu: Metody są krótkie i mają pojedyncze odpowiedzialności, co jest zgodne z zasadą Single Responsibility Principle.
+Funkcjonalność i bezpieczeństwo
+	1. Walidacja danych wejściowych: Implementacja metody sanitizeInput() pokazuje dbałość o bezpieczeństwo i zapobieganie atakom XSS.
+	2. Obsługa duplikatów: Sprawdzanie duplikatów zadań przed dodaniem nowego zapewnia integralność danych.
+	3. Internacjonalizacja: Implementacja systemu tłumaczeń (translations) z myślą o globalnym zasięgu.
+	4. Responsywność: Kod UI zawiera obsługę zdarzeń, co sugeruje responsywny interfejs użytkownika.
+Zaawansowane funkcje
+	1. Eksport do PDF: Funkcji saveTasksToPDF() pozwala zapisywać liste zadań do pliku PDF.
+Obsługa canvas: Wykorzystanie Canvas do tworzenia tła PDF.
+
+
 
 "EN"
 
-Chorely is a to-do list application designed for task management. It allows users to easily add, edit, delete, and mark tasks as completed. The app also enables exporting the task list to a PDF file with an automatically generated table, facilitating organization and task archiving.
+Chorely is a to-do list application designed for task management.
+It allows users to easily add, edit, delete, and mark tasks as completed.
+The app also enables exporting the task list to a PDF file with an automatically generated table, facilitating organization and task archiving.
+
+Overall structure and organization
+	1. Modularity: The code is well equipped with classes (TodoError, TodoList, TodoListUI) which ensures modularity and makes it easier to maintain.
+	2. Logic Separation: Separation of the business logic (TodoList) from the user interface (TodoListUI).
+	3. Error Handling: Implement your own TodoError class for error handling.
+Code quality
+	1. Consistency: Code is consistent in style and formatting, making it easier to reproduce and maintain.
+	2. Naming: Variable names and descriptive functions follow the camelCase convention.
+	3. Comments: The code contains JSDoc comments to help explain and understand the functions.
+	4. Code Cleanliness: Methods are short and accessible, which is consistent with the Single Responsibility Principle.
+Functionality and safety
+	1. Specified data validation: Implementing sanitizeInput() methods poses security risks and prevents XSS attacks.
+	2. Duplicate handling: Checking for duplicate tasks before releasing a new one ensures data integrity.
+	3. Internationalization: Implementation of a translation (translation) system with a global principle in mind.
+	4. Responsiveness: The UI code includes event handling, which means a responsive user interface.
+Advanced features
+	1. Export to PDF: The saveTasksToPDF() function allows you to save the task list to a PDF file.
+Canvas support: Canvas treatment for creating PDF backgrounds.

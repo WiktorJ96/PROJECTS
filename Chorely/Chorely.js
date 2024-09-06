@@ -1,12 +1,31 @@
+class TodoError extends Error {
+    constructor(message, code) {
+        super(message);
+        this.code = code;
+    }
+}
+
 class TodoList {
     constructor() {
         this.tasks = [];
         this.idNumber = 0;
     }
 
+    /**
+     * Adds a new task to the todo list.
+     * @param {string} taskText - The text content of the new task.
+     * @returns {Object|null} The newly created task object, or null if the task couldn't be added.
+     * @throws {TodoError} If the task is empty or a duplicate.
+     */
     addNewTask(taskText) {
-        taskText = taskText.trim();
-        if (taskText !== '' && !this.isDuplicateTask(taskText)) {
+        try {
+            taskText = this.sanitizeInput(taskText.trim());
+            if (taskText === '') {
+                throw new TodoError('Task text cannot be empty', 'EMPTY_TASK');
+            }
+            if (this.isDuplicateTask(taskText)) {
+                throw new TodoError('Task already exists', 'DUPLICATE_TASK');
+            }
             this.idNumber++;
             const newTask = {
                 id: this.idNumber,
@@ -15,14 +34,43 @@ class TodoList {
             };
             this.tasks.push(newTask);
             return newTask;
+        } catch (error) {
+            console.error(`Error adding task: ${error.message}`);
+            throw error;
         }
-        return null;
     }
 
+    /**
+     * Sanitizes input to prevent XSS attacks.
+     * @param {string} input - The input to sanitize.
+     * @returns {string} The sanitized input.
+     */
+    sanitizeInput(input) {
+        return input.replace(/[&<>"']/g, function(m) {
+            return {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[m]
+        });
+    }
+
+    /**
+     * Checks if a task with the given text already exists.
+     * @param {string} taskText - The task text to check.
+     * @returns {boolean} True if the task already exists, false otherwise.
+     */
     isDuplicateTask(taskText) {
         return this.tasks.some(task => task.text === taskText);
     }
 
+    /**
+     * Toggles the completion status of a task.
+     * @param {number} taskId - The ID of the task to toggle.
+     * @returns {Object|null} The updated task object, or null if the task wasn't found.
+     */
     completeTask(taskId) {
         const task = this.tasks.find(t => t.id === taskId);
         if (task) {
@@ -32,15 +80,39 @@ class TodoList {
         return null;
     }
 
+    /**
+     * Edits the text of an existing task.
+     * @param {number} taskId - The ID of the task to edit.
+     * @param {string} newText - The new text for the task.
+     * @returns {Object|null} The updated task object, or null if the task wasn't found or the new text was invalid.
+     * @throws {TodoError} If the new text is empty or a duplicate.
+     */
     editTask(taskId, newText) {
-        const task = this.tasks.find(t => t.id === taskId);
-        if (task && newText.trim() !== '') {
-            task.text = newText.trim();
-            return task;
+        try {
+            newText = this.sanitizeInput(newText.trim());
+            if (newText === '') {
+                throw new TodoError('Task text cannot be empty', 'EMPTY_TASK');
+            }
+            if (this.isDuplicateTask(newText)) {
+                throw new TodoError('Task already exists', 'DUPLICATE_TASK');
+            }
+            const task = this.tasks.find(t => t.id === taskId);
+            if (task) {
+                task.text = newText;
+                return task;
+            }
+            return null;
+        } catch (error) {
+            console.error(`Error editing task: ${error.message}`);
+            throw error;
         }
-        return null;
     }
 
+    /**
+     * Deletes a task from the list.
+     * @param {number} taskId - The ID of the task to delete.
+     * @returns {Object|null} The deleted task object, or null if the task wasn't found.
+     */
     deleteTask(taskId) {
         const index = this.tasks.findIndex(t => t.id === taskId);
         if (index !== -1) {
@@ -49,6 +121,10 @@ class TodoList {
         return null;
     }
 
+    /**
+     * Returns a copy of all tasks.
+     * @returns {Array} An array of all task objects.
+     */
     getAllTasks() {
         return [...this.tasks];
     }
