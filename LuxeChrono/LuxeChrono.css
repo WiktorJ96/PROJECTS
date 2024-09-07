@@ -110,7 +110,6 @@ display: none;
         #2c2c2c 0%,
         #1a1a1a 60%,
         #0a0a0a 100%);
-    position: relative;
     box-shadow: 
         0 0 50px rgba(212, 175, 55, 0.3),
         inset 0 0 20px rgba(0, 0, 0, 0.5),
@@ -279,7 +278,7 @@ button:active {
     height: 100px;
     max-height: 20px;
     overflow-y: auto;
-    width: 50%;
+    max-width: 10rem;
     background: rgba(26, 26, 26, 0.8);
     border-radius: 10px;
     margin: 20px auto 0;
@@ -541,7 +540,12 @@ button:active {
     }
 
     .time-list {
-        width: 80%;
+        width: 50%;
+        max-width: 9rem;
+        max-height: 0.1rem;
+    }
+    .time-list li{
+        padding: 4px 5px;
     }
 
     #minutnik-input {
