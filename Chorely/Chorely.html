@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' https://cdnjs.cloudflare.com;
-    style-src 'self' https://fonts.googleapis.com https://use.fontawesome.com;
+    script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://use.fontawesome.com https://cdnjs.cloudflare.com;
     font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com;
     img-src 'self' data:;
     connect-src 'self';
@@ -14,7 +14,6 @@
     object-src 'none';
     base-uri 'self';
     form-action 'self';
-    frame-ancestors 'none';
     upgrade-insecure-requests;
 ">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -68,13 +67,14 @@
     </main>
 
     <div class="popup" role="dialog" aria-labelledby="popup-title" aria-hidden="true">
-        <h3 id="popup-title" class="edit_h3" data-lang-key="popupTitle">Edytuj zadanie:</h3>
-        <div class="popup-body">
-            <label for="popup-input" class="visually-hidden" data-lang-key="popupInputLabel">Wprowadź nową treść zadania</label>
-            <input type="text" id="popup-input" class="popup-input" placeholder="Wprowadź nową treść zadania..." data-placeholder-key="popupInputPlaceholder">
-            <button class="popup-btn accept" data-lang-key="popupAcceptBtn" aria-label="Zatwierdź edycję zadania">Zatwierdź</button>
-            <button class="popup-btn cancel" data-lang-key="popupCancelBtn" aria-label="Anuluj edycję zadania">Anuluj</button>
-        </div>
+    <h3 id="popup-title" class="edit_h3" data-lang-key="popupTitle">Edytuj zadanie:</h3>
+    <div class="popup-body">
+        <label for="popup-input" class="visually-hidden" data-lang-key="popupInputLabel">Wprowadź nową treść zadania</label>
+        <input type="text" id="popup-input" class="popup-input" placeholder="Wprowadź nową treść zadania..." data-placeholder-key="popupInputPlaceholder">
+        <p class="popup-info"></p>
+        <button class="popup-btn accept" data-lang-key="popupAcceptBtn" aria-label="Zatwierdź edycję zadania">Zatwierdź</button>
+        <button class="popup-btn cancel" data-lang-key="popupCancelBtn" aria-label="Anuluj edycję zadania">Anuluj</button>
+    </div>
     </div>
 
     <footer>
@@ -85,9 +85,10 @@
         <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
-    <script src="Chorely.js"></script>
+    <script type="module" src="Chorely.js"></script>
     <script src="../translations/translates.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.8/purify.min.js"></script>
 </body>
 </html>

@@ -1,5 +1,3 @@
-import DOMPurify from 'dompurify';
-
 class TodoError extends Error {
     constructor(message, code) {
         super(message);
@@ -31,7 +29,6 @@ class TodoList {
             this.tasks.push(newTask);
             return newTask;
         } catch (error) {
-            console.error(`Error adding task: ${error.message}`);
             throw error;
         }
     }
@@ -69,7 +66,6 @@ class TodoList {
             }
             return null;
         } catch (error) {
-            console.error(`Error editing task: ${error.message}`);
             throw error;
         }
     }
@@ -110,7 +106,13 @@ class TodoListUI {
     addCSP() {
         const meta = document.createElement('meta');
         meta.httpEquiv = "Content-Security-Policy";
-        meta.content = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline';";
+        meta.content = `
+            default-src 'self';
+            script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://use.fontawesome.com https://cdnjs.cloudflare.com;
+            font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com;
+            img-src 'self' data:;
+        `;
         document.head.appendChild(meta);
     }
 
@@ -131,9 +133,9 @@ class TodoListUI {
             this.todoInput.value = '';
             this.alertInfo.textContent = '';
         } else if (taskText.trim() === '') {
-            this.alertInfo.textContent = translations[language].emptyTask;
+            this.alertInfo.textContent = 'Enter the task content.';
         } else {
-            this.alertInfo.textContent = translations[language].duplicateTask;
+            this.alertInfo.textContent = 'Task already exists.';
         }
     }
 
@@ -201,8 +203,6 @@ class TodoListUI {
             this.editedTodo = taskElement;
             this.popup.style.display = 'flex';
             this.popupInput.value = task.text;
-        } else {
-            console.error('Task not found');
         }
     }
 
@@ -216,7 +216,7 @@ class TodoListUI {
                 this.updateTaskNumbers();
             }
         } else {
-            this.popupInfo.textContent = translations[language].emptyPopup;
+            this.popupInfo.textContent = 'You must provide some content.';
         }
     }
 
@@ -227,13 +227,23 @@ class TodoListUI {
             this.updateTaskNumbers();
         }
         if (this.todoList.getAllTasks().length === 0) {
-            this.alertInfo.textContent = translations[language].noTasks;
+    
+        const currentLanguage = localStorage.getItem('preferredLanguage'); 
+    
+   
+            this.alertInfo.textContent = currentLanguage === 'pl' 
+                ? 'Brak zadań na liście.' 
+                : 'No tasks on the list.';
         }
     }
 
     closePopup() {
-        this.popup.style.display = 'none';
-        this.popupInfo.textContent = '';
+        if (this.popup) {
+            this.popup.style.display = 'none';
+        }
+        if (this.popupInfo) {
+            this.popupInfo.textContent = '';
+        }
     }
 
     updateTaskNumbers() {
@@ -390,77 +400,17 @@ class TodoListUI {
 
 }
 
-const translations = {
-    en: {
-        emptyTask: 'Enter the task content.',
-        duplicateTask: 'Task already exists.',
-        noTasks: 'No tasks on the list.',
-        emptyPopup: 'You must provide some content.',
-        addBtn: 'Add',
-        acceptBtn: 'Accept',
-        cancelBtn: 'Cancel',  
-    },
-    pl: {
-        emptyTask: 'Wpisz treść zadania.',
-        duplicateTask: 'Zadanie już istnieje.',
-        noTasks: 'Brak zadań na liście.',
-        emptyPopup: 'Musisz podać jakąś treść.',
-        addBtn: 'Dodaj',
-        acceptBtn: 'Akceptuj',
-        cancelBtn: 'Anuluj',
-    }
-};
-
-const getBrowserLanguage = () => {
-    const lang = navigator.language || navigator.userLanguage;
-    return lang.startsWith('pl') ? 'pl' : 'en';
-}
-
-const getSavedLanguage = () => {
-    return localStorage.getItem('language') || getBrowserLanguage();
-}
-
-let language = getSavedLanguage();
-
-const setLanguage = (lang) => {
-    localStorage.setItem('language', lang);
-    document.documentElement.lang = lang;
-    language = lang;
-    translatePage();
-}
-
-const translatePage = () => {
-    const todoListUI = window.todoListUI; 
-    if (todoListUI) {
-        todoListUI.addBtn.textContent = translations[language].addBtn;
-        todoListUI.addPopupBtn.textContent = translations[language].acceptBtn;
-        todoListUI.closeTodoBtn.textContent = translations[language].cancelBtn;
-        
-        if (todoListUI.alertInfo.innerHTML) {
-            Object.keys(translations.en).forEach(key => {
-                if (todoListUI.alertInfo.innerHTML === translations.en[key] || 
-                    todoListUI.alertInfo.innerHTML === translations.pl[key]) {
-                    todoListUI.alertInfo.innerHTML = translations[language][key];
-                }
-            });
-        }
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
+
+    if (typeof DOMPurify === 'undefined') {
+        console.error('DOMPurify is not loaded. Please make sure it is included in your HTML file.');
+        return;
+    }
+
     const todoList = new TodoList();
     window.todoListUI = new TodoListUI(todoList);
-    translatePage();
+    
 });
 
-module.exports = {
-    TodoList,
-    TodoListUI,
-    translations,
-    getBrowserLanguage,
-    getSavedLanguage,
-    setLanguage,
-    translatePage
-};
 
 
