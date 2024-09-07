@@ -22,7 +22,7 @@ Jakość kodu
 
 Funkcjonalność i bezpieczeństwo
 
-	1.Walidacja danych wejściowych: Implementacja metody sanitizeInput() w JavaScript pokazuje dbałość o bezpieczeństwo i zapobieganie atakom XSS.
+	1.Walidacja danych wejściowych: Implementacja sanityzacji danych wejściowych z użyciem biblioteki DOMPurify w JavaScript pokazuje dbałość o bezpieczeństwo i zapobieganie atakom XSS.
 	2.Obsługa duplikatów: Sprawdzanie duplikatów zadań przed dodaniem nowego zapewnia integralność danych.
 	3.Internacjonalizacja: Implementacja systemu tłumaczeń (translations) z myślą o globalnym zasięgu, widoczna zarówno w JavaScript, jak i w atrybutach data-lang-key w HTML.
 	4.Responsywność: Kod UI zawiera obsługę zdarzeń, co sugeruje responsywny interfejs użytkownika.
@@ -30,7 +30,7 @@ Funkcjonalność i bezpieczeństwo
 
 Zaawansowane funkcje
 
-	1.Eksport do PDF: Funkcja saveTasksToPDF() pozwala zapisywać listę zadań do pliku PDF.
+	1.Eksport do PDF: Funkcja saveTasksToPDF() pozwala zapisywać listę zadań do pliku PDF, z dodatkową sanityzacją danych przed generowaniem dokumentu.
 	2.Obsługa canvas: Wykorzystanie Canvas do tworzenia tła PDF.
 	3.Edycja zadań: Implementacja mechanizmu edycji zadań poprzez popup w HTML i JavaScript.
 
@@ -78,7 +78,7 @@ Code quality
 
 Functionality and security
 
-	1. Input validation: Implementation of the sanitizeInput() method in JavaScript shows attention to security and prevention of XSS attacks.
+	1. Input validation: Implementing sanitization of data stored using the DOMPurify library in JavaScript prevents security and prevents XSS attacks.
 	2. Duplicate handling: Checking for duplicate tasks before adding a new one ensures data integrity.
 	3. Internationalization: Implementation of a translation system (translations) with global reach in mind, visible in both JavaScript and data-lang-key attributes in HTML.
 	4. Responsiveness: UI code includes event handling, suggesting a responsive user interface.
@@ -86,7 +86,7 @@ Functionality and security
 
 Advanced features
 
-	1. PDF export: The saveTasksToPDF() function allows saving the task list to a PDF file.
+	1. PDF export: The saveTasksToPDF() function allows you to save a task list to a PDF file, with additional data sanitization before generating the document.
 	2. Canvas handling: Use of Canvas to create PDF backgrounds.
 	3. Task editing: Implementation of a task editing mechanism via popup in HTML and JavaScript.
 

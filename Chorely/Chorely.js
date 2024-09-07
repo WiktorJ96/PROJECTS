@@ -1,3 +1,5 @@
+import DOMPurify from 'dompurify';
+
 class TodoError extends Error {
     constructor(message, code) {
         super(message);
@@ -11,12 +13,6 @@ class TodoList {
         this.idNumber = 0;
     }
 
-    /**
-     * Adds a new task to the todo list.
-     * @param {string} taskText - The text content of the new task.
-     * @returns {Object|null} The newly created task object, or null if the task couldn't be added.
-     * @throws {TodoError} If the task is empty or a duplicate.
-     */
     addNewTask(taskText) {
         try {
             taskText = this.sanitizeInput(taskText.trim());
@@ -40,37 +36,14 @@ class TodoList {
         }
     }
 
-    /**
-     * Sanitizes input to prevent XSS attacks.
-     * @param {string} input - The input to sanitize.
-     * @returns {string} The sanitized input.
-     */
     sanitizeInput(input) {
-        return input.replace(/[&<>"']/g, function(m) {
-            return {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#39;'
-            }[m]
-        });
+        return DOMPurify.sanitize(input, {ALLOWED_TAGS: [], ALLOWED_ATTR: []});
     }
 
-    /**
-     * Checks if a task with the given text already exists.
-     * @param {string} taskText - The task text to check.
-     * @returns {boolean} True if the task already exists, false otherwise.
-     */
     isDuplicateTask(taskText) {
         return this.tasks.some(task => task.text === taskText);
     }
 
-    /**
-     * Toggles the completion status of a task.
-     * @param {number} taskId - The ID of the task to toggle.
-     * @returns {Object|null} The updated task object, or null if the task wasn't found.
-     */
     completeTask(taskId) {
         const task = this.tasks.find(t => t.id === taskId);
         if (task) {
@@ -80,13 +53,6 @@ class TodoList {
         return null;
     }
 
-    /**
-     * Edits the text of an existing task.
-     * @param {number} taskId - The ID of the task to edit.
-     * @param {string} newText - The new text for the task.
-     * @returns {Object|null} The updated task object, or null if the task wasn't found or the new text was invalid.
-     * @throws {TodoError} If the new text is empty or a duplicate.
-     */
     editTask(taskId, newText) {
         try {
             newText = this.sanitizeInput(newText.trim());
@@ -108,11 +74,6 @@ class TodoList {
         }
     }
 
-    /**
-     * Deletes a task from the list.
-     * @param {number} taskId - The ID of the task to delete.
-     * @returns {Object|null} The deleted task object, or null if the task wasn't found.
-     */
     deleteTask(taskId) {
         const index = this.tasks.findIndex(t => t.id === taskId);
         if (index !== -1) {
@@ -121,10 +82,6 @@ class TodoList {
         return null;
     }
 
-    /**
-     * Returns a copy of all tasks.
-     * @returns {Array} An array of all task objects.
-     */
     getAllTasks() {
         return [...this.tasks];
     }
@@ -147,6 +104,14 @@ class TodoListUI {
         this.editedTodo = null;
 
         this.bindEvents();
+        this.addCSP();
+    }
+
+    addCSP() {
+        const meta = document.createElement('meta');
+        meta.httpEquiv = "Content-Security-Policy";
+        meta.content = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline';";
+        document.head.appendChild(meta);
     }
 
     bindEvents() {
@@ -164,11 +129,11 @@ class TodoListUI {
         if (newTask) {
             this.createTaskElement(newTask);
             this.todoInput.value = '';
-            this.alertInfo.innerHTML = '';
+            this.alertInfo.textContent = '';
         } else if (taskText.trim() === '') {
-            this.alertInfo.innerHTML = translations[language].emptyTask;
+            this.alertInfo.textContent = translations[language].emptyTask;
         } else {
-            this.alertInfo.innerHTML = translations[language].duplicateTask;
+            this.alertInfo.textContent = translations[language].duplicateTask;
         }
     }
 
@@ -176,7 +141,7 @@ class TodoListUI {
         const newTask = document.createElement('li');
         newTask.setAttribute('id', `todo-${task.id}`);
         newTask.innerHTML = `
-            <div class="task-text">${task.id}. ${task.text}</div>
+            <div class="task-text">${task.id}. ${DOMPurify.sanitize(task.text)}</div>
             <div class="tools">
                 <button class="complete"><i class="fas fa-check"></i></button>
                 <button class="edit"><i class="fas fa-pen"></i></button>
@@ -224,7 +189,7 @@ class TodoListUI {
     updateTaskAppearance(taskElement, task) {
         const taskTextElement = taskElement.querySelector('.task-text');
         if (taskTextElement) {
-            taskTextElement.textContent = task.text;
+            taskTextElement.textContent = `${task.id}. ${DOMPurify.sanitize(task.text)}`;
             taskTextElement.style.textDecoration = task.completed ? 'line-through' : 'none';
         }
         this.updateTaskNumbers(); 
@@ -251,7 +216,7 @@ class TodoListUI {
                 this.updateTaskNumbers();
             }
         } else {
-            this.popupInfo.innerText = translations[language].emptyPopup;
+            this.popupInfo.textContent = translations[language].emptyPopup;
         }
     }
 
@@ -262,23 +227,23 @@ class TodoListUI {
             this.updateTaskNumbers();
         }
         if (this.todoList.getAllTasks().length === 0) {
-            this.alertInfo.innerHTML = translations[language].noTasks;
+            this.alertInfo.textContent = translations[language].noTasks;
         }
     }
 
     closePopup() {
         this.popup.style.display = 'none';
-        this.popupInfo.innerHTML = '';
+        this.popupInfo.textContent = '';
     }
 
-     updateTaskNumbers() {
+    updateTaskNumbers() {
         const tasks = this.todoList.getAllTasks();
         tasks.forEach((task, index) => {
             const taskElement = document.getElementById(`todo-${task.id}`);
             if (taskElement) {
                 const taskTextElement = taskElement.querySelector('.task-text');
                 if (taskTextElement) {
-                    taskTextElement.textContent = `${index + 1}. ${task.text}`;
+                    taskTextElement.textContent = `${index + 1}. ${DOMPurify.sanitize(task.text)}`;
                     taskTextElement.style.textDecoration = task.completed ? 'line-through' : 'none';
                 }
             }
