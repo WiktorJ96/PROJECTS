@@ -1,3 +1,11 @@
+class NoteError extends Error {
+    constructor(message, code) {
+        super(message);
+        this.name = 'NoteError';
+        this.code = code;
+    }
+}
+
 const addBtn = document.querySelector('.add');
 const saveBtn = document.querySelector('.save');
 const cancelBtn = document.querySelector('.cancel');
@@ -28,6 +36,15 @@ let isEditing = false;
 let editingNoteId = null;
 let noteToDelete = null;
 
+
+const showError = (message) => {
+    error.textContent = message;
+    error.style.visibility = 'visible';
+    setTimeout(() => {
+        error.style.visibility = 'hidden';
+    }, 3000);
+}
+
 const openPanel = () => {
     notePanel.style.display = 'flex';
 }
@@ -45,15 +62,22 @@ const closePanel = () => {
 }
 
 const loadNotes = async () => {
-    const response = await fetch('http://localhost:3000/api/notes');
-    if (response.ok) {
+    try {
+        const response = await fetch('http://localhost:3000/api/notes');
+        if (!response.ok) {
+            throw new NoteError('Nie udało się załadować notatek', 'LOAD_NOTES_ERROR');
+        }
         const notes = await response.json();
         noteArea.innerHTML = '';
         notes.forEach(note => {
             createNoteElement(note);
         });
-    } else {
-        console.error('Failed to load notes');
+    } catch (error) {
+        if (error instanceof NoteError) {
+            showError(error.message);
+        } else {
+            showError('Wystąpił nieznany błąd podczas ładowania notatek');
+        }
     }
 }
 
@@ -77,41 +101,49 @@ const createNoteElement = (note) => {
 }
 
 const addNote = async () => {
-    if (titleInput.value !== '' && quill.root.innerHTML.trim() !== '<p><br></p>' && selectedColor && categorySelect.value !== '') {
-        const note = {
-            id: isEditing ? editingNoteId : Date.now().toString(),
-            title: titleInput.value,
-            content: quill.root.innerHTML,
-            category: categorySelect.value,
-            color: selectedColor
-        };
+    try {
+        if (titleInput.value !== '' && quill.root.innerHTML.trim() !== '<p><br></p>' && selectedColor && categorySelect.value !== '') {
+            const note = {
+                id: isEditing ? editingNoteId : Date.now().toString(),
+                title: titleInput.value,
+                content: quill.root.innerHTML,
+                category: categorySelect.value,
+                color: selectedColor
+            };
 
-        const response = isEditing ?
-            await fetch(`http://localhost:3000/api/notes/${editingNoteId}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(note),
-            }) :
-            await fetch('http://localhost:3000/api/notes', {
-                method: 'POST',
+            const url = isEditing ? `http://localhost:3000/api/notes/${editingNoteId}` : 'http://localhost:3000/api/notes';
+            const method = isEditing ? 'PUT' : 'POST';
+
+            const response = await fetch(url, {
+                method: method,
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(note),
             });
 
-        if (response.ok) {
+            if (!response.ok) {
+                throw new NoteError('Nie udało się zapisać notatki', 'SAVE_NOTE_ERROR');
+            }
+
             closePanel();
             loadNotes();
         } else {
-            console.error('Failed to save note');
+            throw new NoteError('Uzupełnij wszystkie pola!', 'VALIDATION_ERROR');
         }
-    } else {
-        error.style.visibility = 'visible';
+    } catch (error) {
+        if (error instanceof NoteError) {
+            showError(error.message);
+        } else {
+            showError('Wystąpił nieznany błąd podczas zapisywania notatki');
+        }
     }
 }
 
 const editNoteHandler = async (id) => {
-    const response = await fetch(`http://localhost:3000/api/notes/${id}`);
-    if (response.ok) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/notes/${id}`);
+        if (!response.ok) {
+            throw new NoteError('Nie udało się załadować notatki do edycji', 'LOAD_NOTE_ERROR');
+        }
         const note = await response.json();
         isEditing = true;
         editingNoteId = id;
@@ -129,8 +161,12 @@ const editNoteHandler = async (id) => {
         });
 
         openPanel();
-    } else {
-        console.error('Failed to load note for editing');
+    } catch (error) {
+        if (error instanceof NoteError) {
+            showError(error.message);
+        } else {
+            showError('Wystąpił nieznany błąd podczas ładowania notatki do edycji');
+        }
     }
 }
 
@@ -140,16 +176,24 @@ const deleteNoteHandler = (id) => {
 }
 
 confirmYesBtn.addEventListener('click', async () => {
-    if (noteToDelete) {
-        const response = await fetch(`http://localhost:3000/api/notes/${noteToDelete}`, { method: 'DELETE' });
-        if (response.ok) {
+    try {
+        if (noteToDelete) {
+            const response = await fetch(`http://localhost:3000/api/notes/${noteToDelete}`, { method: 'DELETE' });
+            if (!response.ok) {
+                throw new NoteError('Nie udało się usunąć notatki', 'DELETE_NOTE_ERROR');
+            }
             noteToDelete = null;
             loadNotes();
-        } else {
-            console.error('Failed to delete note');
         }
+    } catch (error) {
+        if (error instanceof NoteError) {
+            showError(error.message);
+        } else {
+            showError('Wystąpił nieznany błąd podczas usuwania notatki');
+        }
+    } finally {
+        confirmModal.style.display = 'none';
     }
-    confirmModal.style.display = 'none';
 });
 
 confirmNoBtn.addEventListener('click', () => {
@@ -161,13 +205,21 @@ const deleteAllNotes = () => {
 }
 
 confirmAllYesBtn.addEventListener('click', async () => {
-    const response = await fetch('http://localhost:3000/api/notes', { method: 'DELETE' });
-    if (response.ok) {
+    try {
+        const response = await fetch('http://localhost:3000/api/notes', { method: 'DELETE' });
+        if (!response.ok) {
+            throw new NoteError('Nie udało się usunąć wszystkich notatek', 'DELETE_ALL_NOTES_ERROR');
+        }
         noteArea.innerHTML = '';
-    } else {
-        console.error('Failed to delete all notes');
+    } catch (error) {
+        if (error instanceof NoteError) {
+            showError(error.message);
+        } else {
+            showError('Wystąpił nieznany błąd podczas usuwania wszystkich notatek');
+        }
+    } finally {
+        confirmAllModal.style.display = 'none';
     }
-    confirmAllModal.style.display = 'none';
 });
 
 confirmAllNoBtn.addEventListener('click', () => {
@@ -227,49 +279,3 @@ colorPicker.addEventListener('click', (e) => {
 
 document.addEventListener('DOMContentLoaded', loadNotes);
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const translations = {
-                "pl": {},
-                "en": {}
-            };
-
-            fetch('pl.json')
-                .then(response => response.json())
-                .then(data => {
-                    translations['pl'] = data;
-                });
-
-            fetch('en.json')
-                .then(response => response.json())
-                .then(data => {
-                    translations['en'] = data;
-                });
-
-            function translatePage(lang) {
-                document.querySelectorAll('[data-lang-key]').forEach(element => {
-                    const key = element.getAttribute('data-lang-key');
-                    if (translations[lang][key]) {
-                        element.innerHTML = translations[lang][key];
-                    }
-                });
-                document.querySelectorAll('[data-placeholder-key]').forEach(element => {
-                    const key = element.getAttribute('data-placeholder-key');
-                    if (translations[lang][key]) {
-                        element.placeholder = translations[lang][key];
-                    }
-                });
-                document.querySelectorAll('select option').forEach(option => {
-                    const key = option.getAttribute('data-lang-key');
-                    if (translations[lang][key]) {
-                        option.textContent = translations[lang][key];
-                    }
-                });
-                document.documentElement.lang = lang;
-            }
-
-            document.getElementById('lang-pl').addEventListener('click', () => translatePage('pl'));
-            document.getElementById('lang-en').addEventListener('click', () => translatePage('en'));
-
-            
-            translatePage('pl');
-        });

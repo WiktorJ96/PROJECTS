@@ -1,0 +1,21 @@
+{
+  "name": "ThoughtSpace",
+  "short_name": "ThoughtSpace",
+  "description": "Aplikacja do zarządzania notatkami",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4A3728",
+  "icons": [
+    {
+      "src": "./ThoughtSpace_icon.svg",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./ThoughtSpace_icon.svg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

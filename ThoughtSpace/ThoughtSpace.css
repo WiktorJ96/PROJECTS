@@ -73,7 +73,6 @@ body {
 
 .logo-container {
     position: relative;
-    left: 2%;
 }
 
     .wooden-icon {
@@ -818,7 +817,15 @@ footer::after {
     }
 }
 
+@media (max-width: 480px) {
 
+    .menu-right{
+        justify-content: end;
+    }
+    .menu{
+        border-radius: 1px;
+    }
+}
 
 
 
