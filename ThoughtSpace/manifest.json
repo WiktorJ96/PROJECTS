@@ -2,7 +2,7 @@
   "name": "ThoughtSpace",
   "short_name": "ThoughtSpace",
   "description": "Aplikacja do zarządzania notatkami",
-  "start_url": "/index.html",
+  "start_url": "./ThoughtSpace.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4A3728",

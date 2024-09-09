@@ -1,6 +1,7 @@
 "PL"
 
-ThoughtSpace to wszechstronna aplikacja notatnikowa, oferująca zaawansowane funkcje takie jak filtracja notatek, wyszukiwarka oraz integracja z edytorem tekstowym Quill. Aplikacja umożliwia tworzenie, edytowanie oraz organizowanie notatek w prosty i efektywny sposób. Dodatkowo, notatki można zapisać w formacie .json zgodnie z konfiguracją opisaną w pliku README.
+ThoughtSpace to wszechstronna aplikacja notatnikowa, oferująca zaawansowane funkcje takie jak filtracja notatek, wyszukiwarka oraz integracja z edytorem tekstowym Quill. Aplikacja umożliwia tworzenie, edytowanie oraz organizowanie notatek w prosty i efektywny sposób. Dodatkowo, notatki można zapisać w formacie .json zgodnie z konfiguracją opisaną poniżej.
+Co istotne, ThoughtSpace został zaprojektowany jako Progresywna Aplikacja Internetowa (PWA). Ta funkcjonalność PWA pozwala użytkownikom na zainstalowanie aplikacji na swoich urządzeniach, zapewniając doświadczenie zbliżone do natywnych aplikacji. Jako PWA, ThoughtSpace oferuje takie korzyści jak dostęp offline, zwiększona wydajność oraz możliwość płynnej pracy na różnych urządzeniach. Ta cecha znacząco poprawia ogólne doświadczenie użytkownika, czyniąc aplikację bardziej dostępną i wygodną w codziennym użytkowaniu.
 
 Instrukcja:
 1. stwórz folder note-app
@@ -61,7 +62,8 @@ Dostępność
 
 "EN"
 
-ThoughtSpace is a versatile notepad application offering advanced features such as note filtering, a search function, and integration with the Quill text editor. The application allows users to easily create, edit, and organize their notes in a simple and efficient way. Additionally, notes can be saved in .json format, following the configuration described in the README file.
+ThinkSpace is a versatile notebook application with advanced features such as note filtering, search engine and integration with the Quill text editor. The application allows you to create, edit and organize notes in a simple and effective way. Additional comments can be saved in .json as configured below.
+Most importantly, ThinkSpace was the foundation as a Progressive Web Application (PWA). This PWA functionality allows users to install an application for use, with the ability to apply approximately to native applications. As a PWA, ThinkSpace offers benefits such as offline access, basic power, and the ability to work seamlessly across devices. This feature enhances the overall user experience by making it more accessible and convenient to use.
 
 Instruction:
 1. create a note-app folder

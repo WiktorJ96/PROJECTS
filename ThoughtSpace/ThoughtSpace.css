@@ -398,7 +398,7 @@ main{
     background-color: #F5E6D3;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
-    z-index: 1000;
+    z-index: 1000000;
     resize: both;
     overflow: hidden;
     min-width: 400px;
@@ -685,7 +685,6 @@ footer::after {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
     }
 
     .logo-container {
@@ -702,7 +701,7 @@ footer::after {
     .menu-buttons {
         width: 100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: start;
         margin-bottom: 15px;
     }
 
@@ -734,12 +733,24 @@ footer::after {
 }
 
 @media (min-width: 770px) and (max-width: 885px) {
-    .search-icon{
-        margin-left: 15px;
-    }
-    .search-container input[type="text"] {
-        left: 15px;
-    }
+        .menu-left{
+            flex-direction: row;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .menu-right{
+            flex-direction: row;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .filter-container, .search-container {
+        width: 45%;
+        margin: 0 auto;
+        }
+        .menu-buttons {
+            width: 94%;
+            margin: 0 auto;
+        }
 }
 
 
