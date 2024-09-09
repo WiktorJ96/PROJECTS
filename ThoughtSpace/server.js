@@ -10,7 +10,7 @@ app.use(cors());
 
 const notesFilePath = './notes.json';
 
-// Helper function to read notes from file
+
 const readNotesFromFile = () => {
     if (!fs.existsSync(notesFilePath)) {
         return [];
@@ -19,22 +19,19 @@ const readNotesFromFile = () => {
     return JSON.parse(data || '[]');
 };
 
-// Helper function to write notes to file
 const writeNotesToFile = (notes) => {
     fs.writeFileSync(notesFilePath, JSON.stringify(notes, null, 2));
 };
 
-// Endpoint to get all notes
 app.get('/api/notes', (req, res) => {
     const notes = readNotesFromFile();
     res.json(notes);
 });
 
-// Endpoint to get a single note by ID
 app.get('/api/notes/:id', (req, res) => {
     const notes = readNotesFromFile();
     const noteId = req.params.id;
-    console.log(`Fetching note with id: ${noteId}`); // Add this line
+    console.log(`Fetching note with id: ${noteId}`); 
     const note = notes.find(note => note.id === noteId);
     if (note) {
         res.json(note);
@@ -43,7 +40,6 @@ app.get('/api/notes/:id', (req, res) => {
     }
 });
 
-// Endpoint to add a new note
 app.post('/api/notes', (req, res) => {
     const notes = readNotesFromFile();
     const newNote = req.body;
@@ -52,12 +48,11 @@ app.post('/api/notes', (req, res) => {
     res.status(201).json(newNote);
 });
 
-// Endpoint to update a note
 app.put('/api/notes/:id', (req, res) => {
     const notes = readNotesFromFile();
     const updatedNote = req.body;
     const noteId = req.params.id;
-    console.log(`Updating note with id: ${noteId}`); // Add this line
+    console.log(`Updating note with id: ${noteId}`); 
     const noteIndex = notes.findIndex(note => note.id === noteId);
     if (noteIndex !== -1) {
         notes[noteIndex] = updatedNote;
@@ -68,17 +63,15 @@ app.put('/api/notes/:id', (req, res) => {
     }
 });
 
-// Endpoint to delete a note
 app.delete('/api/notes/:id', (req, res) => {
     let notes = readNotesFromFile();
     const noteId = req.params.id;
-    console.log(`Deleting note with id: ${noteId}`); // Add this line
+    console.log(`Deleting note with id: ${noteId}`);
     notes = notes.filter(note => note.id !== noteId);
     writeNotesToFile(notes);
     res.status(204).send();
 });
 
-// Endpoint to delete all notes
 app.delete('/api/notes', (req, res) => {
     writeNotesToFile([]);
     res.status(204).send();
