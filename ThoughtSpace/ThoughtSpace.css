@@ -4,9 +4,15 @@
     padding: 0;
     scrollbar-width: thin;
     scrollbar-color: #8B7D6B #F5E6D3;
+    scrollbar-width: none; 
 }
 
 ::-webkit-scrollbar {
+    width: 0; 
+    height: 0; 
+}
+
+/* ::-webkit-scrollbar {
     width: 12px;
 }
 
@@ -28,7 +34,7 @@
 
 ::-webkit-scrollbar-button {
     display: none;
-}
+} */
 
 :root {
     --primary-color: #8B7D6B;
@@ -621,7 +627,7 @@ main{
 footer {
     background-image: linear-gradient(90deg, #8B7D6B, #4A3728, #8B7D6B);
     color: #F5E6D3;
-    padding: 1.5rem;
+    padding: 0.5rem;
     text-align: center;
     width: 100%;
     border-radius: 3px;
@@ -668,11 +674,76 @@ footer::after {
     font-family: 'Georgia', serif;
 }
 
-
-.language-switch {
-    display: none;
+.footer_buttons {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 10px; 
 }
 
+.footer_buttons button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #F5E6D3;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background-color: #675c4f;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255,255,255,0.2);
+    font-family: 'Georgia', serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer_buttons button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(to bottom right, rgba(255,255,255,0), rgba(255,255,255,0.13), rgba(255,255,255,0));
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.footer_buttons button:hover::after {
+    opacity: 1;
+    top: -100%;
+    left: -100%;
+}
+
+.footer_buttons button:hover {
+    background-color: #4A3728;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.footer_buttons button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.footer_buttons button i {
+    margin-right: 8px;
+    font-size: 1.2rem; 
+}
+
+.footer_buttons .installButton {
+    background-color: #8B7D6B;
+}
+
+.footer_buttons .installButton:hover {
+    background-color: #4A3728;
+}
+.installButton {
+    display: none;
+}
 
 @media (max-width: 1200px) {
     .menu {

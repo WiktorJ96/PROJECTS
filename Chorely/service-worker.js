@@ -4,6 +4,8 @@ const urlsToCache = [
   './Chorely.html',
   './Chorely.css',
   './Chorely.js',
+  '../translations/todo-pl.json',
+  '../translations/todo-en.json',
   './ikona_Chorely.png',
   './Chorely_icon.svg'
 ];

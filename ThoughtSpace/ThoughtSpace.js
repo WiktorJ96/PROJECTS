@@ -123,10 +123,12 @@ class NoteApp {
         this.isEditing = false;
         this.editingNoteId = null;
         this.noteToDelete = null;
+        this.deferredPrompt = null;
 
         this.initElements();
         this.bindEvents();
         this.loadNotes();
+        this.setupPWA();
     }
 
     initElements() {
@@ -140,6 +142,7 @@ class NoteApp {
         this.categoryFilter = document.querySelector('#category-filter');
         this.confirmModal = document.getElementById('confirm-modal');
         this.confirmAllModal = document.getElementById('confirm-all-modal');
+        this.installButton = document.querySelector('.installButton');
     }
 
     bindEvents() {
@@ -164,6 +167,10 @@ class NoteApp {
                 this.deleteNoteHandler(e.target.closest('.delete-note').dataset.id);
             }
         });
+
+        if (this.installButton) {
+            this.installButton.addEventListener('click', () => this.installPWA());
+        }
     }
 
     openPanel() {
@@ -348,6 +355,36 @@ class NoteApp {
         };
         note.style.backgroundImage = gradients[color] || 'linear-gradient(135deg, #ffffff, #f0f0f0)';
     }
+
+    setupPWA() {
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            this.deferredPrompt = e;
+            if (this.installButton) {
+                this.installButton.style.display = 'block';
+            } else {
+                console.error('Nie znaleziono przycisku instalacji');
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            if (this.installButton) {
+                this.installButton.style.display = 'none';
+            }
+        });
+    }
+
+    installPWA() {
+        if (this.deferredPrompt) {
+            this.deferredPrompt.prompt();
+            this.deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                } 
+                this.deferredPrompt = null;
+            });
+        }
+    }
 }
 
 const app = new NoteApp();
@@ -355,9 +392,6 @@ const app = new NoteApp();
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./service-worker.js')
-            .then(registration => {
-                console.log('Service Worker zarejestrowany pomyślnie:', registration);
-            })
             .catch(error => {
                 console.error('Błąd podczas rejestracji Service Worker:', error);
             });

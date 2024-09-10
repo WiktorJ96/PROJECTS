@@ -1,9 +1,3 @@
-
-if (typeof(Storage) !== "undefined") {
-} else {
-    console.error("localStorage nie jest dostępny");
-}
-
 class TodoError extends Error {
     constructor(message, code) {
         super(message);
@@ -389,10 +383,6 @@ class TodoListUI {
     ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.rotate(Math.PI / 4);  
     ctx.translate(-canvas.width / 2, -canvas.height / 2);
-
-    // Usuwamy tło - pomijamy rysowanie tła
-    // ctx.fillStyle = 'rgba(0, 0, 0, 0)'; // Jeśli chcemy ustawić przezroczyste tło
-    // ctx.fillRect(0, 0, canvas.width, canvas.height); // To już niepotrzebne, usuwamy
 
     const logoWidth = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height) * 0.7;
     const logoHeight = 180 * scale * 0.7;

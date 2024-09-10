@@ -5,7 +5,9 @@ const ASSETS_TO_CACHE = [
   './ThoughtSpace.css',
   './ThoughtSpace.js',
   '../translations/notatnik-pl.json',
-  '../translations/notatnik-en.json'
+  '../translations/notatnik-en.json',
+  './ikona_ThoughtSpace.png',
+  './ThoughtSpace_icon.svg'
 ];
 
 self.addEventListener('install', (event) => {
