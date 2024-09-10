@@ -7,8 +7,16 @@ class TodoError extends Error {
 
 class TodoList {
     constructor() {
-        this.tasks = [];
-        this.idNumber = 0;
+        this.tasks = this.loadTasksFromStorage();
+        this.idNumber = this.tasks.length > 0 ? this.tasks[this.tasks.length - 1].id : 0;
+    }
+
+    sanitizeInput(input) {
+    return DOMPurify.sanitize(input, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+    }
+
+    isDuplicateTask(taskText) {
+        return this.tasks.some(task => task.text === taskText);
     }
 
     addNewTask(taskText) {
@@ -27,24 +35,27 @@ class TodoList {
                 completed: false
             };
             this.tasks.push(newTask);
+            this.saveTasksToStorage();
             return newTask;
         } catch (error) {
             throw error;
         }
     }
 
-    sanitizeInput(input) {
-        return DOMPurify.sanitize(input, {ALLOWED_TAGS: [], ALLOWED_ATTR: []});
+    saveTasksToStorage() {
+        localStorage.setItem('tasks', JSON.stringify(this.tasks));
     }
 
-    isDuplicateTask(taskText) {
-        return this.tasks.some(task => task.text === taskText);
+    loadTasksFromStorage() {
+        const savedTasks = localStorage.getItem('tasks');
+        return savedTasks ? JSON.parse(savedTasks) : [];
     }
 
     completeTask(taskId) {
         const task = this.tasks.find(t => t.id === taskId);
         if (task) {
             task.completed = !task.completed;
+            this.saveTasksToStorage();  
             return task;
         }
         return null;
@@ -62,6 +73,7 @@ class TodoList {
             const task = this.tasks.find(t => t.id === taskId);
             if (task) {
                 task.text = newText;
+                this.saveTasksToStorage();
                 return task;
             }
             return null;
@@ -73,7 +85,9 @@ class TodoList {
     deleteTask(taskId) {
         const index = this.tasks.findIndex(t => t.id === taskId);
         if (index !== -1) {
-            return this.tasks.splice(index, 1)[0];
+            const deletedTask = this.tasks.splice(index, 1)[0];
+            this.saveTasksToStorage();  
+            return deletedTask;
         }
         return null;
     }
@@ -82,6 +96,7 @@ class TodoList {
         return [...this.tasks];
     }
 }
+
 
 class TodoListUI {
     constructor(todoList) {
@@ -101,7 +116,10 @@ class TodoListUI {
 
         this.bindEvents();
         this.addCSP();
+        this.installPWA();
     }
+
+
 
     addCSP() {
         const meta = document.createElement('meta');
@@ -124,6 +142,34 @@ class TodoListUI {
         this.closeTodoBtn.addEventListener('click', () => this.closePopup());
         this.saveBtn.addEventListener('click', () => this.saveTasksToPDF());
     }
+
+    installPWA() {
+    let deferredPrompt;
+    const installButton = document.querySelector('.installButton');
+
+    installButton.style.display = 'none';
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault(); 
+        deferredPrompt = e;
+        installButton.style.display = 'block'; 
+
+        installButton.addEventListener('click', () => {
+            installButton.style.display = 'none';
+            deferredPrompt.prompt(); 
+
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('Użytkownik zaakceptował instalację PWA');
+                } else {
+                    console.log('Użytkownik odrzucił instalację PWA');
+                }
+                deferredPrompt = null;
+            });
+        });
+    });
+}
+
 
     addNewTask() {
         const taskText = this.todoInput.value;
@@ -227,10 +273,7 @@ class TodoListUI {
             this.updateTaskNumbers();
         }
         if (this.todoList.getAllTasks().length === 0) {
-    
-        const currentLanguage = localStorage.getItem('preferredLanguage'); 
-    
-   
+            const currentLanguage = localStorage.getItem('preferredLanguage'); 
             this.alertInfo.textContent = currentLanguage === 'pl' 
                 ? 'Brak zadań na liście.' 
                 : 'No tasks on the list.';
@@ -401,7 +444,6 @@ class TodoListUI {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
     if (typeof DOMPurify === 'undefined') {
         console.error('DOMPurify is not loaded. Please make sure it is included in your HTML file.');
         return;
@@ -409,8 +451,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const todoList = new TodoList();
     window.todoListUI = new TodoListUI(todoList);
-    
 });
 
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+            .then(registration => {
+                console.log('Service Worker zarejestrowany pomyślnie:', registration);
+            })
+            .catch(error => {
+                console.error('Błąd podczas rejestracji Service Worker:', error);
+            });
+    });
+}
 
 

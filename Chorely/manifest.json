@@ -1,13 +1,12 @@
 {
-  "name": "ThoughtSpace",
-  "short_name": "ThoughtSpace",
-  "description": "Aplikacja do zarządzania notatkami",
-  "start_url": "./ThoughtSpace.html",
+  "name": "Chorely - ToDo App",
+  "short_name": "Chorely",
+  "start_url": "./Chorely.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#4A3728",
+  "theme_color": "#4A90E2",
   "icons": [
-        {
+    {
       "src": "./ikona_Chorely.webp",
       "sizes": "192x192",
       "type": "image/webp"
@@ -23,9 +22,9 @@
       "type": "image/webp"
     },
     {
-      "src": "./ThoughtSpace_icon.svg",
+      "src": "./ikona_Chorely.webp",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/webp"
     }
   ]
 }

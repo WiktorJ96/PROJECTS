@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4A90E2">
+    <link rel="apple-touch-icon" href="./ikona_Chorely.webp">
     <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
@@ -18,9 +21,9 @@
 ">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Chorely</title>
+    <link rel="icon" href="./Chorely_icon.svg" type="image/svg">
     <meta name="description" content="Chorely to aplikacja do zarządzania zadaniami, która pomoże Ci zorganizować codzienne obowiązki." data-lang-key="meta_description">
     <meta name="keywords" content="zarządzanie zadaniami, lista zadań, produktywność, organizacja, planowanie" data-lang-key="meta_keywords">
-    <link rel="icon" href="./Chorely_icon.svg" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
@@ -78,9 +81,10 @@
     </div>
 
     <footer>
-        <nav class="language-switch" aria-label="Zmiana języka">
+        <nav class="footer_buttons" aria-label="Zmiana języka">
             <button id="lang-pl" aria-label="Zmień język na polski">PL</button>
             <button id="lang-en" aria-label="Zmień język na angielski">EN</button>
+             <button class="installButton" onclick="installPWA()"><i class="fas fa-download"></i>App</button>
         </nav>
         <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
     </footer>

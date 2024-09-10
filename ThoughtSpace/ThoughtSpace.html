@@ -256,21 +256,8 @@
     
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.8/purify.min.js"></script>
-    <script src="ThoughtSpace.js"></script>
+    <script type="module" src="ThoughtSpace.js"></script>
     <script src="../translations/translates.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./service-worker.js')
-                    .then(registration => {
-                        console.log('Service Worker zarejestrowany pomyślnie:', registration);
-                    })
-                    .catch(error => {
-                        console.error('Błąd podczas rejestracji Service Worker:', error);
-                    });
-            });
-        }
-    </script>
 
 </body>
 </html>
