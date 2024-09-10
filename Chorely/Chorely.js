@@ -178,17 +178,47 @@ class TodoListUI {
     }
 
     setupPWA() {
-        if (this.installButton) {
-            this.installButton.style.display = 'none';
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            this.hideInstallButton();
+            return;
         }
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             this.deferredPrompt = e;
-            if (this.installButton) {
-                this.installButton.style.display = 'block';
-            }
+            this.showInstallButton();
         });
+
+        if (
+            navigator.standalone === false &&
+            /iPhone|iPad|iPod/.test(navigator.userAgent)
+        ) {
+            this.showIOSInstallInstructions();
+        }
+    }
+
+    showInstallButton() {
+        if (this.installButton) {
+            this.installButton.style.display = 'block';
+        }
+    }
+
+    hideInstallButton() {
+        if (this.installButton) {
+            this.installButton.style.display = 'none';
+        }
+    }
+
+    showIOSInstallInstructions() {
+        const iosInstructions = document.createElement('div');
+        iosInstructions.innerHTML = `
+            <p>Aby zainstalować tę aplikację na iOS:</p>
+            <ol>
+                <li>Dotknij ikony "Udostępnij" w przeglądarce</li>
+                <li>Wybierz "Dodaj do ekranu głównego"</li>
+            </ol>
+        `;
+        document.body.appendChild(iosInstructions);
     }
 
     installPWA() {
@@ -197,14 +227,14 @@ class TodoListUI {
             this.deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
                     console.log('Użytkownik zaakceptował instalację PWA');
+                    this.hideInstallButton();
                 } else {
                     console.log('Użytkownik odrzucił instalację PWA');
                 }
                 this.deferredPrompt = null;
             });
-            if (this.installButton) {
-                this.installButton.style.display = 'none';
-            }
+        } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+            alert('Aby zainstalować aplikację, użyj opcji "Dodaj do ekranu głównego" w menu udostępniania przeglądarki.');
         }
     }
 
@@ -499,6 +529,10 @@ class TodoListUI {
     }
 
 }
+
+window.addEventListener('appinstalled', (evt) => {
+    console.log('Aplikacja została zainstalowana');
+});
 
 window.addEventListener('storage', function(e) {
     console.log('Zmiana w localStorage:', e.key, e.oldValue, e.newValue);
