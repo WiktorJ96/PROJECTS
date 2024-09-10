@@ -1,6 +1,5 @@
 
 if (typeof(Storage) !== "undefined") {
-    console.log("localStorage jest dostępny");
 } else {
     console.error("localStorage nie jest dostępny");
 }
@@ -14,11 +13,8 @@ class TodoError extends Error {
 
 class TodoList {
     constructor() {
-        console.log('Inicjalizacja TodoList');
         this.tasks = this.loadTasksFromStorage();
-        console.log('Wczytane zadania:', this.tasks);
         this.idNumber = this.tasks.length > 0 ? Math.max(...this.tasks.map(task => task.id)) : 0;
-        console.log('Aktualny idNumber:', this.idNumber);
     }
 
     sanitizeInput(input) {
@@ -46,7 +42,6 @@ class TodoList {
             };
             this.tasks.push(newTask);
             this.saveTasksToStorage();
-            console.log('Dodano nowe zadanie:', newTask);
             return newTask;
         } catch (error) {
             console.error('Błąd podczas dodawania zadania:', error);
@@ -56,9 +51,7 @@ class TodoList {
 
     saveTasksToStorage() {
         try {
-            console.log('Zapisywanie zadań:', this.tasks);
             localStorage.setItem('tasks', JSON.stringify(this.tasks));
-            console.log('Zapisano w localStorage:', localStorage.getItem('tasks'));
         } catch (error) {
             console.error('Błąd podczas zapisywania zadań do localStorage:', error);
         }
@@ -67,7 +60,6 @@ class TodoList {
     loadTasksFromStorage() {
         try {
             const savedTasks = localStorage.getItem('tasks');
-            console.log('Wczytano z localStorage:', savedTasks);
             if (!savedTasks) return [];
 
             const parsedTasks = JSON.parse(savedTasks);
@@ -93,7 +85,6 @@ class TodoList {
         if (task) {
             task.completed = !task.completed;
             this.saveTasksToStorage();  
-            console.log('Zaktualizowano status zadania:', task);
             return task;
         }
         console.warn('Nie znaleziono zadania o id:', taskId);
@@ -113,7 +104,6 @@ class TodoList {
             if (task) {
                 task.text = newText;
                 this.saveTasksToStorage();
-                console.log('Edytowano zadanie:', task);
                 return task;
             }
             console.warn('Nie znaleziono zadania o id:', taskId);
@@ -129,7 +119,6 @@ class TodoList {
         if (index !== -1) {
             const deletedTask = this.tasks.splice(index, 1)[0];
             this.saveTasksToStorage();  
-            console.log('Usunięto zadanie:', deletedTask);
             return deletedTask;
         }
         console.warn('Nie znaleziono zadania do usunięcia o id:', taskId);
@@ -162,7 +151,6 @@ class TodoListUI {
         this.bindEvents();
         this.renderTasks();
         this.setupPWA();
-        console.log('TodoListUI zainicjalizowany');
     }
 
     bindEvents() {
@@ -226,10 +214,7 @@ class TodoListUI {
             this.deferredPrompt.prompt();
             this.deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
-                    console.log('Użytkownik zaakceptował instalację PWA');
                     this.hideInstallButton();
-                } else {
-                    console.log('Użytkownik odrzucił instalację PWA');
                 }
                 this.deferredPrompt = null;
             });
@@ -391,155 +376,152 @@ class TodoListUI {
     }
 
     saveTasksToPDF() {
-        const { jsPDF } = window.jspdf;
+    const { jsPDF } = window.jspdf;
 
-        const canvas = document.createElement('canvas');
-        const pdfWidth = 210;  
-        const pdfHeight = 297; 
-        const scale = 10;      
-        canvas.width = pdfWidth * scale;
-        canvas.height = pdfHeight * scale;
-        const ctx = canvas.getContext('2d');
+    const canvas = document.createElement('canvas');
+    const pdfWidth = 210;  
+    const pdfHeight = 297; 
+    const scale = 10;      
+    canvas.width = pdfWidth * scale;
+    canvas.height = pdfHeight * scale;
+    const ctx = canvas.getContext('2d');
 
-        ctx.translate(canvas.width / 2, canvas.height / 2);
-        ctx.rotate(Math.PI / 4);  
-        ctx.translate(-canvas.width / 2, -canvas.height / 2);
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.rotate(Math.PI / 4);  
+    ctx.translate(-canvas.width / 2, -canvas.height / 2);
 
-        const bgGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        bgGradient.addColorStop(0, 'rgba(240, 248, 255, 0.8)');  
-        bgGradient.addColorStop(1, 'rgba(230, 230, 250, 0.8)');  
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Usuwamy tło - pomijamy rysowanie tła
+    // ctx.fillStyle = 'rgba(0, 0, 0, 0)'; // Jeśli chcemy ustawić przezroczyste tło
+    // ctx.fillRect(0, 0, canvas.width, canvas.height); // To już niepotrzebne, usuwamy
 
-        const logoWidth = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height) * 0.7;
-        const logoHeight = 180 * scale * 0.7;
-        const startX = (canvas.width - logoWidth) / 2;
-        const startY = (canvas.height - logoHeight) / 2;
+    const logoWidth = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height) * 0.7;
+    const logoHeight = 180 * scale * 0.7;
+    const startX = (canvas.width - logoWidth) / 2;
+    const startY = (canvas.height - logoHeight) / 2;
 
-        const logoGradient = ctx.createLinearGradient(startX, startY, startX + logoWidth, startY + logoHeight);
-        logoGradient.addColorStop(0, 'rgba(135, 206, 250, 0.2)');  
-        logoGradient.addColorStop(1, 'rgba(70, 130, 180, 0.3)');   
-        ctx.fillStyle = logoGradient;
-        
-        ctx.beginPath();
-        ctx.moveTo(startX, startY + 30 * scale);
-        ctx.lineTo(startX, startY + logoHeight - 30 * scale);
-        ctx.quadraticCurveTo(startX, startY + logoHeight, startX + 30 * scale, startY + logoHeight);
-        ctx.lineTo(startX + logoWidth - 30 * scale, startY + logoHeight);
-        ctx.quadraticCurveTo(startX + logoWidth, startY + logoHeight, startX + logoWidth, startY + logoHeight - 30 * scale);
-        ctx.lineTo(startX + logoWidth, startY + 30 * scale);
-        ctx.quadraticCurveTo(startX + logoWidth, startY, startX + logoWidth - 30 * scale, startY);
-        ctx.lineTo(startX + 30 * scale, startY);
-        ctx.quadraticCurveTo(startX, startY, startX, startY + 30 * scale);
-        ctx.fill();
+    const logoGradient = ctx.createLinearGradient(startX, startY, startX + logoWidth, startY + logoHeight);
+    logoGradient.addColorStop(0, 'rgba(135, 206, 250, 0.2)');  
+    logoGradient.addColorStop(1, 'rgba(70, 130, 180, 0.3)');   
+    ctx.fillStyle = logoGradient;
+    
+    ctx.beginPath();
+    ctx.moveTo(startX, startY + 30 * scale);
+    ctx.lineTo(startX, startY + logoHeight - 30 * scale);
+    ctx.quadraticCurveTo(startX, startY + logoHeight, startX + 30 * scale, startY + logoHeight);
+    ctx.lineTo(startX + logoWidth - 30 * scale, startY + logoHeight);
+    ctx.quadraticCurveTo(startX + logoWidth, startY + logoHeight, startX + logoWidth, startY + logoHeight - 30 * scale);
+    ctx.lineTo(startX + logoWidth, startY + 30 * scale);
+    ctx.quadraticCurveTo(startX + logoWidth, startY, startX + logoWidth - 30 * scale, startY);
+    ctx.lineTo(startX + 30 * scale, startY);
+    ctx.quadraticCurveTo(startX, startY, startX, startY + 30 * scale);
+    ctx.fill();
 
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
 
-        const iconSize = 80 * scale * 0.7;
-        const iconOffsetX = iconSize * 0.9; 
-        const iconGradient = ctx.createRadialGradient(
-            centerX - iconOffsetX, centerY, 0,
-            centerX - iconOffsetX, centerY, iconSize / 2
-        );
-        iconGradient.addColorStop(0, 'rgba(30, 144, 255, 0.8)'); 
-        iconGradient.addColorStop(1, 'rgba(0, 191, 255, 0.6)');   
-        
-        ctx.beginPath();
-        ctx.arc(centerX - iconOffsetX, centerY, iconSize / 2, 0, 2 * Math.PI);
-        ctx.fillStyle = iconGradient;
-        ctx.fill();
+    const iconSize = 80 * scale * 0.7;
+    const iconOffsetX = iconSize * 0.9; 
+    const iconGradient = ctx.createRadialGradient(
+        centerX - iconOffsetX, centerY, 0,
+        centerX - iconOffsetX, centerY, iconSize / 2
+    );
+    iconGradient.addColorStop(0, 'rgba(30, 144, 255, 0.8)'); 
+    iconGradient.addColorStop(1, 'rgba(0, 191, 255, 0.6)');   
+    
+    ctx.beginPath();
+    ctx.arc(centerX - iconOffsetX, centerY, iconSize / 2, 0, 2 * Math.PI);
+    ctx.fillStyle = iconGradient;
+    ctx.fill();
 
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-        ctx.shadowBlur = 10 * scale * 0.7;
-        ctx.shadowOffsetX = 3 * scale * 0.7;
-        ctx.shadowOffsetY = 3 * scale * 0.7;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+    ctx.shadowBlur = 10 * scale * 0.7;
+    ctx.shadowOffsetX = 3 * scale * 0.7;
+    ctx.shadowOffsetY = 3 * scale * 0.7;
 
-        ctx.font = `bold ${40 * scale * 0.7}px "Font Awesome 5 Free"`;
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('\uf00c', centerX - iconOffsetX, centerY);
+    ctx.font = `bold ${40 * scale * 0.7}px "Font Awesome 5 Free"`;
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('\uf00c', centerX - iconOffsetX, centerY);
 
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
-        ctx.shadowBlur = 5 * scale * 0.7;
-        ctx.shadowOffsetX = 2 * scale * 0.7;
-        ctx.shadowOffsetY = 2 * scale * 0.7;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+    ctx.shadowBlur = 5 * scale * 0.7;
+    ctx.shadowOffsetX = 2 * scale * 0.7;
+    ctx.shadowOffsetY = 2 * scale * 0.7;
 
-        const textOffsetX = iconSize * 0.7; 
-        ctx.font = `bold ${32 * scale * 0.7}px Arial`;
-        
-        const textGradient = ctx.createLinearGradient(
-            centerX + textOffsetX - 50 * scale * 0.7, centerY,
-            centerX + textOffsetX + 50 * scale * 0.7, centerY
-        );
-        textGradient.addColorStop(0, 'rgba(25, 25, 112, 0.9)');
-        textGradient.addColorStop(1, 'rgba(70, 130, 180, 0.9)'); 
-        
-        ctx.fillStyle = textGradient;
-        ctx.fillText('CHORELY', centerX + textOffsetX, centerY);
+    const textOffsetX = iconSize * 0.7; 
+    ctx.font = `bold ${32 * scale * 0.7}px Arial`;
+    
+    const textGradient = ctx.createLinearGradient(
+        centerX + textOffsetX - 50 * scale * 0.7, centerY,
+        centerX + textOffsetX + 50 * scale * 0.7, centerY
+    );
+    textGradient.addColorStop(0, 'rgba(25, 25, 112, 0.9)');
+    textGradient.addColorStop(1, 'rgba(70, 130, 180, 0.9)'); 
+    
+    ctx.fillStyle = textGradient;
+    ctx.fillText('CHORELY', centerX + textOffsetX, centerY);
 
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
-        ctx.lineWidth = 1 * scale * 0.7;
-        ctx.strokeText('CHORELY', centerX + textOffsetX, centerY);
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+    ctx.lineWidth = 1 * scale * 0.7;
+    ctx.strokeText('CHORELY', centerX + textOffsetX, centerY);
 
-        ctx.shadowColor = 'transparent';
-        ctx.shadowBlur = 0;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
 
-        const doc = new jsPDF();
+    const doc = new jsPDF();
 
-        const imgData = canvas.toDataURL('image/png');
-        doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    const imgData = canvas.toDataURL('image/png');
+    doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
 
-        const tasks = this.todoList.getAllTasks().map(task => ({
-            text: task.text,
-            completed: task.completed
-        }));
+    const tasks = this.todoList.getAllTasks().map(task => ({
+        text: task.text,
+        completed: task.completed
+    }));
 
-        doc.setFontSize(12);
+    doc.setFontSize(12);
 
-        doc.autoTable({
-            head: [['Zadania/Tasks:']],
-            body: tasks.map(task => [
-                {
-                    content: task.text,
-                    styles: {
-                        textDecoration: task.completed ? 'line-through' : 'none',
-                        textColor: task.completed ? [255, 0, 0] : [0, 0, 0]
-                    }
-                }
-            ]),
-            startY: 20,
-            margin: { left: 10, right: 10 },
-            styles: { overflow: 'linebreak' },
-            theme: 'grid',
-            headStyles: { fillColor: [30, 144, 255], textColor: 255 },  
-            alternateRowStyles: { fillColor: [240, 248, 255] },  
-            didDrawCell: function(data) {
-                if (data.section === 'body' && tasks[data.row.index].completed) {
-                    const { x, y, width, height } = data.cell;
-                    doc.setDrawColor(255, 0, 0);  
-                    doc.line(x, y + height / 2, x + width, y + height / 2);
+    doc.autoTable({
+        head: [['Zadania/Tasks:']],
+        body: tasks.map(task => [
+            {
+                content: task.text,
+                styles: {
+                    textDecoration: task.completed ? 'line-through' : 'none',
+                    textColor: task.completed ? [255, 0, 0] : [0, 0, 0]
                 }
             }
-        });
+        ]),
+        startY: 20,
+        margin: { left: 10, right: 10 },
+        styles: { overflow: 'linebreak' },
+        theme: 'grid',
+        headStyles: { fillColor: [30, 144, 255], textColor: 255 },  
+        alternateRowStyles: { fillColor: [240, 248, 255] },  
+        didDrawCell: function(data) {
+            if (data.section === 'body' && tasks[data.row.index].completed) {
+                const { x, y, width, height } = data.cell;
+                doc.setDrawColor(255, 0, 0);  
+                doc.line(x, y + height / 2, x + width, y + height / 2);
+            }
+        }
+    });
 
-        doc.save('tasks.pdf');
-    }
+    doc.save('tasks.pdf');
+}
+
 
 }
 
 window.addEventListener('appinstalled', (evt) => {
-    console.log('Aplikacja została zainstalowana');
 });
 
 window.addEventListener('storage', function(e) {
-    console.log('Zmiana w localStorage:', e.key, e.oldValue, e.newValue);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM załadowany, inicjalizacja aplikacji');
     const todoList = new TodoList();
     window.todoListUI = new TodoListUI(todoList);
 });
@@ -547,9 +529,6 @@ document.addEventListener('DOMContentLoaded', () => {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./service-worker.js')
-            .then(registration => {
-                console.log('Service Worker zarejestrowany pomyślnie:', registration);
-            })
             .catch(error => {
                 console.error('Błąd podczas rejestracji Service Worker:', error);
             });

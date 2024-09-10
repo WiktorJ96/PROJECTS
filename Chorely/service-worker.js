@@ -4,7 +4,7 @@ const urlsToCache = [
   './Chorely.html',
   './Chorely.css',
   './Chorely.js',
-  './ikona_Chorely.webp',
+  './ikona_Chorely.png',
   './Chorely_icon.svg'
 ];
 

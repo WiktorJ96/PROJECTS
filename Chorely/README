@@ -17,9 +17,8 @@ Jakość kodu
 
 	1.Spójność: Kod JavaScript jest spójny w stylu i formatowaniu, co ułatwia czytanie i utrzymanie.
 	2.Nazewnictwo: Nazwy zmiennych i funkcji w JavaScript są opisowe i zgodne z konwencją camelCase.
-	3.Komentarze: Kod JavaScript zawiera komentarze JSDoc, co ułatwia dokumentację i zrozumienie funkcji.
-	4.Czystość kodu: Metody JavaScript są krótkie i mają pojedyncze odpowiedzialności, zgodnie z zasadą Single Responsibility Principle.
-	5.Semantyka HTML: Odpowiednie użycie atrybutów ARIA i ról dla lepszej dostępności.
+	3.Czystość kodu: Metody JavaScript są krótkie i mają pojedyncze odpowiedzialności, zgodnie z zasadą Single Responsibility Principle.
+	4.Semantyka HTML: Odpowiednie użycie atrybutów ARIA i ról dla lepszej dostępności.
 
 Funkcjonalność i bezpieczeństwo
 
@@ -75,9 +74,8 @@ Code quality
 
 	1.Consistency: JavaScript code is consistent in style and formatting, which facilitates reading and maintenance.
 	2.Naming: Variable and function names in JavaScript are descriptive and follow camelCase convention.
-	3.Comments: JavaScript code includes JSDoc comments, which facilitates documentation and understanding of functions.
-	4.Code cleanliness: JavaScript methods are short and have single responsibilities, in line with the Single Responsibility Principle.
-	5.HTML semantics: Appropriate use of ARIA attributes and roles for better accessibility.
+	3.Code cleanliness: JavaScript methods are short and have single responsibilities, in line with the Single Responsibility Principle.
+	4.HTML semantics: Appropriate use of ARIA attributes and roles for better accessibility.
 
 Functionality and security
 
