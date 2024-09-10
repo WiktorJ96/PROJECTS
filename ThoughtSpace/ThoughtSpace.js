@@ -357,22 +357,51 @@ class NoteApp {
     }
 
     setupPWA() {
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            this.hideInstallButton();
+            return;
+        }
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             this.deferredPrompt = e;
-            if (this.installButton) {
-                this.installButton.style.display = 'block';
-            } else {
-                console.error('Nie znaleziono przycisku instalacji');
-            }
+            this.showInstallButton();
         });
 
+        if (
+            navigator.standalone === false &&
+            /iPhone|iPad|iPod/.test(navigator.userAgent)
+        ) {
+            this.showIOSInstallInstructions();
+        }
+
         window.addEventListener('appinstalled', () => {
-            if (this.installButton) {
-                this.installButton.style.display = 'none';
-            }
+            this.hideInstallButton();
         });
+    }
+
+    showInstallButton() {
+        if (this.installButton) {
+            this.installButton.style.display = 'block';
+        }
+    }
+
+    hideInstallButton() {
+        if (this.installButton) {
+            this.installButton.style.display = 'none';
+        }
+    }
+
+    showIOSInstallInstructions() {
+        const iosInstructions = document.createElement('div');
+        iosInstructions.innerHTML = `
+            <p>Aby zainstalować tę aplikację na iOS:</p>
+            <ol>
+                <li>Dotknij ikony "Udostępnij" w przeglądarce</li>
+                <li>Wybierz "Dodaj do ekranu głównego"</li>
+            </ol>
+        `;
+        document.body.appendChild(iosInstructions);
     }
 
     installPWA() {
@@ -380,14 +409,29 @@ class NoteApp {
             this.deferredPrompt.prompt();
             this.deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
-                } 
+                    this.hideInstallButton();
+                }
                 this.deferredPrompt = null;
             });
+        } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+            alert('Aby zainstalować aplikację, użyj opcji "Dodaj do ekranu głównego" w menu udostępniania przeglądarki.');
         }
     }
 }
 
-const app = new NoteApp();
+// Globalne nasłuchiwacze zdarzeń
+window.addEventListener('appinstalled', (evt) => {
+    // Możesz dodać tutaj dodatkową logikę, jeśli jest potrzebna
+});
+
+window.addEventListener('storage', function(e) {
+    // Możesz dodać logikę obsługi zdarzeń storage, jeśli jest potrzebna
+});
+
+// Uczyń instancję NoteApp dostępną globalnie
+document.addEventListener('DOMContentLoaded', () => {
+    window.noteApp = new NoteApp();
+});
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
