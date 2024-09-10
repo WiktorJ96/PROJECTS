@@ -13,28 +13,28 @@ const ASSETS_TO_CACHE = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => {
-        return Promise.all(
-          ASSETS_TO_CACHE.map(url => {
-            return cache.add(url).catch(error => {
-              console.error(`Nie udało się dodać ${url} do cache:`, error);
-            });
-          })
-        );
-      })
+      .then((cache) => cache.addAll(urlsToCache))
   );
 });
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
-      .then((response) => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request).catch(error => {
-          console.error('Błąd pobierania zasobu:', error);
-        });
-      })
+      .then((response) => response || fetch(event.request))
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  const cacheWhitelist = [CACHE_NAME];
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
   );
 });
