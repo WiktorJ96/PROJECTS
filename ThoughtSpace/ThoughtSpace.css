@@ -746,7 +746,19 @@ footer::after {
 .footer_buttons .installButton:hover {
     background-color: #4A3728;
 }
-.installButton {
+
+.fas.fa-download {
+    font-family: "Font Awesome 5 Free" !important;
+    font-weight: 900;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+.installButton{
     display: none;
 }
 
