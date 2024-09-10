@@ -7,22 +7,47 @@ const ASSETS_TO_CACHE = [
   '../translations/notatnik-pl.json',
   '../translations/notatnik-en.json',
   './ikona_ThoughtSpace.png',
-  './ThoughtSpace_icon.svg'
+  './ThoughtSpace_icon.svg',
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(ASSETS_TO_CACHE))
+      .then((cache) => {
+        return Promise.all(
+          ASSETS_TO_CACHE.map(url => {
+            return cache.add(url).catch(error => {
+              console.error(`Nie udało się dodać ${url} do cache:`, error);
+            });
+          })
+        );
+      })
   );
 });
 
 self.addEventListener('fetch', (event) => {
+  if (event.request.url.includes('fontawesome')) {
+    return;
+  }
+  
   event.respondWith(
     caches.match(event.request)
-      .then((response) => response || fetch(event.request))
-      .catch(() => {
-        console.error('Nie udało się pobrać zasobu:', event.request.url);
+      .then((response) => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request).then(response => {
+          if (response && response.status === 200 && response.type === 'basic') {
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME)
+              .then(cache => {
+                cache.put(event.request, responseToCache);
+              });
+          }
+          return response;
+        }).catch(() => {
+          console.error('Nie udało się pobrać zasobu:', event.request.url);
+        });
       })
   );
 });
