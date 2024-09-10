@@ -1,3 +1,10 @@
+
+if (typeof(Storage) !== "undefined") {
+    console.log("localStorage jest dostępny");
+} else {
+    console.error("localStorage nie jest dostępny");
+}
+
 class TodoError extends Error {
     constructor(message, code) {
         super(message);
@@ -7,12 +14,15 @@ class TodoError extends Error {
 
 class TodoList {
     constructor() {
+        console.log('Inicjalizacja TodoList');
         this.tasks = this.loadTasksFromStorage();
-        this.idNumber = this.tasks.length > 0 ? this.tasks[this.tasks.length - 1].id : 0;
+        console.log('Wczytane zadania:', this.tasks);
+        this.idNumber = this.tasks.length > 0 ? Math.max(...this.tasks.map(task => task.id)) : 0;
+        console.log('Aktualny idNumber:', this.idNumber);
     }
 
     sanitizeInput(input) {
-    return DOMPurify.sanitize(input, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+        return DOMPurify.sanitize(input, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
     }
 
     isDuplicateTask(taskText) {
@@ -36,19 +46,46 @@ class TodoList {
             };
             this.tasks.push(newTask);
             this.saveTasksToStorage();
+            console.log('Dodano nowe zadanie:', newTask);
             return newTask;
         } catch (error) {
+            console.error('Błąd podczas dodawania zadania:', error);
             throw error;
         }
     }
 
     saveTasksToStorage() {
-        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        try {
+            console.log('Zapisywanie zadań:', this.tasks);
+            localStorage.setItem('tasks', JSON.stringify(this.tasks));
+            console.log('Zapisano w localStorage:', localStorage.getItem('tasks'));
+        } catch (error) {
+            console.error('Błąd podczas zapisywania zadań do localStorage:', error);
+        }
     }
 
     loadTasksFromStorage() {
-        const savedTasks = localStorage.getItem('tasks');
-        return savedTasks ? JSON.parse(savedTasks) : [];
+        try {
+            const savedTasks = localStorage.getItem('tasks');
+            console.log('Wczytano z localStorage:', savedTasks);
+            if (!savedTasks) return [];
+
+            const parsedTasks = JSON.parse(savedTasks);
+            if (!Array.isArray(parsedTasks)) {
+                console.warn('Zapisane zadania nie są w oczekiwanym formacie. Resetowanie...');
+                return [];
+            }
+
+            return parsedTasks.filter(task => 
+                typeof task === 'object' &&
+                typeof task.id === 'number' &&
+                typeof task.text === 'string' &&
+                typeof task.completed === 'boolean'
+            );
+        } catch (error) {
+            console.error('Błąd podczas wczytywania zadań z localStorage:', error);
+            return [];
+        }
     }
 
     completeTask(taskId) {
@@ -56,8 +93,10 @@ class TodoList {
         if (task) {
             task.completed = !task.completed;
             this.saveTasksToStorage();  
+            console.log('Zaktualizowano status zadania:', task);
             return task;
         }
+        console.warn('Nie znaleziono zadania o id:', taskId);
         return null;
     }
 
@@ -74,10 +113,13 @@ class TodoList {
             if (task) {
                 task.text = newText;
                 this.saveTasksToStorage();
+                console.log('Edytowano zadanie:', task);
                 return task;
             }
+            console.warn('Nie znaleziono zadania o id:', taskId);
             return null;
         } catch (error) {
+            console.error('Błąd podczas edycji zadania:', error);
             throw error;
         }
     }
@@ -87,8 +129,10 @@ class TodoList {
         if (index !== -1) {
             const deletedTask = this.tasks.splice(index, 1)[0];
             this.saveTasksToStorage();  
+            console.log('Usunięto zadanie:', deletedTask);
             return deletedTask;
         }
+        console.warn('Nie znaleziono zadania do usunięcia o id:', taskId);
         return null;
     }
 
@@ -96,7 +140,6 @@ class TodoList {
         return [...this.tasks];
     }
 }
-
 
 class TodoListUI {
     constructor(todoList) {
@@ -111,27 +154,15 @@ class TodoListUI {
         this.popupInput = document.querySelector('.popup-input');
         this.addPopupBtn = document.querySelector('.accept');
         this.closeTodoBtn = document.querySelector('.cancel');
+        this.installButton = document.querySelector('.installButton');
         
         this.editedTodo = null;
+        this.deferredPrompt = null;
 
         this.bindEvents();
-        this.addCSP();
-        this.installPWA();
-    }
-
-
-
-    addCSP() {
-        const meta = document.createElement('meta');
-        meta.httpEquiv = "Content-Security-Policy";
-        meta.content = `
-            default-src 'self';
-            script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
-            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://use.fontawesome.com https://cdnjs.cloudflare.com;
-            font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com;
-            img-src 'self' data:;
-        `;
-        document.head.appendChild(meta);
+        this.renderTasks();
+        this.setupPWA();
+        console.log('TodoListUI zainicjalizowany');
     }
 
     bindEvents() {
@@ -141,47 +172,68 @@ class TodoListUI {
         this.addPopupBtn.addEventListener('click', () => this.changeTodo());
         this.closeTodoBtn.addEventListener('click', () => this.closePopup());
         this.saveBtn.addEventListener('click', () => this.saveTasksToPDF());
+        if (this.installButton) {
+            this.installButton.addEventListener('click', () => this.installPWA());
+        }
+    }
+
+    setupPWA() {
+        if (this.installButton) {
+            this.installButton.style.display = 'none';
+        }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            this.deferredPrompt = e;
+            if (this.installButton) {
+                this.installButton.style.display = 'block';
+            }
+        });
     }
 
     installPWA() {
-    let deferredPrompt;
-    const installButton = document.querySelector('.installButton');
-
-    installButton.style.display = 'none';
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault(); 
-        deferredPrompt = e;
-        installButton.style.display = 'block'; 
-
-        installButton.addEventListener('click', () => {
-            installButton.style.display = 'none';
-            deferredPrompt.prompt(); 
-
-            deferredPrompt.userChoice.then((choiceResult) => {
+        if (this.deferredPrompt) {
+            this.deferredPrompt.prompt();
+            this.deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
                     console.log('Użytkownik zaakceptował instalację PWA');
                 } else {
                     console.log('Użytkownik odrzucił instalację PWA');
                 }
-                deferredPrompt = null;
+                this.deferredPrompt = null;
             });
-        });
-    });
-}
+            if (this.installButton) {
+                this.installButton.style.display = 'none';
+            }
+        }
+    }
 
+    renderTasks() {
+        this.ulList.innerHTML = '';
+        const tasks = this.todoList.getAllTasks();
+        tasks.forEach(task => this.createTaskElement(task));
+        if (tasks.length === 0) {
+            this.alertInfo.textContent = 'Brak zadań na liście.';
+        } else {
+            this.alertInfo.textContent = '';
+        }
+    }
 
     addNewTask() {
         const taskText = this.todoInput.value;
-        const newTask = this.todoList.addNewTask(taskText);
-        if (newTask) {
+        try {
+            const newTask = this.todoList.addNewTask(taskText);
             this.createTaskElement(newTask);
             this.todoInput.value = '';
             this.alertInfo.textContent = '';
-        } else if (taskText.trim() === '') {
-            this.alertInfo.textContent = 'Enter the task content.';
-        } else {
-            this.alertInfo.textContent = 'Task already exists.';
+        } catch (error) {
+            if (error.code === 'EMPTY_TASK') {
+                this.alertInfo.textContent = 'Wprowadź treść zadania.';
+            } else if (error.code === 'DUPLICATE_TASK') {
+                this.alertInfo.textContent = 'Takie zadanie już istnieje.';
+            } else {
+                this.alertInfo.textContent = 'Wystąpił błąd podczas dodawania zadania.';
+            }
         }
     }
 
@@ -196,6 +248,10 @@ class TodoListUI {
                 <button class="delete"><i class="fas fa-times"></i></button>
             </div>
         `;
+        if (task.completed) {
+            newTask.classList.add('completed');
+            newTask.querySelector('.complete').classList.add('completed');
+        }
         this.ulList.appendChild(newTask);
         this.updateTaskNumbers();
     }
@@ -230,7 +286,7 @@ class TodoListUI {
                 completeButton.classList.toggle('completed');
             }
             this.updateTaskAppearance(taskElement, updatedTask);
-            this.updateTaskNumbers(); 
+            this.updateTaskNumbers();
         }
     }
 
@@ -240,7 +296,7 @@ class TodoListUI {
             taskTextElement.textContent = `${task.id}. ${DOMPurify.sanitize(task.text)}`;
             taskTextElement.style.textDecoration = task.completed ? 'line-through' : 'none';
         }
-        this.updateTaskNumbers(); 
+        this.updateTaskNumbers();
     }
 
     editTask(taskId, taskElement) {
@@ -255,14 +311,22 @@ class TodoListUI {
     changeTodo() {
         if (this.popupInput.value !== '') {
             const taskId = parseInt(this.editedTodo.id.split('-')[1]);
-            const updatedTask = this.todoList.editTask(taskId, this.popupInput.value);
-            if (updatedTask) {
-                this.updateTaskAppearance(this.editedTodo, updatedTask);
-                this.closePopup();
-                this.updateTaskNumbers();
+            try {
+                const updatedTask = this.todoList.editTask(taskId, this.popupInput.value);
+                if (updatedTask) {
+                    this.updateTaskAppearance(this.editedTodo, updatedTask);
+                    this.closePopup();
+                    this.updateTaskNumbers();
+                }
+            } catch (error) {
+                if (error.code === 'DUPLICATE_TASK') {
+                    this.popupInfo.textContent = 'Takie zadanie już istnieje.';
+                } else {
+                    this.popupInfo.textContent = 'Wystąpił błąd podczas edycji zadania.';
+                }
             }
         } else {
-            this.popupInfo.textContent = 'You must provide some content.';
+            this.popupInfo.textContent = 'Musisz podać jakąś treść zadania.';
         }
     }
 
@@ -273,20 +337,13 @@ class TodoListUI {
             this.updateTaskNumbers();
         }
         if (this.todoList.getAllTasks().length === 0) {
-            const currentLanguage = localStorage.getItem('preferredLanguage'); 
-            this.alertInfo.textContent = currentLanguage === 'pl' 
-                ? 'Brak zadań na liście.' 
-                : 'No tasks on the list.';
+            this.alertInfo.textContent = 'Brak zadań na liście.';
         }
     }
 
     closePopup() {
-        if (this.popup) {
-            this.popup.style.display = 'none';
-        }
-        if (this.popupInfo) {
-            this.popupInfo.textContent = '';
-        }
+        this.popup.style.display = 'none';
+        this.popupInfo.textContent = '';
     }
 
     updateTaskNumbers() {
@@ -443,16 +500,15 @@ class TodoListUI {
 
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (typeof DOMPurify === 'undefined') {
-        console.error('DOMPurify is not loaded. Please make sure it is included in your HTML file.');
-        return;
-    }
+window.addEventListener('storage', function(e) {
+    console.log('Zmiana w localStorage:', e.key, e.oldValue, e.newValue);
+});
 
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM załadowany, inicjalizacja aplikacji');
     const todoList = new TodoList();
     window.todoListUI = new TodoListUI(todoList);
 });
-
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
