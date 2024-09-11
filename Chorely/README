@@ -8,50 +8,54 @@ Chorely jest zaprojektowana jako Progressive Web App (PWA), co oznacza, że łą
 
 Ogólna struktura i organizacja
 
-	1.Modułowość: Kod JavaScript jest dobrze zorganizowany w klasy (TodoError, TodoList, TodoListUI), co sprzyja modułowości i ułatwia utrzymanie.
-	2.Separacja logiki: Rozdzielenie logiki biznesowej (TodoList) od interfejsu użytkownika (TodoListUI) w JavaScript.
-	3.Obsługa błędów: Implementacja własnej klasy TodoError do obsługi błędów w JavaScript.
-	4.Struktura HTML: Prawidłowe użycie struktury HTML5 z semantycznymi tagami jak <header>, <main>, <section>, <footer>.
+1. Modułowość: Kod JavaScript jest dobrze zorganizowany w klasy (TodoError, TodoList, TodoListUI), co sprzyja modułowości i ułatwia
+   utrzymanie.
+2. Separacja logiki: Rozdzielenie logiki biznesowej (TodoList) od interfejsu użytkownika (TodoListUI) w JavaScript.
+3. Obsługa błędów: Implementacja własnej klasy TodoError do obsługi błędów w JavaScript.
+4. Struktura HTML: Prawidłowe użycie struktury HTML5 z semantycznymi tagami jak <header>, <main>, <section>, <footer>.
 
 Jakość kodu
 
-	1.Spójność: Kod JavaScript jest spójny w stylu i formatowaniu, co ułatwia czytanie i utrzymanie.
-	2.Nazewnictwo: Nazwy zmiennych i funkcji w JavaScript są opisowe i zgodne z konwencją camelCase.
-	3.Czystość kodu: Metody JavaScript są krótkie i mają pojedyncze odpowiedzialności, zgodnie z zasadą Single Responsibility Principle.
-	4.Semantyka HTML: Odpowiednie użycie atrybutów ARIA i ról dla lepszej dostępności.
+1. Spójność: Kod JavaScript jest spójny w stylu i formatowaniu, co ułatwia czytanie i utrzymanie.
+2. Nazewnictwo: Nazwy zmiennych i funkcji w JavaScript są opisowe i zgodne z konwencją camelCase.
+3. Czystość kodu: Metody JavaScript są krótkie i mają pojedyncze odpowiedzialności, zgodnie z zasadą Single Responsibility Principle.
+4. Semantyka HTML: Odpowiednie użycie atrybutów ARIA i ról dla lepszej dostępności.
 
 Funkcjonalność i bezpieczeństwo
 
-	1.Walidacja danych wejściowych: Implementacja sanityzacji danych wejściowych z użyciem biblioteki DOMPurify w JavaScript pokazuje dbałość o bezpieczeństwo i zapobieganie atakom XSS.
-	2.Obsługa duplikatów: Sprawdzanie duplikatów zadań przed dodaniem nowego zapewnia integralność danych.
-	3.Internacjonalizacja: Implementacja systemu tłumaczeń z myślą o globalnym zasięgu.
-	4.Responsywność: Kod UI zawiera obsługę zdarzeń, co sugeruje responsywny interfejs użytkownika.
-	5.Content Security Policy: Implementacja CSP w meta tagu HTML dla zwiększenia bezpieczeństwa strony.
+1. Walidacja danych wejściowych: Implementacja sanityzacji danych wejściowych z użyciem biblioteki DOMPurify w JavaScript 
+   pokazuje dbałość o bezpieczeństwo i zapobieganie atakom XSS.
+2. Obsługa duplikatów: Sprawdzanie duplikatów zadań przed dodaniem nowego zapewnia integralność danych.
+3. Internacjonalizacja: Implementacja systemu tłumaczeń z myślą o globalnym zasięgu.
+4. Responsywność: Kod UI zawiera obsługę zdarzeń, co sugeruje responsywny interfejs użytkownika.
+5. Content Security Policy: Implementacja CSP w meta tagu HTML dla zwiększenia bezpieczeństwa strony.
 
 Zaawansowane funkcje
 
-	1.Eksport do PDF: Funkcja saveTasksToPDF() pozwala zapisywać listę zadań do pliku PDF, z dodatkową sanityzacją danych przed generowaniem dokumentu.
-	2.Obsługa canvas: Wykorzystanie Canvas do tworzenia tła PDF.
-	3.Progressive Web App (PWA): Aplikacja jest zbudowana jako PWA, co umożliwia instalację na urządzeniach mobilnych i desktopowych, działanie offline oraz szybkie ładowanie.
+1. Eksport do PDF: Funkcja saveTasksToPDF() pozwala zapisywać listę zadań do pliku PDF, z dodatkową sanityzacją danych 
+   przed generowaniem dokumentu.
+2. Obsługa canvas: Wykorzystanie Canvas do tworzenia tła PDF.
+3. Progressive Web App (PWA): Aplikacja jest zbudowana jako PWA, co umożliwia instalację 
+   na urządzeniach mobilnych i desktopowych, działanie offline oraz szybkie ładowanie.
 
 SEO i metadane
 
-	1.Optymalizacja SEO: Użycie odpowiednich metatagów, w tym description i keywords.
-	2.Schema.org: Zastosowanie strukturyzowanych danych schema.org dla lepszego indeksowania.
-	3.Canonical URL: Użycie tagu canonical dla uniknięcia duplikacji treści.
+1. Optymalizacja SEO: Użycie odpowiednich metatagów, w tym description i keywords.
+2. Schema.org: Zastosowanie strukturyzowanych danych schema.org dla lepszego indeksowania.
+3. Canonical URL: Użycie tagu canonical dla uniknięcia duplikacji treści.
 
 Wydajność i kompatybilność
 
-	1.Zewnętrzne zasoby: Linkowanie do zewnętrznych zasobów CSS i JavaScript z CDN dla poprawy wydajności.
-	2.Normalizacja CSS: Użycie normalize.css dla spójności wyświetlania w różnych przeglądarkach.
-	3.Responsywność: Zastosowanie meta viewport dla dostosowania do urządzeń mobilnych.
-	4.Service Worker: Implementacja Service Worker dla obsługi funkcji offline i cachowania, co jest kluczowe dla PWA.
+1. Zewnętrzne zasoby: Linkowanie do zewnętrznych zasobów CSS i JavaScript z CDN dla poprawy wydajności.
+2. Normalizacja CSS: Użycie normalize.css dla spójności wyświetlania w różnych przeglądarkach.
+3. Responsywność: Zastosowanie meta viewport dla dostosowania do urządzeń mobilnych.
+4. Service Worker: Implementacja Service Worker dla obsługi funkcji offline i cachowania, co jest kluczowe dla PWA.
 
 Dostępność
 
-	1.ARIA: Rozbudowane użycie atrybutów ARIA dla poprawy dostępności aplikacji.
-	2.Semantyczne HTML: Prawidłowe użycie znaczników HTML5 dla lepszej struktury i dostępności.
-	3.Etykiety formularzy: Poprawne użycie znaczników <label> dla pól formularza.
+1. ARIA: Rozbudowane użycie atrybutów ARIA dla poprawy dostępności aplikacji.
+2. Semantyczne HTML: Prawidłowe użycie znaczników HTML5 dla lepszej struktury i dostępności.
+3. Etykiety formularzy: Poprawne użycie znaczników <label> dla pól formularza.
 
 
 
@@ -65,47 +69,51 @@ Chorely is designed as a Progressive Web App (PWA), which means it combines the 
 
 General structure and organization
 
-	1.Modularity: JavaScript code is well-organized into classes (TodoError, TodoList, TodoListUI), which promotes modularity and 		 facilitates maintenance.
-	2.Logic separation: Separation of business logic (TodoList) from user interface (TodoListUI) in JavaScript.
-	3.Error handling: Implementation of a custom TodoError class for error handling in JavaScript.
-	4.HTML structure: Proper use of HTML5 structure with semantic tags such as <header>, <main>, <section>, <footer>.
+1. Modularity: JavaScript code is well-organized into classes (TodoError, TodoList, TodoListUI), which promotes 
+   modularity and facilitates maintenance.
+2. Logic separation: Separation of business logic (TodoList) from user interface (TodoListUI) in JavaScript.
+3. Error handling: Implementation of a custom TodoError class for error handling in JavaScript.
+4. HTML structure: Proper use of HTML5 structure with semantic tags such as <header>, <main>, <section>, <footer>.
 
 Code quality
 
-	1.Consistency: JavaScript code is consistent in style and formatting, which facilitates reading and maintenance.
-	2.Naming: Variable and function names in JavaScript are descriptive and follow camelCase convention.
-	3.Code cleanliness: JavaScript methods are short and have single responsibilities, in line with the Single Responsibility Principle.
-	4.HTML semantics: Appropriate use of ARIA attributes and roles for better accessibility.
+1. Consistency: JavaScript code is consistent in style and formatting, which facilitates reading and maintenance.
+2. Naming: Variable and function names in JavaScript are descriptive and follow camelCase convention.
+3. Code cleanliness: JavaScript methods are short and have single responsibilities, in line with the Single Responsibility Principle.
+4. HTML semantics: Appropriate use of ARIA attributes and roles for better accessibility.
 
 Functionality and security
 
-	1.Input validation: Implementing sanitization of data stored using the DOMPurify library in JavaScript prevents security and prevents XSS attacks.
-	2.Duplicate handling: Checking for duplicate tasks before adding a new one ensures data integrity.
-	3.Internationalization: Implementation of a translation system with global reach in mind.
-	4.Responsiveness: UI code includes event handling, suggesting a responsive user interface.
-	5.Content Security Policy: Implementation of CSP in HTML meta tag for increased page security.
+1. Input validation: Implementing sanitization of data stored using the DOMPurify library in JavaScript prevents security 
+   and preventsXSS attacks.
+2. Duplicate handling: Checking for duplicate tasks before adding a new one ensures data integrity.
+3. Internationalization: Implementation of a translation system with global reach in mind.
+4. Responsiveness: UI code includes event handling, suggesting a responsive user interface.
+5. Content Security Policy: Implementation of CSP in HTML meta tag for increased page security.
 
 Advanced features
 
-	1.PDF export: The saveTasksToPDF() function allows you to save a task list to a PDF file, with additional data sanitization before generating the document.
-	2.Canvas handling: Use of Canvas to create PDF backgrounds.
-	3.Progressive Web App (PWA): The application is built as a PWA, enabling installation on mobile and desktop devices, offline functionality, and fast loading.
+1. PDF export: The saveTasksToPDF() function allows you to save a task list to a PDF file, with additional data sanitization 
+   before generating the document.
+2. Canvas handling: Use of Canvas to create PDF backgrounds.
+3. Progressive Web App (PWA): The application is built as a PWA, enabling installation on mobile and desktop devices, 
+   offline functionality, and fast loading.
 
 SEO and metadata
 
-	1.SEO optimization: Use of appropriate meta tags, including description and keywords.
-	2.Schema.org: Application of schema.org structured data for better indexing.
-	3.Canonical URL: Use of canonical tag to avoid content duplication.
+1. SEO optimization: Use of appropriate meta tags, including description and keywords.
+2. Schema.org: Application of schema.org structured data for better indexing.
+3. Canonical URL: Use of canonical tag to avoid content duplication.
 
 Performance and compatibility
 
-	1.External resources: Linking to external CSS and JavaScript resources from CDN for improved performance.
-	2.CSS normalization: Use of normalize.css for consistent display across different browsers.
-	3.Responsiveness: Application of meta viewport for adaptation to mobile devices.
-	4.Service Worker: Implementation of Service Worker for handling offline functionality and caching, which is crucial for PWA.
+1. External resources: Linking to external CSS and JavaScript resources from CDN for improved performance.
+2. CSS normalization: Use of normalize.css for consistent display across different browsers.
+3. Responsiveness: Application of meta viewport for adaptation to mobile devices.
+4. Service Worker: Implementation of Service Worker for handling offline functionality and caching, which is crucial for PWA.
 
 Accessibility
 
-	1.ARIA: Extensive use of ARIA attributes to improve application accessibility.
-	2.Semantic HTML: Proper use of HTML5 tags for better structure and accessibility.
-	3.Form labels: Correct use of <label> tags for form fields.
+1. ARIA: Extensive use of ARIA attributes to improve application accessibility.
+2. Semantic HTML: Proper use of HTML5 tags for better structure and accessibility.
+3. Form labels: Correct use of <label> tags for form fields.
