@@ -419,16 +419,12 @@ class NoteApp {
     }
 }
 
-// Globalne nasłuchiwacze zdarzeń
 window.addEventListener('appinstalled', (evt) => {
-    // Możesz dodać tutaj dodatkową logikę, jeśli jest potrzebna
 });
 
 window.addEventListener('storage', function(e) {
-    // Możesz dodać logikę obsługi zdarzeń storage, jeśli jest potrzebna
 });
 
-// Uczyń instancję NoteApp dostępną globalnie
 document.addEventListener('DOMContentLoaded', () => {
     window.noteApp = new NoteApp();
 });

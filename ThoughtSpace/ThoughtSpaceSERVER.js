@@ -126,10 +126,12 @@ class NoteApp {
         this.isEditing = false;
         this.editingNoteId = null;
         this.noteToDelete = null;
+        this.deferredPrompt = null;
 
         this.initElements();
         this.bindEvents();
         this.loadNotes();
+        this.setupPWA();
     }
 
     initElements() {
@@ -143,6 +145,7 @@ class NoteApp {
         this.categoryFilter = document.querySelector('#category-filter');
         this.confirmModal = document.getElementById('confirm-modal');
         this.confirmAllModal = document.getElementById('confirm-all-modal');
+        this.installButton = document.querySelector('.installButton');
     }
 
     bindEvents() {
@@ -167,6 +170,72 @@ class NoteApp {
                 this.deleteNoteHandler(e.target.closest('.delete-note').dataset.id);
             }
         });
+
+        if (this.installButton) {
+            this.installButton.addEventListener('click', () => this.installPWA());
+        }
+    }
+
+    setupPWA() {
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            this.hideInstallButton();
+            return;
+        }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            this.deferredPrompt = e;
+            this.showInstallButton();
+        });
+
+        if (
+            navigator.standalone === false &&
+            /iPhone|iPad|iPod/.test(navigator.userAgent)
+        ) {
+            this.showIOSInstallInstructions();
+        }
+
+        window.addEventListener('appinstalled', () => {
+            this.hideInstallButton();
+        });
+    }
+
+    showInstallButton() {
+        if (this.installButton) {
+            this.installButton.style.display = 'block';
+        }
+    }
+
+    hideInstallButton() {
+        if (this.installButton) {
+            this.installButton.style.display = 'none';
+        }
+    }
+
+    showIOSInstallInstructions() {
+        const iosInstructions = document.createElement('div');
+        iosInstructions.innerHTML = `
+            <p>Aby zainstalować tę aplikację na iOS:</p>
+            <ol>
+                <li>Dotknij ikony "Udostępnij" w przeglądarce</li>
+                <li>Wybierz "Dodaj do ekranu głównego"</li>
+            </ol>
+        `;
+        document.body.appendChild(iosInstructions);
+    }
+
+    installPWA() {
+        if (this.deferredPrompt) {
+            this.deferredPrompt.prompt();
+            this.deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    this.hideInstallButton();
+                }
+                this.deferredPrompt = null;
+            });
+        } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+            alert('Aby zainstalować aplikację, użyj opcji "Dodaj do ekranu głównego" w menu udostępniania przeglądarki.');
+        }
     }
 
     openPanel() {
@@ -353,14 +422,19 @@ class NoteApp {
     }
 }
 
-const app = new NoteApp();
+window.addEventListener('appinstalled', (evt) => {
+});
+
+window.addEventListener('storage', function(e) {
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    window.noteApp = new NoteApp();
+});
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./service-worker.js')
-            .then(registration => {
-                console.log('Service Worker zarejestrowany pomyślnie:', registration);
-            })
             .catch(error => {
                 console.error('Błąd podczas rejestracji Service Worker:', error);
             });
