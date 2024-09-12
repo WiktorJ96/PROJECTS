@@ -623,5 +623,7 @@ footer p {
         width: 100%;
         margin: 5px 0;
     }
-    
+    .footer_buttons {
+        margin-bottom: 10px;
+    }
 }

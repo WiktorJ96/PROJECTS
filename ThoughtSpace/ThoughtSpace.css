@@ -847,11 +847,6 @@ footer::after {
         width: 100%;
     }
 
-    .note {
-        position: relative;
-        left: 10%;
-    }
-
     .note-area {
         padding: 20px 10px;
     }
@@ -863,7 +858,16 @@ footer::after {
         justify-content: end;
         margin: 0 auto;
     }
+    .menu-right button{
+        max-width: 170px;
+    }
     .menu{
         border-radius: 1px;
+    }
+    .note {
+        margin: 0 auto;
+    }
+    .footer_buttons {
+        margin-bottom: 10px;
     }
 }
