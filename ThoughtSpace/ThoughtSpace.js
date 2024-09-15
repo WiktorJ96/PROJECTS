@@ -146,7 +146,7 @@ class NoteApp {
     }
 
     bindEvents() {
-        document.querySelector('.add').addEventListener('click', () => this.openPanel());
+        document.querySelector('.add').addEventListener('click', (e) => this.openPanel(e));
         document.querySelector('.save').addEventListener('click', () => this.addNote());
         document.querySelector('.cancel').addEventListener('click', () => this.closePanel());
         document.querySelector('.delete-all').addEventListener('click', () => this.deleteAllNotes());
@@ -171,15 +171,25 @@ class NoteApp {
         if (this.installButton) {
             this.installButton.addEventListener('click', () => this.installPWA());
         }
+
+        document.addEventListener('click', (e) => this.closeNotePanel(e));
+        this.notePanel.addEventListener('click', (e) => e.stopPropagation());
     }
 
-    openPanel() {
+    openPanel(event) {
+        if (event) event.stopPropagation();
         this.notePanel.style.display = 'flex';
     }
 
     closePanel() {
         this.notePanel.style.display = 'none';
         this.resetForm();
+    }
+
+    closeNotePanel(event) {
+        if (this.notePanel && !this.notePanel.contains(event.target) && !event.target.closest('.add')) {
+            this.closePanel();
+        }
     }
 
     resetForm() {
