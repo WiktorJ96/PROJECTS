@@ -27,8 +27,8 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-    <link rel="stylesheet" href="./Chorely.css">
     <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/Chorely/Chorely.html">
+    <link rel="stylesheet" href="Chorely.css">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -88,6 +88,16 @@
         <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
+    <script>
+    const version = '1.0.3'; 
+        
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = `Chorely.css?v=${version}`; 
+        
+        
+    document.head.appendChild(link);
+    </script>
     <script type="module" src="Chorely.js"></script>
     <script src="../translations/translates.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
