@@ -1,136 +1,19 @@
-         
+import { Note } from "./Note.js";
+import { NoteStorage } from "./NoteStorage.js";
+import { PWAManager } from "./PWA_Manager.js";
 
-class NoteError extends Error {
-    constructor(message, code) {
-        super(message);
-        this.name = 'NoteError';
-        this.code = code;
-    }
-}
-
-class Note {
-    constructor(id, title, content, category, color) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.category = category;
-        this.color = color;
-    }
-
-    toElement() {
-        const noteElement = document.createElement('div');
-        noteElement.classList.add('note');
-        noteElement.setAttribute('id', this.id);
-        noteElement.innerHTML = `
-            <div class="note-header">
-                <h3 class="note-title">${this.escapeHtml(this.title)}</h3>
-                <button class="edit-note" data-id="${this.id}"><i class="fas fa-edit icon"></i></button>
-                <button class="delete-note" data-id="${this.id}"><i class="fas fa-times icon"></i></button>
-            </div>
-            <div class="note-body">${this.content}</div>
-            <div class="note-category"><span>${this.escapeHtml(this.category)}</span></div>
-        `;
-        noteElement.dataset.category = this.category;
-        noteElement.dataset.color = this.color;
-        NoteApp.setNoteColor(noteElement, this.color);
-        return noteElement;
-    }
-
-    escapeHtml(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
-}
-
-class NoteStorage {
-    static DB_NAME = 'ThoughtSpaceDB';
-    static STORE_NAME = 'notes';
-
-    static async openDB() {
-        return new Promise((resolve, reject) => {
-            const request = indexedDB.open(this.DB_NAME, 1);
-            request.onerror = () => reject(new Error("Nie udało się otworzyć bazy danych"));
-            request.onsuccess = () => resolve(request.result);
-            request.onupgradeneeded = (event) => {
-                const db = event.target.result;
-                db.createObjectStore(this.STORE_NAME, { keyPath: 'id' });
-            };
-        });
-    }
-
-    static async addNote(note) {
-        const db = await this.openDB();
-        return new Promise((resolve, reject) => {
-            const transaction = db.transaction(this.STORE_NAME, 'readwrite');
-            const store = transaction.objectStore(this.STORE_NAME);
-            const request = store.add(note);
-            request.onerror = () => reject(new Error("Nie udało się dodać notatki"));
-            request.onsuccess = () => resolve(request.result);
-        });
-    }
-
-    static async getNotes() {
-        const db = await this.openDB();
-        return new Promise((resolve, reject) => {
-            const transaction = db.transaction(this.STORE_NAME, 'readonly');
-            const store = transaction.objectStore(this.STORE_NAME);
-            const request = store.getAll();
-            request.onerror = () => reject(new Error("Nie udało się pobrać notatek"));
-            request.onsuccess = () => resolve(request.result);
-        });
-    }
-
-    static async updateNote(note) {
-        const db = await this.openDB();
-        return new Promise((resolve, reject) => {
-            const transaction = db.transaction(this.STORE_NAME, 'readwrite');
-            const store = transaction.objectStore(this.STORE_NAME);
-            const request = store.put(note);
-            request.onerror = () => reject(new Error("Nie udało się zaktualizować notatki"));
-            request.onsuccess = () => resolve(request.result);
-        });
-    }
-
-    static async deleteNote(id) {
-        const db = await this.openDB();
-        return new Promise((resolve, reject) => {
-            const transaction = db.transaction(this.STORE_NAME, 'readwrite');
-            const store = transaction.objectStore(this.STORE_NAME);
-            const request = store.delete(id);
-            request.onerror = () => reject(new Error("Nie udało się usunąć notatki"));
-            request.onsuccess = () => resolve(request.result);
-        });
-    }
-
-    static async deleteAllNotes() {
-        const db = await this.openDB();
-        return new Promise((resolve, reject) => {
-            const transaction = db.transaction(this.STORE_NAME, 'readwrite');
-            const store = transaction.objectStore(this.STORE_NAME);
-            const request = store.clear();
-            request.onerror = () => reject(new Error("Nie udało się usunąć wszystkich notatek"));
-            request.onsuccess = () => resolve(request.result);
-        });
-    }
-}
-
-class NoteApp {
+export class NoteApp {
     constructor() {
         this.quill = new Quill('#editor', { theme: 'snow' });
         this.selectedColor = null;
         this.isEditing = false;
         this.editingNoteId = null;
         this.noteToDelete = null;
-        this.deferredPrompt = null;
 
         this.initElements();
         this.bindEvents();
         this.loadNotes();
-        this.setupPWA();
+        this.pwaManager = new PWAManager();
     }
 
     initElements() {
@@ -144,11 +27,10 @@ class NoteApp {
         this.categoryFilter = document.querySelector('#category-filter');
         this.confirmModal = document.getElementById('confirm-modal');
         this.confirmAllModal = document.getElementById('confirm-all-modal');
-        this.installButton = document.querySelector('.installButton');
     }
 
     bindEvents() {
-        document.querySelector('.add').addEventListener('click', (e) => this.openPanel(e));
+        document.querySelector('.add').addEventListener('click', () => this.openPanel());
         document.querySelector('.save').addEventListener('click', () => this.addNote());
         document.querySelector('.cancel').addEventListener('click', () => this.closePanel());
         document.querySelector('.delete-all').addEventListener('click', () => this.deleteAllNotes());
@@ -169,29 +51,15 @@ class NoteApp {
                 this.deleteNoteHandler(e.target.closest('.delete-note').dataset.id);
             }
         });
-
-        if (this.installButton) {
-            this.installButton.addEventListener('click', () => this.installPWA());
-        }
-
-        document.addEventListener('click', (e) => this.closeNotePanel(e));
-        this.notePanel.addEventListener('click', (e) => e.stopPropagation());
     }
 
-    openPanel(event) {
-        if (event) event.stopPropagation();
+    openPanel() {
         this.notePanel.style.display = 'flex';
     }
 
     closePanel() {
         this.notePanel.style.display = 'none';
         this.resetForm();
-    }
-
-    closeNotePanel(event) {
-        if (this.notePanel && !this.notePanel.contains(event.target) && !event.target.closest('.add')) {
-            this.closePanel();
-        }
     }
 
     resetForm() {
@@ -215,7 +83,7 @@ class NoteApp {
     }
 
     renderNotes(notes) {
-        this.noteArea.innerHTML = ''; 
+        this.noteArea.innerHTML = '';
         notes.forEach(noteData => {
             const note = new Note(noteData.id, noteData.title, noteData.content, noteData.category, noteData.color);
             const noteElement = note.toElement();
@@ -243,7 +111,7 @@ class NoteApp {
                 this.closePanel();
                 await this.loadNotes();
             } else {
-                throw new Error('Uzupełnij wszystkie pola!');
+                throw new NoteError('Uzupełnij wszystkie pola!', 'VALIDATION_ERROR');
             }
         } catch (error) {
             this.showError(error.message);
@@ -367,86 +235,4 @@ class NoteApp {
         };
         note.style.backgroundImage = gradients[color] || 'linear-gradient(135deg, #ffffff, #f0f0f0)';
     }
-
-    setupPWA() {
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            this.hideInstallButton();
-            return;
-        }
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            this.deferredPrompt = e;
-            this.showInstallButton();
-        });
-
-        if (
-            navigator.standalone === false &&
-            /iPhone|iPad|iPod/.test(navigator.userAgent)
-        ) {
-            this.showIOSInstallInstructions();
-        }
-
-        window.addEventListener('appinstalled', () => {
-            this.hideInstallButton();
-        });
-    }
-
-    showInstallButton() {
-        if (this.installButton) {
-            this.installButton.style.display = 'block';
-        }
-    }
-
-    hideInstallButton() {
-        if (this.installButton) {
-            this.installButton.style.display = 'none';
-        }
-    }
-
-    showIOSInstallInstructions() {
-        const iosInstructions = document.createElement('div');
-        iosInstructions.innerHTML = `
-            <p>Aby zainstalować tę aplikację na iOS:</p>
-            <ol>
-                <li>Dotknij ikony "Udostępnij" w przeglądarce</li>
-                <li>Wybierz "Dodaj do ekranu głównego"</li>
-            </ol>
-        `;
-        document.body.appendChild(iosInstructions);
-    }
-
-    installPWA() {
-        if (this.deferredPrompt) {
-            this.deferredPrompt.prompt();
-            this.deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    this.hideInstallButton();
-                }
-                this.deferredPrompt = null;
-            });
-        } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-            alert('Aby zainstalować aplikację, użyj opcji "Dodaj do ekranu głównego" w menu udostępniania przeglądarki.');
-        }
-    }
 }
-
-window.addEventListener('appinstalled', (evt) => {
-});
-
-window.addEventListener('storage', function(e) {
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    window.noteApp = new NoteApp();
-});
-
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-            .catch(error => {
-                console.error('Błąd podczas rejestracji Service Worker:', error);
-            });
-    });
-}
-

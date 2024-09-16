@@ -1,8 +1,9 @@
-const CACHE_NAME = 'thoughtspace-cache-v3';
+const CACHE_NAME = 'thoughtspace-cache-v4';
 const ASSETS_TO_CACHE = [
   './',
   './ThoughtSpace.html',
-  './ThoughtSpace.js',
+  './JS/Main.js',
+  './ThoughtSpace.css',
   '../translations/notatnik-pl.json',
   '../translations/notatnik-en.json',
   './assets/ikona_ThoughtSpace.png',
