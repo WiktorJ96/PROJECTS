@@ -762,6 +762,7 @@ footer::after {
     display: none;
 }
 
+
 @media (min-width: 765px) and (max-width: 900px) {
     #search{
         margin-left: 1px;
@@ -778,26 +779,33 @@ footer::after {
 @media (orientation: portrait) and (max-width: 480px) {
 
     .menu-right{
-        justify-content: end;
+        max-width: 95%;
         margin: 0 auto;
+        justify-content: center;
     }
-    .menu-right button{
-        max-width: 170px;
+    .menu-left div{
+        flex-direction: column;
+        width: 100%;
     }
     .menu{
         border-radius: 1px;
     }
     .note {
         margin: 0 auto;
+        margin-bottom: 15px;
     }
     .footer_buttons {
         margin-bottom: 10px;
     }
 }
 
-@media (orientation: portrait) and (max-width: 769px) {
+@media (orientation: portrait) and (max-width: 850px) {
     .menu {
         padding: 10px;
+    }
+    .menu-right{
+        margin: 0 auto;
+        justify-content: center;
     }
 
     .wooden-icon {
