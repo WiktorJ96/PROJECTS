@@ -1,4 +1,4 @@
-const CACHE_NAME = 'todo-app-cache-v2';
+const CACHE_NAME = 'todo-app-cache-v1.0.3';
 const urlsToCache = [
   '/',
   './Chorely.html',
@@ -41,8 +41,14 @@ self.addEventListener('fetch', (event) => {
   if (event.request.url.includes('fontawesome')) {
     return;
   }
+  const shouldAlwaysUpdate = (request) => {
+    const url = new URL(request.url);
+    return url.pathname.endsWith('.css') || 
+           url.pathname.endsWith('.js') || 
+           url.pathname.endsWith('.html');
+  };
 
-  if (event.request.url.endsWith('.css')) {
+  if (shouldAlwaysUpdate(event.request)) {
     event.respondWith(
       fetch(event.request).then((networkResponse) => {
         if (networkResponse && networkResponse.status === 200) {
