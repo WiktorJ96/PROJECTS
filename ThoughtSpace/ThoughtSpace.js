@@ -1,3 +1,5 @@
+         
+
 class NoteError extends Error {
     constructor(message, code) {
         super(message);
@@ -447,3 +449,4 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+

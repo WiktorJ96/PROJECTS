@@ -1,8 +1,7 @@
-const CACHE_NAME = 'thoughtspace-cache-v1';
+const CACHE_NAME = 'thoughtspace-cache-v3';
 const ASSETS_TO_CACHE = [
   './',
   './ThoughtSpace.html',
-  './ThoughtSpace.css',
   './ThoughtSpace.js',
   '../translations/notatnik-pl.json',
   '../translations/notatnik-en.json',
@@ -12,44 +11,13 @@ const ASSETS_TO_CACHE = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        return Promise.all(
-          ASSETS_TO_CACHE.map(url => {
-            return cache.add(url).catch(error => {
-              console.error(`Nie udało się dodać ${url} do cache:`, error);
-            });
-          })
-        );
-      })
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(ASSETS_TO_CACHE).catch(error => {
+        console.error('Nie udało się dodać zasobów do cache:', error);
+      });
+    })
   );
-});
-
-self.addEventListener('fetch', (event) => {
-  if (event.request.url.includes('fontawesome')) {
-    return;
-  }
-  
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request).then(response => {
-          if (response && response.status === 200 && response.type === 'basic') {
-            const responseToCache = response.clone();
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-          }
-          return response;
-        }).catch(() => {
-          console.error('Nie udało się pobrać zasobu:', event.request.url);
-        });
-      })
-  );
+  self.skipWaiting(); 
 });
 
 self.addEventListener('activate', (event) => {
@@ -63,6 +31,49 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
+    })
+  );
+  self.clients.claim(); 
+});
+
+self.addEventListener('fetch', (event) => {
+  if (event.request.url.includes('fontawesome')) {
+    return;
+  }
+
+  if (event.request.url.endsWith('.css')) {
+    event.respondWith(
+      fetch(event.request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return networkResponse;
+      }).catch(() => {
+        return caches.match(event.request);
+      })
+    );
+    return;
+  }
+  
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      if (response) {
+        return response;
+      }
+      return fetch(event.request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return networkResponse;
+      }).catch(() => {
+        console.error('Nie udało się pobrać zasobu:', event.request.url);
+      });
     })
   );
 });

@@ -263,7 +263,7 @@ main{
 
 .note-area {
     display: flex;
-    align-items: center;
+    justify-content: start;
     flex-wrap: wrap;
     padding: 40px;
     overflow-y: auto;
@@ -762,6 +762,68 @@ footer::after {
     display: none;
 }
 
+@media (min-width: 765px) and (max-width: 900px) {
+    #search{
+        margin-left: 1px;
+    }
+    .logo-container{
+        display: none;
+    }
+    .note-area{
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (orientation: portrait) and (max-width: 480px) {
+
+    .menu-right{
+        justify-content: end;
+        margin: 0 auto;
+    }
+    .menu-right button{
+        max-width: 170px;
+    }
+    .menu{
+        border-radius: 1px;
+    }
+    .note {
+        margin: 0 auto;
+    }
+    .footer_buttons {
+        margin-bottom: 10px;
+    }
+}
+
+@media (orientation: portrait) and (max-width: 769px) {
+    .menu {
+        padding: 10px;
+    }
+
+    .wooden-icon {
+        width: 180px;
+    }
+
+    .footer {
+        padding: 0.5rem;
+    }
+
+    .wooden-icon {
+        display: none;
+    }
+
+    .menu button,
+    .filter-container,
+    .search-container {
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .note-area {
+        padding: 20px 10px;
+    }
+}
+
 @media (orientation: portrait) and (max-width: 1200px) {
     .menu {
         flex-direction: column;
@@ -823,56 +885,6 @@ footer::after {
     }
 }
 
-@media (orientation: portrait) and (max-width: 769px) {
-    .menu {
-        padding: 10px;
-    }
-
-    .wooden-icon {
-        width: 180px;
-    }
-
-    .footer {
-        padding: 0.5rem;
-    }
-
-    .wooden-icon {
-        display: none;
-    }
-
-    .menu button,
-    .filter-container,
-    .search-container {
-        font-size: 14px;
-        width: 100%;
-    }
-
-    .note-area {
-        padding: 20px 10px;
-    }
-}
-
-@media (orientation: portrait) and (max-width: 480px) {
-
-    .menu-right{
-        justify-content: end;
-        margin: 0 auto;
-    }
-    .menu-right button{
-        max-width: 170px;
-    }
-    .menu{
-        border-radius: 1px;
-    }
-    .note {
-        margin: 0 auto;
-    }
-    .footer_buttons {
-        margin-bottom: 10px;
-    }
-}
-
-
 @media (orientation: landscape) and (max-height: 400px) {
     .wooden-icon {
         width: 100px;
@@ -893,63 +905,137 @@ footer::after {
     }
 }
 
-@media (orientation: landscape) and (max-height: 800px) {
+@media screen and (max-width: 600px) and (orientation: landscape) {
+    
+    .note-panel {
+        padding: 10px;
+    }
+
+    .note-panel h2 {
+        font-size: 18px;
+    }
+
+    .note-panel input[type="text"],
+    .note-panel textarea,
+    .note-panel #category,
+    #editor {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .color-option {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@media screen and (max-width: 1300px) and (orientation: landscape)  {
+    body {
+        overflow: auto;
+    }
     .menu {
         flex-direction: row;
         padding: 10px;
         border-radius: 3px;
     }
-
     .logo-container {
         order: 0;
         width: auto;
         margin-bottom: 0;
     }
-
     .wooden-icon {
         width: 150px;
         display: block;
     }
-
     .menu-buttons {
         width: auto;
         margin-bottom: 0;
         margin-right: 10px;
     }
-
     .menu button {
         width: auto;
         margin: 0 5px;
     }
-
     .filter-container, .search-container {
         width: auto;
         margin-bottom: 0;
     }
-
     #category-filter {
         width: auto;
     }
-    #search{
+    #search {
         margin-left: -10px;
     }
-    .menu-left{
+    .menu-left {
         margin-left: 2%;
     }
-
     .note-area {
         padding: 10px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
     }
-
     .footer {
         padding: 0.3rem;
     }
-
     .footer_buttons {
         display: flex;
+    }
+    .note-panel {
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: none;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 0;
+        overflow: auto;
+    }
+    .note-panel h2 {
+        width: 100%;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .note-panel > div {
+        width: 50%;
+        padding: 0 10px;
+    }
+    .panel-buttons {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        gap: 10px;
+    }
+    #editor {
+        height: 150px;
+        font-size: 14px;
+    }
+    .note-panel input[type="text"],
+    .note-panel textarea,
+    .note-panel #category {
+        font-size: 14px;
+        padding: 8px;
+        margin-bottom: 10px;
+        width: 50%;
+    }
+    .color-picker {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    .color-option {
+        width: 30px;
+        height: 30px;
+    }
+    .note-category {
+        font-size: 10px;
+        padding: 3px 6px;
     }
 }
 
@@ -1004,104 +1090,11 @@ footer::after {
     }
 }
 
-@media (min-width: 897px) and (max-width: 900px) {
-    #search{
-        margin-left: 1px;
-    }
-}
 
 
-@media screen and (max-width: 900px) and (orientation: landscape) {
-        body{
-        overflow: auto;
-    }
-    .note-panel {
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-content: flex-start;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        transform: none;
-        width: 100%;
-        height: 100%;
-        max-width: 100%;
-        max-height: 100%;
-        border-radius: 0;
-        overflow: auto;
-    }
 
-    .note-panel h2 {
-        width: 100%;
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
 
-    .note-panel > div {
-        width: 50%;
-        padding: 0 10px;
-    }
 
-    .panel-buttons{
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        gap: 10px;
-    }
 
-    #editor {
-        height: 150px;
-        font-size: 14px;
-    }
 
-    .note-panel input[type="text"],
-    .note-panel textarea,
-    .note-panel #category {
-        font-size: 14px;
-        padding: 8px;
-        margin-bottom: 10px;
-        width: 50%;
-    }
 
-    .color-picker {
-        width: 100%;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-
-    .color-option {
-        width: 30px;
-        height: 30px;
-    }
-
-    .note-category {
-        font-size: 10px;
-        padding: 3px 6px;
-    }
-
-}
-
-@media screen and (max-width: 600px) and (orientation: landscape) {
-    
-    .note-panel {
-        padding: 10px;
-    }
-
-    .note-panel h2 {
-        font-size: 18px;
-    }
-
-    .note-panel input[type="text"],
-    .note-panel textarea,
-    .note-panel #category,
-    #editor {
-        font-size: 12px;
-        padding: 6px;
-    }
-
-    .color-option {
-        width: 25px;
-        height: 25px;
-    }
-}
