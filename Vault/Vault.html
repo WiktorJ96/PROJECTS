@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-lang-key="title">Vault</title>
-    <link rel="icon" href="./Vault_icon.svg" type="image/svg+xml">
+    <link rel="icon" href="./assets/Vault_icon.svg" type="image/svg+xml">
     <meta name="description" content="Twój osobisty menedżer finansów. Śledź swoje przychody i wydatki z łatwością."
         data-lang-key="meta_description">
     <meta name="keywords"
@@ -104,14 +104,14 @@
 
         <label for="category" data-lang-key="category_label">Wybierz kategorię:</label>
         <small data-lang-key="category_small">([ + ] oznacza przychód, [ - ] oznacza wydatek)</small>
-        <select id="category" aria-labelledby="category" onchange="selectCategory()">
-            <option value="none" selected disabled></option>
-            <option value="income" data-lang-key="income_option">[ + ] Przychód</option>
-            <option value="fuel" data-lang-key="fuel_option">[ - ] Paliwo</option>
-            <option value="food" data-lang-key="food_option">[ - ] Jedzenie</option>
-            <option value="fun" data-lang-key="fun_option">[ - ] Zabawa</option>
-            <option value="other" data-lang-key="other_option">[ - ] Inne</option>
-        </select>
+        <select id="category" aria-labelledby="category">
+    <option value="none" selected disabled></option>
+    <option value="income" data-lang-key="income_option">[ + ] Przychód</option>
+    <option value="fuel" data-lang-key="fuel_option">[ - ] Paliwo</option>
+    <option value="food" data-lang-key="food_option">[ - ] Jedzenie</option>
+    <option value="fun" data-lang-key="fun_option">[ - ] Zabawa</option>
+    <option value="other" data-lang-key="other_option">[ - ] Inne</option>
+    </select>
 
         <div class="panel-buttons">
             <button class="save" aria-label="Zapisz transakcję" data-lang-key="save_button"><i class="fas fa-save"
@@ -122,7 +122,7 @@
         
     </div>
 
-    <div id="confirmationModal" class="modal">
+<div id="confirmationModal" class="modal">
     <div class="modal-content">
         <h2 data-lang-key="modal-content-h2">Potwierdzenie</h2>
         <p data-lang-key="modal-content-p">Czy na pewno chcesz usunąć wszystkie transakcje?</p>
@@ -139,20 +139,21 @@
         <p data-lang-key="modal-content-p2">Czy na pewno chcesz usunąć tę transakcję?</p>
         <div class="modal-buttons">
             <button id="confirmDeleteTransaction" data-lang-key="modal-content-confirm-button">Tak</button>
-            <button id="cancelDeleteTransaction" data-lang-key="modal-content-confirm-button">Anuluj</button>
+            <button id="cancelDeleteTransaction" data-lang-key="modal-content-cancel-button">Anuluj</button>
         </div>
     </div>
 </div>
 
 <footer>
-    <div class="language-switch">
-        <button id="lang-pl">PL</button>
-        <button id="lang-en">EN</button>
-    </div>
-    <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
-</footer>
+        <nav class="footer_buttons" aria-label="Zmiana języka">
+            <button id="lang-pl" aria-label="Zmień język na polski">PL</button>
+            <button id="lang-en" aria-label="Zmień język na angielski">EN</button>
+             <button class="installButton"><i class="fas fa-download"></i>App</button>
+        </nav>
+        <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
+    </footer>
 
-    <script src="Vault.js"></script>
+    <script type="module" src="./JS/Main.js"></script>
     <script src="../translations/translates.js"></script>
 </body>
 
