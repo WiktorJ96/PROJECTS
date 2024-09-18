@@ -505,6 +505,8 @@ class TodoListUI {
 
 }
 
+
+
 window.addEventListener('appinstalled', (evt) => {
 });
 
