@@ -1,6 +1,6 @@
 import { Note } from "./Note.js";
 import { NoteStorage } from "./NoteStorage.js";
-import { PWAManager } from "./PWA_Manager.js";
+import { PWAManager } from "./PWAManager.js";
 
 export class NoteApp {
     constructor() {
