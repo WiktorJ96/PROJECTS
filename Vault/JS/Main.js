@@ -7,15 +7,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const chartManager = new ChartManager(transactionManager);
   const uiManager = new UIManager(transactionManager, chartManager);
 
-  window.uiManager = uiManager;
+  function setLanguage(lang) {
+    transactionManager.setCurrency(lang === "pl" ? "PLN" : "USD");
+    window.dispatchEvent(new Event("languageChange"));
+  }
 
   const preferredLanguage = localStorage.getItem("preferredLanguage");
-  uiManager.setLanguage(preferredLanguage);
+  setLanguage(preferredLanguage);
 
-  document
-    .getElementById("lang-pl")
-    .addEventListener("click", () => uiManager.setLanguage("pl"));
-  document
-    .getElementById("lang-en")
-    .addEventListener("click", () => uiManager.setLanguage("en"));
+
+  uiManager.updateTransactionsDisplay();
+  uiManager.updateBalance();
+  chartManager.updateChart();
+
+  document.getElementById("lang-pl").addEventListener("click", () => setLanguage("pl"));
+  document.getElementById("lang-en").addEventListener("click", () => setLanguage("en"));
 });

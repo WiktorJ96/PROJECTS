@@ -93,10 +93,6 @@ body::after {
   }
 }
 
-.language-switch {
-  display: block;
-}
-
 header {
   display: flex;
   justify-content: center;

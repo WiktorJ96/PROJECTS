@@ -92,8 +92,7 @@ class ChartManager {
               const index = legendItem.datasetIndex;
               const ci = this.chart;
               const meta = ci.getDatasetMeta(index);
-              meta.hidden =
-                meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+              meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
               ci.update();
             },
             labels: {
@@ -218,9 +217,7 @@ class ChartManager {
 
   setTheme(isDark) {
     const textColor = isDark ? "#FFF" : "#333";
-    const gridColor = isDark
-      ? "rgba(255, 255, 255, 0.2)"
-      : "rgba(0, 0, 0, 0.1)";
+    const gridColor = isDark ? "rgba(255, 255, 255, 0.2)" : "rgba(0, 0, 0, 0.1)";
 
     this.chart.options.plugins.title.color = textColor;
     this.chart.options.scales.x.title.color = textColor;
@@ -233,37 +230,28 @@ class ChartManager {
     this.chart.update();
   }
 
-  setupLanguageChangeListener() {
-    window.addEventListener("storage", (event) => {
-      if (event.key === "preferredLanguage") {
-        this.setLanguage(event.newValue);
-      }
-    });
+  updateLanguage() {
+    const lang = localStorage.getItem("preferredLanguage");
+
+    this.chart.options.plugins.title.text = lang === "pl" ? "HISTORIA SALDA" : "BALANCE HISTORY";
+
+    this.chart.options.scales.x.title.text = lang === "pl" ? "Data" : "Date";
+    this.chart.options.scales.y.title.text =
+      lang === "pl"
+        ? `Saldo (${this.transactionManager.currencyCode})`
+        : `Balance (${this.transactionManager.currencyCode})`;
+
+    this.chart.data.datasets[0].label = lang === "pl" ? "Saldo" : "Balance";
+    this.chart.data.datasets[1].label = lang === "pl" ? "Przychody" : "Income";
+    this.chart.data.datasets[2].label = lang === "pl" ? "Wydatki" : "Expenses";
+
+    this.chart.update();
   }
 
-  setLanguage(language) {
-    const currencyCode = language.startsWith("pl") ? "PLN" : "USD";
-    const isPolish = language.startsWith("pl");
-
-    this.chart.options.plugins.title.text = isPolish
-      ? "HISTORIA SALDA"
-      : "BALANCE HISTORY";
-    this.chart.options.scales.x.title.text = isPolish ? "Data" : "Date";
-    this.chart.options.scales.y.title.text = isPolish
-      ? `Saldo (${currencyCode})`
-      : `Balance (${currencyCode})`;
-    this.chart.data.datasets[0].label = isPolish ? "Saldo" : "Balance";
-    this.chart.data.datasets[1].label = isPolish ? "Przychody" : "Income";
-    this.chart.data.datasets[2].label = isPolish ? "Wydatki" : "Expenses";
-    this.chart.options.scales.y.ticks.callback = (value) => {
-      return new Intl.NumberFormat(isPolish ? "pl-PL" : "en-US", {
-        style: "currency",
-        currency: currencyCode,
-      }).format(value);
-    };
-    this.chart.update();
-
-    localStorage.setItem("preferredLanguage", language);
+  setupLanguageChangeListener() {
+    window.addEventListener("languageChange", () => {
+      this.updateLanguage();
+    });
   }
 }
 
