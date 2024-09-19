@@ -697,16 +697,8 @@ footer::before {
 
 footer::after {
   z-index: 2;
-  background: radial-gradient(
-      circle at 25% 35%,
-      rgba(255, 255, 255, 0.2) 0%,
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at 75% 65%,
-      rgba(255, 255, 255, 0.2) 0%,
-      transparent 35%
-    );
+  background: radial-gradient(circle at 25% 35%, rgba(255, 255, 255, 0.2) 0%, transparent 35%),
+    radial-gradient(circle at 75% 65%, rgba(255, 255, 255, 0.2) 0%, transparent 35%);
   box-shadow:
     0 -5px 15px rgba(0, 0, 0, 0.1),
     inset 0 0 30px rgba(0, 0, 0, 0.2),

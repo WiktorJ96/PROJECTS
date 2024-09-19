@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <title data-lang-key="title">EcoTrack - Rejestracja/Logowanie</title>
+    <link rel="icon" href="./assets/EcoTrack_logo.svg" type="image/svg+xml">
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="application/ld+json">
@@ -26,10 +27,6 @@
     </script>
 </head>
 <body data-page="form">
-    <div class="language-switch">
-        <button id="lang-pl">PL</button>
-        <button id="lang-en">EN</button>
-    </div>
     <div class="wrapper">
         <nav>
     <div class="logo">
@@ -110,11 +107,15 @@
             <button type="button" class="close" data-lang-key="close">Zamknij</button>
         </div>
     </div>
-    <footer data-lang-key="footer">
-        <p>&copy; 2024 EcoTrack. Wspólnie dbamy o naszą planetę.</p>
+    <footer>
+        <nav class="footer_buttons" aria-label="Zmiana języka">
+            <button id="lang-pl" aria-label="Zmień język na polski">PL</button>
+            <button id="lang-en" aria-label="Zmień język na angielski">EN</button>
+        </nav>
+        <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
     </footer>
-    <script src="EcoTrack.js"></script>
-    <script src="../translations/translate2.js"></script>
+    <script type="module" src="./JS/Main.js"></script>
+    <script src="../translations/translates.js"></script>
 </body>
 
 </html>

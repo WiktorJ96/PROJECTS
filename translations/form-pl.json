@@ -23,5 +23,10 @@
   "error": "BŁĄD",
   "switchToRegister": "Zarejestruj się",
   "switchToLogin": "Zaloguj się",
-  "footer": "2024 W.J Project. Wszelkie prawa zastrzeżone."
+  "footer": "2024 W.J Project. Wszelkie prawa zastrzeżone.",
+  "error_no_value": "Proszę podać wartość.",
+  "minUsernameLength": "Nazwa użytkownika musi mieć co najmniej 4 znaki.",
+  "minPasswordLength": "Hasło musi mieć co najmniej 8 znaków.",
+  "invalidEmail": "Wpisz poprawny adres e-mail",
+  "passwordMismatch": "Hasła do siebie nie pasują"
 }

@@ -69,11 +69,7 @@ body::after {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(
-    circle at 50% 50%,
-    var(--light-highlight) 0%,
-    transparent 60%
-  );
+  background: radial-gradient(circle at 50% 50%, var(--light-highlight) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -227,11 +223,7 @@ h2.title {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(255, 255, 255, 0) 70%
-  );
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
   transform: rotate(30deg);
   pointer-events: none;
   transition: all 0.5s ease;

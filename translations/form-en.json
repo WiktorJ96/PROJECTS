@@ -30,5 +30,6 @@
   "error": "ERROR",
   "switchToRegister": "Register",
   "switchToLogin": "Log In",
-  "footer": "2024 W.J Project. All rights reserved."
+  "footer": "2024 W.J Project. All rights reserved.",
+  "error_no_value": "Please provide a value."
 }
