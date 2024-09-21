@@ -1,5 +1,5 @@
 {
-  "title": "Formularz rejestracji/logowania",
+  "title": "EcoTrack - Rejestracja/Logowanie",
   "description": "Rejestracja i logowanie do naszego serwisu. Zarejestruj się lub zaloguj się, aby uzyskać dostęp do wszystkich funkcji.",
   "keywords": "rejestracja, logowanie, formularz, social login, Facebook, Google",
   "registerTitle": "Zarejestruj się",
@@ -17,16 +17,11 @@
   "emailLabel": "Adres e-mail:",
   "emailPlaceholder": "Wpisz adres e-mail",
   "clear": "Wyczyść",
-  "send": "Wyślij",
+  "send": "Dołącz do EcoTrack",
   "formSent": "Formularz został wysłany",
   "close": "Zamknij",
   "error": "BŁĄD",
   "switchToRegister": "Zarejestruj się",
   "switchToLogin": "Zaloguj się",
-  "footer": "2024 W.J Project. Wszelkie prawa zastrzeżone.",
-  "error_no_value": "Proszę podać wartość.",
-  "minUsernameLength": "Nazwa użytkownika musi mieć co najmniej 4 znaki.",
-  "minPasswordLength": "Hasło musi mieć co najmniej 8 znaków.",
-  "invalidEmail": "Wpisz poprawny adres e-mail",
-  "passwordMismatch": "Hasła do siebie nie pasują"
+  "footer": "2024 W.J Project. Wszelkie prawa zastrzeżone."
 }

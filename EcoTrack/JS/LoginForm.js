@@ -7,7 +7,6 @@ export class LoginForm extends Form {
     this.password = document.querySelector("#login-password");
     this.sendBtn = document.querySelector(".login-send");
     this.clearBtn = document.querySelector("#login-form .clear");
-
     this.initEventListeners();
   }
 

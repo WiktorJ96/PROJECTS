@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Rejestracja i logowanie do EcoTrack. Śledź swoje ekologiczne nawyki i dbaj o planetę." data-lang-key="description">
     <meta name="keywords" content="ecotrack, rejestracja, logowanie, ekologia, zielone nawyki" data-lang-key="keywords">
-    <meta name="author" content="EcoTrack Team">
-    <link rel="canonical" href="https://ecotrack.example.com/">
+    <meta name="author" content="Wiktor Jurkowski">
+    <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/EcoTrack/EcoTrack.html">
     <link rel="stylesheet" href="EcoTrack.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
@@ -22,11 +22,15 @@
       "@type": "WebPage",
       "name": "EcoTrack - Rejestracja/Logowanie",
       "description": "Rejestracja i logowanie do EcoTrack. Śledź swoje ekologiczne nawyki i dbaj o planetę.",
-      "url": "https://ecotrack.example.com/"
+      "url": "https://wiktorj96.github.io/PROJECTS/EcoTrack/EcoTrack.html"
+      "author": {
+        "@type": "Person",
+        "name": "Wiktor Jurkowski"
+      }
     }
     </script>
 </head>
-<body data-page="form">
+<body data-page="EcoTrack">
     <div class="wrapper">
         <nav>
     <div class="logo">
@@ -53,24 +57,24 @@
                 <label for="username" data-lang-key="usernameLabel">Nazwa użytkownika:</label>
                 <input type="text" id="username" placeholder="Twoja nazwa w EcoTrack"
                     data-placeholder-key="usernamePlaceholder">
-                <p class="error-text" data-lang-key="error">BŁĄD</p>
+                <p class="error-text" >Nazwa użytkownika musi mieć co najmniej 4 znaki.</p>
             </div>
             <div class="form-box">
                 <label for="password" data-lang-key="passwordLabel">Hasło:</label>
                 <input type="password" id="password" placeholder="Silne hasło dla bezpieczeństwa"
                     data-placeholder-key="passwordPlaceholder">
-                <p class="error-text" data-lang-key="error">BŁĄD</p>
+                <p class="error-text" >Hasło musi mieć co najmniej 8 znaków.</p>
             </div>
             <div class="form-box">
                 <label for="password2" data-lang-key="repeatPasswordLabel">Powtórz hasło:</label>
                 <input type="password" id="password2" placeholder="Potwierdź swoje hasło"
                     data-placeholder-key="repeatPasswordPlaceholder">
-                <p class="error-text" data-lang-key="error">BŁĄD</p>
+                <p class="error-text" >Hasła do siebie nie pasują</p>
             </div>
             <div class="form-box">
                 <label for="email" data-lang-key="emailLabel">Adres e-mail:</label>
                 <input type="email" id="email" placeholder="Twój adres e-mail" data-placeholder-key="emailPlaceholder">
-                <p class="error-text" data-lang-key="error">BŁĄD</p>
+                <p class="error-text" >Wpisz poprawny adres e-mail</p>
             </div>
             <div class="control-buttons">
                 <button type="button" class="clear" data-lang-key="clear">Wyczyść</button>
@@ -89,13 +93,13 @@
                 <label for="login-username" data-lang-key="usernameLabel">Nazwa użytkownika:</label>
                 <input type="text" id="login-username" placeholder="Twoja nazwa w EcoTrack"
                     data-placeholder-key="usernamePlaceholder">
-                <p class="error-text" data-lang-key="error">BŁĄD</p>
+                <p class="error-text" >Proszę podać wartość.</p>
             </div>
             <div class="form-box">
                 <label for="login-password" data-lang-key="passwordLabel">Hasło:</label>
                 <input type="password" id="login-password" placeholder="Twoje hasło EcoTrack"
                     data-placeholder-key="passwordPlaceholder">
-                <p class="error-text" data-lang-key="error">BŁĄD</p>
+                <p class="error-text" >Proszę podać wartość.</p>
             </div>
             <div class="control-buttons">
                 <button type="button" class="clear" data-lang-key="clear">Wyczyść</button>

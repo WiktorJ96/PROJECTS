@@ -1,11 +1,14 @@
 export class Form {
+  constructor() {
+    this.currentLang = localStorage.getItem("preferredLanguage");
+  }
 
-  showError(input, msg) {
+  showError(input, errorMessage) {
     const formBox = input.parentElement;
     const errorMsg = formBox.querySelector(".error-text");
 
     formBox.classList.add("error");
-    errorMsg.textContent = msg;
+    errorMsg.textContent = errorMessage;
   }
 
   clearError(input) {
@@ -16,10 +19,13 @@ export class Form {
   }
 
   checkForm(inputs) {
+    this.currentLang = localStorage.getItem("preferredLanguage");
     let isValid = true;
     inputs.forEach((el) => {
       if (el.value === "") {
-        this.showError(el, "Proszę podać wartość.");
+        const errorMessage =
+          this.currentLang === "en" ? "Please provide a value." : "Proszę podać wartość.";
+        this.showError(el, errorMessage);
         isValid = false;
       } else {
         this.clearError(el);
@@ -29,8 +35,13 @@ export class Form {
   }
 
   checkLength(input, min) {
+    this.currentLang = localStorage.getItem("preferredLanguage");
     if (input.value.length < min) {
-      this.showError(input, `Pole musi zawierać co najmniej ${min} znaków.`);
+      const errorMessage =
+        this.currentLang === "en"
+          ? `Field must contain at least ${min} characters.`
+          : `Pole musi zawierać co najmniej ${min} znaków.`;
+      this.showError(input, errorMessage);
       return false;
     } else {
       this.clearError(input);
@@ -41,8 +52,13 @@ export class Form {
   checkEmail(input) {
     const emailValue = input.value;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!emailPattern.test(emailValue)) {
-      this.showError(input, "Wpisz poprawny adres e-mail");
+      const errorMessage =
+        this.currentLang === "en"
+          ? "Please enter a valid email address"
+          : "Wpisz poprawny adres e-mail";
+      this.showError(input, errorMessage);
       return false;
     } else {
       this.clearError(input);
@@ -52,12 +68,13 @@ export class Form {
 
   checkPasswords(password, password2) {
     if (password.value !== password2.value) {
-      this.showError(password2, "Hasła do siebie nie pasują");
+      const errorMessage =
+        this.currentLang === "en" ? "Passwords do not match" : "Hasła do siebie nie pasują";
+      this.showError(password2, errorMessage);
       return false;
     } else {
       this.clearError(password2);
       return true;
     }
   }
-
 }
