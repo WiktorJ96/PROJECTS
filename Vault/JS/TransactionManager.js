@@ -22,6 +22,7 @@ class TransactionManager {
       category,
       date: new Date().toISOString().split("T")[0],
     };
+    console.log("Nowa transakcja:", newTransaction); // Dodaj to
     this.transactions.push(newTransaction);
     this.saveToLocalStorage();
     return newTransaction;
@@ -98,6 +99,11 @@ class TransactionManager {
     if (savedData.currencySymbol) this.currencySymbol = savedData.currencySymbol;
     if (savedData.nextId) this.nextId = savedData.nextId;
     if (savedData.initialBalance) this.initialBalance = savedData.initialBalance;
+
+    if (savedData.transactions) {
+      this.transactions = savedData.transactions;
+      console.log("Wczytane transakcje:", this.transactions); // Dodaj to
+    }
 
     return savedData.availableFunds || this.getCurrentBalance();
   }

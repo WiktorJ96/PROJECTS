@@ -95,6 +95,34 @@ class UIManager {
     }
   }
 
+  getCategoryIcon(category) {
+    let categoryIcon;
+
+    switch (category) {
+      case "[ + ] Income":
+      case "[ + ] Przychód":
+        categoryIcon = '<i class="fas fa-money-bill-wave"></i>';
+        break;
+      case "[ - ] Shopping":
+      case "[ - ] Zakupy":
+        categoryIcon = '<i class="fas fa-cart-arrow-down"></i>';
+        break;
+      case "[ - ] Food":
+      case "[ - ] Jedzenie":
+        categoryIcon = '<i class="fas fa-hamburger"></i>';
+        break;
+      case "[ - ] Cinema":
+      case "[ - ] Kino":
+        categoryIcon = '<i class="fas fa-film"></i>';
+        break;
+      default:
+        categoryIcon = '<i class="fas fa-question-circle"></i>';
+        break;
+    }
+
+    return categoryIcon;
+  }
+
   addTransactionToDOM(transaction) {
     const newTransactionElement = document.createElement("div");
     newTransactionElement.classList.add("transaction");
@@ -104,16 +132,16 @@ class UIManager {
     const categoryName = transaction.category.replace(/\[.*?\]\s/, "").trim();
 
     newTransactionElement.innerHTML = `                   
-      <p class="transaction-name">
-        <span class="category-icon">${categoryIcon}</span>
-        <span class="transaction-title">${transaction.name}</span>
-        <span class="transaction-category" data-lang-key="${categoryName}">(${categoryName})</span>
-      </p>
-      <p class="transaction-amount ${transaction.amount > 0 ? "income" : "expense"}">
-        ${transaction.amount.toFixed(2)}${this.transactionManager.currencySymbol}
-        <button class="delete"><i class="fas fa-times"></i></button>
-      </p>
-    `;
+    <p class="transaction-name">
+      <span class="category-icon">${categoryIcon}</span>
+      <span class="transaction-title">${transaction.name}</span>
+      <span class="transaction-category" data-lang-key="${categoryName}">(${categoryName})</span>
+    </p>
+    <p class="transaction-amount ${transaction.amount > 0 ? "income" : "expense"}">
+      ${transaction.amount.toFixed(2)}${this.transactionManager.currencySymbol}
+      <button class="delete"><i class="fas fa-times"></i></button>
+    </p>
+  `;
 
     const deleteButton = newTransactionElement.querySelector(".delete");
     deleteButton.addEventListener("click", () => this.showDeleteTransactionModal(transaction.id));
@@ -122,8 +150,16 @@ class UIManager {
   }
 
   clearTransactionsDisplay() {
+    const incomeTitle = this.income.querySelector("h3");
+    const outcomeTitle = this.outcome.querySelector("h3");
+
     this.income.innerHTML = "";
     this.outcome.innerHTML = "";
+
+    if (incomeTitle) this.income.appendChild(incomeTitle);
+    if (outcomeTitle) this.outcome.appendChild(outcomeTitle);
+
+    
   }
 
   updateBalance() {
@@ -157,8 +193,15 @@ class UIManager {
   }
 
   updateTransactionsDisplay() {
+    const incomeTitle = this.income.querySelector("h3");
+    const outcomeTitle = this.outcome.querySelector("h3");
+
     this.income.innerHTML = "";
     this.outcome.innerHTML = "";
+
+    if (incomeTitle) this.income.appendChild(incomeTitle);
+    if (outcomeTitle) this.outcome.appendChild(outcomeTitle);
+
     this.transactionManager.transactions.forEach((transaction) =>
       this.addTransactionToDOM(transaction)
     );
@@ -243,18 +286,6 @@ class UIManager {
 
   updateLanguage() {
     this.language = localStorage.getItem("preferredLanguage");
-  }
-
-  getCategoryIcon(category) {
-    const icons = {
-      Income: "money-bill-wave",
-      Shopping: "cart-arrow-down",
-      Food: "hamburger",
-      Cinema: "film",
-    };
-    const cleanCategory = category.replace(/\[.*?\]\s/, "").trim();
-    const iconName = icons[cleanCategory] || "question-circle";
-    return `<i class="fas fa-${iconName}"></i>`;
   }
 
   showDeleteAllModal() {
