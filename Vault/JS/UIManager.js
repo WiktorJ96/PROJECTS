@@ -30,7 +30,9 @@ class UIManager {
       darkBtn: ".dark",
       nameInput: "#name",
       amountInput: "#amount",
-      categorySelect: "#category",
+      transactionTypeSelect: "#transaction-type",
+      incomeCategorySelect: "#income-category",
+      expenseCategorySelect: "#expense-category",
       deleteAllModal: "#confirmationModal",
       deleteTransactionModal: "#deleteTransactionModal",
       confirmDeleteBtn: "#confirmDelete",
@@ -54,7 +56,7 @@ class UIManager {
       deleteAllBtn: () => this.showDeleteAllModal(),
       lightBtn: () => this.setLightTheme(),
       darkBtn: () => this.setDarkTheme(),
-      categorySelect: () => this.handleCategoryChange(),
+      transactionTypeSelect: () => this.handleTransactionTypeChange(),
       confirmDeleteBtn: () => this.deleteAllTransactions(),
       cancelDeleteBtn: () => this.hideDeleteAllModal(),
       confirmDeleteTransactionBtn: () => this.confirmDeleteTransaction(),
@@ -63,7 +65,10 @@ class UIManager {
 
     Object.entries(eventMap).forEach(([elementKey, handler]) => {
       if (this[elementKey]) {
-        this[elementKey].addEventListener("click", handler.bind(this));
+        this[elementKey].addEventListener(
+          "change" in this[elementKey] ? "change" : "click",
+          handler.bind(this)
+        );
       } else {
         console.warn(`Element ${elementKey} not found`);
       }
@@ -72,6 +77,7 @@ class UIManager {
 
   showPanel() {
     this.addTransactionPanel.style.display = "flex";
+    this.handleTransactionTypeChange();
   }
 
   closePanel() {
@@ -79,13 +85,28 @@ class UIManager {
     this.clearInputs();
   }
 
+  handleTransactionTypeChange() {
+    const isIncome = this.transactionTypeSelect.value === "income";
+    this.incomeCategorySelect.style.display = isIncome ? "block" : "none";
+    this.expenseCategorySelect.style.display = isIncome ? "none" : "block";
+  }
+
   saveTransaction() {
-    if (this.nameInput.value && this.amountInput.value && this.categorySelect.value !== "none") {
+    if (this.nameInput.value && this.amountInput.value && this.transactionTypeSelect.value) {
+      const isIncome = this.transactionTypeSelect.value === "income";
+      const categorySelect = isIncome ? this.incomeCategorySelect : this.expenseCategorySelect;
+      const category = categorySelect.options[categorySelect.selectedIndex].text;
+
+      const amount = isIncome
+        ? Math.abs(parseFloat(this.amountInput.value))
+        : -Math.abs(parseFloat(this.amountInput.value));
+
       const newTransaction = this.transactionManager.createNewTransaction(
         this.nameInput.value,
-        this.amountInput.value,
-        this.categorySelect.options[this.categorySelect.selectedIndex].text
+        amount,
+        category
       );
+
       this.addTransactionToDOM(newTransaction);
       this.updateBalance();
       this.chartManager.updateChart();
@@ -96,31 +117,19 @@ class UIManager {
   }
 
   getCategoryIcon(category) {
-    let categoryIcon;
+    const lowerCategory = category.toLowerCase();
+    const iconMap = {
+      wypłata: "fa-money-bill-wave",
+      premia: "fa-gift",
+      prezent: "fa-gift",
+      inne: "fa-question-circle",
+      zakupy: "fa-cart-arrow-down",
+      jedzenie: "fa-hamburger",
+      kino: "fa-film",
+      transport: "fa-bus",
+    };
 
-    switch (category) {
-      case "[ + ] Income":
-      case "[ + ] Przychód":
-        categoryIcon = '<i class="fas fa-money-bill-wave"></i>';
-        break;
-      case "[ - ] Shopping":
-      case "[ - ] Zakupy":
-        categoryIcon = '<i class="fas fa-cart-arrow-down"></i>';
-        break;
-      case "[ - ] Food":
-      case "[ - ] Jedzenie":
-        categoryIcon = '<i class="fas fa-hamburger"></i>';
-        break;
-      case "[ - ] Cinema":
-      case "[ - ] Kino":
-        categoryIcon = '<i class="fas fa-film"></i>';
-        break;
-      default:
-        categoryIcon = '<i class="fas fa-question-circle"></i>';
-        break;
-    }
-
-    return categoryIcon;
+    return `<i class="fas ${iconMap[lowerCategory] || "fa-question-circle"}"></i>`;
   }
 
   addTransactionToDOM(transaction) {
@@ -129,7 +138,7 @@ class UIManager {
     newTransactionElement.setAttribute("id", transaction.id);
 
     const categoryIcon = this.getCategoryIcon(transaction.category);
-    const categoryName = transaction.category.replace(/\[.*?\]\s/, "").trim();
+    const categoryName = transaction.category;
 
     newTransactionElement.innerHTML = `                   
     <p class="transaction-name">
@@ -138,7 +147,7 @@ class UIManager {
       <span class="transaction-category" data-lang-key="${categoryName}">(${categoryName})</span>
     </p>
     <p class="transaction-amount ${transaction.amount > 0 ? "income" : "expense"}">
-      ${transaction.amount.toFixed(2)}${this.transactionManager.currencySymbol}
+      ${Math.abs(transaction.amount).toFixed(2)}${this.transactionManager.currencySymbol}
       <button class="delete"><i class="fas fa-times"></i></button>
     </p>
   `;
@@ -158,8 +167,6 @@ class UIManager {
 
     if (incomeTitle) this.income.appendChild(incomeTitle);
     if (outcomeTitle) this.outcome.appendChild(outcomeTitle);
-
-    
   }
 
   updateBalance() {
@@ -193,15 +200,7 @@ class UIManager {
   }
 
   updateTransactionsDisplay() {
-    const incomeTitle = this.income.querySelector("h3");
-    const outcomeTitle = this.outcome.querySelector("h3");
-
-    this.income.innerHTML = "";
-    this.outcome.innerHTML = "";
-
-    if (incomeTitle) this.income.appendChild(incomeTitle);
-    if (outcomeTitle) this.outcome.appendChild(outcomeTitle);
-
+    this.clearTransactionsDisplay();
     this.transactionManager.transactions.forEach((transaction) =>
       this.addTransactionToDOM(transaction)
     );
@@ -272,16 +271,12 @@ class UIManager {
     document.head.appendChild(style);
   }
 
-  handleCategoryChange() {
-    console.log(
-      "Selected category:",
-      this.categorySelect.options[this.categorySelect.selectedIndex].text
-    );
-  }
-
   clearInputs() {
     [this.nameInput, this.amountInput].forEach((input) => (input.value = ""));
-    this.categorySelect.selectedIndex = 0;
+    this.transactionTypeSelect.selectedIndex = 0;
+    this.incomeCategorySelect.selectedIndex = 0;
+    this.expenseCategorySelect.selectedIndex = 0;
+    this.handleTransactionTypeChange();
   }
 
   updateLanguage() {

@@ -190,11 +190,20 @@ h2.title {
   flex-wrap: wrap;
 }
 
+.category-select,
+.category-label {
+  display: none;
+}
+
+#transaction-type {
+  margin-bottom: 10px;
+}
+
 .income-area,
 .expenses-area {
   flex: 1;
   padding: 2rem;
-  border-radius: 15px;
+  border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   border: 2px solid var(--border-color);
   min-width: 300px;
@@ -205,10 +214,12 @@ h2.title {
 
 .income-area {
   background-color: var(--income-bg);
+  margin-right: 0.15rem;
 }
 
 .expenses-area {
   background-color: var(--expense-bg);
+  margin-left: 0.15rem;
 }
 
 .income-area::before,
@@ -274,20 +285,6 @@ h2.title {
   transform: scaleX(1);
 }
 
-@media (max-width: 768px) {
-  .income-area,
-  .expenses-area {
-    padding: 1.5rem;
-    min-width: 250px;
-  }
-
-  .income-area h3,
-  .expenses-area h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-}
-
 .transaction {
   padding: 10px 0;
   display: flex;
@@ -334,15 +331,24 @@ h2.title {
   transform: scale(0.9);
 }
 
+.money_and_chart {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  width: 100%;
+  justify-content: center;
+  gap: 2%;
+  align-items: center;
+}
+
 .chart {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   padding: 20px;
   width: 100%;
   max-width: 580px;
   height: 300px;
-  border-radius: 15px;
+  border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   border: 2px solid var(--border-color);
   background-color: var(--first-color);
@@ -362,13 +368,12 @@ h2.title {
 .options {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   padding: 40px;
   width: 100%;
-  max-width: 600px;
+  max-width: 580px;
   height: 300px;
   border: 2px solid var(--border-color);
-  border-radius: 15px;
+  border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   background-color: var(--first-color);
   transition: all 0.3s ease;
@@ -798,6 +803,16 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .income-area,
+  .expenses-area {
+    padding: 1.5rem;
+    min-width: 250px;
+  }
+  .income-area h3,
+  .expenses-area h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
   .add-transaction-panel h2.title {
     font-size: 2rem;
   }

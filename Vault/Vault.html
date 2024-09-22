@@ -29,9 +29,6 @@
     }
     </script>
 </head>
-<style>
-
-</style>
 <body data-page="Vault">
 
     <header>
@@ -63,6 +60,7 @@
             </div>
         </section>
 
+        <div class="money_and_chart">
         <section class="options" aria-labelledby="available-funds-title">
             <div class="funds">
                 <h2 class="title" id="available-funds-title" data-lang-key="options_section_title">Dostępne środki</h2>
@@ -83,41 +81,43 @@
                 <canvas id="balanceChart" aria-label="Wykres salda finansowego"></canvas>
             </div>
         </section>
+    </div>
     </main>
 
-    <div class="add-transaction-panel" aria-labelledby="add-transaction-title">
-        
-        <h2 class="titleh2" id="add-transaction-title" data-lang-key="add_transaction_panel_title">Dodaj nową transakcję
-        </h2>
-        <hr class="hrsecond">
-        <label for="name" data-lang-key="name_label">Nazwa:</label>
-        <small data-lang-key="name_small">(podaj nazwę transakcji)</small>
-        <input type="text" id="name" aria-labelledby="name">
-
-        <label for="amount" data-lang-key="amount_label">Kwota:</label>
-        <small data-lang-key="amount_small">(podaj kwotę transakcji, jeśli dodajesz wydatek, postaw znak minusa na
-            początku kwoty)</small>
-        <input type="number" id="amount" aria-labelledby="amount">
-
-        <label for="category" data-lang-key="category_label">Wybierz kategorię:</label>
-        <small data-lang-key="category_small">([ + ] oznacza przychód, [ - ] oznacza wydatek)</small>
-        <select id="category" aria-labelledby="category">
-    <option value="none" selected disabled></option>
-    <option value="income" data-lang-key="income_option">[ + ] Przychód</option>
-    <option value="fuel" data-lang-key="fuel_option">[ - ] Paliwo</option>
-    <option value="food" data-lang-key="food_option">[ - ] Jedzenie</option>
-    <option value="fun" data-lang-key="fun_option">[ - ] Zabawa</option>
-    <option value="other" data-lang-key="other_option">[ - ] Inne</option>
-    </select>
-
-        <div class="panel-buttons">
-            <button class="save" aria-label="Zapisz transakcję" data-lang-key="save_button"><i class="fas fa-save"
-                    aria-hidden="true"></i> Zapisz</button>
-            <button class="cancel" aria-label="Anuluj" data-lang-key="cancel_button"><i class="far fa-window-close"
-                    aria-hidden="true"></i> Anuluj</button>
-        </div>
-        
-    </div>
+    <div class="add-transaction-panel">
+  <h2 class="title">Dodaj nową transakcję</h2>
+  <label for="name">Nazwa:</label>
+  <input type="text" id="name" />
+  
+  <label for="amount">Kwota:</label>
+  <input type="number" id="amount" />
+  
+  <label for="transaction-type">Typ transakcji:</label>
+  <select id="transaction-type">
+    <option value="income">Przychód</option>
+    <option value="expense">Wydatek</option>
+  </select>
+  
+  <label for="income-category" class="category-label income-category">Kategoria przychodu:</label>
+  <select id="income-category" class="category-select income-category">
+    <option value="salary">Wypłata</option>
+    <option value="bonus">Premia</option>
+    <option value="gift">Prezent</option>
+    <option value="other-income">Inne</option>
+  </select>
+  
+  <label for="expense-category" class="category-label expense-category">Kategoria wydatku:</label>
+  <select id="expense-category" class="category-select expense-category">
+    <option value="shopping">Zakupy</option>
+    <option value="food">Jedzenie</option>
+    <option value="cinema">Kino</option>
+    <option value="transport">Transport</option>
+    <option value="other-expense">Inne</option>
+  </select>
+  
+  <button class="save">Dodaj</button>
+  <button class="cancel">Anuluj</button>
+</div>
 
 <div id="confirmationModal" class="modal">
     <div class="modal-content">
