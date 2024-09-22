@@ -120,12 +120,19 @@ class UIManager {
     const lowerCategory = category.toLowerCase();
     const iconMap = {
       wypłata: "fa-money-bill-wave",
+      salary: "fa-money-bill-wave",
       premia: "fa-gift",
+      bonus: "fa-gift",
       prezent: "fa-gift",
+      gift: "fa-gift",
       inne: "fa-question-circle",
+      other: "fa-question-circle",
       zakupy: "fa-cart-arrow-down",
+      shopping: "fa-cart-arrow-down",
       jedzenie: "fa-hamburger",
+      food: "fa-hamburger",
       kino: "fa-film",
+      cinema: "fa-film",
       transport: "fa-bus",
     };
 

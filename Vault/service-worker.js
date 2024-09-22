@@ -1,13 +1,12 @@
-const CACHE_NAME = "todo-app-cache-v1.0.35";
+const CACHE_NAME = "budget-tracker-cache-v1.0.1";
 const ASSETS_TO_CACHE = [
   "/",
-  "./Chorely.html",
-  "./Chorely.css",
+  "./Vault.html",
+  "./Vault.css",
   "./JS/Main.js",
-  "../translations/todo-pl.json",
-  "../translations/todo-en.json",
-  "./assets/ikona_Chorely.png",
-  "./assets/Chorely_icon.svg",
+  "../translations/Vault-pl.json",
+  "../translations/Vault-en.json",
+  "./assets/Vault_icon.png",
 ];
 
 self.addEventListener("install", (event) => {

@@ -9,11 +9,12 @@
     <meta name="keywords" content="kalkulator wydatków, menedżer finansów, finanse osobiste, budżet domowy, śledzenie wydatków, zarządzanie pieniędzmi, finanse" data-lang-key="meta_keywords">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Wiktor Jurkowski">
+    <link rel="manifest" href="./manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="Vault.css">
     <title data-lang-key="title">Vault</title>
-    <link rel="icon" href="./assets/Vault_icon.svg" type="image/svg+xml">
+    <link rel="icon" href="./assets/Vault_icon.png" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="application/ld+json">
     {
@@ -84,40 +85,45 @@
     </div>
     </main>
 
+    <section>
     <div class="add-transaction-panel">
-  <h2 class="title">Dodaj nową transakcję</h2>
-  <label for="name">Nazwa:</label>
+  <h2 class="title" data-lang-key="add_new_transaction">Dodaj nową transakcję</h2>
+  <hr class="hrsecond">
+  <label for="name" data-lang-key="name">Nazwa:</label>
   <input type="text" id="name" />
   
-  <label for="amount">Kwota:</label>
+  <label for="amount" data-lang-key="amount">Kwota:</label>
   <input type="number" id="amount" />
   
-  <label for="transaction-type">Typ transakcji:</label>
+  <label for="transaction-type" data-lang-key="transaction_type">Typ transakcji:</label>
   <select id="transaction-type">
-    <option value="income">Przychód</option>
-    <option value="expense">Wydatek</option>
+    <option value="income" data-lang-key="income">Przychód</option>
+    <option value="expense" data-lang-key="expense">Wydatek</option>
   </select>
   
-  <label for="income-category" class="category-label income-category">Kategoria przychodu:</label>
+  <label for="income-category" class="category-label income-category" data-lang-key="income_category">Kategoria przychodu:</label>
   <select id="income-category" class="category-select income-category">
-    <option value="salary">Wypłata</option>
-    <option value="bonus">Premia</option>
-    <option value="gift">Prezent</option>
-    <option value="other-income">Inne</option>
+    <option value="salary" data-lang-key="salary">Wypłata</option>
+    <option value="bonus" data-lang-key="bonus">Premia</option>
+    <option value="gift" data-lang-key="gift">Prezent</option>
+    <option value="other-income" data-lang-key="other_income">Inne</option>
   </select>
   
-  <label for="expense-category" class="category-label expense-category">Kategoria wydatku:</label>
+  <label for="expense-category" class="category-label expense-category" data-lang-key="expense_category">Kategoria wydatku:</label>
   <select id="expense-category" class="category-select expense-category">
-    <option value="shopping">Zakupy</option>
-    <option value="food">Jedzenie</option>
-    <option value="cinema">Kino</option>
-    <option value="transport">Transport</option>
-    <option value="other-expense">Inne</option>
+    <option value="shopping" data-lang-key="shopping">Zakupy</option>
+    <option value="food" data-lang-key="food">Jedzenie</option>
+    <option value="cinema" data-lang-key="cinema">Kino</option>
+    <option value="transport" data-lang-key="transport">Transport</option>
+    <option value="other-expense" data-lang-key="other_expense">Inne</option>
   </select>
   
-  <button class="save">Dodaj</button>
-  <button class="cancel">Anuluj</button>
+  <div class="transaction-panel-buttons">
+    <button class="save" data-lang-key="add">Dodaj</button>
+    <button class="cancel" data-lang-key="cancel">Anuluj</button>
+  </div>
 </div>
+</section>
 
 <div id="confirmationModal" class="modal">
     <div class="modal-content">
