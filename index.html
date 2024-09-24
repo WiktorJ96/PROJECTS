@@ -31,7 +31,7 @@
     }
     </script>
 </head>
-<body data-page="index">
+<body data-page="Index">
     <a href="#main-content" class="skip-link" style="top: -50%;">Przejdź do głównej treści</a>
 
     <header class="index-header">
@@ -129,146 +129,196 @@
         </section>
 
         <section id="skills" aria-label="Umiejętności">
-            <div class="skills-header">
-                <button class="scroll-button left" aria-label="Przewiń umiejętności w lewo">
-                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
-                </button>
-                <h2 data-lang-key="skills">Umiejętności</h2>
-                <button class="scroll-button right" aria-label="Przewiń umiejętności w prawo">
-                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
-                </button>
-            </div>
-            <hr class="line">
-            <div class="skills-container">
-                <div class="skills-page">
+    <div class="skills-header">
+        <button class="scroll-button left" aria-label="Przewiń kategorie w lewo">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <h2 data-lang-key="skills">Umiejętności</h2>
+        <button class="scroll-button right" aria-label="Przewiń kategorie w prawo">
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </button>
+    </div>
+    <hr class="line">
+    <div class="skills-container">
 
-                    <div class="skill" id="html-skill">
-                        <div class="skill-header">
-                            <span class="skills__name">
-                                <i class="fab fa-html5 icon iconHTML" ></i>
-                                <span data-lang-key="html">HTML</span>
-                                <a href="./SKILLS/html-skills.html" class="skill-button">
-                                    <i class="fas fa-mouse-pointer"></i>
-                                    <i data-feather="click"></i>
-                                    <span class="click-text">click</span>
-                                </a>
-                            </span>
-                            <span class="skills__percent">85%</span>
-                        </div>
-                        <div class="progress-container" style="--progress: 85%;">
-                            <div class="progress-bar"></div>
-                        </div>
+        <div class="skills-page">
+            <h3 class="skills-page-title" data-lang-key="languages">Języki</h3>
+            <div class="skills-list">
+                <div class="skill" id="html-skill">
+                    <div class="skill-header">
+                        <span class="skills__name">
+                            <i class="fab fa-html5 icon iconHTML"></i>
+                            <span data-lang-key="html">HTML</span>
+                            <a href="./SKILLS/html-skills.html" class="skill-button">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <i data-feather="click"></i>
+                                <span class="click-text">click</span>
+                            </a>
+                        </span>
+                        <span class="skills__percent">85%</span>
                     </div>
-
-                    <div class="skill" id="css-skill">
-                        <div class="skill-header">
-                            <span class="skills__name">
-                                <i class="fab fa-css3-alt icon iconCSS"></i>
-                                <span data-lang-key="css">CSS</span>
-                                <a href="./SKILLS/css-skills.html" class="skill-button">
-                                    <i class="fas fa-mouse-pointer"></i>
-                                    <span class="click-text">click</span>
-                                </a>
-                            </span>
-                            <span class="skills__percent">85%</span>
-                        </div>
-                        <div class="progress-container" style="--progress: 85%;">
-                            <div class="progress-bar"></div>
-                        </div>
+                    <div class="progress-container" style="--progress: 85%;">
+                        <div class="progress-bar"></div>
                     </div>
-
-                    <div class="skill" id="js-skill">
-                        <div class="skill-header">
-                            <span class="skills__name">
-                                <i class="fab fa-js-square icon iconJS"></i>
-                                <span class="javascript-label" data-lang-key="javascript">JavaScript</span>
-                                <span class="javascript-label-short" data-lang-key="javascript_short">JS</span>
-                                <a href="./SKILLS/js-skills.html" class="skill-button">
-                                    <i class="fas fa-mouse-pointer"></i>
-                                    <span class="click-text">click</span>
-                                </a>
-                            </span>
-                            <span class="skills__percent">70%</span>
-                        </div>
-                        <div class="progress-container" style="--progress: 70%;">
-                            <div class="progress-bar"></div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="skill" id="react-skill">
-                        <div class="skill-header">
-                            <span class="skills__name">
-                                <i class="fab fa-react icon" style="color:#61dafb;"></i>
-                                <span data-lang-key="react">React</span>
-                                <a href="react-skills.html" class="skill-button">
-                                    <i class="fas fa-mouse-pointer"></i>
-                                    <span class="click-text">click</span>
-                                </a>
-                            </span>
-                            <span class="skills__percent">5%</span>
-                        </div>
-                        <div class="progress-container" style="--progress: 5%;">
-                            <div class="progress-bar"></div>
-                        </div>
-                    </div> -->
-
-                    <!-- <div class="skill" id="angular-skill">
-                        <div class="skill-header">
-                            <span class="skills__name">
-                                <i class="fab fa-angular icon" style="color:#dd0031;"></i>
-                                <span data-lang-key="angular">Angular</span>
-                                <a href="angular-skills.html" class="skill-button">
-                                    <i class="fas fa-mouse-pointer"></i>
-                                    <span class="click-text">click</span>
-                                </a>
-                            </span>
-                            <span class="skills__percent">5%</span>
-                        </div>
-                        <div class="progress-container" style="--progress: 5%;">
-                            <div class="progress-bar"></div>
-                        </div>
-                    </div> -->
-
                 </div>
-                <div class="skills-page">
 
-                    <!-- <div class="skill" id="docker-skill">
-                        <div class="skill-header">
-                            <span class="skills__name">
-                                <i class="fab fa-docker icon" style="color:#a6c4dc;"></i>
-                                <span data-lang-key="docker">Docker</span>
-                                <a href="docker-skills.html" class="skill-button">
-                                    <i class="fas fa-mouse-pointer"></i>
-                                    <span class="click-text">click</span>
-                                </a>
-                            </span>
-                            <span class="skills__percent">50%</span>
-                        </div>
-                        <div class="progress-container" style="--progress: 50%;">
-                            <div class="progress-bar"></div>
-                        </div>
-                    </div> -->
-
-                    <div class="skill" id="figma-skill">
-                        <div class="skill-header">
-                            <span class="skills__name">
-                                <i class="fab fa-figma icon" style="color:#F24E1E;"></i>
-                                <span data-lang-key="figma">Figma</span>
-                                <a href="./SKILLS/figma-skills.html" class="skill-button">
-                                    <i class="fas fa-mouse-pointer"></i>
-                                    <span class="click-text">click</span>
-                                </a>
-                            </span>
-                            <span class="skills__percent">70%</span>
-                        </div>
-                        <div class="progress-container" style="--progress: 70%;">
-                            <div class="progress-bar"></div>
-                        </div>
+                <div class="skill" id="css-skill">
+                    <div class="skill-header">
+                        <span class="skills__name">
+                            <i class="fab fa-css3-alt icon iconCSS"></i>
+                            <span data-lang-key="css">CSS</span>
+                            <a href="./SKILLS/css-skills.html" class="skill-button">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <span class="click-text">click</span>
+                            </a>
+                        </span>
+                        <span class="skills__percent">85%</span>
                     </div>
+                    <div class="progress-container" style="--progress: 85%;">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
 
+                <div class="skill" id="js-skill">
+                    <div class="skill-header">
+                        <span class="skills__name">
+                            <i class="fab fa-js-square icon iconJS"></i>
+                            <span class="javascript-label" data-lang-key="javascript">JavaScript</span>
+                            <span class="javascript-label-short" data-lang-key="javascript_short">JS</span>
+                            <a href="./SKILLS/js-skills.html" class="skill-button">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <span class="click-text">click</span>
+                            </a>
+                        </span>
+                        <span class="skills__percent">70%</span>
+                    </div>
+                    <div class="progress-container" style="--progress: 70%;">
+                        <div class="progress-bar"></div>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <!-- <div class="skills-page">
+            <h3 class="skills-page-title" data-lang-key="frameworks">Frameworki</h3>
+            <div class="skills-list">
+                <div class="skill" id="react-skill">
+                    <div class="skill-header">
+                        <span class="skills__name">
+                            <i class="fab fa-react icon" style="color:#61dafb;"></i>
+                            <span data-lang-key="react">React</span>
+                            <a href="react-skills.html" class="skill-button">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <span class="click-text">click</span>
+                            </a>
+                        </span>
+                        <span class="skills__percent">5%</span>
+                    </div>
+                    <div class="progress-container" style="--progress: 5%;">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="skill" id="angular-skill">
+                    <div class="skill-header">
+                        <span class="skills__name">
+                            <i class="fab fa-angular icon" style="color:#dd0031;"></i>
+                            <span data-lang-key="angular">Angular</span>
+                            <a href="angular-skills.html" class="skill-button">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <span class="click-text">click</span>
+                            </a>
+                        </span>
+                        <span class="skills__percent">5%</span>
+                    </div>
+                    <div class="progress-container" style="--progress: 5%;">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div> -->
+
+        <!-- <div class="skills-page">
+            <h3 class="skills-page-title" data-lang-key="additional-technologies">Dodatkowe technologie</h3>
+            <div class="skills-list">
+                <div class="skill" id="xml-skills">
+                    <div class="skill-header">
+                        <span class="skills__name">
+                            <i class="fas fa-code"></i>
+                            <span data-lang-key="docker">XML</span>
+                            <a href="xml-skills.html" class="skill-button">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <span class="click-text">click</span>
+                            </a>
+                        </span>
+                        <span class="skills__percent">50%</span>
+                    </div>
+                    <div class="progress-container" style="--progress: 50%;">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="skill" id="json-skill">
+                    <div class="skill-header">
+                        <span class="skills__name">
+                            <ikona>
+                            <span data-lang-key="figma">JSON</span>
+                            <a href="json-skills.html" class="skill-button">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <span class="click-text">click</span>
+                            </a>
+                        </span>
+                        <span class="skills__percent">70%</span>
+                    </div>
+                    <div class="progress-container" style="--progress: 70%;">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+            </div> -->
+
+        <div class="skills-page">
+            <h3 class="skills-page-title" data-lang-key="tools">Narzędzia</h3>
+            <div class="skills-list">
+                <!-- <div class="skill" id="docker-skill">
+                    <div class="skill-header">
+                        <span class="skills__name">
+                            <i class="fab fa-docker icon" style="color:#a6c4dc;"></i>
+                            <span data-lang-key="docker">Docker</span>
+                            <a href="docker-skills.html" class="skill-button">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <span class="click-text">click</span>
+                            </a>
+                        </span>
+                        <span class="skills__percent">50%</span>
+                    </div>
+                    <div class="progress-container" style="--progress: 50%;">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div> -->
+
+                <div class="skill" id="figma-skill">
+                    <div class="skill-header">
+                        <span class="skills__name">
+                            <i class="fab fa-figma icon" style="color:#F24E1E;"></i>
+                            <span data-lang-key="figma">Figma</span>
+                            <a href="./SKILLS/figma-skills.html" class="skill-button">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <span class="click-text">click</span>
+                            </a>
+                        </span>
+                        <span class="skills__percent">70%</span>
+                    </div>
+                    <div class="progress-container" style="--progress: 70%;">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
 
     <section id="portfolio">
         <h2 data-lang-key="portfolio">Portfolio</h2>

@@ -292,7 +292,8 @@ class UIManager {
 
   showDeleteAllModal() {
     if (this.deleteAllModal) {
-      this.deleteAllModal.style.display = "block";
+      this.deleteAllModal.classList.add("show");
+      document.body.style.overflow = "hidden";
     } else {
       console.error("Delete all modal not found");
     }
@@ -300,14 +301,16 @@ class UIManager {
 
   hideDeleteAllModal() {
     if (this.deleteAllModal) {
-      this.deleteAllModal.style.display = "none";
+      this.deleteAllModal.classList.remove("show");
+      document.body.style.overflow = "";
     }
   }
 
   showDeleteTransactionModal(id) {
     if (this.deleteTransactionModal) {
-      this.deleteTransactionModal.style.display = "block";
+      this.deleteTransactionModal.classList.add("show");
       this.deleteTransactionModal.dataset.transactionId = id;
+      document.body.style.overflow = "hidden"; 
     } else {
       console.error("Delete transaction modal not found");
     }
@@ -315,7 +318,8 @@ class UIManager {
 
   hideDeleteTransactionModal() {
     if (this.deleteTransactionModal) {
-      this.deleteTransactionModal.style.display = "none";
+      this.deleteTransactionModal.classList.remove("show");
+      document.body.style.overflow = ""; 
     }
   }
 }

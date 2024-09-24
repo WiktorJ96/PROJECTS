@@ -819,17 +819,26 @@ footer::before {
 }
 
 @media (max-width: 1200px) {
-  .options,
-  .chart {
-    width: 45%;
+  .money_and_chart {
+    flex-direction: column;
+    align-items: center;
   }
-}
 
-@media (max-width: 992px) {
   .options,
   .chart {
     width: 100%;
     max-width: 700px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  header h1 {
+    font-size: 54px;
+  }
+
+  header p {
+    font-size: 20px;
   }
 
   .transaction-list {
@@ -839,13 +848,18 @@ footer::before {
   .income-area,
   .expenses-area {
     width: 100%;
-    margin-bottom: 20px;
+    margin: 0 0 20px 0;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
+  header {
+    height: auto;
+    padding: 20px 0;
+  }
+
   header h1 {
-    font-size: 48px;
+    font-size: 42px;
   }
 
   header p {
@@ -853,61 +867,178 @@ footer::before {
   }
 
   h2.title {
-    font-size: 26px;
+    font-size: 28px;
   }
 
   .available-money {
-    font-size: 48px;
+    font-size: 42px;
+  }
+
+  .controls {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .controls button {
+    width: 30%;
+    margin-bottom: 10px;
+  }
+
+  .style-selection {
+    align-items: center;
+  }
+
+  .color-buttons {
+    gap: 15px;
+  }
+
+  .color-buttons button {
+    width: 50px;
+    height: 50px;
+  }
+
+  .add-transaction-panel h2.title {
+    font-size: 24px;
   }
 
   .add-transaction-panel label {
-    font-size: 22px;
+    font-size: 16px;
+  }
+
+  .add-transaction-panel input,
+  .add-transaction-panel select {
+    font-size: 14px;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .add-transaction-panel button {
+    font-size: 14px;
+    padding: 0.6rem 1.5rem;
+  }
+
+  .footer-content p {
+    font-size: 12px;
+  }
+
+  .footer_buttons {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .footer_buttons button {
+    width: 15%;
+    margin-bottom: 10px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 576px) {
+  body {
+    padding: 10px;
+  }
+
+  header h1 {
+    font-size: 36px;
+  }
+
+  header p {
+    font-size: 16px;
+  }
+
+  h2.title {
+    font-size: 24px;
+  }
+
+  .available-money {
+    font-size: 36px;
+  }
+
   .income-area,
   .expenses-area {
-    padding: 1.5rem;
-    min-width: 250px;
+    padding: 1rem;
   }
+
   .income-area h3,
   .expenses-area h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 20px;
   }
+
+  .transaction {
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .transaction-name,
+  .transaction-amount {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .delete {
+    align-self: flex-end;
+  }
+
   .add-transaction-panel h2.title {
-    font-size: 2rem;
+    font-size: 22px;
   }
 
   .add-transaction-panel label {
-    font-size: 1rem;
+    font-size: 14px;
   }
 
   .add-transaction-panel input,
   .add-transaction-panel select,
   .add-transaction-panel button {
-    font-size: 0.9rem;
-  }
-  footer {
-    padding: 15px 0;
-    margin-top: 30px;
+    font-size: 14px;
   }
 
-  footer p {
-    font-size: 12px;
+  .modal-content {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .modal-buttons button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 450px) {
+  header h1 {
+    font-size: 32px;
+  }
+
+  header p {
+    font-size: 14px;
+  }
+
+  .available-money {
+    font-size: 32px;
+  }
+
+  .add-transaction-panel h2.title {
+    font-size: 20px;
+  }
+
+  .add-transaction-panel label {
+    font-size: 13px;
+  }
+
+  .add-transaction-panel input,
+  .add-transaction-panel select,
+  .add-transaction-panel button {
+    font-size: 13px;
   }
   .controls {
     flex-direction: column;
     align-items: center;
   }
-
   .controls button {
+    width: 70%;
     margin-bottom: 10px;
-    width: 80%;
   }
-
-  .style-selection {
-    align-items: center;
+  .footer_buttons button {
+    width: 29%;
+    margin-bottom: 10px;
   }
 }
