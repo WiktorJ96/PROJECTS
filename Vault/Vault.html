@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="Vault.css">
     <title data-lang-key="title">Vault</title>
-    <link rel="icon" href="./assets/Vault_icon2.png" type="image/png">
+    <link rel="icon" href="./assets/Vault_icon1.png" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="application/ld+json">
     {
@@ -30,8 +30,48 @@
     }
     </script>
 </head>
+<style>
+    .img-icon{
+        width: 90px;
+        height: 90px;
+        margin-right: 10px;
+        vertical-align: middle;
+        fill: currentColor;
+    }
+    .vault-text {
+             font-size: 68px;
+            font-weight: 700;
+            background: linear-gradient(
+                45deg, 
+                rgba(255, 106, 0, 0.604), 
+                rgba(255, 0, 0, 0.607), 
+                rgba(0, 102, 255, 0.807)
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 
+                2px 2px 4px rgba(255, 107, 0, 0.2),
+                -2px -2px 4px rgba(0, 102, 255, 0.2);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                text-shadow: 
+                    2px 2px 4px rgba(255, 107, 0, 0.2),
+                    -2px -2px 4px rgba(0, 102, 255, 0.2);
+            }
+            to {
+                text-shadow: 
+                    0 0 10px rgba(255, 107, 0, 0.4),
+                    0 0 20px rgba(255, 0, 0, 0.4),
+                    0 0 30px rgba(0, 102, 255, 0.6);
+            }
+        }
+    
+</style>
 <body data-page="Vault">
-
+<!-- <i class="fas fa-vault gradient-icon" aria-hidden="true"></i> -->
     <header>
         <nav aria-label="breadcrumb">
         </nav>
@@ -41,7 +81,7 @@
                 <button class="dark" aria-label="Ciemny motyw"></button>
             </div>
         </div>
-        <h1><i class="fas fa-vault gradient-icon" aria-hidden="true"></i> <span class="gradient-text">V</span>ault</h1>
+        <h1><img class="img-icon" src="./assets/Vault_icon1.png"> <span class="vault-text">V</span>ault</h1>
         <p data-lang-key="header_subtitle">Twój osobisty menedżer finansów.</p>
         <hr>
     </header>

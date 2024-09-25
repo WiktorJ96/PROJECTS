@@ -1,111 +1,131 @@
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    display: none;
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 #custom-scrollbar {
-    position: fixed;
-    top: 0;
-    right: 2px;
-    width: 8px;
-    height: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
+  position: fixed;
+  top: 0;
+  right: 2px;
+  width: 8px;
+  height: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 9999;
+}
+
+body {
+  background: linear-gradient(60deg, #efecec 0%, #f2f3f5 100%);
+  font-family: "Poppins", sans-serif;
+  animation: fadeIn 1s ease-in-out;
+  overflow-x: hidden;
+  margin-top: -25px;
+  min-height: 104vh;
+}
+
+@keyframes fadeIn {
+  from {
     opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 9999;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
- body {
-    background: linear-gradient(60deg, #efecec 0%, #f2f3f5 100%);
-    font-family: 'Poppins', sans-serif;
-    animation: fadeIn 1s ease-in-out;
-    overflow-x: hidden;
-    margin-top: -25px;
-    min-height: 104vh;
+.skill-icon {
+  font-size: 2rem;
+  color: hsla(0, 0%, 16%, 0.9);
+  transition:
+    transform 0.3s,
+    color 0.3s;
 }
 
- @keyframes fadeIn {
-     from {
-         opacity: 0;
-     }
+.skill-icon:hover {
+  transform: rotate(15deg) scale(1.1);
+}
 
-     to {
-         opacity: 1;
-     }
- }
+.skill-card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  border-radius: 15px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+}
 
- .skill-icon {
-     font-size: 2rem;
-     color: hsla(0, 0%, 16%, 0.9);
-     transition: transform 0.3s, color 0.3s;
- }
+.skill-card:hover {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
- .skill-icon:hover {
-     transform: rotate(15deg) scale(1.1);
- }
+.container {
+  max-width: 1200px;
+}
 
- .skill-card {
-     border: none;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-     transition: transform 0.3s, box-shadow 0.3s;
-     border-radius: 15px;
-     overflow: hidden;
-     background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
- }
+.difficulty-icon {
+  font-size: 1.2rem;
+  color: #28a745;
+  transition:
+    transform 0.3s,
+    color 0.3s;
+}
 
- .skill-card:hover {
-     transform: scale(1.05) rotate(2deg);
-     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
- }
+.difficulty-icon:hover {
+  transform: scale(1.2);
+  color: #218838;
+}
 
- .container {
-     max-width: 1200px;
- }
-
- .difficulty-icon {
-     font-size: 1.2rem;
-     color: #28a745;
-     transition: transform 0.3s, color 0.3s;
- }
-
- .difficulty-icon:hover {
-     transform: scale(1.2);
-     color: #218838;
- }
-
- .card-footer .badge {
-     font-size: 0.8rem;
- }
- .language-switch{
-    display: none;
- }
- .iconCSS{
-    background-image: linear-gradient(135deg, hsla(193, 95%, 68%, 0.9), hsla(228, 78%, 52%, 0.9), hsla(235, 66%, 30%, 0.9));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    }
-    .iconJS{
-    background-image: linear-gradient(135deg, hsla(51, 100%, 50%, 0.9), hsla(39, 100%, 50%, 0.9));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    }
-    .iconHTML{
-    background-image: linear-gradient(135deg, hsla(0, 100%, 71%, 0.9), hsla(0, 100%, 50%, 0.9), hsla(0, 100%, 27%, 0.9));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    }
-    .icon {
-        font-size: 100px;
-        display: block;
-        text-align-last: center;
-        margin-bottom: 20px;
-    }
+.card-footer .badge {
+  font-size: 0.8rem;
+}
+.language-switch {
+  display: none;
+}
+.iconCSS {
+  background-image: linear-gradient(
+    135deg,
+    hsla(193, 95%, 68%, 0.9),
+    hsla(228, 78%, 52%, 0.9),
+    hsla(235, 66%, 30%, 0.9)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+.iconJS {
+  background-image: linear-gradient(
+    135deg,
+    hsla(51, 100%, 50%, 0.9),
+    hsla(39, 100%, 50%, 0.9)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+.iconHTML {
+  background-image: linear-gradient(
+    135deg,
+    hsla(0, 100%, 71%, 0.9),
+    hsla(0, 100%, 50%, 0.9),
+    hsla(0, 100%, 27%, 0.9)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+.icon {
+  font-size: 100px;
+  display: block;
+  text-align-last: center;
+  margin-bottom: 20px;
+}
