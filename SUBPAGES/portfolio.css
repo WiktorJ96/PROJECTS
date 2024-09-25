@@ -579,8 +579,20 @@ h2 {
   background: linear-gradient(90deg, #404040, #4d4d4d, #b3b3b3);
 }
 
+#vsc-skill .progress-bar {
+  background: linear-gradient(90deg, #007acc, #1f9cf0, #00b4ab);
+}
+
+#intellij-skill .progress-bar {
+  background: linear-gradient(90deg, #ec4c8a, #9933cc, #3a80f7, #2c387e);
+}
+
+#xml-liquid-studio-skill .progress-bar {
+  background: linear-gradient(90deg, #003366, #3399cc, #d9d9d9);
+}
+
 .icon {
-  font-size: 30px;
+  font-size: 35px;
   margin-right: 8px;
   transition: color 0.3s;
 }
@@ -603,61 +615,44 @@ h2 {
   border-radius: 20px;
 }
 
+.click {
+  font-size: 20px;
+}
+
 .skill-button {
   display: inline-flex;
   align-items: center;
   background-color: #f0f0f0;
   border: 1px solid #ddd;
   border-radius: 15px;
-  padding: 0.1px 5px;
+  padding: 5px 12px;
   margin-left: 10px;
   font-size: 0.7em;
   text-decoration: none;
   color: #333;
   position: relative;
   overflow: hidden;
-  animation: breathe 4s ease-in-out infinite;
-}
-
-@keyframes breathe {
-  0%,
-  100% {
-    transform: scale(1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-}
-
-.skill-button::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.8) 0%,
-    rgba(255, 255, 255, 0) 70%
-  );
-  animation: pulse 4s linear infinite;
+  animation: pulse 3s linear infinite;
+  transition: 3s ease-in-out;
 }
 
 @keyframes pulse {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  25% {
+    transform: scale(0.95);
+    opacity: 0.8;
   }
   50% {
     transform: scale(1);
-    opacity: 0.5;
+    opacity: 0.9;
   }
-  100% {
-    transform: scale(1.2);
-    opacity: 0;
+  75% {
+    transform: scale(1.02);
+    opacity: 0.8;
   }
 }
 
@@ -676,10 +671,6 @@ h2 {
 .skill-button .material-icons-outlined {
   font-size: 16px;
   margin-right: 4px;
-}
-
-.click-text {
-  font-size: 0.9em;
 }
 
 .skills-header {
@@ -739,8 +730,25 @@ h2 {
 .javascript-label {
   display: inline;
 }
-
 .javascript-label-short {
+  display: none;
+}
+.vsc-label {
+  display: inline;
+}
+.vsc-label-short {
+  display: none;
+}
+.ij-label {
+  display: inline;
+}
+.ij-label-short {
+  display: none;
+}
+.xml-ls-label {
+  display: inline;
+}
+.xml-ls-label-short {
   display: none;
 }
 /*PORTFOLIO*/
@@ -1401,8 +1409,25 @@ footer {
   .javascript-label {
     display: none;
   }
-
   .javascript-label-short {
+    display: inline;
+  }
+  .vsc-label {
+    display: none;
+  }
+  .vsc-label-short {
+    display: inline;
+  }
+  .ij-label {
+    display: none;
+  }
+  .ij-label-short {
+    display: inline;
+  }
+  .xml-ls-label {
+    display: none;
+  }
+  .xml-ls-label-short {
     display: inline;
   }
 }

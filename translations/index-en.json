@@ -27,9 +27,7 @@
   "languages": "Programming languages",
   "frameworks": "Frameworks",
   "data_formats": "Data formats",
-  "programs-editors": "Programs/Editors",
-  "javascript_short": "JS",
-  "vsc": "VSC",
+  "programs-editors": "IDE/Editors",
   "or_web_dev": "or a web developer",
   "dynamic_sentences": ["And you need a web designer", "or a web developer"]
 }

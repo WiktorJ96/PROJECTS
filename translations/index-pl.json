@@ -27,9 +27,7 @@
   "languages": "Języki programowania",
   "frameworks": "Frameworki",
   "data_formats": "Formaty danych",
-  "programs-editors": "Programy/Edytory",
-  "javascript_short": "JS",
-  "vsc": "VSC",
+  "programs-editors": "IDE/Edytory",
   "or_web_dev": "lub web developera",
   "dynamic_sentences": ["I potrzebujesz web designera", "lub web developera"]
 }
