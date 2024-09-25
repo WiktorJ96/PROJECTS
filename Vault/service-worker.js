@@ -6,7 +6,7 @@ const ASSETS_TO_CACHE = [
   "./JS/Main.js",
   "../translations/Vault-pl.json",
   "../translations/Vault-en.json",
-  "./assets/Vault_icon.png",
+  "./assets/Vault_icon1.png",
 ];
 
 self.addEventListener("install", (event) => {

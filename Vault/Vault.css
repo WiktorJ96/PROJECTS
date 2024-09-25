@@ -213,14 +213,14 @@ h2.title {
 }
 
 .income-area {
-  background: linear-gradient(135deg, var(--income-bg), rgba(25, 204, 100, 0.1));
-  border: 2px solid rgba(25, 204, 100, 0.3);
+  background: linear-gradient(135deg, var(--income-bg), rgba(25, 204, 100, 0.15));
+  border: 2px solid rgba(25, 204, 100, 0.22);
   margin-right: 0.45rem;
 }
 
 .expenses-area {
-  background: linear-gradient(135deg, var(--expense-bg), rgba(230, 49, 29, 0.1));
-  border: 2px solid rgba(230, 49, 29, 0.3);
+  background: linear-gradient(135deg, var(--expense-bg), rgba(230, 49, 29, 0.15));
+  border: 2px solid rgba(230, 49, 29, 0.22);
   margin-left: 0.45rem;
 }
 
@@ -293,7 +293,7 @@ h2.title {
 }
 
 .transaction:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 .transaction-name {
