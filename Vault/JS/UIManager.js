@@ -8,6 +8,10 @@ class UIManager {
     this.root = document.documentElement;
     this.body = document.body;
     this.updateLanguage();
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      this.setTheme(savedTheme === "dark");
+    }
 
     window.addEventListener("languageChange", () => {
       this.updateLanguage();
@@ -231,6 +235,7 @@ class UIManager {
     this.updateBodyAfterStyle(theme);
     this.chartManager.setTheme(isDark);
     this.body.classList.toggle("dark-theme", isDark);
+    localStorage.setItem("theme", isDark ? "dark" : "light");
   }
 
   setLightTheme() {

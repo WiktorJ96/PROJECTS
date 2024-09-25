@@ -1,4 +1,4 @@
-const CACHE_NAME = "budget-tracker-cache-v1.0.1";
+const CACHE_NAME = "budget-tracker-cache-v1.0.3";
 const ASSETS_TO_CACHE = [
   "/",
   "./Vault.html",
@@ -7,6 +7,11 @@ const ASSETS_TO_CACHE = [
   "../translations/Vault-pl.json",
   "../translations/Vault-en.json",
   "./assets/Vault_icon1.png",
+  "./JS/ChartManager.js",
+  "./JS/TransactionManager.js",
+  "./JS/UIManager.js",
+  "./JS/PWAManager.js",
+  "https://cdn.jsdelivr.net/npm/chart.js",
 ];
 
 self.addEventListener("install", (event) => {
