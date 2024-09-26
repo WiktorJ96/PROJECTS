@@ -4,13 +4,17 @@ class ChartManager {
     this.chart = null;
     this.initializeChart();
     this.setupLanguageChangeListener();
+    window.addEventListener("themeChange", (event) => {
+      const isDark = event.detail.theme === "dark";
+      this.setTheme(isDark);
+    });
   }
 
   initializeChart() {
     const ctx = document.getElementById("balanceChart").getContext("2d");
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, "rgba(58,123,213,1)");
-    gradient.addColorStop(1, "rgba(0,210,255,0.3)");
+    gradient.addColorStop(0, "rgba(52, 152, 219, 0.6)");
+    gradient.addColorStop(1, "rgba(52, 152, 219, 0.1)");
 
     this.chart = new Chart(ctx, {
       type: "line",
@@ -21,49 +25,49 @@ class ChartManager {
             label: "Balance",
             data: [],
             backgroundColor: gradient,
-            borderColor: "rgba(0,123,255,1)",
+            borderColor: "rgba(52, 152, 219, 1)",
             borderWidth: 2,
             tension: 0.4,
-            pointBackgroundColor: "rgba(0,123,255,1)",
+            pointBackgroundColor: "rgba(52, 152, 219, 1)",
             pointBorderColor: "#fff",
             pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgba(0,123,255,1)",
+            pointHoverBorderColor: "rgba(52, 152, 219, 1)",
             fill: true,
-            pointRadius: 5,
-            pointHoverRadius: 7,
+            pointRadius: 4,
+            pointHoverRadius: 6,
             pointStyle: "circle",
           },
           {
             label: "Income",
             data: [],
-            backgroundColor: "rgba(19, 200, 109, 0.2)",
-            borderColor: "rgba(19, 200, 109, 1)",
+            backgroundColor: "rgba(46, 204, 113, 0.2)",
+            borderColor: "rgba(46, 204, 113, 1)",
             borderWidth: 2,
             tension: 0.4,
-            pointBackgroundColor: "rgba(19, 200, 109, 1)",
+            pointBackgroundColor: "rgba(46, 204, 113, 1)",
             pointBorderColor: "#fff",
             pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgba(19, 200, 109, 1)",
+            pointHoverBorderColor: "rgba(46, 204, 113, 1)",
             fill: false,
-            pointRadius: 5,
-            pointHoverRadius: 7,
+            pointRadius: 4,
+            pointHoverRadius: 6,
             pointStyle: "circle",
             hidden: true,
           },
           {
             label: "Expenses",
             data: [],
-            backgroundColor: "rgba(255, 104, 104, 0.2)",
-            borderColor: "rgba(255, 104, 104, 1)",
+            backgroundColor: "rgba(231, 76, 60, 0.2)",
+            borderColor: "rgba(231, 76, 60, 1)",
             borderWidth: 2,
             tension: 0.4,
-            pointBackgroundColor: "rgba(255, 104, 104, 1)",
+            pointBackgroundColor: "rgba(231, 76, 60, 1)",
             pointBorderColor: "#fff",
             pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgba(255, 104, 104, 1)",
+            pointHoverBorderColor: "rgba(231, 76, 60, 1)",
             fill: false,
-            pointRadius: 5,
-            pointHoverRadius: 7,
+            pointRadius: 4,
+            pointHoverRadius: 6,
             pointStyle: "circle",
             hidden: true,
           },
@@ -74,50 +78,41 @@ class ChartManager {
         maintainAspectRatio: false,
         plugins: {
           title: {
-            display: true,
-            text: "BALANCE HISTORY",
-            font: {
-              size: 35,
-              weight: "bold",
-              family: "Poppins",
-            },
-            color: "#333",
-            padding: {
-              top: 10,
-              bottom: 30,
-            },
+            display: false,
           },
           legend: {
             onClick: (e, legendItem) => {
               const index = legendItem.datasetIndex;
               const ci = this.chart;
               const meta = ci.getDatasetMeta(index);
-              meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+              meta.hidden =
+                meta.hidden === null ? !ci.data.datasets[index].hidden : null;
               ci.update();
             },
             labels: {
               font: {
-                size: 14,
-                family: "Poppins",
+                size: 12,
+                family: "'Poppins', sans-serif",
+                weight: "600",
               },
-              color: "#333",
+              color: "#34495e",
               usePointStyle: true,
-              padding: 20,
+              padding: 15,
             },
             onHover: (event, legendItem) => {
               event.native.target.style.cursor = "pointer";
             },
           },
           tooltip: {
-            backgroundColor: "rgba(0,0,0,0.7)",
+            backgroundColor: "rgba(52, 73, 94, 0.8)",
             titleFont: {
-              size: 16,
-              weight: "bold",
-              family: "Poppins",
+              size: 14,
+              weight: "600",
+              family: "'Poppins', sans-serif",
             },
             bodyFont: {
-              size: 14,
-              family: "Poppins",
+              size: 12,
+              family: "'Poppins', sans-serif",
             },
             callbacks: {
               label: (context) => {
@@ -142,16 +137,17 @@ class ChartManager {
               display: true,
               text: "Date",
               font: {
-                size: 16,
-                weight: "bold",
-                family: "Poppins",
+                size: 14,
+                weight: "600",
+                family: "'Poppins', sans-serif",
               },
-              color: "#333",
+              color: "#34495e",
             },
             ticks: {
-              color: "#333",
+              color: "#34495e",
               font: {
-                family: "Poppins",
+                family: "'Poppins', sans-serif",
+                size: 10,
               },
               maxRotation: 0,
               minRotation: 0,
@@ -166,16 +162,17 @@ class ChartManager {
               display: true,
               text: `Balance (${this.transactionManager.currencyCode})`,
               font: {
-                size: 16,
-                weight: "bold",
-                family: "Poppins",
+                size: 14,
+                weight: "600",
+                family: "'Poppins', sans-serif",
               },
-              color: "#333",
+              color: "#34495e",
             },
             ticks: {
-              color: "#333",
+              color: "#34495e",
               font: {
-                family: "Poppins",
+                family: "'Poppins', sans-serif",
+                size: 10,
               },
               callback: (value) => {
                 return new Intl.NumberFormat(undefined, {
@@ -186,17 +183,18 @@ class ChartManager {
             },
             grid: {
               borderDash: [5, 5],
+              color: "rgba(52, 73, 94, 0.1)",
             },
           },
         },
         animation: {
-          duration: 2000,
-          easing: "easeInOutBounce",
+          duration: 1500,
+          easing: "easeInOutQuart",
         },
         hover: {
-          animationDuration: 1000,
+          animationDuration: 300,
         },
-        responsiveAnimationDuration: 1000,
+        responsiveAnimationDuration: 300,
       },
     });
   }
@@ -216,24 +214,41 @@ class ChartManager {
   }
 
   setTheme(isDark) {
-    const textColor = isDark ? "#FFF" : "#333";
-    const gridColor = isDark ? "rgba(255, 255, 255, 0.2)" : "rgba(0, 0, 0, 0.1)";
+    const textColor = isDark ? "#ecf0f1" : "#34495e"; 
+    const gridColor = isDark
+      ? "rgba(236, 240, 241, 0.1)"
+      : "rgba(52, 73, 94, 0.1)";
 
-    this.chart.options.plugins.title.color = textColor;
-    this.chart.options.scales.x.title.color = textColor;
-    this.chart.options.scales.y.title.color = textColor;
-    this.chart.options.scales.x.ticks.color = textColor;
-    this.chart.options.scales.y.ticks.color = textColor;
-    this.chart.options.scales.x.grid.color = gridColor;
-    this.chart.options.scales.y.grid.color = gridColor;
-    this.chart.options.plugins.legend.labels.color = textColor;
+    this.chart.options.plugins.legend.labels.color = textColor; 
+    this.chart.options.scales.x.title.color = textColor; 
+    this.chart.options.scales.y.title.color = textColor; 
+    this.chart.options.scales.x.ticks.color = textColor; 
+    this.chart.options.scales.y.ticks.color = textColor; 
+
+    this.chart.options.scales.x.grid.color = gridColor; 
+    this.chart.options.scales.y.grid.color = gridColor; 
+
+    if (isDark) {
+      this.chart.data.datasets[0].backgroundColor = (ctx) => {
+        const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, "rgba(52, 152, 219, 0.4)");
+        gradient.addColorStop(1, "rgba(52, 152, 219, 0.05)");
+        return gradient;
+      };
+    } else {
+      this.chart.data.datasets[0].backgroundColor = (ctx) => {
+        const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, "rgba(52, 152, 219, 0.6)");
+        gradient.addColorStop(1, "rgba(52, 152, 219, 0.1)");
+        return gradient;
+      };
+    }
+
     this.chart.update();
   }
 
   updateLanguage() {
     const lang = localStorage.getItem("preferredLanguage");
-
-    this.chart.options.plugins.title.text = lang === "pl" ? "HISTORIA SALDA" : "BALANCE HISTORY";
 
     this.chart.options.scales.x.title.text = lang === "pl" ? "Data" : "Date";
     this.chart.options.scales.y.title.text =

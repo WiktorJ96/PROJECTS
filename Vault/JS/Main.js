@@ -1,12 +1,14 @@
 import TransactionManager from "./TransactionManager.js";
 import ChartManager from "./ChartManager.js";
 import UIManager from "./UIManager.js";
+import ThemeManager from "./ThemeManager.js";
 import { PWAManager } from "./PWAManager.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const transactionManager = new TransactionManager();
   const chartManager = new ChartManager(transactionManager);
   const uiManager = new UIManager(transactionManager, chartManager);
+  const themeManager = new ThemeManager();
   const pwaManager = new PWAManager();
 
   function setLanguage(lang) {
@@ -21,8 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
   uiManager.updateBalance();
   chartManager.updateChart();
 
-  document.getElementById("lang-pl").addEventListener("click", () => setLanguage("pl"));
-  document.getElementById("lang-en").addEventListener("click", () => setLanguage("en"));
+  document
+    .getElementById("lang-pl")
+    .addEventListener("click", () => setLanguage("pl"));
+  document
+    .getElementById("lang-en")
+    .addEventListener("click", () => setLanguage("en"));
 
   window.addEventListener("appinstalled", (evt) => {
     console.log("Aplikacja została zainstalowana", evt);
@@ -43,5 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("storage", function (e) {
     console.log("Zmiana w storage:", e);
+    if (e.key === "theme") {
+      themeManager.setTheme(e.newValue);
+      chartManager.updateChart();
+    }
   });
 });

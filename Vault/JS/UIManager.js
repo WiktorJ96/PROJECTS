@@ -5,13 +5,8 @@ class UIManager {
     this.language = localStorage.getItem("preferredLanguage");
     this.initializeElements();
     this.initializeEventListeners();
-    this.root = document.documentElement;
     this.body = document.body;
     this.updateLanguage();
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      this.setTheme(savedTheme === "dark");
-    }
 
     window.addEventListener("languageChange", () => {
       this.updateLanguage();
@@ -22,16 +17,16 @@ class UIManager {
 
   initializeElements() {
     const selectors = {
-      income: ".income-area",
-      outcome: ".expenses-area",
-      money: ".available-money",
-      addTransactionPanel: ".add-transaction-panel",
-      addBtn: ".add-transaction",
-      saveBtn: ".save",
+      income: "#income-area",
+      outcome: "#expenses-area",
+      money: "#available-money",
+      addTransactionPanel: "#addTransactionModal",
+      addBtn: "#add-transaction",
+      saveBtn: "#saveTransaction",
       cancelBtn: ".cancel",
-      deleteAllBtn: ".delete-all",
-      lightBtn: ".light",
-      darkBtn: ".dark",
+      deleteAllBtn: "#delete-all",
+      lightBtn: "#light-mode",
+      darkBtn: "#dark-mode",
       nameInput: "#name",
       amountInput: "#amount",
       transactionTypeSelect: "#transaction-type",
@@ -43,8 +38,8 @@ class UIManager {
       cancelDeleteBtn: "#cancelDelete",
       confirmDeleteTransactionBtn: "#confirmDeleteTransaction",
       cancelDeleteTransactionBtn: "#cancelDeleteTransaction",
-      incomeTitle: ".income-area h3",
-      expensesTitle: ".expenses-area h3",
+      incomeTitle: "#income-tab",
+      expensesTitle: "#expenses-tab",
     };
 
     Object.entries(selectors).forEach(([key, selector]) => {
@@ -55,11 +50,8 @@ class UIManager {
   initializeEventListeners() {
     const eventMap = {
       addBtn: () => this.showPanel(),
-      cancelBtn: () => this.closePanel(),
       saveBtn: () => this.saveTransaction(),
       deleteAllBtn: () => this.showDeleteAllModal(),
-      lightBtn: () => this.setLightTheme(),
-      darkBtn: () => this.setDarkTheme(),
       transactionTypeSelect: () => this.handleTransactionTypeChange(),
       confirmDeleteBtn: () => this.deleteAllTransactions(),
       cancelDeleteBtn: () => this.hideDeleteAllModal(),
@@ -77,29 +69,48 @@ class UIManager {
         console.warn(`Element ${elementKey} not found`);
       }
     });
+
+    this.addTransactionPanel.addEventListener("hidden.bs.modal", () => {
+      this.clearInputs();
+    });
   }
 
   showPanel() {
-    this.addTransactionPanel.style.display = "flex";
+    const modal = new bootstrap.Modal(this.addTransactionPanel);
+    modal.show();
     this.handleTransactionTypeChange();
   }
 
   closePanel() {
-    this.addTransactionPanel.style.display = "none";
+    const modal = bootstrap.Modal.getInstance(this.addTransactionPanel);
+    if (modal) {
+      modal.hide();
+    }
     this.clearInputs();
   }
 
   handleTransactionTypeChange() {
     const isIncome = this.transactionTypeSelect.value === "income";
-    this.incomeCategorySelect.style.display = isIncome ? "block" : "none";
-    this.expenseCategorySelect.style.display = isIncome ? "none" : "block";
+    this.incomeCategorySelect.closest(".mb-3").style.display = isIncome
+      ? "block"
+      : "none";
+    this.expenseCategorySelect.closest(".mb-3").style.display = isIncome
+      ? "none"
+      : "block";
   }
 
   saveTransaction() {
-    if (this.nameInput.value && this.amountInput.value && this.transactionTypeSelect.value) {
+    if (
+      this.nameInput.value &&
+      this.amountInput.value &&
+      this.transactionTypeSelect.value
+    ) {
       const isIncome = this.transactionTypeSelect.value === "income";
-      const categorySelect = isIncome ? this.incomeCategorySelect : this.expenseCategorySelect;
-      const category = categorySelect.options[categorySelect.selectedIndex].text;
+      const categorySelect = isIncome
+        ? this.incomeCategorySelect
+        : this.expenseCategorySelect;
+      const category =
+        categorySelect.options[categorySelect.selectedIndex].text;
 
       const amount = isIncome
         ? Math.abs(parseFloat(this.amountInput.value))
@@ -116,7 +127,9 @@ class UIManager {
       this.chartManager.updateChart();
       this.closePanel();
     } else {
-      alert(this.language === "pl" ? "Wprowadź wszystkie dane" : "Enter all data");
+      alert(
+        this.language === "pl" ? "Wprowadź wszystkie dane" : "Enter all data"
+      );
     }
   }
 
@@ -164,20 +177,18 @@ class UIManager {
   `;
 
     const deleteButton = newTransactionElement.querySelector(".delete");
-    deleteButton.addEventListener("click", () => this.showDeleteTransactionModal(transaction.id));
+    deleteButton.addEventListener("click", () =>
+      this.showDeleteTransactionModal(transaction.id)
+    );
 
-    (transaction.amount > 0 ? this.income : this.outcome).appendChild(newTransactionElement);
+    (transaction.amount > 0 ? this.income : this.outcome).appendChild(
+      newTransactionElement
+    );
   }
 
   clearTransactionsDisplay() {
-    const incomeTitle = this.income.querySelector("h3");
-    const outcomeTitle = this.outcome.querySelector("h3");
-
     this.income.innerHTML = "";
     this.outcome.innerHTML = "";
-
-    if (incomeTitle) this.income.appendChild(incomeTitle);
-    if (outcomeTitle) this.outcome.appendChild(outcomeTitle);
   }
 
   updateBalance() {
@@ -217,72 +228,6 @@ class UIManager {
     );
   }
 
-  setTheme(isDark) {
-    const theme = isDark ? "dark" : "light";
-    const colors = {
-      light: { first: "#F5F7FA", second: "#1E2A3A", border: "rgba(0, 0, 0, 0.15)" },
-      dark: { first: "#222", second: "#F9F9F9", border: "rgba(255, 255, 255, 0.4)" },
-    };
-
-    Object.entries(colors[theme]).forEach(([key, value]) => {
-      this.root.style.setProperty(`--${key}-color`, value);
-    });
-
-    this.body.style.backgroundColor = `var(--${theme}-bg-primary)`;
-    this.body.style.backgroundImage = this.getBackgroundImage(theme);
-    this.body.style.boxShadow = this.getBoxShadow(theme);
-
-    this.updateBodyAfterStyle(theme);
-    this.chartManager.setTheme(isDark);
-    this.body.classList.toggle("dark-theme", isDark);
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-  }
-
-  setLightTheme() {
-    this.setTheme(false);
-  }
-
-  setDarkTheme() {
-    this.setTheme(true);
-  }
-
-  getBackgroundImage(theme) {
-    return `
-      repeating-linear-gradient(0deg, 
-          var(--${theme}-bg-primary), 
-          var(--${theme}-bg-primary) 15px, 
-          var(--${theme}-bg-secondary) 15px, 
-          var(--${theme}-bg-secondary) 16px
-      ),
-      repeating-linear-gradient(90deg, 
-          var(--${theme}-bg-primary), 
-          var(--${theme}-bg-primary) 15px, 
-          var(--${theme}-bg-secondary) 15px, 
-          var(--${theme}-bg-secondary) 16px
-      )
-    `;
-  }
-
-  getBoxShadow(theme) {
-    return `
-      inset 0 0 50px var(--${theme}-shadow-strong),
-      inset 0 0 100px var(--${theme}-shadow-light)
-    `;
-  }
-
-  updateBodyAfterStyle(theme) {
-    const style = document.createElement("style");
-    style.textContent = `
-      body::after {
-          background: radial-gradient(circle at 50% 50%, 
-              var(--${theme}-highlight) 0%, 
-              transparent 60%
-          );
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
   clearInputs() {
     [this.nameInput, this.amountInput].forEach((input) => (input.value = ""));
     this.transactionTypeSelect.selectedIndex = 0;
@@ -296,35 +241,27 @@ class UIManager {
   }
 
   showDeleteAllModal() {
-    if (this.deleteAllModal) {
-      this.deleteAllModal.classList.add("show");
-      document.body.style.overflow = "hidden";
-    } else {
-      console.error("Delete all modal not found");
-    }
+    const modal = new bootstrap.Modal(this.deleteAllModal);
+    modal.show();
   }
 
   hideDeleteAllModal() {
-    if (this.deleteAllModal) {
-      this.deleteAllModal.classList.remove("show");
-      document.body.style.overflow = "";
+    const modal = bootstrap.Modal.getInstance(this.deleteAllModal);
+    if (modal) {
+      modal.hide();
     }
   }
 
   showDeleteTransactionModal(id) {
-    if (this.deleteTransactionModal) {
-      this.deleteTransactionModal.classList.add("show");
-      this.deleteTransactionModal.dataset.transactionId = id;
-      document.body.style.overflow = "hidden"; 
-    } else {
-      console.error("Delete transaction modal not found");
-    }
+    this.deleteTransactionModal.dataset.transactionId = id;
+    const modal = new bootstrap.Modal(this.deleteTransactionModal);
+    modal.show();
   }
 
   hideDeleteTransactionModal() {
-    if (this.deleteTransactionModal) {
-      this.deleteTransactionModal.classList.remove("show");
-      document.body.style.overflow = ""; 
+    const modal = bootstrap.Modal.getInstance(this.deleteTransactionModal);
+    if (modal) {
+      modal.hide();
     }
   }
 }
