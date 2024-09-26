@@ -28,10 +28,19 @@
   <!-- Vault door (shield shape) -->
   <path d="M50 20 L75 35 L75 70 L50 85 L25 70 L25 35 Z" fill="url(#door-gradient)" filter="url(#shadow)"/>
   
-  <!-- Lock mechanism -->
-  <circle cx="50" cy="52" r="15" fill="none" stroke="#0d9488" stroke-width="3"/>
-  <path d="M50 42 L50 52 L60 58" stroke="#0d9488" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- New abstract lock mechanism -->
+  <circle cx="50" cy="52" r="18" fill="#0d9488" opacity="0.1"/>
   
-  <!-- Subtle shine -->
-  <path d="M40 25 Q50 30 60 25" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <!-- Central diamond -->
+  <rect x="45" y="47" width="10" height="10" fill="#0d9488" transform="rotate(45 50 52)"/>
+  
+  <!-- Surrounding lines -->
+  <line x1="35" y1="52" x2="65" y2="52" stroke="#0d9488" stroke-width="2"/>
+  <line x1="50" y1="37" x2="50" y2="67" stroke="#0d9488" stroke-width="2"/>
+  
+  <!-- Corner accents -->
+  <circle cx="35" cy="37" r="1.5" fill="#C0C0C0"/>
+  <circle cx="65" cy="37" r="1.5" fill="#C0C0C0"/>
+  <circle cx="35" cy="67" r="1.5" fill="#C0C0C0"/>
+  <circle cx="65" cy="67" r="1.5" fill="#C0C0C0"/>
 </svg>

@@ -158,25 +158,34 @@ class UIManager {
 
   addTransactionToDOM(transaction) {
     const newTransactionElement = document.createElement("div");
-    newTransactionElement.classList.add("transaction");
+    newTransactionElement.classList.add("transaction-item");
+    newTransactionElement.classList.add(
+      transaction.amount > 0 ? "income-item" : "expense-item"
+    );
     newTransactionElement.setAttribute("id", transaction.id);
 
     const categoryIcon = this.getCategoryIcon(transaction.category);
     const categoryName = transaction.category;
 
-    newTransactionElement.innerHTML = `                   
-    <p class="transaction-name">
-      <span class="category-icon">${categoryIcon}</span>
-      <span class="transaction-title">${transaction.name}</span>
-      <span class="transaction-category" data-lang-key="${categoryName}">(${categoryName})</span>
-    </p>
-    <p class="transaction-amount ${transaction.amount > 0 ? "income" : "expense"}">
+    newTransactionElement.innerHTML = `
+    <div class="transaction-details">
+      <div class="transaction-name">
+        <span class="category-icon">${categoryIcon}</span>
+        <span class="transaction-title">${transaction.name}</span>
+      </div>
+      <div class="transaction-category" data-lang-key="${categoryName}">${categoryName}</div>
+    </div>
+    <div class="transaction-amount ${transaction.amount > 0 ? "income" : "expense"}">
       ${Math.abs(transaction.amount).toFixed(2)}${this.transactionManager.currencySymbol}
-      <button class="delete"><i class="fas fa-times"></i></button>
-    </p>
+    </div>
+    <button class="delete-transaction" aria-label="Usuń transakcję">
+      <i class="fas fa-times"></i>
+    </button>
   `;
 
-    const deleteButton = newTransactionElement.querySelector(".delete");
+    const deleteButton = newTransactionElement.querySelector(
+      ".delete-transaction"
+    );
     deleteButton.addEventListener("click", () =>
       this.showDeleteTransactionModal(transaction.id)
     );

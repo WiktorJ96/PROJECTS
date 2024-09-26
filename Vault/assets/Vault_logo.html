@@ -1,64 +1,60 @@
-<!doctype html>
-<html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <title>Vault Logo</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
     <style>
-      body,
-      html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f0f0f0;
-        font-family: Arial, sans-serif;
-      }
+        :root {
+            --primary-color: hsla(145, 63%, 42%, 1);
+            --text-color: hsl(0, 0%, 100%);
+        }
 
-      .logo-container {
-        text-align: center;
-      }
+        body {
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
 
-      h1 {
-        font-size: 68px;
-        margin: 0;
-      }
+        .logo {
+            display: flex;
+            align-items: center;
+            background-color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
 
-      .gradient-icon {
-        background: linear-gradient(135deg, #ffd700, #b22222);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: 68px;
-      }
+        .logo:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
 
-      .gradient-text {
-        background: linear-gradient(135deg, #ffd700, #b22222);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: 68px;
-      }
+        .logo-icon {
+            color: var(--text-color);
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            letter-spacing: -1px;
+            margin: 0;
+        }
     </style>
-  </head>
-  <body>
-    <div class="logo-container">
-      <h1>
-        <i class="fas fa-vault gradient-icon" aria-hidden="true"></i>
-        <span class="gradient-text">V</span>ault
-      </h1>
+</head>
+<body>
+    <div class="logo">
+        <img src="vault_icon.svg" alt="" class=" me-1 mb-3 animate__animated animate__bounceIn" width="110px" height="110px">
+        <h1 class="logo-text">Vault</h1>
     </div>
-  </body>
+</body>
 </html>

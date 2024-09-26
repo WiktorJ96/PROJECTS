@@ -958,17 +958,12 @@ h2 {
 }
 
 /* VAULT */
-.gradient-icon {
-  background: linear-gradient(135deg, #ffd700, #b22222);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 68px;
+.text{
+  font-size: 38px;
 }
-.gradient-text {
-  background: linear-gradient(135deg, #ffd700, #b22222);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 68px;
+.h1-Vault{
+  display: flex;
+  flex-direction: row;
 }
 
 .flip-card-back h1 {
