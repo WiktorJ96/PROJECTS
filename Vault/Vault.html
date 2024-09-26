@@ -31,30 +31,32 @@
     }
     </script>
 </head>
+<style>
+    .btn i {
+  pointer-events: none;
+}
+</style>
 <body data-page="Vault">
-    <header class="header-bg text-white py-4 animate__animated animate__fadeIn">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h1 class="display-4 mb-0">
-                        <!-- <i class="fas fa-vault me-3 animate__animated animate__bounceIn"></i> -->
-                        <img src="./assets/vault_icon.svg" alt="" class=" mb-3 animate__animated animate__bounceIn" width="90px" height="90px">
-                        Vault
-                    </h1>
-                    <p class="lead mt-2" data-lang-key="header_subtitle">Twój osobisty menedżer finansów.</p>
-                </div>
-                <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                    <div class="btn-group" role="group" aria-label="Wybór stylu">
-                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
-    <button id="theme-toggle" class="btn btn-outline-light" aria-label="Toggle theme">
-        <i class="fas fa-moon"></i>
-    </button>
-</div>
+    <header class="header-bg text-white py-3 py-md-5 animate__animated animate__fadeIn">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-9 col-sm-10 col-md-8">
+                <div class="d-flex align-items-center">
+                    <img src="./assets/vault_icon.svg" alt="" class="me-2 me-md-3 animate__animated animate__bounceIn" width="80" height="80">
+                    <div>
+                        <h1 class="h1 h1-md mb-0">Vault</h1>
+                        <p class="small mb-0 d-sm-block" data-lang-key="header_subtitle">Twój osobisty menedżer finansów.</p>
                     </div>
                 </div>
             </div>
+            <div class="col-3 col-sm-2 col-md-4 text-end">
+                <button id="theme-toggle" class="btn btn-outline-light btn-sm" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </div>
-    </header>
+    </div>
+</header>
 
     <main class="container my-5 animate__animated animate__fadeIn">
         <div class="row mb-4">
@@ -64,10 +66,10 @@
         <h2 class="card-title h4 mb-3" id="available-funds-title" data-lang-key="options_section_title">Dostępne środki</h2>
         <p class="card-text available-money flex-grow-1 d-flex align-items-center justify-content-center" id="available-money">0 PLN</p>
         <div class="mt-auto d-flex flex-column align-items-center">
-            <button class="btn btn-primary w-100 mb-2 animate__animated animate__pulse animate__infinite add-transaction" id="add-transaction" data-lang-key="add_transaction_button">
+            <button class="btn1 btn btn-primary w-100 mb-2 animate__animated animate__pulse animate__infinite add-transaction" id="add-transaction" data-lang-key="add_transaction_button">
                 <i class="fas fa-plus me-2"></i> Dodaj transakcję
             </button>
-            <button class="btn btn-danger w-100 custom-tooltip delete-all" id="delete-all" data-lang-key="delete_all_button">
+            <button class="btn1 btn btn-danger w-100 custom-tooltip delete-all" id="delete-all" data-lang-key="delete_all_button">
                 <i class="far fa-trash-alt me-2"></i> Usuń wszystko
                 <span class="tooltiptext">Usuń wszystkie transakcje</span>
             </button>
@@ -159,10 +161,12 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal" data-lang-key="cancel">Anuluj</button>
+                <div class="modal-footer d-flex justify-content-end">
+                <div class="d-flex flex-row">
+                    <button type="button" class="btn btn-secondary cancel me-2" data-bs-dismiss="modal" data-lang-key="cancel">Anuluj</button>
                     <button type="button" class="btn btn-primary save" id="saveTransaction" data-lang-key="add">Dodaj</button>
                 </div>
+            </div>
             </div>
         </div>
     </div>

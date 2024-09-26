@@ -81,6 +81,8 @@ class ChartManager {
             display: false,
           },
           legend: {
+            position: "top",
+            align: "center",
             onClick: (e, legendItem) => {
               const index = legendItem.datasetIndex;
               const ci = this.chart;
@@ -214,19 +216,19 @@ class ChartManager {
   }
 
   setTheme(isDark) {
-    const textColor = isDark ? "#ecf0f1" : "#34495e"; 
+    const textColor = isDark ? "#ecf0f1" : "#34495e";
     const gridColor = isDark
       ? "rgba(236, 240, 241, 0.1)"
       : "rgba(52, 73, 94, 0.1)";
 
-    this.chart.options.plugins.legend.labels.color = textColor; 
-    this.chart.options.scales.x.title.color = textColor; 
-    this.chart.options.scales.y.title.color = textColor; 
-    this.chart.options.scales.x.ticks.color = textColor; 
-    this.chart.options.scales.y.ticks.color = textColor; 
+    this.chart.options.plugins.legend.labels.color = textColor;
+    this.chart.options.scales.x.title.color = textColor;
+    this.chart.options.scales.y.title.color = textColor;
+    this.chart.options.scales.x.ticks.color = textColor;
+    this.chart.options.scales.y.ticks.color = textColor;
 
-    this.chart.options.scales.x.grid.color = gridColor; 
-    this.chart.options.scales.y.grid.color = gridColor; 
+    this.chart.options.scales.x.grid.color = gridColor;
+    this.chart.options.scales.y.grid.color = gridColor;
 
     if (isDark) {
       this.chart.data.datasets[0].backgroundColor = (ctx) => {
