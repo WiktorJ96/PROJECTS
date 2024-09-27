@@ -36,13 +36,13 @@ document.addEventListener("DOMContentLoaded", function () {
   function setLanguage(lang) {
     localStorage.setItem("preferredLanguage", lang);
     loadTranslations(lang);
-    updateLanguageButtons(lang); // Dodajemy wywołanie tej funkcji, aby ustawić aktywny przycisk
+    updateLanguageButtons(lang);
   }
 
   function loadPreferredLanguage() {
     const lang = localStorage.getItem("preferredLanguage") || "pl";
     loadTranslations(lang);
-    updateLanguageButtons(lang); // Dodajemy wywołanie tej funkcji, aby ustawić aktywny przycisk przy ładowaniu strony
+    updateLanguageButtons(lang);
   }
 
   function translatePage(lang) {
@@ -93,15 +93,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updateLanguageButtons(lang) {
-    // Pobieramy przyciski
     const langPl = document.getElementById("lang-pl");
     const langEn = document.getElementById("lang-en");
 
-    // Najpierw usuwamy klasę 'active' z obu przycisków
     if (langPl) langPl.classList.remove("active");
     if (langEn) langEn.classList.remove("active");
 
-    // Następnie dodajemy klasę 'active' do przycisku w zależności od wybranego języka
     if (lang === "pl" && langPl) {
       langPl.classList.add("active");
     } else if (lang === "en" && langEn) {
