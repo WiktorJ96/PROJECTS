@@ -1,4 +1,4 @@
-const CACHE_NAME = "budget-tracker-cache-v1.0.3";
+const CACHE_NAME = "budget-tracker-cache-v1.0.2";
 const ASSETS_TO_CACHE = [
   "/",
   "./Vault.html",
@@ -6,7 +6,8 @@ const ASSETS_TO_CACHE = [
   "./JS/Main.js",
   "../translations/Vault-pl.json",
   "../translations/Vault-en.json",
-  
+  "./assets/vault_icon_manifest.svg",
+  "./assets/Vault_icon.png",
   "./JS/ChartManager.js",
   "./JS/TransactionManager.js",
   "./JS/UIManager.js",

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#053f3c"/>
+      <stop offset="50%" style="stop-color:#065f46"/>
+      <stop offset="100%" style="stop-color:#0d9488"/>
+    </linearGradient>
+    <linearGradient id="door-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e2e8f0"/>
+      <stop offset="100%" style="stop-color:#94a3b8"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+      <feOffset dx="0" dy="10" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/> 
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background hexagon -->
+  <path d="M256 26 L445 128 L445 384 L256 486 L67 384 L67 128 Z" fill="url(#bg-gradient)" filter="url(#shadow)"/>
+  
+  <!-- Vault door (shield shape) -->
+  <path d="M256 102 L384 179 L384 358 L256 435 L128 358 L128 179 Z" fill="url(#door-gradient)" filter="url(#shadow)"/>
+  
+  <!-- New abstract lock mechanism -->
+  <circle cx="256" cy="266" r="92" fill="#0d9488" opacity="0.1"/>
+  
+  <!-- Central diamond -->
+  <rect x="230" y="240" width="52" height="52" fill="#0d9488" transform="rotate(45 256 266)"/>
+  
+  <!-- Surrounding lines -->
+  <line x1="179" y1="266" x2="333" y2="266" stroke="#0d9488" stroke-width="10"/>
+  <line x1="256" y1="189" x2="256" y2="343" stroke="#0d9488" stroke-width="10"/>
+  
+  <!-- Corner accents -->
+  <circle cx="179" cy="189" r="7.5" fill="#C0C0C0"/>
+  <circle cx="333" cy="189" r="7.5" fill="#C0C0C0"/>
+  <circle cx="179" cy="343" r="7.5" fill="#C0C0C0"/>
+  <circle cx="333" cy="343" r="7.5" fill="#C0C0C0"/>
+</svg>

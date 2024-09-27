@@ -178,6 +178,10 @@ body {
   z-index: -1;
 }
 
+.col-md-6 button.active {
+  color: #222;
+}
+
 #available-money {
   font-size: 3.2rem;
   font-weight: 700;
@@ -392,14 +396,13 @@ body {
     align-self: flex-end;
     margin-top: 10px;
   }
-  .btn1{
+  .btn1 {
     min-width: 80%;
   }
 }
 
-@media (max-height: 450px){
+@media (max-height: 450px) {
   .btn1 {
     min-width: 95%;
   }
 }
-
