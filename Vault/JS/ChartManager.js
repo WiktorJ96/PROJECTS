@@ -4,6 +4,7 @@ class ChartManager {
     this.chart = null;
     this.initializeChart();
     this.setupLanguageChangeListener();
+    this.setupResizeListener();
     window.addEventListener("themeChange", (event) => {
       const isDark = event.detail.theme === "dark";
       this.setTheme(isDark);
@@ -93,13 +94,13 @@ class ChartManager {
             },
             labels: {
               font: {
-                size: 12,
+                size: this.getResponsiveFontSize(12),
                 family: "'Poppins', sans-serif",
                 weight: "600",
               },
               color: "#34495e",
               usePointStyle: true,
-              padding: 15,
+              padding: this.getResponsivePadding(15),
             },
             onHover: (event, legendItem) => {
               event.native.target.style.cursor = "pointer";
@@ -108,12 +109,12 @@ class ChartManager {
           tooltip: {
             backgroundColor: "rgba(52, 73, 94, 0.8)",
             titleFont: {
-              size: 14,
+              size: this.getResponsiveFontSize(14),
               weight: "600",
               family: "'Poppins', sans-serif",
             },
             bodyFont: {
-              size: 12,
+              size: this.getResponsiveFontSize(12),
               family: "'Poppins', sans-serif",
             },
             callbacks: {
@@ -139,7 +140,7 @@ class ChartManager {
               display: true,
               text: "Date",
               font: {
-                size: 14,
+                size: this.getResponsiveFontSize(14),
                 weight: "600",
                 family: "'Poppins', sans-serif",
               },
@@ -149,10 +150,11 @@ class ChartManager {
               color: "#34495e",
               font: {
                 family: "'Poppins', sans-serif",
-                size: 10,
+                size: this.getResponsiveFontSize(10),
               },
               maxRotation: 0,
               minRotation: 0,
+              maxTicksLimit: this.getResponsiveTicksLimit(),
             },
             grid: {
               display: false,
@@ -163,7 +165,7 @@ class ChartManager {
             title: {
               display: true,
               font: {
-                size: 14,
+                size: this.getResponsiveFontSize(14),
                 weight: "600",
                 family: "'Poppins', sans-serif",
               },
@@ -173,7 +175,7 @@ class ChartManager {
               color: "#34495e",
               font: {
                 family: "'Poppins', sans-serif",
-                size: 10,
+                size: this.getResponsiveFontSize(10),
               },
               callback: (value) => {
                 return new Intl.NumberFormat(undefined, {
@@ -198,6 +200,36 @@ class ChartManager {
         responsiveAnimationDuration: 300,
       },
     });
+  }
+
+  getResponsiveFontSize(baseSize) {
+    const width = window.innerWidth;
+    if (width < 768) {
+      return baseSize * 0.8;
+    } else if (width < 1024) {
+      return baseSize * 0.9;
+    }
+    return baseSize;
+  }
+
+  getResponsivePadding(basePadding) {
+    const width = window.innerWidth;
+    if (width < 768) {
+      return basePadding * 0.6;
+    } else if (width < 1024) {
+      return basePadding * 0.8;
+    }
+    return basePadding;
+  }
+
+  getResponsiveTicksLimit() {
+    const width = window.innerWidth;
+    if (width < 768) {
+      return 4;
+    } else if (width < 1024) {
+      return 6;
+    }
+    return 8;
   }
 
   updateChart() {
@@ -253,7 +285,6 @@ class ChartManager {
 
     this.chart.options.scales.x.title.text = lang === "pl" ? "Data" : "Date";
 
-
     this.chart.data.datasets[0].label = lang === "pl" ? "Saldo" : "Balance";
     this.chart.data.datasets[1].label = lang === "pl" ? "Przychody" : "Income";
     this.chart.data.datasets[2].label = lang === "pl" ? "Wydatki" : "Expenses";
@@ -265,6 +296,42 @@ class ChartManager {
     window.addEventListener("languageChange", () => {
       this.updateLanguage();
     });
+  }
+
+  setupResizeListener() {
+    window.addEventListener("resize", () => {
+      this.updateResponsiveSettings();
+    });
+  }
+
+  updateResponsiveSettings() {
+    this.chart.options.plugins.legend.labels.font.size =
+      this.getResponsiveFontSize(12);
+    this.chart.options.plugins.legend.labels.padding =
+      this.getResponsivePadding(15);
+    this.chart.options.plugins.tooltip.titleFont.size =
+      this.getResponsiveFontSize(14);
+    this.chart.options.plugins.tooltip.bodyFont.size =
+      this.getResponsiveFontSize(12);
+    this.chart.options.scales.x.title.font.size =
+      this.getResponsiveFontSize(14);
+    this.chart.options.scales.x.ticks.font.size =
+      this.getResponsiveFontSize(10);
+    this.chart.options.scales.y.title.font.size =
+      this.getResponsiveFontSize(14);
+    this.chart.options.scales.y.ticks.font.size =
+      this.getResponsiveFontSize(10);
+    this.chart.options.scales.x.ticks.maxTicksLimit =
+      this.getResponsiveTicksLimit();
+
+    const width = window.innerWidth;
+    if (width < 768) {
+      this.chart.options.plugins.legend.position = "bottom";
+    } else {
+      this.chart.options.plugins.legend.position = "top";
+    }
+
+    this.chart.update();
   }
 }
 
