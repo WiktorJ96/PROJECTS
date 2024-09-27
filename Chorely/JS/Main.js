@@ -11,9 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.pdfGenerator = pdfGenerator;
 
-  const preferredLanguage = localStorage.getItem("preferredLanguage") || "pl";
-  setLanguage(preferredLanguage);
-
   const saveBtn = document.querySelector(".save-btn");
   if (saveBtn) {
     saveBtn.addEventListener("click", () => pdfGenerator.saveTasksToPDF());

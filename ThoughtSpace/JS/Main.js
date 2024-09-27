@@ -8,9 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.noteApp = new NoteApp();
 });
 
-const preferredLanguage = localStorage.getItem("preferredLanguage") || "pl";
-setLanguage(preferredLanguage);
-
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker

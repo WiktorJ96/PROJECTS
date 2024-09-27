@@ -697,8 +697,16 @@ footer::before {
 
 footer::after {
   z-index: 2;
-  background: radial-gradient(circle at 25% 35%, rgba(255, 255, 255, 0.2) 0%, transparent 35%),
-    radial-gradient(circle at 75% 65%, rgba(255, 255, 255, 0.2) 0%, transparent 35%);
+  background: radial-gradient(
+      circle at 25% 35%,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 75% 65%,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 35%
+    );
   box-shadow:
     0 -5px 15px rgba(0, 0, 0, 0.1),
     inset 0 0 30px rgba(0, 0, 0, 0.2),
@@ -776,6 +784,15 @@ footer::after {
   box-shadow:
     0 2px 4px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.footer_buttons button.active {
+  background-color: #8b7b5a;
+  color: #ffffff;
+  box-shadow:
+    0 6px 10px rgba(0, 0, 0, 0.15),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 .footer_buttons button i {

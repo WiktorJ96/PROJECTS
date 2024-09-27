@@ -40,7 +40,7 @@ body::-webkit-scrollbar {
 }
 
 .language-switch button:hover {
-  background-color: hsla(0, 0%, 100%, 0.92);
+  background-color: #fff;
   color: #333;
 }
 
@@ -84,6 +84,19 @@ body::-webkit-scrollbar {
   position: relative;
   overflow: hidden;
   order: 2;
+}
+
+.language-switch button.active {
+  background-color: #fff;
+  color: #222;
+  font-weight: bold;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.language-switch button:active {
+  transform: translateY(2px);
+  box-shadow: none;
 }
 
 .btn {
@@ -958,10 +971,10 @@ h2 {
 }
 
 /* VAULT */
-.text{
+.text {
   font-size: 38px;
 }
-.h1-Vault{
+.h1-Vault {
   display: flex;
   flex-direction: row;
 }

@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.dispatchEvent(new Event("languageChange"));
   }
 
-  const preferredLanguage = localStorage.getItem("preferredLanguage") || "pl";
+  const preferredLanguage = localStorage.getItem("preferredLanguage");
   setLanguage(preferredLanguage);
 
   uiManager.updateTransactionsDisplay();

@@ -7,6 +7,23 @@
   font-family: "Poppins", sans-serif;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body.loading {
+  overflow: hidden;
+}
+
+body.loaded {
+  overflow: auto;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -102,7 +119,11 @@ body {
   left: 5px;
   width: 10px;
   height: 10px;
-  background: radial-gradient(circle at 30% 30%, #ffffff, rgba(255, 255, 255, 0.5));
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ffffff,
+    rgba(255, 255, 255, 0.5)
+  );
   border-radius: 50%;
   opacity: 0.8;
   animation: dewdropMove 3s ease-in-out infinite;
@@ -385,12 +406,20 @@ h1 {
 }
 
 .oauth-buttons button.facebook-login {
-  background-image: linear-gradient(to right, hsla(221, 44%, 41%, 0.9), hsla(220, 44%, 51%, 0.9));
+  background-image: linear-gradient(
+    to right,
+    hsla(221, 44%, 41%, 0.9),
+    hsla(220, 44%, 51%, 0.9)
+  );
   color: white;
 }
 
 .oauth-buttons .custom-google-signin {
-  background-image: linear-gradient(to right, hsla(5, 81%, 56%, 0.9), hsla(45, 90%, 63%, 0.9));
+  background-image: linear-gradient(
+    to right,
+    hsla(5, 81%, 56%, 0.9),
+    hsla(45, 90%, 63%, 0.9)
+  );
   color: white;
   display: flex;
   justify-content: center;
@@ -456,6 +485,13 @@ footer {
 .footer_buttons button:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
+
+.footer_buttons button.active {
+  background-color: #4caf50;
+  color: #ffffff;
+  border-color: #388e3c;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 footer p {
