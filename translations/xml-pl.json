@@ -1,0 +1,16 @@
+{
+  "page_title": "Umiejętności XML",
+  "basics_title": "Podstawy XML:",
+  "basics_description": "Definicja XML, cele i zastosowania XML, struktura pliku XML, zasady poprawności składniowej",
+  "structure_title": "Struktura i składnia XML:",
+  "structure_description": "Elementy, atrybuty, znaczniki, poprawność składniowa, tworzenie poprawnych dokumentów XML",
+  "namespaces_title": "Przestrzenie nazw:",
+  "namespaces_description": "XMLNS - przestrzenie nazw w XML, zastosowanie i implementacja",
+  "tools_title": "Narzędzia XML:",
+  "tools_description": "Praca z edytorami XML, w szczególności Liquid XML Studio",
+  "dtd_title": "DTD (Document Type Definition):",
+  "dtd_description": "Wprowadzenie do DTD, deklarowanie elementów i atrybutów w DTD",
+  "advanced_dtd_title": "Zaawansowane koncepcje DTD:",
+  "advanced_dtd_description": "Encje w DTD, FPI (Formal Public Identifier), zastosowanie DTD w praktyce",
+  "difficulty_easy": "Łatwy"
+}

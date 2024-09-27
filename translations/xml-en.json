@@ -1,0 +1,16 @@
+{
+  "page_title": "XML Skills",
+  "basics_title": "XML Basics:",
+  "basics_description": "XML definition, purposes and applications of XML, XML file structure, syntax correctness rules",
+  "structure_title": "XML Structure and Syntax:",
+  "structure_description": "Elements, attributes, tags, syntactic correctness, creating valid XML documents",
+  "namespaces_title": "Namespaces:",
+  "namespaces_description": "XMLNS - XML namespaces, application and implementation",
+  "tools_title": "XML Tools:",
+  "tools_description": "Working with XML editors, especially Liquid XML Studio",
+  "dtd_title": "DTD (Document Type Definition):",
+  "dtd_description": "Introduction to DTD, declaring elements and attributes in DTD",
+  "advanced_dtd_title": "Advanced DTD Concepts:",
+  "advanced_dtd_description": "Entities in DTD, FPI (Formal Public Identifier), practical application of DTD",
+  "difficulty_easy": "Easy"
+}
