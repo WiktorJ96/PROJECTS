@@ -162,7 +162,6 @@ class ChartManager {
             beginAtZero: true,
             title: {
               display: true,
-              text: `Balance (${this.transactionManager.currencyCode})`,
               font: {
                 size: 14,
                 weight: "600",
@@ -253,10 +252,7 @@ class ChartManager {
     const lang = localStorage.getItem("preferredLanguage");
 
     this.chart.options.scales.x.title.text = lang === "pl" ? "Data" : "Date";
-    this.chart.options.scales.y.title.text =
-      lang === "pl"
-        ? `Saldo (${this.transactionManager.currencyCode})`
-        : `Balance (${this.transactionManager.currencyCode})`;
+
 
     this.chart.data.datasets[0].label = lang === "pl" ? "Saldo" : "Balance";
     this.chart.data.datasets[1].label = lang === "pl" ? "Przychody" : "Income";
