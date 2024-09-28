@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const paths = [
       `../translations/${page}-${lang}.json`,
       `./translations/${page}-${lang}.json`,
-      `translations/${page}-${lang}.json`
+      `/translations/${page}-${lang}.json`
     ];
 
     const fetchPromises = paths.map((path) =>
