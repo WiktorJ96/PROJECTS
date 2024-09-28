@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta name="description"
     content="Oblicz swoje dzienne zapotrzebowanie kaloryczne na podstawie płci, wagi, wzrostu, wieku, poziomu aktywności i stylu żywienia.">
   <meta name="keywords"
@@ -11,11 +11,11 @@
   <meta name="author" content="Wiktor Jurkowski">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
   <link rel="stylesheet" href="NutriPulse.css">
   <title data-lang-key="title">NutriPulse</title>
-  <link rel="icon" href="./NutriPulse_icon.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/NutriPulse_icon.svg" type="image/svg+xml">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -26,12 +26,44 @@
     }
   </script>
 </head>
+<body data-page="NutriPulse">
+  <div id="loading-screen">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 225">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00C9FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#92FE9D;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2 2" result="shadow"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.2"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  
 
-<body data-page="kcal">
-  <div class="language-switch">
-    <button id="lang-pl" aria-label="Zmień język na polski">PL</button>
-    <button id="lang-en" aria-label="Change language to English">EN</button>
-  </div>
+  
+  <path d="M100 30 Q130 30 150 50 Q170 70 170 100 Q170 130 150 150 Q130 170 100 170 Q70 170 50 150 Q30 130 30 100 Q30 70 50 50 Q70 30 100 30 Z" fill="url(#grad1)" filter="url(#shadow)" />
+  
+  <path d="M100 30 L100 170 M30 100 L170 100 M50 50 L150 150 M50 150 L150 50" stroke="#FFFFFF" stroke-width="2" fill="none" />
+
+  <circle cx="100" cy="100" r="8" fill="#FFFFFF" />
+  <circle cx="70" cy="70" r="5" fill="#FFFFFF" />
+  <circle cx="130" cy="70" r="5" fill="#FFFFFF" />
+  <circle cx="70" cy="130" r="5" fill="#FFFFFF" />
+  <circle cx="130" cy="130" r="5" fill="#FFFFFF" />
+  
+
+  <circle cx="100" cy="100" r="40" stroke="#FFFFFF" stroke-width="2" fill="none">
+    <animate attributeName="r" values="35;40;35" dur="2s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite" />
+  </circle>
+  
+  <text x="100" y="195" font-family="Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle" font-weight="bold">NutriPulse</text>
+        </svg>
+    </div>
+  
   <form id="kalkulatorForm">
     <label for="plec" data-lang-key="select_gender">Wybierz płeć:</label>
     <select id="plec" onchange="zmienRodzajKalkulatora()">
@@ -73,7 +105,10 @@
       <option value="masa" data-lang-key="mass">Masa (zwiększenie o 300 kcal)</option>
     </select>
 
-    <button type="button" onclick="obliczWszystko()" id="calculateButton" data-lang-key="calculate">Oblicz</button>
+    <div class="button-container">
+            <button class="main-btn" type="button" onclick="obliczWszystko()" id="calculateButton" data-lang-key="calculate">Oblicz</button>
+            <button class="main-btn" type="reset" id="resetButton" data-lang-key="reset">Resetuj</button>
+        </div>
   </form>
 
   <div class="resultcontainer">
@@ -84,10 +119,15 @@
   </div>
 
   <footer>
-    <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
-  </footer>
+        <nav class="footer_buttons" aria-label="Zmiana języka">
+            <button id="lang-pl" aria-label="Zmień język na polski">PL</button>
+            <button id="lang-en" aria-label="Zmień język na angielski">EN</button>
+             <button class="installButton"><i class="fas fa-download"></i>App</button>
+        </nav>
+        <p data-lang-key="footer">&copy; 2024 W.J Project. Wszelkie prawa zastrzeżone.</p>
+    </footer>
 
   <script src="NutriPulse.js"></script>
-  <script src="../translations/translate2.js"></script>
+  <script src="../translations/translates.js"></script>
 </body>
 </html>

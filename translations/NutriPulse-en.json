@@ -21,6 +21,7 @@
     "reduction": "Reduction (reduction by 300 kcal)",
     "mass": "Mass (increase by 300 kcal)",
     "calculate": "Calculate",
+    "reset": "Reset",
     "result_text": "Your daily calorie requirement is: ",
     "protein": "Protein: ",
     "fats": "Fats: ",
