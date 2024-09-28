@@ -6,11 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function fetchTranslations(lang) {
     const page = document.body.getAttribute("data-page");
-    const paths = [
-      `../translations/${page}-${lang}.json`,
-      `./translations/${page}-${lang}.json`,
-      `/translations/${page}-${lang}.json`
-    ];
+    const paths = [`./translations/${page}-${lang}.json`];
+
 
     const fetchPromises = paths.map((path) =>
       fetch(path).then((response) => {
