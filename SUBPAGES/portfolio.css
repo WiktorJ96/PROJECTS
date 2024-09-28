@@ -1190,7 +1190,7 @@ h2 {
 }
 
 .text-animate {
-  opacity: 0;
+  opacity: 1;
 }
 
 .text-animate.animated {

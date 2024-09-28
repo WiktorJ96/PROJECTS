@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("preferredLanguage", lang);
     loadTranslations(lang);
     updateLanguageButtons(lang);
+    document.dispatchEvent(new CustomEvent('languageChanged', { detail: { language: lang } }));
   }
 
   function loadPreferredLanguage() {

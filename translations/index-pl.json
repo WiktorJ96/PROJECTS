@@ -17,7 +17,6 @@
   "motivated": "Jednak jestem <strong>zmotywowany</strong> aby jak najszybciej zdobyć wiedzę",
   "technologies_languages": "na temat rożnych technologii i języków programowania",
   "if_you_like": "Jeśli podobają Ci się moje projekty",
-  "need_web_designer": "I potrzebujesz web designera",
   "contact_me": "Skontaktuj się",
   "js_projects": "Projekty JavaScript",
   "based_on_js_html_css": "Projekty bazujące na JS, HTML i CSS",
@@ -27,7 +26,5 @@
   "languages": "Języki programowania",
   "frameworks": "Frameworki",
   "data_formats": "Formaty danych",
-  "programs-editors": "IDE/Edytory",
-  "or_web_dev": "lub web developera",
-  "dynamic_sentences": ["I potrzebujesz web designera", "lub web developera"]
+  "programs-editors": "IDE/Edytory"
 }
