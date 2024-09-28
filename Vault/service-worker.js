@@ -1,17 +1,17 @@
-const CACHE_NAME = "budget-tracker-cache-v1.0.2";
+const CACHE_NAME = "budget-tracker-cache-v1.0.3";
 const ASSETS_TO_CACHE = [
   "/",
   "./Vault.html",
   "./Vault.css",
   "./JS/Main.js",
-  "../translations/Vault-pl.json",
-  "../translations/Vault-en.json",
-  "./assets/vault_icon_manifest.svg",
-  "./assets/Vault_icon.png",
   "./JS/ChartManager.js",
   "./JS/TransactionManager.js",
   "./JS/UIManager.js",
   "./JS/PWAManager.js",
+  "../translations/Vault-pl.json",
+  "../translations/Vault-en.json",
+  "./assets/vault_icon_manifest.svg",
+  "./assets/Vault_icon.png",
   "https://cdn.jsdelivr.net/npm/chart.js",
 ];
 
@@ -51,7 +51,8 @@ self.addEventListener("fetch", (event) => {
     return (
       url.pathname.endsWith(".css") ||
       url.pathname.endsWith(".js") ||
-      url.pathname.endsWith(".html")
+      url.pathname.endsWith(".html") ||
+      url.pathname.endsWith(".json")
     );
   };
 

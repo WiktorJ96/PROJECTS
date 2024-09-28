@@ -1,11 +1,15 @@
-const CACHE_NAME = "thoughtspace-cache-v1.0.3";
+const CACHE_NAME = "thoughtspace-cache-v1.0.4";
 const ASSETS_TO_CACHE = [
   "./",
   "./ThoughtSpace.html",
-  "./JS/Main.js",
   "./ThoughtSpace.css",
-  "../translations/notatnik-pl.json",
-  "../translations/notatnik-en.json",
+  "./JS/Main.js",
+  "./JS/Note.js",
+  "./JS/NoteApp.js",
+  "./JS/NoteStorage.js",
+  "./JS/PWAManager.js",
+  "../translations/ThoughtSpace-pl.json",
+  "../translations/ThoughtSpace-en.json",
   "./assets/ikona_ThoughtSpace.png",
   "./assets/ThoughtSpace_icon.svg",
 ];
@@ -46,7 +50,8 @@ self.addEventListener("fetch", (event) => {
     return (
       url.pathname.endsWith(".css") ||
       url.pathname.endsWith(".js") ||
-      url.pathname.endsWith(".html")
+      url.pathname.endsWith(".html") ||
+      url.pathname.endsWith(".json")
     );
   };
 

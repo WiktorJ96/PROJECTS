@@ -1,11 +1,15 @@
-const CACHE_NAME = "todo-app-cache-v1.0.35";
+const CACHE_NAME = "todo-app-cache-v1.0.4";
 const ASSETS_TO_CACHE = [
   "/",
   "./Chorely.html",
   "./Chorely.css",
   "./JS/Main.js",
-  "../translations/todo-pl.json",
-  "../translations/todo-en.json",
+  "./JS/PDFGenerator.js",
+  "./JS/PWAHandler.js",
+  "./JS/ToDoList.js",
+  "./JS/TodoListUI.js",
+  "../translations/Chorely-pl.json",
+  "../translations/Chorely-en.json",
   "./assets/ikona_Chorely.png",
   "./assets/Chorely_icon.svg",
 ];
@@ -46,7 +50,8 @@ self.addEventListener("fetch", (event) => {
     return (
       url.pathname.endsWith(".css") ||
       url.pathname.endsWith(".js") ||
-      url.pathname.endsWith(".html")
+      url.pathname.endsWith(".html") ||
+      url.pathname.endsWith(".json")
     );
   };
 
