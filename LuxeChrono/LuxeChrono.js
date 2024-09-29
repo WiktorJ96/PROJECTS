@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         introOverlay: document.getElementById('intro-overlay')
     };
 
-    let audio = new Audio('../music/Orbiting Knowhere - The Whole Other.mp3');
+    let audio = new Audio('./assets/music/Orbiting Knowhere - The Whole Other.mp3');
 
     let state = {
     stopwatch: {
