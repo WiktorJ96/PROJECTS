@@ -129,3 +129,15 @@ body {
   text-align-last: center;
   margin-bottom: 20px;
 }
+
+.filter-panel {
+  margin-bottom: 30px;
+}
+
+.progress {
+  height: 20px;
+}
+
+.nav {
+  margin-bottom: 20px;
+}

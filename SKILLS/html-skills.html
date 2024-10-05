@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,116 +9,450 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
     <link rel="stylesheet" href="./skills.css">
     <style>
+        .html-hr {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, rgb(255, 51, 0), rgba(227, 76, 38, 0), rgb(255, 51, 0));
+            margin: 40px 0;
+            position: relative;
+            overflow: visible;
+        }
 
-.html-hr {
-    border: none;
-    height: 3px;
-    background: linear-gradient(to right, rgb(255, 51, 0), rgba(227, 76, 38, 0), rgb(255, 51, 0));
-    margin: 40px 0;
-    position: relative;
-    overflow: visible;
-}
-
-.html-hr::before {
-    content: '< HTML >';
-    display: block;
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 20px;
-    letter-spacing: 10px;
-    color: rgb(255, 51, 0);
-    font-weight: bold;
-}
+        .html-hr::before {
+            content: '< HTML >';
+            display: block;
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            letter-spacing: 10px;
+            color: rgb(255, 51, 0);
+            font-weight: bold;
+        }
     </style>
 </head>
-<div class="language-switch">
-    <button id="lang-pl">PL</button>
-    <button id="lang-en">EN</button>
-</div>
+
 <body class="bg-light" data-page="html">
+    <div class="language-switch">
+        <button id="lang-pl" >PL</button>
+        <button id="lang-en" >EN</button>
+    </div>
 
     <div class="loader" id="loader"></div>
 
     <div class="container py-5">
-        <i class="fab fa-html5 icon iconHTML" ></i>
+        <i class="fab fa-html5 icon iconHTML"></i>
         <hr class="html-hr">
 
+        <!-- Panel Filtrów -->
+        <div class="filter-panel">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="difficultyFilter" class="form-label" data-lang-key="filter_difficulty_label">Filtruj według poziomu zrozumienia:</label>
+                    <select id="difficultyFilter" class="form-select">
+                        <option value="all" data-lang-key="filter_all">Wszystkie</option>
+                        <option value="Dobry" data-lang-key="filter_good">Dobry</option>
+                        <option value="Średni" data-lang-key="filter_medium">Średni</option>
+                        <option value="Słaby" data-lang-key="filter_weak">Słaby</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="categoryFilter" class="form-label" data-lang-key="filter_category_label">Filtruj według kategorii:</label>
+                    <select id="categoryFilter" class="form-select">
+                        <option value="all" data-lang-key="filter_all">Wszystkie</option>
+                        <option value="podstawy-html" data-lang-key="category_html_basics">Podstawy HTML</option>
+                        <option value="struktura-semantyka" data-lang-key="category_structure_semantics">Struktura i Semantyka</option>
+                        <option value="formularze-interakcja" data-lang-key="category_forms_interaction">Formularze i Interakcja</option>
+                        <option value="multimedia-grafika" data-lang-key="category_multimedia_graphics">Multimedia i Grafika</option>
+                        <option value="dostepnosc" data-lang-key="category_accessibility">Dostępność</option>
+                        <option value="seo-metadane" data-lang-key="category_seo_metadata">SEO i Metadane</option>
+                        <option value="wydajnosc-optymalizacja" data-lang-key="category_performance_optimization">Wydajność i Optymalizacja</option>
+                        <option value="zaawansowane-tematy" data-lang-key="category_advanced_topics">Zaawansowane Tematy</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <!-- Zawartość kart umiejętności -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="skillsContent">
 
-            <div class="col">
+            <!-- Podstawy HTML -->
+            <div class="col" data-difficulty="Dobry" data-category="podstawy-html">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-code skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="basics_title">Podstawy HTML:</h5>
-                        <p class="card-text" data-lang-key="basics_desc">struktura dokumentu HTML, najważniejsze
-                            znaczniki HTML, atrybuty znaczników, prawidłowa budowa sekcji &lt;head&gt;, tworzenie
-                            struktury strony
-                        </p>
+                        <i class="fas fa-file-code skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_html_structure">Struktura dokumentu HTML</h5>
+                        <p class="card-text" data-lang-key="skill_html_structure_desc">Podstawowa struktura dokumentu HTML, znaczenie tagów <code>&lt;!DOCTYPE&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>.</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col" data-difficulty="Dobry" data-category="podstawy-html">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-layer-group skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="advanced_title">Zaawansowane HTML:</h5>
-                        <p class="card-text" data-lang-key="advanced_desc">semantyczne znaczniki HTML5, tworzenie
-                            formularzy, osadzanie multimediów</p>
+                        <i class="fas fa-tags skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_tags_attributes">Znaczniki i atrybuty</h5>
+                        <p class="card-text" data-lang-key="skill_tags_attributes_desc">Najważniejsze znaczniki HTML, atrybuty znaczników, zagnieżdżanie elementów.</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col" data-difficulty="Dobry" data-category="podstawy-html">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-heading skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_head_section">Sekcja &lt;head&gt;</h5>
+                        <p class="card-text" data-lang-key="skill_head_section_desc">Prawidłowa budowa sekcji <code>&lt;head&gt;</code>, użycie meta tagów, tytułu strony, linkowanie stylów i skryptów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Dobry" data-category="podstawy-html">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-sitemap skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_page_structure">Struktura strony</h5>
+                        <p class="card-text" data-lang-key="skill_page_structure_desc">Tworzenie struktury strony za pomocą sekcji, artykułów, nagłówków, list, akapitów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Struktura i Semantyka -->
+            <div class="col" data-difficulty="Dobry" data-category="struktura-semantyka">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-scroll skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_semantic_html5">Semantyczne znaczniki HTML5</h5>
+                        <p class="card-text" data-lang-key="skill_semantic_html5_desc">Użycie znaczników <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Dobry" data-category="struktura-semantyka">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-list-ul skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_lists_links_images">Listy, linki i obrazy</h5>
+                        <p class="card-text" data-lang-key="skill_lists_links_images_desc">Tworzenie list uporządkowanych i nieuporządkowanych, linkowanie stron, osadzanie obrazów i tekst alternatywny.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="struktura-semantyka">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-table skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_tables">Tabele</h5>
+                        <p class="card-text" data-lang-key="skill_tables_desc">Tworzenie i stylizacja tabel, użycie nagłówków tabel, łączenie komórek.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Dobry" data-category="struktura-semantyka">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-check skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_best_practices">Najlepsze praktyki</h5>
+                        <p class="card-text" data-lang-key="skill_best_practices_desc">Unikanie przestarzałych znaczników, pisanie czystego i czytelnego kodu, formatowanie i komentarze.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formularze i Interakcja -->
+            <div class="col" data-difficulty="Średni" data-category="formularze-interakcja">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-edit skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_creating_forms">Tworzenie formularzy</h5>
+                        <p class="card-text" data-lang-key="skill_creating_forms_desc">Elementy formularzy, atrybuty <code>&lt;form&gt;</code>, różne typy inputów, przyciski.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="formularze-interakcja">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-check-circle skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_form_validation">Walidacja formularzy</h5>
+                        <p class="card-text" data-lang-key="skill_form_validation_desc">Atrybuty walidacyjne (<code>required</code>, <code>pattern</code>), komunikaty błędów, najlepsze praktyki.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multimedia i Grafika -->
+            <div class="col" data-difficulty="Średni" data-category="multimedia-grafika">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-photo-video skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_embedding_multimedia">Osadzanie multimediów</h5>
+                        <p class="card-text" data-lang-key="skill_embedding_multimedia_desc">Elementy <code>&lt;audio&gt;</code>, <code>&lt;video&gt;</code>, atrybuty kontrolne, źródła multimediów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="multimedia-grafika">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-vector-square skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_canvas_svg">Canvas i SVG</h5>
+                        <p class="card-text" data-lang-key="skill_canvas_svg_desc">Rysowanie grafiki za pomocą <code>&lt;canvas&gt;</code>, użycie SVG dla skalowalnych grafik wektorowych.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dostępność -->
+            <div class="col" data-difficulty="Średni" data-category="dostepnosc">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-universal-access skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="accessibility_title">Dostępność i Semantyka:</h5>
-                        <p class="card-text" data-lang-key="accessibility_desc">implementacja ARIA roles i atrybutów,
-                            zapewnianie zgodności z WCAG.</p>
+                        <h5 class="card-title" data-lang-key="skill_aria_wcag">ARIA i WCAG</h5>
+                        <p class="card-text" data-lang-key="skill_aria_wcag_desc">Implementacja ARIA roles i atrybutów, zapewnianie zgodności z WCAG.</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-warning"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Średni"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
-    <div class="card skill-card h-100">
-        <div class="card-body text-center">
-            <i class="fas fa-search skill-icon mb-3"></i>
-            <h5 class="card-title" data-lang-key="seo_title">SEO i Wydajność:</h5>
-            <p class="card-text" data-lang-key="seo_desc">Optymalizacja metadanych, struktura nagłówków, szybkość ładowania.</p>
-        </div>
-        <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-warning"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Średni"></i></span>
+            <div class="col" data-difficulty="Dobry" data-category="dostepnosc">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-file-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_alt_text_semantics">Tekst alternatywny i semantyka</h5>
+                        <p class="card-text" data-lang-key="skill_alt_text_semantics_desc">Użycie atrybutu <code>alt</code> dla obrazów, znaczenie semantyki dla dostępności.</p>
                     </div>
-    </div>
-</div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="dostepnosc">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-universal-access skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_form_accessibility">Dostępność formularzy</h5>
+                        <p class="card-text" data-lang-key="skill_form_accessibility_desc">Użycie <code>&lt;label&gt;</code>, <code>&lt;fieldset&gt;</code>, <code>&lt;legend&gt;</code>, zapewnienie dostępności dla czytników ekranu.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO i Metadane -->
+            <div class="col" data-difficulty="Średni" data-category="seo-metadane">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-search skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_metadata_optimization">Optymalizacja metadanych</h5>
+                        <p class="card-text" data-lang-key="skill_metadata_optimization_desc">Użycie meta tagów, meta description, meta keywords, znaczenie dla SEO.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Dobry" data-category="seo-metadane">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-heading skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_heading_structure">Struktura nagłówków</h5>
+                        <p class="card-text" data-lang-key="skill_heading_structure_desc">Poprawne użycie nagłówków <code>h1</code>-<code>h6</code>, znaczenie dla SEO i dostępności.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="seo-metadane">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-code skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_microformats_structured_data">Mikroformaty i strukturalne dane</h5>
+                        <p class="card-text" data-lang-key="skill_microformats_structured_data_desc">Użycie <code>schema.org</code>, <code>JSON-LD</code>, znaczenie dla SEO.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wydajność i Optymalizacja -->
+            <div class="col" data-difficulty="Średni" data-category="wydajnosc-optymalizacja">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-tachometer-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_loading_speed">Szybkość ładowania</h5>
+                        <p class="card-text" data-lang-key="skill_loading_speed_desc">Optymalizacja kodu HTML, minimalizacja, asynchroniczne ładowanie skryptów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="wydajnosc-optymalizacja">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-layer-group skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_progressive_enhancement">Progressive Enhancement</h5>
+                        <p class="card-text" data-lang-key="skill_progressive_enhancement_desc">Tworzenie stron dostępnych dla różnych przeglądarek i urządzeń, dodawanie funkcjonalności w miarę możliwości.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zaawansowane Tematy -->
+            <div class="col" data-difficulty="Słaby" data-category="zaawansowane-tematy">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-plug skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_html_apis">HTML APIs</h5>
+                        <p class="card-text" data-lang-key="skill_html_apis_desc">Użycie atrybutu <code>contenteditable</code>, drag and drop, elementu <code>&lt;details&gt;</code>, <code>&lt;dialog&gt;</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="zaawansowane-tematy">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-cubes skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_web_components">Web Components</h5>
+                        <p class="card-text" data-lang-key="skill_web_components_desc">Custom Elements, Shadow DOM, Templates i ich zastosowanie.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
-<div id="custom-scrollbar"></div>
+
+    <!-- Skrypty -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="../translations/translates.js"></script>
     <script src="skills.js"></script>
-</body>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const difficultyFilter = document.getElementById('difficultyFilter');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const skillCards = document.querySelectorAll('.col');
 
+        function filterSkills() {
+            const selectedDifficulty = difficultyFilter.value;
+            const selectedCategory = categoryFilter.value;
+
+            skillCards.forEach(card => {
+                const cardDifficulty = card.getAttribute('data-difficulty');
+                const cardCategory = card.getAttribute('data-category');
+
+                let difficultyMatch = (selectedDifficulty === 'all' || cardDifficulty === selectedDifficulty);
+                let categoryMatch = (selectedCategory === 'all' || cardCategory === selectedCategory);
+
+                if (difficultyMatch && categoryMatch) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        difficultyFilter.addEventListener('change', filterSkills);
+        categoryFilter.addEventListener('change', filterSkills);
+
+        filterSkills();
+    });
+    </script>
+</body>
 </html>

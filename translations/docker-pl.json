@@ -1,0 +1,19 @@
+{
+  "page_title": "Umiejętności Docker",
+  "basics_title": "Podstawy Dockera",
+  "basics_desc": "Architektura, koncepcje (obrazy, kontenery, registry)",
+  "containers_title": "Uruchamianie kontenerów",
+  "containers_desc": "Podstawowe komendy, proces uruchamiania, zarządzanie wieloma kontenerami, monitorowanie, dostęp do terminala",
+  "images_title": "Budowanie obrazów",
+  "images_desc": "Tworzenie własnych obrazów, Dockerfile, warstwy obrazów, tagowanie, multistage build",
+  "networking_title": "Sieci w Dockerze",
+  "networking_desc": "Zarządzanie sieciami, DNS, konfiguracja sieci",
+  "storage_title": "Przechowywanie danych",
+  "storage_desc": "Volumes, bind mounts, zarządzanie danymi w kontenerach",
+  "security_title": "Bezpieczeństwo Dockera",
+  "security_desc": "Praktyki bezpieczeństwa, komendy bezpieczeństwa, obrazy rootless, skanowanie obrazów",
+  "compose_title": "Docker Compose",
+  "compose_desc": "Docker Compose, komendy, profile, nadpisywanie plików, budowanie i obserwowanie zmian",
+  "registry_title": "Docker Registry",
+  "registry_desc": "Docker Hub, lokalne registry, przechowywanie i dystrybucja obrazów"
+}

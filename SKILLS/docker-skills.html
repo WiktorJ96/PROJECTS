@@ -10,40 +10,82 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
     <link rel="stylesheet" href="./skills.css">
     <style>
-        .docker-logo {
+        .docker-hr {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, hsla(201, 100%, 50%, 0.9), rgba(0, 143, 255, 0), rgba(0, 143, 255, 0));
+            margin: 40px 0;
+            position: relative;
+            overflow: visible;
+        }
+
+        .docker-hr::before {
+            content: '(Docker)';
             display: block;
-            margin: 0 auto;
-            max-width: 80px;
-            height: auto;
-            border-radius: 8px;
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            letter-spacing: 10px;
+            color: rgb(0, 143, 255);
+            font-weight: bold;
         }
     </style>
 </head>
-<div class="language-switch">
-    <button id="lang-pl">PL</button>
-    <button id="lang-en">EN</button>
-</div>
+
 <body class="bg-light" data-page="docker">
+    <div class="language-switch">
+        <button id="lang-pl">PL</button>
+        <button id="lang-en">EN</button>
+    </div>
 
     <div class="loader" id="loader"></div>
 
     <div class="container py-5">
-        <img src="https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png" alt="Docker Logo"
-            class="docker-logo mb-4">
+        <i class="fab fa-docker icon iconDocker"></i>
+        <hr class="docker-hr">
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
             <div class="col">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-play-circle skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="container_basics_title">Podstawy kontenerów:</h5>
-                        <p class="card-text" data-lang-key="container_basics_desc">Uruchamianie, monitorowanie i zarządzanie kontenerami, praca z wieloma kontenerami, obsługa terminala</p>
+                        <i class="fas fa-book skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="basics_title">Podstawy Dockera:</h5>
+                        <p class="card-text" data-lang-key="basics_desc">Architektura, koncepcje (obrazy, kontenery, registry)</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-success"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" data-lang-key="difficulty_easy" title="Łatwy"></i></span>
+                        <span class="badge bg-success"><i data-bs-toggle="tooltip" data-bs-placement="top" title="Łatwy"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-play skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="containers_title">Uruchamianie kontenerów:</h5>
+                        <p class="card-text" data-lang-key="containers_desc">Podstawowe komendy, proces uruchamiania, zarządzanie wieloma kontenerami, monitorowanie, dostęp do terminala</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-success"><i data-bs-toggle="tooltip" data-bs-placement="top" title="Łatwy"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-layer-group skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="images_title">Budowanie obrazów:</h5>
+                        <p class="card-text" data-lang-key="images_desc">Tworzenie własnych obrazów, Dockerfile, warstwy obrazów, tagowanie, multistage build</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-warning"><i data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i></span>
                     </div>
                 </div>
             </div>
@@ -52,28 +94,12 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-network-wired skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="docker_networks_title">Sieci Docker:</h5>
-                        <p class="card-text" data-lang-key="docker_networks_desc">Zarządzanie sieciami Docker, konfiguracja DNS, łączenie kontenerów</p>
+                        <h5 class="card-title" data-lang-key="networking_title">Sieci w Dockerze:</h5>
+                        <p class="card-text" data-lang-key="networking_desc">Zarządzanie sieciami, DNS, konfiguracja sieci</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-warning"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" data-lang-key="difficulty_medium" title="Średni"></i></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card skill-card h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-cubes skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="image_building_title">Budowanie obrazów:</h5>
-                        <p class="card-text" data-lang-key="image_building_desc">Tworzenie własnych obrazów, praca z Dockerfile, tagowanie, warstwy obrazów, multistage build</p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-warning"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" data-lang-key="difficulty_medium" title="Średni"></i></span>
+                        <span class="badge bg-warning"><i data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i></span>
                     </div>
                 </div>
             </div>
@@ -82,13 +108,12 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-database skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="data_storage_title">Przechowywanie danych:</h5>
-                        <p class="card-text" data-lang-key="data_storage_desc">Praca z volumes, bind mounts, zarządzanie danymi w kontenerach</p>
+                        <h5 class="card-title" data-lang-key="storage_title">Przechowywanie danych:</h5>
+                        <p class="card-text" data-lang-key="storage_desc">Volumes, bind mounts, zarządzanie danymi w kontenerach</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-warning"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" data-lang-key="difficulty_medium" title="Średni"></i></span>
+                        <span class="badge bg-warning"><i data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i></span>
                     </div>
                 </div>
             </div>
@@ -97,13 +122,12 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-shield-alt skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="docker_security_title">Bezpieczeństwo Docker:</h5>
-                        <p class="card-text" data-lang-key="docker_security_desc">Podstawy bezpieczeństwa, rootless kontenery, skanowanie obrazów</p>
+                        <h5 class="card-title" data-lang-key="security_title">Bezpieczeństwo Dockera:</h5>
+                        <p class="card-text" data-lang-key="security_desc">Praktyki bezpieczeństwa, komendy bezpieczeństwa, obrazy rootless, skanowanie obrazów</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-danger"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" data-lang-key="difficulty_hard" title="Trudny"></i></span>
+                        <span class="badge bg-danger"><i data-bs-toggle="tooltip" data-bs-placement="top" title="Trudny"></i></span>
                     </div>
                 </div>
             </div>
@@ -111,14 +135,13 @@
             <div class="col">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-file-alt skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="docker_compose_title">Docker Compose:</h5>
-                        <p class="card-text" data-lang-key="docker_compose_desc">Konfiguracja i zarządzanie wieloma kontenerami, praca z profilami, nadpisywanie plików konfiguracyjnych</p>
+                        <i class="fas fa-cubes skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="compose_title">Docker Compose:</h5>
+                        <p class="card-text" data-lang-key="compose_desc">Docker Compose, komendy, profile, nadpisywanie plików, budowanie i obserwowanie zmian</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-danger"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" data-lang-key="difficulty_hard" title="Trudny"></i></span>
+                        <span class="badge bg-warning"><i data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i></span>
                     </div>
                 </div>
             </div>
@@ -127,37 +150,22 @@
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-cloud-upload-alt skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="image_storage_title">Przechowywanie obrazów:</h5>
-                        <p class="card-text" data-lang-key="image_storage_desc">Praca z Docker Hub, lokalne registry, inne opcje przechowywania obrazów</p>
+                        <h5 class="card-title" data-lang-key="registry_title">Docker Registry:</h5>
+                        <p class="card-text" data-lang-key="registry_desc">Docker Hub, lokalne registry, przechowywanie i dystrybucja obrazów</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-warning"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" data-lang-key="difficulty_medium" title="Średni"></i></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card skill-card h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-cogs skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="advanced_topics_title">Zaawansowane tematy:</h5>
-                        <p class="card-text" data-lang-key="advanced_topics_desc">Docker init, praca z Apple Silicon, dobre praktyki, inne narzędzia ekosystemu Docker</p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-danger"><i class="fas fa-signal difficulty-icon" data-bs-toggle="tooltip"
-                                data-bs-placement="top" data-lang-key="difficulty_hard" title="Trudny"></i></span>
+                        <span class="badge bg-warning"><i data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i></span>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-<div id="custom-scrollbar"></div>
+    <div id="custom-scrollbar"></div>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="../translations/translates.js"></script>
+    <script src="skills.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,19 @@
+{
+  "page_title": "Docker Skills",
+  "basics_title": "Docker Basics",
+  "basics_desc": "Architecture, concepts (images, containers, registry)",
+  "containers_title": "Running Containers",
+  "containers_desc": "Basic commands, startup process, managing multiple containers, monitoring, terminal access",
+  "images_title": "Building Images",
+  "images_desc": "Creating custom images, Dockerfile, image layers, tagging, multistage build",
+  "networking_title": "Docker Networking",
+  "networking_desc": "Network management, DNS, network configuration",
+  "storage_title": "Data Storage",
+  "storage_desc": "Volumes, bind mounts, managing data in containers",
+  "security_title": "Docker Security",
+  "security_desc": "Security practices, security commands, rootless images, image scanning",
+  "compose_title": "Docker Compose",
+  "compose_desc": "Docker Compose, commands, profiles, file overrides, building and watching changes",
+  "registry_title": "Docker Registry",
+  "registry_desc": "Docker Hub, local registry, image storage and distribution"
+}

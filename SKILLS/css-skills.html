@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,183 +10,706 @@
     <link rel="stylesheet" href="./skills.css">
     <style>
         .css-hr {
-    border: none;
-    height: 3px;
-    background: linear-gradient(to right, rgb(0, 102, 255), rgba(227, 76, 38, 0), rgb(1, 94, 255));
-    margin: 40px 0;
-    position: relative;
-    overflow: visible;
-}
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, rgb(0, 102, 255), rgba(227, 76, 38, 0), rgb(1, 94, 255));
+            margin: 40px 0;
+            position: relative;
+            overflow: visible;
+        }
 
-.css-hr::before {
-    content: '.CSS';
-    display: block;
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 20px;
-    letter-spacing: 10px;
-    color: rgb(0, 94, 255);
-    font-weight: bold;
-}
-
+        .css-hr::before {
+            content: '.CSS';
+            display: block;
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            letter-spacing: 10px;
+            color: rgb(0, 94, 255);
+            font-weight: bold;
+        }
     </style>
 </head>
-<div class="language-switch">
-    <button id="lang-pl">PL</button>
-    <button id="lang-en">EN</button>
-</div>
+
 <body class="bg-light" data-page="css">
+    <div class="language-switch">
+        <button id="lang-pl" >PL</button>
+        <button id="lang-en" >EN</button>
+    </div>
 
     <div class="loader" id="loader"></div>
 
     <div class="container py-5">
-
         <i class="fab fa-css3-alt icon iconCSS"></i>
         <hr class="css-hr">
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <!-- Panel Filtrów -->
+        <div class="filter-panel">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="difficultyFilter" class="form-label" data-lang-key="filter_difficulty_label">Filtruj według poziomu zrozumienia:</label>
+                    <select id="difficultyFilter" class="form-select">
+                        <option value="all" data-lang-key="filter_all">Wszystkie</option>
+                        <option value="Dobry" data-lang-key="filter_good">Dobry</option>
+                        <option value="Średni" data-lang-key="filter_medium">Średni</option>
+                        <option value="Słaby" data-lang-key="filter_weak">Słaby</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="categoryFilter" class="form-label" data-lang-key="filter_category_label">Filtruj według kategorii:</label>
+                    <select id="categoryFilter" class="form-select">
+                        <option value="all" data-lang-key="filter_all">Wszystkie</option>
+                        <option value="podstawy-css" data-lang-key="category_css_basics">Podstawy CSS</option>
+                        <option value="typografia" data-lang-key="category_typography">Typografia</option>
+                        <option value="kolory-jednostki" data-lang-key="category_colors_units">Kolory i Jednostki</option>
+                        <option value="układ-strony" data-lang-key="category_page_layout">Układ Strony</option>
+                        <option value="animacje-przejścia" data-lang-key="category_animations_transitions">Animacje i Przejścia</option>
+                        <option value="efekty-wizualne" data-lang-key="category_visual_effects">Efekty Wizualne i Grafika</option>
+                        <option value="selektory-pseudoklasy" data-lang-key="category_selectors_pseudoclasses">Zaawansowane Selektory i Pseudoklasy</option>
+                        <option value="responsywne-projektowanie" data-lang-key="category_responsive_design">Responsywne Projektowanie i Media Queries</option>
+                        <option value="zaawansowane-techniki" data-lang-key="category_advanced_techniques">Zaawansowane Techniki CSS</option>
+                        <option value="dostępność-optymalizacja" data-lang-key="category_accessibility_optimization">Dostępność i Optymalizacja</option>
+                        <option value="praktyczne-umiejętności" data-lang-key="category_practical_skills">Praktyczne Umiejętności</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-            <div class="col">
+        <!-- Zawartość kart umiejętności -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="skillsContent">
+
+            <!-- podstawy-css -->
+
+            <div class="col" data-difficulty="Dobry" data-category="podstawy-css">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-paint-brush skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="css_basics_title">Podstawy CSS:</h5>
-                        <p class="card-text" data-lang-key="css_basics_desc">składnia CSS, selektory CSS, sposoby
-                            dodawania stylów do HTML, kaskadowość i specyficzność, dziedziczenie w CSS</p>
+                        <i class="fas fa-code skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_css_basics">Podstawy CSS</h5>
+                        <p class="card-text" data-lang-key="skill_css_basics_desc">Składnia CSS, selektory CSS, sposoby dodawania stylów do HTML, kaskadowość i specyficzność, dziedziczenie w CSS, CSS reset/normalize</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col" data-difficulty="Średni" data-category="podstawy-css">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-calculator skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_css_functions">Funkcje CSS</h5>
+                        <p class="card-text" data-lang-key="skill_css_functions_desc">Użycie funkcji takich jak <code>calc()</code>, <code>min()</code>, <code>max()</code>, <code>clamp()</code> do dynamicznego obliczania wartości właściwości CSS.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="podstawy-css">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-code-branch skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_css_variables">CSS Variables (Custom Properties)</h5>
+                        <p class="card-text" data-lang-key="skill_css_variables_desc">Definiowanie i używanie własnych właściwości CSS dla ułatwienia zarządzania stylami.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="podstawy-css">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-sitemap skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_css_variables_scope">Zakres CSS Variables</h5>
+                        <p class="card-text" data-lang-key="skill_css_variables_scope_desc">Zrozumienie zakresu i dziedziczenia własnych właściwości CSS, tworzenie tematycznych zestawów stylów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- typografia -->
+
+            <div class="col" data-difficulty="Dobry" data-category="typografia">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-text-height skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="text_styling_title">Stylizacja tekstu i fontów:</h5>
-                        <p class="card-text" data-lang-key="text_styling_desc">właściwości fontów (font-size, color,
-                            font-style, font-weight, etc.), stylizacja tekstu (text-indent, text-align, text-transform,
-                            line-height), korzystanie z Google Fonts</p>
+                        <h5 class="card-title" data-lang-key="skill_text_font_styling">Stylizacja tekstu i fontów</h5>
+                        <p class="card-text" data-lang-key="skill_text_font_styling_desc">Właściwości fontów, stylizacja tekstu, korzystanie z Google Fonts, CSS Writing Modes</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col" data-difficulty="Słaby" data-category="typografia">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-font skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_advanced_font_properties">Zaawansowane właściwości fontów</h5>
+                        <p class="card-text" data-lang-key="skill_advanced_font_properties_desc">Właściwości takie jak <code>font-variant</code>, <code>font-feature-settings</code>, <code>font-kerning</code> dla lepszej kontroli nad typografią.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                         </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="typografia">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-file-import skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_custom_fonts">CSS Custom Fonts</h5>
+                        <p class="card-text" data-lang-key="skill_custom_fonts_desc">Zaawansowane użycie <code>@font-face</code>, zarządzanie formatami fontów, kontrola nad ładowaniem fontów poprzez <code>font-display</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                         </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="typografia">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                       <i class="fas fa-list-ol skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_css_counters">CSS Counters</h5>
+                        <p class="card-text" data-lang-key="skill_css_counters_desc">Tworzenie niestandardowych liczników i numeracji za pomocą <code>counter-reset</code>, <code>counter-increment</code> i <code>content</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                         </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- kolory-jednostki -->
+
+            <div class="col" data-difficulty="Dobry" data-category="kolory-jednostki">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                       <i class="fas fa-ruler skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_colors_units">Kolory i jednostki</h5>
+                        <p class="card-text" data-lang-key="skill_colors_units_desc">Systemy kolorów (RGB, HEX, HSL), jednostki w CSS (px, em, rem, %, vw/vh)</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                            <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="kolory-jednostki">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-ruler-combined skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_additional_css_units">Dodatkowe jednostki CSS</h5>
+                        <p class="card-text" data-lang-key="skill_additional_css_units_desc">Jednostki takie jak <code>ch</code>, <code>ex</code>, <code>fr</code> (w grid layout), <code>cap</code>, <code>ic</code>, <code>lh</code>, <code>rlh</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- układ-strony -->
+
+            <div class="col" data-difficulty="Dobry" data-category="układ-strony">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-th-large skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="box_model_title">Model pudełkowy i układ strony:</h5>
-                        <p class="card-text" data-lang-key="box_model_desc">box model (margin, padding, border),
-                            box-sizing, elementy blokowe i liniowe, właściwość display, pozycjonowanie elementów (float,
-                            flexbox, grid)</p>
+                        <h5 class="card-title" data-lang-key="skill_box_model">Model pudełkowy i układ strony</h5>
+                        <p class="card-text" data-lang-key="skill_box_model_desc">Box model, box-sizing, elementy blokowe i liniowe, właściwość display, pozycjonowanie elementów</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                          <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col" data-difficulty="Dobry" data-category="układ-strony">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-ruler skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="colors_units_title">Kolory i jednostki:</h5>
-                        <p class="card-text" data-lang-key="colors_units_desc">systemy kolorów (RGB, HEX, HSL),
-                            jednostki w CSS (px, em, rem, %, vw/vh)</p>
+                        <i class="fas fa-align-justify skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_flexbox">CSS Flexbox</h5>
+                        <p class="card-text" data-lang-key="skill_flexbox_desc">Tworzenie elastycznych układów stron za pomocą Flexbox, zarządzanie osiami, justyfikacja, wyrównanie.</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                          <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top"  title="Dobry"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col" data-difficulty="Średni" data-category="układ-strony">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-bezier-curve skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="advanced_css_title">Zaawansowane CSS:</h5>
-                        <p class="card-text" data-lang-key="advanced_css_desc">pseudoklasy i pseudoelementy,
-                            zaawansowane selektory CSS, responsywne projektowanie</p>
+                       <i class="fas fa-th skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_grid_layout">CSS Grid Layout</h5>
+                        <p class="card-text" data-lang-key="skill_grid_layout_desc">Tworzenie zaawansowanych układów siatki, definiowanie wierszy i kolumn, zarządzanie przestrzenią.</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                          <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col" data-difficulty="Słaby" data-category="układ-strony">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-magic skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="styling_animation_title">Techniki stylizacji i animacji:
-                        </h5>
-                        <p class="card-text" data-lang-key="styling_animation_desc">wykorzystanie zmiennych CSS z
-                            użyciem selektora <span style="color: #0051ff;">:root</span>, tworzenie złożonych animacji
-                            CSS z wykorzystaniem <span style="color: #aa00ff;">@keyframes</span></p>
+                      <i class="fas fa-th-list skill-icon mb-3"></i>
+                      <h5 class="card-title" data-lang-key="skill_subgrid">CSS Subgrid</h5>
+                      <p class="card-text" data-lang-key="skill_subgrid_desc">Użycie subgrid do dziedziczenia siatki nadrzędnej, tworzenie spójnych układów zagnieżdżonych.</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col" data-difficulty="Słaby" data-category="układ-strony">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-image skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="resources_tools_title">Zasoby i narzędzia:</h5>
-                        <p class="card-text" data-lang-key="resources_tools_desc">korzystanie z Google Fonts, źródła
-                            darmowych grafik i wideo, narzędzia do tworzenia schematów kolorów, podstawy pracy z
-                            programami graficznymi</p>
+                       <i class="fas fa-border-all skill-icon mb-3"></i>
+                       <h5 class="card-title" data-lang-key="skill_grid_template_areas">CSS Grid Template Areas</h5>
+                       <p class="card-text" data-lang-key="skill_grid_template_areas_desc">Tworzenie semantycznych układów siatki za pomocą nazwanych obszarów (<code>grid-template-areas</code>).</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col" data-difficulty="Słaby" data-category="układ-strony">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-paint-roller skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="practical_skills_title">Praktyczne umiejętności:</h5>
-                        <p class="card-text" data-lang-key="practical_skills_desc">tworzenie layoutów stron, stylizacja
-                            przycisków i menu, praca z projektami graficznymi (mockup), debugowanie kodu CSS,
-                            optymalizacja kodu CSS</p>
+                       <i class="fas fa-columns skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_multi_column_layout">Multi-column Layout</h5>
+                        <p class="card-text" data-lang-key="skill_multi_column_layout_desc">Tworzenie układów wielokolumnowych za pomocą <code>column-count</code>, <code>column-gap</code>, <code>column-rule</code>.</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
                     </div>
                 </div>
             </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="układ-strony">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                       <i class="fas fa-arrows-alt-h skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="skill_logical_properties">CSS Logical Properties</h5>
+                    <p class="card-text" data-lang-key="skill_logical_properties_desc">Pełne wykorzystanie właściwości logicznych do tworzenia układów niezależnych od kierunku tekstu.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="układ-strony">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-image skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="skill_object_fit">Obiekty graficzne</h5>
+                    <p class="card-text" data-lang-key="skill_object_fit_desc">Kontrola wyświetlania obrazów i elementów osadzonych za pomocą <code>object-fit</code>, <code>object-position</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="układ-strony">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-shield-alt skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="skill_containment_isolation">CSS Containment i Isolation</h5>
+                    <p class="card-text" data-lang-key="skill_containment_isolation_desc">Optymalizacja wydajności renderowania za pomocą <code>contain</code>, kontrola kontekstu stacking poprzez <code>isolation</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- animacje-przejścia -->
+
+            <div class="col" data-difficulty="Średni" data-category="animacje-przejścia">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                       <i class="fas fa-magic skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_animations_transitions">Animacje i przejścia</h5>
+                        <p class="card-text" data-lang-key="skill_animations_transitions_desc">CSS Transitions, tworzenie animacji z <code>@keyframes</code>, transformacje 2D i 3D, optymalizacja wydajności animacji</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                          <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="animacje-przejścia">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                       <i class="fas fa-stopwatch skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_animation_direction_timing">CSS Animation Direction i Timing Functions</h5>
+                        <p class="card-text" data-lang-key="skill_animation_direction_timing_desc">Kontrola kierunku i sposobu odtwarzania animacji za pomocą <code>animation-direction</code>, <code>animation-fill-mode</code>, funkcje czasowe (<code>cubic-bezier</code>, <code>steps</code>).</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <!-- efekty-wizualne -->
+
+            <div class="col" data-difficulty="Słaby" data-category="efekty-wizualne">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                       <i class="fas fa-shapes skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_advanced_visual_effects">Zaawansowane efekty wizualne</h5>
+                        <p class="card-text" data-lang-key="skill_advanced_visual_effects_desc">CSS Shapes, CSS Masking, CSS Filters, tworzenie niestandardowych kształtów i efektów wizualnych</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="efekty-wizualne">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-fill-drip skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="skill_advanced_gradients">Gradienty zaawansowane</h5>
+                    <p class="card-text" data-lang-key="skill_advanced_gradients_desc">Użycie <code>conic-gradient</code> oraz tworzenie skomplikowanych wzorów za pomocą zaawansowanych technik gradientów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="efekty-wizualne">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                       <i class="fas fa-adjust skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_blend_modes">Blend Modes i Compositing</h5>
+                        <p class="card-text" data-lang-key="skill_blend_modes_desc">Użycie <code>mix-blend-mode</code>, <code>background-blend-mode</code>, <code>isolation</code> do tworzenia zaawansowanych efektów graficznych.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="efekty-wizualne">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                       <i class="fas fa-crop skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_clip_path_masking">CSS Clip Path i Masking</h5>
+                        <p class="card-text" data-lang-key="skill_clip_path_masking_desc">Tworzenie niestandardowych kształtów i maskowanie elementów za pomocą <code>clip-path</code>, <code>mask-image</code>, <code>mask-size</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <!-- selektory-pseudoklasy -->
+
+            <div class="col" data-difficulty="Słaby" data-category="selektory-pseudoklasy">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                       <i class="fas fa-bezier-curve skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_advanced_selectors">Zaawansowane selektory CSS</h5>
+                        <p class="card-text" data-lang-key="skill_advanced_selectors_desc">Pseudoklasy i pseudoelementy, zaawansowane selektory CSS (<code>:not()</code>, <code>:has()</code>), CSS Logical Properties</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <div class="col" data-difficulty="Średni" data-category="selektory-pseudoklasy">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                       <i class="fas fa-pen-nib skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_content_generation">CSS Content i generowanie zawartości</h5>
+                        <p class="card-text" data-lang-key="skill_content_generation_desc">Zaawansowane użycie właściwości <code>content</code> w połączeniu z pseudoelementami <code>::before</code>, <code>::after</code> i <code>::marker</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                          <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <!-- responsywne-projektowanie -->
+
+            <div class="col" data-difficulty="Średni" data-category="responsywne-projektowanie">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-mobile-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_responsive_design">Responsywne projektowanie</h5>
+                        <p class="card-text" data-lang-key="skill_responsive_design_desc">Media Queries, techniki responsywnego obrazu, podejście mobile-first</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                          <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="responsywne-projektowanie">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-eye skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_media_queries_level4">CSS Media Queries Level 4</h5>
+                        <p class="card-text" data-lang-key="skill_media_queries_level4_desc">Użycie nowych cech mediów, takich jak <code>prefers-color-scheme</code>, <code>prefers-reduced-motion</code>, <code>prefers-contrast</code> dla lepszej dostępności i dostosowania do preferencji użytkownika.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="responsywne-projektowanie">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-globe skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_environment_variables">CSS Environment Variables</h5>
+                        <p class="card-text" data-lang-key="skill_environment_variables_desc">Użycie <code>env()</code> do dostępu do wartości dostarczanych przez przeglądarkę lub system, takich jak <code>safe-area-inset</code> na urządzeniach z notchem.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <!-- zaawansowane-techniki -->
+
+            <div class="col" data-difficulty="Słaby" data-category="zaawansowane-techniki">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-cogs skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="skill_advanced_css_techniques">Zaawansowane techniki CSS</h5>
+                    <p class="card-text" data-lang-key="skill_advanced_css_techniques_desc">CSS Houdini, CSS Containment, Feature Queries (<code>@supports</code>), CSS Custom Properties (zaawansowane użycie)</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="zaawansowane-techniki">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-arrows-alt skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="skill_scroll_snap">CSS Scroll Snap</h5>
+                    <p class="card-text" data-lang-key="skill_scroll_snap_desc">Kontrola przewijania za pomocą <code>scroll-snap-type</code>, <code>scroll-snap-align</code> dla tworzenia płynnego przewijania między elementami.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <div class="col" data-difficulty="Średni" data-category="zaawansowane-techniki">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-scroll skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="skill_scrollbar_styling">CSS Scrollbar Styling</h5>
+                    <p class="card-text" data-lang-key="skill_scrollbar_styling_desc">Stylizacja pasków przewijania za pomocą <code>scrollbar-color</code>, <code>scrollbar-width</code> oraz pseudo-elementów <code>::-webkit-scrollbar</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                          <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <!-- dostępność-optymalizacja -->
+
+            <div class="col" data-difficulty="Słaby" data-category="dostępność-optymalizacja">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-tools skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="skill_best_practices">Najlepsze praktyki i optymalizacja</h5>
+                    <p class="card-text" data-lang-key="skill_best_practices_desc">Metodologie organizacji CSS (BEM, OOCSS), optymalizacja wydajności CSS, obsługa przeglądarek i prefiksy dostawców</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="dostępność-optymalizacja">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-universal-access skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="skill_accessibility_css">Dostępność w CSS</h5>
+                    <p class="card-text" data-lang-key="skill_accessibility_css_desc">Praktyki związane z tworzeniem dostępnych interfejsów, stylizowanie stanu fokusu (<code>:focus</code>, <code>:focus-visible</code>), ukrywanie zawartości przed czytnikami ekranu.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="dostępność-optymalizacja">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-print skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="skill_print_stylesheets">Print Stylesheets</h5>
+                    <p class="card-text" data-lang-key="skill_print_stylesheets_desc">Tworzenie stylów przeznaczonych do druku za pomocą <code>@media print</code>, optymalizacja wyglądu strony w wersji drukowanej.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                          <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top"  title="Słaby"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <div class="col" data-difficulty="Średni" data-category="dostępność-optymalizacja">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-arrows-alt-v skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="skill_overflow_scrolling">Overflow i zachowanie przewijania</h5>
+                    <p class="card-text" data-lang-key="skill_overflow_scrolling_desc">Kontrola przewijania i przepełnienia zawartości za pomocą <code>overflow</code>, <code>overflow-x</code>, <code>overflow-y</code>, <code>overscroll-behavior</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                          <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
+
+            <!-- praktyczne-umiejętności -->
+
+            <div class="col" data-difficulty="Średni" data-category="praktyczne-umiejętności"><div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                      <i class="fas fa-paint-roller skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="skill_practical_skills">Praktyczne umiejętności</h5>
+                    <p class="card-text" data-lang-key="skill_practical_skills_desc">Tworzenie layoutów stron, stylizacja komponentów UI, praca z projektami graficznymi (mockup), debugowanie kodu CSS</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                          <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top"  title="Średni"></i>
+                        </span>
+                     </div>
+                   </div>
+                </div>
 
         </div>
     </div>
-<div id="custom-scrollbar"></div>
+
+    <!-- Skrypty -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="../translations/translates.js"></script>
-</body>
+    <script src="skills.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const difficultyFilter = document.getElementById('difficultyFilter');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const skillCards = document.querySelectorAll('.col');
 
+        function filterSkills() {
+            const selectedDifficulty = difficultyFilter.value;
+            const selectedCategory = categoryFilter.value;
+
+            skillCards.forEach(card => {
+                const cardDifficulty = card.getAttribute('data-difficulty');
+                const cardCategory = card.getAttribute('data-category');
+
+                let difficultyMatch = (selectedDifficulty === 'all' || cardDifficulty === selectedDifficulty);
+                let categoryMatch = (selectedCategory === 'all' || cardCategory === selectedCategory);
+
+                if (difficultyMatch && categoryMatch) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+        }
+
+        difficultyFilter.addEventListener('change', filterSkills);
+        categoryFilter.addEventListener('change', filterSkills);
+
+        filterSkills();
+    });
+    </script>
+</body>
 </html>
