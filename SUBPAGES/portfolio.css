@@ -1362,11 +1362,17 @@ footer {
   background-clip: text;
   color: transparent;
 }
+.iconDocker {
+  background-image: linear-gradient(135deg, #0db7ed, #0087c9, #006494);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
 .iconJS_HTML_CSS {
   font-size: 80px;
   filter: grayscale(8%);
 }
-
 .language-switch_portfolio {
   display: none;
 }

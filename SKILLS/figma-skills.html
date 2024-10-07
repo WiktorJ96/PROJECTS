@@ -17,154 +17,351 @@
             height: auto;
             border-radius: 8px;
         }
-.figma-hr {
-    border: none;
-    height: 3px;
-    background: linear-gradient(to right, rgb(255, 55, 0), rgba(227, 76, 38, 0), rgb(149, 1, 255));
-    margin: 40px 0;
-    position: relative;
-    overflow: visible;
-}
 
-.figma-hr::before {
-    content: '🖌';
-    display: block;
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 30px;
-    letter-spacing: 10px;
-    color: rgb(64, 0, 255);
-    font-weight: bold;
-}
+        .figma-hr {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, rgb(255, 55, 0), rgba(227, 76, 38, 0), rgb(149, 1, 255));
+            margin: 40px 0;
+            position: relative;
+            overflow: visible;
+        }
+
+        .figma-hr::before {
+            content: '🖌';
+            display: block;
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            letter-spacing: 10px;
+            color: rgb(64, 0, 255);
+            font-weight: bold;
+        }
     </style>
 </head>
-<div class="language-switch">
-    <button id="lang-pl">PL</button>
-    <button id="lang-en">EN</button>
-</div>
+
 <body class="bg-light" data-page="figma">
+    <div class="language-switch">
+        <button id="lang-pl">PL</button>
+        <button id="lang-en">EN</button>
+    </div>
 
     <div class="loader" id="loader"></div>
 
     <div class="container py-5">
         <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma Logo"
             class="figma-logo mb-4">
-            <hr class="figma-hr">
+        <hr class="figma-hr">
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <!-- Panel Filtrów -->
+        <div class="filter-panel mb-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="difficultyFilter" class="form-label" data-lang-key="filter_difficulty_label">Filtruj według poziomu trudności:</label>
+                    <select id="difficultyFilter" class="form-select">
+                        <option value="all" data-lang-key="filter_all">Wszystkie</option>
+                        <option value="Dobry" data-lang-key="filter_easy">Dobry</option>
+                        <option value="Średni" data-lang-key="filter_medium">Średni</option>
+                        <option value="Słaby" data-lang-key="filter_hard">Słaby</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="categoryFilter" class="form-label" data-lang-key="filter_category_label">Filtruj według kategorii:</label>
+                    <select id="categoryFilter" class="form-select">
+                        <option value="all" data-lang-key="filter_all">Wszystkie</option>
+                        <option value="podstawy-figmy" data-lang-key="category_figma_basics">Podstawy Figmy</option>
+                        <option value="zaawansowane-funkcje" data-lang-key="category_advanced_features">Zaawansowane Funkcje</option>
+                        <option value="wspolpraca-i-zarzadzanie" data-lang-key="category_collaboration_management">Współpraca i Zarządzanie Projektami</option>
+                        <option value="obrazy-i-ikony" data-lang-key="category_images_icons">Praca z Obrazami i Ikonami</option>
+                        <option value="eksport-i-handover" data-lang-key="category_export_handover">Eksport i Handover</option>
+                        <option value="pluginy-i-integracje" data-lang-key="category_plugins_integrations">Pluginy i Integracje</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-            <div class="col">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="skillsContent">
+
+            <!-- Karta: Interfejs i Narzędzia -->
+            <div class="col" data-difficulty="Dobry" data-category="podstawy-figmy">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-desktop skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="figma_basics_title">Podstawy Figmy:</h5>
-                        <p class="card-text" data-lang-key="figma_basics_desc">Znajomość interfejsu i narzędzi Figmy</p>
+                        <h5 class="card-title" data-lang-key="skill_interface_tools_title">Interfejs i Narzędzia</h5>
+                        <p class="card-text" data-lang-key="skill_interface_tools_description">Znajomość interfejsu użytkownika, paneli, skrótów klawiaturowych i podstawowych narzędzi Figmy.</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                        <span class="badge bg-success"><i class="fas fa-smile" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Dobry"></i></span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <!-- Karta: Zarządzanie Kolorami -->
+            <div class="col" data-difficulty="Średni" data-category="podstawy-figmy">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-palette skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="color_management_title">Zarządzanie kolorami:</h5>
-                        <p class="card-text" data-lang-key="color_management_desc">Tworzenie biblioteki kolorów, dobieranie kolorów głównych, dopełniających, odcieni i gradientów</p>
+                        <h5 class="card-title" data-lang-key="skill_color_management_title">Zarządzanie Kolorami</h5>
+                        <p class="card-text" data-lang-key="skill_color_management_description">Tworzenie bibliotek kolorów, stosowanie stylów kolorów, gradienty, efekty i palety.</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-warning"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Średni"></i></span>
+                        <span class="badge bg-warning"><i class="fas fa-meh" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Średni"></i></span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <!-- Karta: Typografia -->
+            <div class="col" data-difficulty="Średni" data-category="podstawy-figmy">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-font skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="typography_title">Typografia:</h5>
-                        <p class="card-text" data-lang-key="typography_desc">Tworzenie biblioteki fontów, wykorzystanie Google Fonts, funkcje związane z tekstem w Figmie</p>
+                        <h5 class="card-title" data-lang-key="skill_typography_title">Typografia</h5>
+                        <p class="card-text" data-lang-key="skill_typography_description">Tworzenie stylów tekstu, wykorzystanie Google Fonts, zarządzanie typografią w projekcie.</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-warning"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Średni"></i></span>
+                        <span class="badge bg-warning"><i class="fas fa-meh" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Średni"></i></span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <!-- Karta: Auto Layout -->
+            <div class="col" data-difficulty="Słaby" data-category="zaawansowane-funkcje">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-layer-group skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_auto_layout_title">Auto Layout</h5>
+                        <p class="card-text" data-lang-key="skill_auto_layout_description">Wykorzystanie Auto Layout do tworzenia responsywnych i elastycznych komponentów.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-danger"><i class="fas fa-frown" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Słaby"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta: Komponenty i Warianty -->
+            <div class="col" data-difficulty="Słaby" data-category="zaawansowane-funkcje">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-cubes skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_components_variants_title">Komponenty i Warianty</h5>
+                        <p class="card-text" data-lang-key="skill_components_variants_description">Tworzenie i zarządzanie komponentami, wykorzystanie wariantów do tworzenia design systemów.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-danger"><i class="fas fa-frown" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Słaby"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta: Prototypowanie -->
+            <div class="col" data-difficulty="Słaby" data-category="zaawansowane-funkcje">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-project-diagram skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_prototyping_title">Prototypowanie</h5>
+                        <p class="card-text" data-lang-key="skill_prototyping_description">Tworzenie interaktywnych prototypów, animacje, przejścia między ekranami.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-danger"><i class="fas fa-frown" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Słaby"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta: Praca Zespołowa -->
+            <div class="col" data-difficulty="Słaby" data-category="wspolpraca-i-zarzadzanie">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-users skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_teamwork_title">Praca Zespołowa</h5>
+                        <p class="card-text" data-lang-key="skill_teamwork_description">Współpraca w czasie rzeczywistym, komentowanie, udostępnianie projektów.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-danger"><i class="fas fa-frown" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Słaby"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta: Biblioteki Zespołowe -->
+            <div class="col" data-difficulty="Słaby" data-category="wspolpraca-i-zarzadzanie">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-book skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_team_libraries_title">Biblioteki Zespołowe</h5>
+                        <p class="card-text" data-lang-key="skill_team_libraries_description">Tworzenie i zarządzanie bibliotekami stylów, komponentów i zasobów dla zespołu.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-danger"><i class="fas fa-frown" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Słaby"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta: Wersjonowanie i Historia -->
+            <div class="col" data-difficulty="Słaby" data-category="wspolpraca-i-zarzadzanie">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-history skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_versioning_history_title">Wersjonowanie i Historia</h5>
+                        <p class="card-text" data-lang-key="skill_versioning_history_description">Korzystanie z historii wersji, cofanie zmian, tworzenie punktów kontrolnych.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">                       
+                        <small class="text-muted"></small>
+                        <span class="badge bg-danger"><i class="fas fa-frown" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Słaby"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta: Import i Edycja Obrazów -->
+            <div class="col" data-difficulty="Średni" data-category="obrazy-i-ikony">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-image skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="image_handling_title">Praca z obrazami:</h5>
-                        <p class="card-text" data-lang-key="image_handling_desc">Importowanie i kadrowanie zdjęć, usuwanie tła, tworzenie efektów, maskowanie, praca z ikonami</p>
+                        <h5 class="card-title" data-lang-key="skill_image_editing_title">Import i Edycja Obrazów</h5>
+                        <p class="card-text" data-lang-key="skill_image_editing_description">Importowanie, kadrowanie, maskowanie zdjęć, usuwanie tła, efekty wizualne.</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-warning"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Średni"></i></span>
+                        <span class="badge bg-warning"><i class="fas fa-meh" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Średni"></i></span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <!-- Karta: Praca z Ikonami i SVG -->
+            <div class="col" data-difficulty="Słaby" data-category="obrazy-i-ikony">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-th skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="layout_design_title">Projektowanie layoutów:</h5>
-                        <p class="card-text" data-lang-key="layout_design_desc">Wykorzystanie siatki (grid) w projektowaniu, tworzenie Key Visual dla kampanii</p>
+                        <i class="fas fa-icons skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_icons_svg_title">Praca z Ikonami i SVG</h5>
+                        <p class="card-text" data-lang-key="skill_icons_svg_description">Importowanie i edycja ikon, tworzenie własnych ikon, wykorzystanie plików SVG.</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-danger"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Trudny"></i></span>
+                        <span class="badge bg-danger"><i class="fas fa-frown" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Słaby"></i></span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <!-- Karta: Eksportowanie Zasobów -->
+            <div class="col" data-difficulty="Średni" data-category="eksport-i-handover">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-mobile-alt skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="responsive_design_title">Projektowanie responsywne:</h5>
-                        <p class="card-text" data-lang-key="responsive_design_desc">Tworzenie grafik dla różnych formatów (Instagram, Facebook, LinkedIn, reklamy Google)</p>
+                        <i class="fas fa-file-export skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_exporting_assets_title">Eksportowanie Zasobów</h5>
+                        <p class="card-text" data-lang-key="skill_exporting_assets_description">Przygotowanie zasobów do eksportu, formaty plików, eksport wielokrotny.</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-danger"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Trudny"></i></span>
+                        <span class="badge bg-warning"><i class="fas fa-meh" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Średni"></i></span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <!-- Karta: Handover dla Deweloperów -->
+            <div class="col" data-difficulty="Słaby" data-category="eksport-i-handover">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-bullhorn skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="advanced_techniques_title">Zaawansowane techniki:</h5>
-                        <p class="card-text" data-lang-key="advanced_techniques_desc">Tworzenie spójnych kampanii reklamowych, implementacja CTA (Call to Action) w projektach</p>
+                        <i class="fas fa-code skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_developer_handover_title">Handover dla Deweloperów</h5>
+                        <p class="card-text" data-lang-key="skill_developer_handover_description">Udostępnianie specyfikacji, wykorzystanie trybu Inspektora, eksport CSS.</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-muted"></small>
-                        <span class="badge bg-danger"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Trudny"></i></span>
+                        <span class="badge bg-danger"><i class="fas fa-frown" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Słaby"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta: Wykorzystanie Pluginów -->
+            <div class="col" data-difficulty="Średni" data-category="pluginy-i-integracje">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-plug skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_plugins_usage_title">Wykorzystanie Pluginów</h5>
+                        <p class="card-text" data-lang-key="skill_plugins_usage_description">Instalacja i korzystanie z pluginów zwiększających produktywność.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-warning"><i class="fas fa-meh" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Średni"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta: Integracje z Innych Narzędziami -->
+            <div class="col" data-difficulty="Słaby" data-category="pluginy-i-integracje">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-exchange-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_integrations_title">Integracje z Innych Narzędziami</h5>
+                        <p class="card-text" data-lang-key="skill_integrations_description">Połączenie z narzędziami takimi jak Slack, Zeplin, Trello, Jira.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <small class="text-muted"></small>
+                        <span class="badge bg-danger"><i class="fas fa-frown" data-bs-toggle="tooltip"
+                                data-bs-placement="top"  title="Słaby"></i></span>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-<div id="custom-scrollbar"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="../translations/translates.js"></script>
+    <script src="skills.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const difficultyFilter = document.getElementById('difficultyFilter');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const skillCards = document.querySelectorAll('.col');
+
+        function filterSkills() {
+            const selectedDifficulty = difficultyFilter.value;
+            const selectedCategory = categoryFilter.value;
+
+            skillCards.forEach(card => {
+                const cardDifficulty = card.getAttribute('data-difficulty');
+                const cardCategory = card.getAttribute('data-category');
+
+                let difficultyMatch = (selectedDifficulty === 'all' || cardDifficulty === selectedDifficulty);
+                let categoryMatch = (selectedCategory === 'all' || cardCategory === selectedCategory);
+
+                if (difficultyMatch && categoryMatch) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        difficultyFilter.addEventListener('change', filterSkills);
+        categoryFilter.addEventListener('change', filterSkills);
+
+        filterSkills();
+    });
+    </script>
 </body>
 
 </html>

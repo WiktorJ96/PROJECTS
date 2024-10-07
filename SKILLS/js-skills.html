@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,30 +7,31 @@
     <link rel="icon" type="image/png" href="assets/js.png" sizes="16x16">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link rel="stylesheet" href="./skills.css">
     <style>
-.js-hr {
-    border: none;
-    height: 3px;
-    background: linear-gradient(to right, hsla(51, 100%, 50%, 0.9), rgba(255, 223, 0, 0), rgba(255, 223, 0));
-    margin: 40px 0;
-    position: relative;
-    overflow: visible;
-}
+        .js-hr {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, hsla(51, 100%, 50%, 0.9), rgba(255, 223, 0, 0), rgba(255, 223, 0));
+            margin: 40px 0;
+            position: relative;
+            overflow: visible;
+        }
 
-.js-hr::before {
-    content: '(...JS)';
-    display: block;
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 20px;
-    letter-spacing: 10px;
-    color: rgb(253, 220, 2);
-    font-weight: bold;
-}
-
+        .js-hr::before {
+            content: '(...JS)';
+            display: block;
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            letter-spacing: 10px;
+            color: rgb(253, 220, 2);
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -48,160 +47,401 @@
         <i class="fab fa-js-square icon iconJS"></i>
         <hr class="js-hr">
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <!-- Panel Filtrów -->
+        <div class="filter-panel">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="difficultyFilter" class="form-label" data-lang-key="filter_difficulty_label">Filtruj według poziomu zrozumienia:</label>
+                    <select id="difficultyFilter" class="form-select">
+                        <option value="all" data-lang-key="filter_all">Wszystkie</option>
+                        <option value="Dobry" data-lang-key="filter_good">Dobry</option>
+                        <option value="Średni" data-lang-key="filter_medium">Średni</option>
+                        <option value="Słaby" data-lang-key="filter_weak">Słaby</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="categoryFilter" class="form-label" data-lang-key="filter_category_label">Filtruj według kategorii:</label>
+                    <select id="categoryFilter" class="form-select">
+                        <option value="all" data-lang-key="filter_all">Wszystkie</option>
+                        <option value="podstawy-js" data-lang-key="category_js_basics">Podstawy JavaScript</option>
+                        <option value="funkcje-zakres" data-lang-key="category_functions_scope">Funkcje i Zakres</option>
+                        <option value="obiekty-tablice" data-lang-key="category_objects_arrays">Obiekty i Tablice</option>
+                        <option value="programowanie-obiektowe" data-lang-key="category_oop">Programowanie Obiektowe</option>
+                        <option value="asynchronicznosc" data-lang-key="category_asynchronicity">Asynchroniczność</option>
+                        <option value="dom-interakcja" data-lang-key="category_dom_interaction">DOM i Interakcja z Przeglądarką</option>
+                        <option value="dodatkowe-tematy" data-lang-key="category_additional_topics">Dodatkowe Tematy</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-            <div class="col">
+        <!-- Zawartość kart umiejętności -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="skillsContent">
+
+            <!-- Podstawy JavaScript -->
+            <div class="col" data-difficulty="Dobry" data-category="podstawy-js">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-file-code skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="basics_title">Znajomość podstaw:</h5>
-                        <p class="card-text" data-lang-key="basics_desc">składnia JS, instrukcje, komentarze, typy
-                            danych (proste i referencyjne), zmienne (const, let, var), operatory, literały, właściwości
-                            i metody typów prostych</p>
+                        <h5 class="card-title" data-lang-key="skill_syntax_variables">Składnia i Zmienne</h5>
+                        <p class="card-text" data-lang-key="skill_syntax_variables_desc">Składnia JS, instrukcje, komentarze, typy danych (proste i referencyjne), zmienne (<code>const</code>, <code>let</code>, <code>var</code>), literały.</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col" data-difficulty="Dobry" data-category="podstawy-js">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-sync skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="control_structures_title">Struktury kontrolne:</h5>
-                        <p class="card-text" data-lang-key="control_structures_desc">instrukcje warunkowe (if, switch),
-                            pętle (for, while, do...while, forEach), operatory warunkowe</p>
+                        <i class="fas fa-calculator skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_operators_expressions">Operatory i Wyrażenia</h5>
+                        <p class="card-text" data-lang-key="skill_operators_expressions_desc">Operatory arytmetyczne, logiczne, porównania, przypisania, wyrażenia warunkowe.</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col" data-difficulty="Dobry" data-category="podstawy-js">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-cog skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="functions_title">Funkcje:</h5>
-                        <p class="card-text" data-lang-key="functions_desc">definiowanie i wywoływanie funkcji,
-                            zwracanie wartości, wartości domyślne, callbacks, obiekt arguments, operator rest</p>
+                        <i class="fas fa-code-branch skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_control_structures">Struktury Kontrolne</h5>
+                        <p class="card-text" data-lang-key="skill_control_structures_desc">Instrukcje warunkowe (<code>if</code>, <code>switch</code>), pętle (<code>for</code>, <code>while</code>, <code>do...while</code>, <code>for...of</code>, <code>forEach</code>).</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
-                    </div>
-                </div>
-            </div>
-
-                        <div class="col">
-                <div class="card skill-card h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-project-diagram skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="advanced_concepts_title">Zaawansowane koncepcje JS:</h5>
-                        <p class="card-text" data-lang-key="advanced_concepts_desc">hoisting, zakres (scope) - globalny
-                            i lokalny, closures, modułowość, destrukturyzacja</p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-warning"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Średni"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
-                <div class="card skill-card h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-th-list skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="data_structures_title">Struktury danych:</h5>
-                        <p class="card-text" data-lang-key="data_structures_desc">tablice i metody tablicowe, obiekty
-                        </p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card skill-card h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-object-group skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="dom_title">DOM (Document Object Model):</h5>
-                        <p class="card-text" data-lang-key="dom_desc">pobieranie elementów, modyfikacja elementów,
-                            obsługa zdarzeń</p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card skill-card h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-cubes skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="oop_title">Programowanie obiektowe (OOP):</h5>
-                        <p class="card-text" data-lang-key="oop_desc">podstawy OOP w JavaScript, klasy i dziedziczenie
-                        </p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-success"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Łatwy"></i></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card skill-card h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-spinner skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="async_title">Programowanie asynchroniczne:</h5>
-                        <p class="card-text" data-lang-key="async_desc">callbacks, promises, async/await, fetch API</p>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-warning"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Średni"></i></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
+            <!-- Funkcje i Zakres -->
+            <div class="col" data-difficulty="Dobry" data-category="funkcje-zakres">
                 <div class="card skill-card h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-laptop-code skill-icon mb-3"></i>
-                        <h5 class="card-title" data-lang-key="practical_skills_title">Praktyczne umiejętności
-                            projektowe:</h5>
-                        <p class="card-text" data-lang-key="practical_skills_desc">
-                            tworzenie interaktywnych elementów strony, praca z LocalStorage, tworzenie gier, walidacja
-                            formularzy, praca z Canvas</p>
+                        <h5 class="card-title" data-lang-key="skill_functions">Definiowanie i Wywoływanie</h5>
+                        <p class="card-text" data-lang-key="skill_functions_desc">Deklaracja funkcji, wyrażenia funkcyjne, funkcje strzałkowe, zwracanie wartości, wartości domyślne parametrów.</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                        <span class="badge bg-warning"><i data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Średni"></i></span>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="funkcje-zakres">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-layer-group skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_scope_hoisting">Scope i Hoisting</h5>
+                        <p class="card-text" data-lang-key="skill_scope_hoisting_desc">Zakres zmiennych (globalny, lokalny), hoisting zmiennych i funkcji, różnice między <code>var</code>, <code>let</code>, <code>const</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="funkcje-zakres">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-lock skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_closures">Closures</h5>
+                        <p class="card-text" data-lang-key="skill_closures_desc">Pojęcie domknięć, zastosowanie w praktyce, prywatne zmienne i funkcje.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Obiekty i Tablice -->
+            <div class="col" data-difficulty="Dobry" data-category="obiekty-tablice">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-cube skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_objects">Obiekty</h5>
+                        <p class="card-text" data-lang-key="skill_objects_desc">Tworzenie i manipulacja obiektami, właściwości i metody, iteracja po obiektach.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Dobry" data-category="obiekty-tablice">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-th-list skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_arrays">Tablice</h5>
+                        <p class="card-text" data-lang-key="skill_arrays_desc">Tworzenie tablic, metody tablicowe (<code>push</code>, <code>pop</code>, <code>map</code>, <code>filter</code>, <code>reduce</code>), iteracja po tablicach.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="obiekty-tablice">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-code skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_destructuring">Destrukturyzacja i Rest/Spread</h5>
+                        <p class="card-text" data-lang-key="skill_destructuring_desc">Destrukturyzacja obiektów i tablic, operator rest i spread.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Programowanie Obiektowe -->
+            <div class="col" data-difficulty="Średni" data-category="programowanie-obiektowe">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chalkboard-teacher skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_classes_inheritance">Klasy i Dziedziczenie</h5>
+                        <p class="card-text" data-lang-key="skill_classes_inheritance_desc">Definiowanie klas, konstruktory, metody, dziedziczenie za pomocą <code>extends</code>, superklasy.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="programowanie-obiektowe">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-project-diagram skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_prototypes">Prototypy i Dziedziczenie Prototypowe</h5>
+                        <p class="card-text" data-lang-key="skill_prototypes_desc">Pojęcie prototypu, łańcuch prototypów, tworzenie własnych prototypów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top" title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="programowanie-obiektowe">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-puzzle-piece skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_modules">Moduły ES6</h5>
+                        <p class="card-text" data-lang-key="skill_modules_desc">Importowanie i eksportowanie modułów, strukturyzacja kodu, najlepsze praktyki.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top" title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Asynchroniczność -->
+            <div class="col" data-difficulty="Średni" data-category="asynchronicznosc">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-spinner skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_callbacks_promises">Callbacks i Promises</h5>
+                        <p class="card-text" data-lang-key="skill_callbacks_promises_desc">Funkcje zwrotne, pojęcie Promise, obsługa asynchronicznego kodu.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="asynchronicznosc">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-hourglass-half skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_async_await">Async/Await</h5>
+                        <p class="card-text" data-lang-key="skill_async_await_desc">Asynchroniczne funkcje, użycie <code>async</code> i <code>await</code>, obsługa błędów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top" title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="asynchronicznosc">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-cloud-download-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_fetch_ajax">Fetch API i AJAX</h5>
+                        <p class="card-text" data-lang-key="skill_fetch_ajax_desc">Wysyłanie żądań HTTP, pobieranie danych z serwera, obsługa JSON.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top" title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DOM i Interakcja z Przeglądarką -->
+            <div class="col" data-difficulty="Dobry" data-category="dom-interakcja">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-object-group skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_dom_manipulation">Manipulacja DOM</h5>
+                        <p class="card-text" data-lang-key="skill_dom_manipulation_desc">Pobieranie elementów, modyfikacja treści i atrybutów, tworzenie i usuwanie elementów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                            <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="dom-interakcja">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-mouse-pointer skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_event_handling">Obsługa Zdarzeń</h5>
+                        <p class="card-text" data-lang-key="skill_event_handling_desc">Dodawanie i usuwanie nasłuchiwaczy zdarzeń, propagacja zdarzeń, delegacja zdarzeń.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="dom-interakcja">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-database skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_web_storage">Web Storage API</h5>
+                        <p class="card-text" data-lang-key="skill_web_storage_desc">Praca z <code>localStorage</code> i <code>sessionStorage</code>, przechowywanie danych po stronie klienta.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dodatkowe Tematy -->
+            <div class="col" data-difficulty="Słaby" data-category="dodatkowe-tematy">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-slash skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_regex">Regular Expressions</h5>
+                        <p class="card-text" data-lang-key="skill_regex_desc">Tworzenie i użycie wyrażeń regularnych, metody testowania i wyszukiwania.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top" title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="dodatkowe-tematy">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-bug skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_error_handling">Obsługa Błędów i Debugowanie</h5>
+                        <p class="card-text" data-lang-key="skill_error_handling_desc">Try...catch, rzucanie wyjątków, użycie narzędzi deweloperskich.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Dobry" data-category="dodatkowe-tematy">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-project-diagram skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill_practical_projects">Praktyczne Projekty</h5>
+                        <p class="card-text" data-lang-key="skill_practical_projects_desc">Tworzenie interaktywnych elementów strony, gier, aplikacji webowych, praca z <code>Canvas</code>.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                            <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry"></i>
+                        </span>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-<div id="custom-scrollbar"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="../translations/translates.js"></script>
     <script src="skills.js"></script>
-</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const difficultyFilter = document.getElementById('difficultyFilter');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const skillCards = document.querySelectorAll('.col');
 
+            function filterSkills() {
+                const selectedDifficulty = difficultyFilter.value;
+                const selectedCategory = categoryFilter.value;
+
+                skillCards.forEach(card => {
+                    const cardDifficulty = card.getAttribute('data-difficulty');
+                    const cardCategory = card.getAttribute('data-category');
+
+                    let difficultyMatch = (selectedDifficulty === 'all' || cardDifficulty === selectedDifficulty);
+                    let categoryMatch = (selectedCategory === 'all' || cardCategory === selectedCategory);
+
+                    if (difficultyMatch && categoryMatch) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            difficultyFilter.addEventListener('change', filterSkills);
+            categoryFilter.addEventListener('change', filterSkills);
+
+            filterSkills();
+
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerElement) {
+                return new bootstrap.Tooltip(tooltipTriggerElement)
+            })
+        });
+    </script>
+</body>
 </html>
