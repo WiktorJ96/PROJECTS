@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="page_title">Umiejętności VSC</title>
+    <link rel="icon" type="image/png" href="./assets/vsc-icon.png" sizes="16x16">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./skills.css">
+    <style>
+.vsc-hr {
+    border: none;
+    height: 3px;
+    background: linear-gradient(to right, #007ACC, rgba(0, 122, 204, 0), #1E1E1E);
+    margin: 40px 0;
+    position: relative;
+    overflow: visible;
+}
+
+.vsc-hr::before {
+    content: 'VSC';
+    display: block;
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    letter-spacing: 8px;
+    color: #007ACC; 
+    font-weight: bold;
+    font-family: Consolas, 'Courier New', monospace;
+}
+    </style>
+<body data-page="vsc">
+    <div class="language-switch">
+        <button id="lang-pl" data-lang-key="button_pl">PL</button>
+        <button id="lang-en" data-lang-key="button_en">EN</button>
+    </div>
+  <div class="container py-5">
+        <div style="text-align: center;">
+    <img src="https://code.visualstudio.com/assets/images/code-stable.png" alt="Visual Studio Code Logo" class="mb-4" style="width: 120px; height: 100px;">
+    </div>
+    <hr class="vsc-hr">
+
+
+    <!-- Zawartość kart umiejętności -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="skillsContent">
+
+        <!-- Podstawy Visual Studio Code -->
+        <div class="col" data-difficulty="Dobry" data-category="podstawy-vscode">
+            <div class="card skill-card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-desktop skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="ui_interface_title">Interfejs Użytkownika</h5>
+                    <p class="card-text" data-lang-key="ui_interface_description">Nawigacja po interfejsie, panele boczne, pasek statusu, terminal wbudowany.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge bg-success">
+                         <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry" ></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zarządzanie Plikami i Projektami -->
+        <div class="col" data-difficulty="Dobry" data-category="podstawy-vscode">
+            <div class="card skill-card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-folder-open skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="file_management_title">Zarządzanie Plikami i Projektami</h5>
+                    <p class="card-text" data-lang-key="file_management_description">Otwieranie folderów, praca z wieloma projektami, przeglądarka plików.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge bg-success">
+                         <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry" ></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edytowanie Kodu -->
+        <div class="col" data-difficulty="Dobry" data-category="edytowanie-kodu">
+            <div class="card skill-card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-code skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="code_editing_title">Podstawy Edytowania Kodu</h5>
+                    <p class="card-text" data-lang-key="code_editing_description">Składnia, podpowiedzi IntelliSense, auto-uzupełnianie, nawigacja po kodzie.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge bg-success">
+                         <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry" ></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col" data-difficulty="Średni" data-category="edytowanie-kodu">
+            <div class="card skill-card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-pencil-alt skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="advanced_editing_title">Zaawansowane Techniki Edycji</h5>
+                    <p class="card-text" data-lang-key="advanced_editing_description">Wielokrotne kursory, zaznaczanie, skróty klawiaturowe, refaktoryzacja kodu.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge bg-warning">
+                         <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni" ></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zarządzanie Rozszerzeniami -->
+        <div class="col" data-difficulty="Średni" data-category="zarzadzanie-rozszerzeniami">
+            <div class="card skill-card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-puzzle-piece skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="extensions_management_title">Instalacja i Zarządzanie Rozszerzeniami</h5>
+                    <p class="card-text" data-lang-key="extensions_management_description">Dodawanie nowych funkcji, konfiguracja rozszerzeń, marketplace.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge bg-success">
+                         <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry" ></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Debugowanie -->
+        <div class="col" data-difficulty="Słaby" data-category="debugowanie">
+            <div class="card skill-card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-bug skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="debugging_title">Debugowanie Kodu</h5>
+                    <p class="card-text" data-lang-key="debugging_description">Ustawianie breakpointów, inspekcja zmiennych, konfiguracja debuggera.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge bg-danger">
+                         <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top" title="Słaby" ></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kontrola Wersji -->
+        <div class="col" data-difficulty="Średni" data-category="kontrola-wersji">
+            <div class="card skill-card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-code-branch skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="git_integration_title">Integracja z Git</h5>
+                    <p class="card-text" data-lang-key="git_integration_description">Podstawowe operacje Git, przegląd zmian, konflikty, rozgałęzienia.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge bg-success">
+                         <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry" ></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personalizacja i Automatyzacja -->
+        <div class="col" data-difficulty="Średni" data-category="personalizacja">
+            <div class="card skill-card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-cogs skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="customization_title">Personalizacja Środowiska</h5>
+                    <p class="card-text" data-lang-key="customization_description">Zmiana motywów, ikon, konfiguracja ustawień użytkownika i projektu.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge bg-success">
+                         <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry" ></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col" data-difficulty="Słaby" data-category="personalizacja">
+            <div class="card skill-card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-robot skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="automation_title">Automatyzacja zadań</h5>
+                    <p class="card-text" data-lang-key="automation_description">Tworzenie zadań, integracja z narzędziami build, automatyczne uruchamianie skryptów.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge bg-danger">
+                         <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top" title="Słaby" ></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zaawansowane Funkcje -->
+        <div class="col" data-difficulty="Słaby" data-category="zaawansowane-funkcje">
+            <div class="card skill-card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-network-wired skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="remote_work_title">Praca zdalna i SSH</h5>
+                    <p class="card-text" data-lang-key="remote_work_description">Edytowanie kodu na zdalnych serwerach, konfiguracja SSH, Remote Development.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge bg-danger">
+                         <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top" title="Słaby" ></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col" data-difficulty="Słaby" data-category="zaawansowane-funkcje">
+            <div class="card skill-card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-docker skill-icon mb-3"></i>
+                    <h5 class="card-title" data-lang-key="docker_integration_title">Integracja z Dockerem i Kubernetes</h5>
+                    <p class="card-text" data-lang-key="docker_integration_description">Zarządzanie kontenerami, praca z klastrami Kubernetes, konfiguracja środowisk.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni" ></i>
+                        </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Skrypty -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../translations/translates.js"></script>
+<script src="skills.js"></script>
+</body>
+</html>
