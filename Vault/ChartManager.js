@@ -233,16 +233,27 @@ class ChartManager {
   }
 
   updateChart() {
-    const balanceHistory = this.transactionManager.balanceHistory;
+    const balanceHistory = this.transactionManager.transactions || [];
+
+    if (balanceHistory.length === 0) {
+      console.log("Brak danych do zaktualizowania wykresu.");
+      return;
+    }
+
     const labels = balanceHistory.map((entry) => entry.date);
-    const balanceData = balanceHistory.map((entry) => entry.balance);
-    const incomeData = balanceHistory.map((entry) => entry.income);
-    const expensesData = balanceHistory.map((entry) => entry.expenses);
+    const balanceData = balanceHistory.map((entry) => entry.amount);
+    const incomeData = balanceHistory
+      .filter((entry) => entry.amount > 0)
+      .map((entry) => entry.amount);
+    const expensesData = balanceHistory
+      .filter((entry) => entry.amount < 0)
+      .map((entry) => entry.amount);
 
     this.chart.data.labels = labels;
     this.chart.data.datasets[0].data = balanceData;
     this.chart.data.datasets[1].data = incomeData;
     this.chart.data.datasets[2].data = expensesData;
+
     this.chart.update();
   }
 

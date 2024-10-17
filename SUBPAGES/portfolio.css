@@ -605,6 +605,10 @@ h2 {
   background: linear-gradient(90deg, #003366, #3399cc, #d9d9d9);
 }
 
+#bootstrap-skill .progress-bar {
+  background: linear-gradient(90deg, #563d7c, #6f42c1, #7952b3);
+}
+
 .icon {
   font-size: 35px;
   margin-right: 8px;
@@ -630,6 +634,11 @@ h2 {
 }
 
 .click {
+  font-size: 20px;
+}
+
+.btn-secondary.rounded-pill {
+  padding: 5px 10px;
   font-size: 20px;
 }
 
@@ -788,8 +797,6 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
-  margin: 2rem;
 }
 
 .flip-card {
@@ -870,21 +877,22 @@ h2 {
   border-radius: 50px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  margin-bottom: 12px;
 }
 
-.chorelyIcon {
+.chorelyIcon1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.4),
     rgba(255, 255, 255, 0.1)
   );
   border-radius: 50%;
-  font-size: 14px;
+  font-size: 20px;
   color: #ffffff;
   box-shadow:
     0 4px 15px rgba(9, 161, 249, 0.3),
@@ -900,7 +908,7 @@ h2 {
     floating 3s ease-in-out infinite;
 }
 
-.chorelyIcon::before {
+.chorelyIcon1::before {
   content: "";
   position: absolute;
   top: -50%;
@@ -909,13 +917,13 @@ h2 {
   height: 200%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.3) 0%,
+    rgba(0, 170, 255, 0.459) 0%,
     transparent 70%
   );
   animation: rotate 6s linear infinite;
 }
 
-.chorelyIcon::after {
+.chorelyIcon1::after {
   content: "\f00c";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
@@ -923,8 +931,8 @@ h2 {
   z-index: 1;
 }
 
-.chorely {
-  font-size: 18px;
+.chorely-name1 {
+  font-size: 24px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -971,13 +979,112 @@ h2 {
   }
 }
 
-/* VAULT */
-.text {
-  font-size: 38px;
+.Chorely-logo-container {
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(135deg, #09a1f9 0%, #0d47a1 100%);
+  padding: 10px 20px;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
+
+.Chorely-logo-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.chorelyIcon2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.1)
+  );
+  border-radius: 50%;
+  font-size: 28px;
+  color: #ffffff;
+  box-shadow:
+    0 4px 15px rgba(9, 161, 249, 0.3),
+    inset 0 2px 5px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 5px rgba(9, 161, 249, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation:
+    morphBackground 10s infinite,
+    floating 3s ease-in-out infinite;
+}
+
+.chorelyIcon2::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 70%
+  );
+  animation: rotate 6s linear infinite;
+}
+
+.chorelyIcon2::after {
+  content: "\f00c";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+}
+
+.chorely-name2 {
+  font-size: 35px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ffffff;
+  margin-left: 15px;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.1),
+    0 0 5px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* VAULT */
 .h1-Vault {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.h1-Vault img {
+  position: relative;
+}
+
+.h1-Vault .text {
+  position: relative;
+  font-size: 38px;
+  font-weight: bold;
+}
+
+.Vault-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(40, 175, 96, 0.952);
+  padding: 5px 18px;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
 }
 
 .flip-card-back h1 {
@@ -1004,7 +1111,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px;
+  padding: 15px;
   background: linear-gradient(
     135deg,
     #e6f2e6 0%,
@@ -1020,7 +1127,7 @@ h2 {
 
 .NutriPulse-H3 {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: -5px;
@@ -1108,7 +1215,7 @@ h2 {
   display: inline-block;
   padding: 0.6rem;
   border-radius: 40px;
-  width: 1.8rem;
+  width: 3rem;
   background-color: #f0f0f0;
   color: #222;
   transition:

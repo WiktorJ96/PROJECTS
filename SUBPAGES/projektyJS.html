@@ -13,6 +13,7 @@
     <link rel="canonical" href="https://wiktorj96.github.io/PROJECTS/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="portfolio.css">
     <title data-lang-key="title_js">Projekty JavaScript, HTML, CSS</title>
 
@@ -26,9 +27,6 @@
     }
     </script>
 </head>
-<style>
-
-    </style>
 <body data-page="subpage">
     <main id="portfolioJS_HTML_CSS">
 
@@ -70,7 +68,9 @@
                                 </figure>
                             </div>
                             <div class="flip-card-back">
-                                <h1 class="h1-Vault"><img src="../Vault/assets/vault_icon.svg" alt=""  width="60px" height="60px"><span class="text">Vault</span></h1>
+                                <div class="Vault-container">
+                                <h1 class="h1-Vault"><img src="../Vault/assets/vault_icon.svg" alt=""  width="67px" height="67px"><span class="text">Vault</span></h1>
+                                </div>
                                 <p data-lang-key="wallet_desc">Responsywny portfel z wykresem salda i opcja zmiany motywu.</p>
                                 <a href="../Vault/Vault.html" class="specific-icon-link">
                                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
@@ -84,15 +84,17 @@
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <figure>
-                                    <img src="../Chorely/assets/Chorely.png" style="filter: grayscale(10%);"
-                                        alt="Zdjęcie projektu TODO Lista">
+                                <figure style="background-image: linear-gradient(135deg, #09a1f9 0%, #0d47a1 100%);">
+                                    <div class="Chorely-logo-container animate-in delay-3">
+      <div class="chorelyIcon2"></div>
+      <span class="chorely-name2">CHORELY</span>
+    </div>
                                 </figure>
                             </div>
                             <div class="flip-card-back">
                                 <div class="chorely-container">
-                            <div class="chorelyIcon"></div>
-                            <span class="chorely">Chorely</span>
+                            <div class="chorelyIcon1"></div>
+                            <span class="chorely-name1">Chorely</span>
                             </div>
                             <p data-lang-key="todo_desc">Responsywna TODO lista z opcją zapisywania tasków w pliku PDF.</p>
                             <a href="../Chorely/Chorely.html" class="specific-icon-link">
@@ -108,8 +110,7 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <figure>
-                                    <img src="../ThoughtSpace/assets/ThoughtSpace.png" style="filter: grayscale(10%);"
-                                        alt="Zdjęcie projektu Notatnik">
+                                    <object type="image/svg+xml" data="../ThoughtSpace/assets/ThoughtSpace_icon2.svg" width="300" height="400" style="background-color: #f0e6d2;"></object>
                                 </figure>
                             </div>
                             <div class="flip-card-back">
@@ -257,8 +258,7 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <figure>
-                                    <img src="../LuxeChrono/assets/LuxeChrono.png" style="filter: grayscale(10%);"
-                                        alt="Zdjęcie projektu Stoper">
+                                    <object type="image/svg+xml" data="../LuxeChrono/assets/LuxeChrono_icon2.svg" width="300" height="400" class="bg-black"></object>
                                 </figure>
                             </div>
                             <div class="flip-card-back">
@@ -282,11 +282,11 @@
     </defs>
     
     <g transform="translate(100,70)" filter="url(#watchSoftGlow)">
-        <text x="0" y="-10" fill="url(#watchGoldGradient)" font-family="'Baskerville', serif" font-size="45" font-weight="bold" text-anchor="middle">LUXE</text>
-        <text x="0" y="25" fill="#ffffff" font-family="'Helvetica Neue', sans-serif" font-size="30" letter-spacing="2" text-anchor="middle">CHRONO</text>
+        <text x="0" y="-10" fill="url(#watchGoldGradient)" font-family="'Baskerville', serif" font-size="45" font-weight="bold" letter-spacing="2" text-anchor="middle">LUXE</text>
+        <text x="0" y="25" fill="#ffffff" font-family="'Helvetica Neue', sans-serif" font-size="18" letter-spacing="6" text-anchor="middle">CHRONO</text>
     </g>
     
-    <g transform="translate(100,5)">
+    <g transform="translate(100,15)">
         <path d="M-5,0 L0,-5 L5,0 L0,5 Z" fill="none" stroke="#e6c66e" stroke-width="0.5"/>
         <text x="0" y="1" fill="#e6c66e" font-family="'Baskerville', serif" font-size="10" text-anchor="middle" alignment-baseline="middle">∞</text>
     </g>
@@ -305,15 +305,15 @@
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
                                 <figure>
-                                    <img src="../NutriPulse/assets/NutriPulse_logo.png" style="filter: grayscale(10%);"
+                                    <img src="../QuantumCalorie/assets/QuantumCalorie_logo.svg" style="filter: grayscale(10%);"
                                         alt="Zdjęcie projektu Kalkulator KCAL">
                                 </figure>
                             </div>
                             <div class="flip-card-back">
-                                <h3 class="NutriPulse-H3"><img src="../NutriPulse/assets/NutriPulse_logo2.svg" alt="">NutriPulse</h3>
+                                <h3 class="NutriPulse-H3 mb-2"><object type="image/svg+xml" data="../QuantumCalorie/assets/QuantumCalorie_logoMini.svg" width="150" height="150"></object><span style="margin-top: -20%;">QuantumCalorie</span></h3>
                                 <p data-lang-key="calorie_calculator_desc">Responsywny kalkulator kcal z wieloma
                                     opcjami.</p>
-                                <a href="../NutriPulse/NutriPulse.html" class="specific-icon-link">
+                                <a href="../QuantumCalorie/QuantumCalorie.html" class="specific-icon-link mb-5">
                                     <i class="fas fa-arrow-right" aria-hidden="true"></i>
                                 </a>
                             </div>

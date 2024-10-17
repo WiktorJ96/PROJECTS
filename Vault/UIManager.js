@@ -12,6 +12,27 @@ class UIManager {
       this.updateLanguage();
       this.updateBalance();
       this.updateTransactionsDisplay();
+      this.chartManager.updateChart();
+    });
+
+    // Zdarzenie aktualizujące UI po dodaniu transakcji
+    window.addEventListener("transactionAdded", () => {
+      this.updateTransactionsDisplay();
+      this.updateBalance();
+      this.chartManager.updateChart();
+    });
+
+    // Zdarzenie aktualizujące UI po usunięciu transakcji
+    window.addEventListener("transactionsCleared", () => {
+      this.clearTransactionsDisplay();
+      this.updateBalance();
+      this.chartManager.updateChart();
+    });
+
+    window.addEventListener("transactionDeleted", () => {
+      this.updateTransactionsDisplay();
+      this.updateBalance();
+      this.chartManager.updateChart();
     });
   }
 
@@ -69,10 +90,20 @@ class UIManager {
         console.warn(`Element ${elementKey} not found`);
       }
     });
+  }
 
-    this.addTransactionPanel.addEventListener("hidden.bs.modal", () => {
-      this.clearInputs();
-    });
+  setLanguage(lang) {
+    this.language = lang;
+    localStorage.setItem("preferredLanguage", lang);
+
+    // Aktualizuj walutę na podstawie wybranego języka
+    this.transactionManager.updateCurrencyBasedOnLanguage(lang);
+
+    // Zaktualizuj UI
+    this.updateLanguage();
+    this.updateBalance();
+    this.updateTransactionsDisplay();
+    this.chartManager.updateChart();
   }
 
   showPanel() {
@@ -99,7 +130,7 @@ class UIManager {
       : "block";
   }
 
-  saveTransaction() {
+  async saveTransaction() {
     if (
       this.nameInput.value &&
       this.amountInput.value &&
@@ -116,7 +147,8 @@ class UIManager {
         ? Math.abs(parseFloat(this.amountInput.value))
         : -Math.abs(parseFloat(this.amountInput.value));
 
-      const newTransaction = this.transactionManager.createNewTransaction(
+      // Używamy asynchronicznej metody, która obsługuje zarówno MongoDB, jak i IndexedDB
+      const newTransaction = await this.transactionManager.createNewTransaction(
         this.nameInput.value,
         amount,
         category
@@ -134,6 +166,10 @@ class UIManager {
   }
 
   getCategoryIcon(category) {
+    if (!category || typeof category !== "string") {
+      return `<i class="fas fa-question-circle"></i>`;
+    }
+
     const lowerCategory = category.toLowerCase();
     const iconMap = {
       wypłata: "fa-money-bill-wave",
@@ -157,6 +193,8 @@ class UIManager {
   }
 
   addTransactionToDOM(transaction) {
+    console.log("Dodaję transakcję do DOM:", transaction); // Sprawdzanie co zawiera obiekt transakcji
+
     const newTransactionElement = document.createElement("div");
     newTransactionElement.classList.add("transaction-item");
     newTransactionElement.classList.add(
@@ -186,9 +224,10 @@ class UIManager {
     const deleteButton = newTransactionElement.querySelector(
       ".delete-transaction"
     );
-    deleteButton.addEventListener("click", () =>
-      this.showDeleteTransactionModal(transaction.id)
-    );
+
+    deleteButton.addEventListener("click", () => {
+      this.showDeleteTransactionModal(transaction.id);
+    });
 
     (transaction.amount > 0 ? this.income : this.outcome).appendChild(
       newTransactionElement
@@ -200,41 +239,61 @@ class UIManager {
     this.outcome.innerHTML = "";
   }
 
+  updateTransactionsDisplay() {
+    this.clearTransactionsDisplay();
+    this.transactionManager.transactions.forEach((transaction) => {
+      this.addTransactionToDOM(transaction);
+    });
+  }
+
   updateBalance() {
     const balance = this.transactionManager.getCurrentBalance();
+    console.log(`Aktualny bilans: ${balance}`);
     this.money.textContent = `${balance.toFixed(2)}${this.transactionManager.currencySymbol}`;
-    localStorage.setItem("availableFunds", balance.toString());
   }
 
-  deleteAllTransactions() {
-    this.transactionManager.deleteAllTransactions();
-    this.clearTransactionsDisplay();
-    this.updateBalance();
-    this.chartManager.updateChart();
-    this.hideDeleteAllModal();
+  async deleteAllTransactions() {
+    // Asynchroniczne usuwanie, aby obsłużyć zarówno MongoDB, jak i IndexedDB
+    if (typeof this.transactionManager.deleteAllTransactions === "function") {
+      await this.transactionManager.deleteAllTransactions();
+      this.clearTransactionsDisplay();
+      this.updateBalance();
+      this.chartManager.updateChart();
+      this.hideDeleteAllModal();
+    } else {
+      console.error(
+        "Metoda deleteAllTransactions nie istnieje w transactionManager."
+      );
+    }
   }
 
-  confirmDeleteTransaction() {
-    const id = parseInt(this.deleteTransactionModal.dataset.transactionId);
-    this.deleteTransaction(id);
+  async confirmDeleteTransaction() {
+    const id = parseInt(this.deleteTransactionModal.dataset.transactionId, 10); // Zabezpieczamy się przed niepoprawnym typem
+
+    if (isNaN(id)) {
+      console.error("Nieprawidłowy identyfikator transakcji: ", id);
+      return;
+    }
+
+    // Asynchroniczne usuwanie transakcji, aby obsłużyć MongoDB i IndexedDB
+    await this.deleteTransaction(id);
     this.hideDeleteTransactionModal();
   }
 
-  deleteTransaction(id) {
-    this.transactionManager.deleteTransaction(id);
+  async deleteTransaction(id) {
+    console.log(`Próbuję usunąć transakcję o ID: ${id}`);
+    await this.transactionManager.deleteTransaction(id);
+
     const transactionElement = document.getElementById(id);
     if (transactionElement) {
       transactionElement.remove();
+      console.log(`Usunięto transakcję o ID: ${id} z DOM`);
+    } else {
+      console.warn(`Nie znaleziono elementu z ID: ${id}`);
     }
+
     this.updateBalance();
     this.chartManager.updateChart();
-  }
-
-  updateTransactionsDisplay() {
-    this.clearTransactionsDisplay();
-    this.transactionManager.transactions.forEach((transaction) =>
-      this.addTransactionToDOM(transaction)
-    );
   }
 
   clearInputs() {
@@ -262,6 +321,13 @@ class UIManager {
   }
 
   showDeleteTransactionModal(id) {
+    if (typeof id === "undefined" || id === null) {
+      console.error("Nieprawidłowy identyfikator transakcji do usunięcia:", id);
+      return;
+    }
+
+    console.log("Wywołanie showDeleteTransactionModal z id:", id);
+
     this.deleteTransactionModal.dataset.transactionId = id;
     const modal = new bootstrap.Modal(this.deleteTransactionModal);
     modal.show();

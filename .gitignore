@@ -1,0 +1,21 @@
+# Ignorowanie folderu z zależnościami
+node_modules/
+
+# Ignorowanie plików buildów i tymczasowych
+dist/
+build/
+*.log
+*.tmp
+
+# Ignorowanie plików środowiska
+.env
+
+# Ignorowanie folderów edytorów i plików konfiguracyjnych
+.vscode/
+
+# Ignorowanie plików systemowych
+.DS_Store
+Thumbs.db
+
+# Ignorowanie plików blokad
+*.lock

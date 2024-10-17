@@ -15,6 +15,9 @@ const ASSETS_TO_CACHE = [
   "https://cdn.jsdelivr.net/npm/chart.js",
 ];
 
+const API_BASE_URL = self.location.origin; // Używamy originu, zakładając, że API jest pod tym samym adresem
+
+// Instalacja i cache'owanie plików
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -26,6 +29,7 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
+// Aktywacja i usuwanie starych cache
 self.addEventListener("activate", (event) => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -42,10 +46,12 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
+// Obsługa fetch i caching
 self.addEventListener("fetch", (event) => {
   if (event.request.url.includes("fontawesome")) {
     return;
   }
+
   const shouldAlwaysUpdate = (request) => {
     const url = new URL(request.url);
     return (
@@ -100,3 +106,107 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
+// Rejestracja synchronizacji w tle
+self.addEventListener("sync", (event) => {
+  if (event.tag === "sync-transactions") {
+    event.waitUntil(syncTransactions());
+  }
+});
+
+// Funkcja otwierająca IndexedDB
+function openIndexedDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("transactionsDB", 1);
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains("transactions")) {
+        const store = db.createObjectStore("transactions", {
+          keyPath: "id",
+          autoIncrement: true,
+        });
+        store.createIndex("synced", "synced", { unique: false }); // Tworzymy indeks na polu "synced"
+      }
+    };
+    request.onsuccess = (event) => {
+      resolve(event.target.result);
+    };
+    request.onerror = (event) => {
+      reject(event.target.error);
+    };
+  });
+}
+
+// Funkcja pobierająca niesynchronizowane transakcje
+function getUnsyncedTransactions(db) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("transactions", "readonly");
+    const store = transaction.objectStore("transactions");
+    const index = store.index("synced");
+    const request = index.getAll(IDBKeyRange.only(false));
+
+    request.onsuccess = (event) => {
+      resolve(event.target.result);
+    };
+    request.onerror = (event) => {
+      reject(event.target.error);
+    };
+  });
+}
+
+// Funkcja oznaczająca transakcję jako zsynchronizowaną
+function markTransactionAsSynced(db, id) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("transactions", "readwrite");
+    const store = transaction.objectStore("transactions");
+    const getRequest = store.get(id);
+
+    getRequest.onsuccess = (event) => {
+      const data = event.target.result;
+      data.synced = true;
+      const putRequest = store.put(data);
+
+      putRequest.onsuccess = () => {
+        resolve();
+      };
+      putRequest.onerror = (event) => {
+        reject(event.target.error);
+      };
+    };
+    getRequest.onerror = (event) => {
+      reject(event.target.error);
+    };
+  });
+}
+
+// Funkcja synchronizująca transakcje z MongoDB
+async function syncTransactions() {
+  try {
+    const db = await openIndexedDB();
+    const transactions = await getUnsyncedTransactions(db);
+
+    for (const transaction of transactions) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/transactions`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(transaction),
+        });
+
+        if (response.ok) {
+          console.log("Transakcja zsynchronizowana z MongoDB:", transaction);
+          await markTransactionAsSynced(db, transaction.id);
+        } else {
+          console.error(
+            "Błąd przy synchronizacji transakcji:",
+            response.statusText
+          );
+        }
+      } catch (error) {
+        console.error("Błąd przy synchronizacji transakcji:", error);
+      }
+    }
+  } catch (error) {
+    console.error("Błąd podczas synchronizacji w tle:", error);
+  }
+}

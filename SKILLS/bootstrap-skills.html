@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="page_title">Umiejętności Bootstrap</title>
+    <link rel="icon" type="image/png" href="assets/bootstrap-icon.png" sizes="16x16">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="skills.css">
+    <style>
+        .bootstrap-hr {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, #563d7c, rgba(0, 0, 0, 0), #0275d8);
+            margin: 40px 0;
+            position: relative;
+            overflow: visible;
+        }
+
+        .bootstrap-hr::before {
+            content: 'Bootstrap';
+            display: block;
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #563d7c;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body class="bg-light" data-page="bootstrap">
+    <div class="language-switch">
+        <button id="lang-pl" >PL</button>
+        <button id="lang-en" >EN</button>
+    </div>
+
+    <div class="container py-5">
+
+        <div style="text-align: center;">
+            <img src="./assets/bootstrap-icon.png" alt="Bootstrap Icon" style="width: 120px; height: 100px;">
+        </div>
+
+        <hr class="bootstrap-hr">
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+            <!-- Grid System -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-th skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="grid_system">System Grid</h5>
+                        <p class="card-text" data-lang-key="grid_description">Umiejętność tworzenia responsywnych układów stron za pomocą systemu siatki Bootstrap.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni" ></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flexbox -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-grip-horizontal skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="flexbox">Flexbox</h5>
+                        <p class="card-text" data-lang-key="flexbox_description">Umiejętność tworzenia responsywnych układów stron za pomocą Flexboxa.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni" ></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typografia -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-font skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="typography">Typografia</h5>
+                        <p class="card-text" data-lang-key="typography_description">Stosowanie stylów typograficznych Bootstrap do tekstu, nagłówków i innych elementów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni" ></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Komponenty -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-puzzle-piece skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="components">Komponenty</h5>
+                        <p class="card-text" data-lang-key="components_description">Wykorzystanie gotowych komponentów, takich jak przyciski, nawigacja, karty, formularze itp.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry" ></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Narzędzia pomocnicze -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-wrench skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="utility_classes">Klasy pomocnicze</h5>
+                        <p class="card-text" data-lang-key="utility_description">Zastosowanie klas pomocniczych dla marginesów, paddingów, tła, kolorów i innych stylów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry" ></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formularze -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-edit skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="forms">Formularze</h5>
+                        <p class="card-text" data-lang-key="forms_description">Tworzenie i stylowanie formularzy z użyciem komponentów Bootstrap.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni" ></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JavaScript w Bootstrap -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-code skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="javascript_components">Komponenty JavaScript</h5>
+                        <p class="card-text" data-lang-key="javascript_description">Wykorzystanie wbudowanych komponentów JavaScript, takich jak modale, karuzele, alerty.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni" ></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dostosowywanie Bootstrap -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-cogs skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="customization">Dostosowywanie</h5>
+                        <p class="card-text" data-lang-key="customization_description">Personalizacja stylów Bootstrap poprzez zmienne SASS i kompilację własnych wersji.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top" title="Słaby" ></i>
+                         </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ikony Bootstrap -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-icons skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="bootstrap_icons">Ikony Bootstrap</h5>
+                        <p class="card-text" data-lang-key="icons_description">Wykorzystanie oficjalnego zestawu ikon Bootstrap w projektach.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                             <i class="fas fa-smile" data-bs-toggle="tooltip" data-bs-placement="top" title="Dobry" ></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Narzędzia dostępności -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-universal-access skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="accessibility">Dostępność (A11Y)</h5>
+                        <p class="card-text" data-lang-key="accessibility_description">Tworzenie dostępnych interfejsów zgodnie ze standardami WCAG przy użyciu Bootstrap.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni" ></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Praca z SASS -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fab fa-sass skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="sass">SASS w Bootstrap</h5>
+                        <p class="card-text" data-lang-key="sass_description">Wykorzystanie preprocesora SASS do modyfikacji i rozszerzania stylów Bootstrap.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" data-bs-placement="top" title="Słaby" ></i>
+                         </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Migracje wersji Bootstrap -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-exchange-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="version_migration">Migracja między wersjami</h5>
+                        <p class="card-text" data-lang-key="version_migration_description">Umiejętność aktualizacji projektów między różnymi wersjami Bootstrap.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                             <i class="fas fa-meh" data-bs-toggle="tooltip" data-bs-placement="top" title="Średni" ></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../translations/translates.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="skills.js"></script>
+</body>
+
+</html>
