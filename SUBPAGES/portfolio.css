@@ -639,7 +639,7 @@ h2 {
 
 .btn-secondary.rounded-pill {
   padding: 5px 10px;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .skill-button {
@@ -656,7 +656,8 @@ h2 {
   position: relative;
   overflow: hidden;
   animation: pulse 3s linear infinite;
-  transition: 3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  bottom: 5px;
 }
 
 @keyframes pulse {
@@ -750,30 +751,14 @@ h2 {
   top: 0;
 }
 
-.javascript-label {
+[class$="-label"] {
   display: inline;
 }
-.javascript-label-short {
+
+[class$="-label-short"] {
   display: none;
 }
-.vsc-label {
-  display: inline;
-}
-.vsc-label-short {
-  display: none;
-}
-.ij-label {
-  display: inline;
-}
-.ij-label-short {
-  display: none;
-}
-.xml-ls-label {
-  display: inline;
-}
-.xml-ls-label-short {
-  display: none;
-}
+
 /*PORTFOLIO*/
 #portfolio {
   padding: 20px 20px 0 20px;
@@ -1432,12 +1417,11 @@ footer {
   border: none;
   height: 1px;
   background-image: linear-gradient(to right, transparent, #333, transparent);
-  margin: 20px 0;
+  margin: 10px 0;
 }
 .iconCSS {
   background-image: linear-gradient(
     135deg,
-    hsla(193, 95%, 68%, 0.9),
     hsla(228, 78%, 52%, 0.9),
     hsla(235, 66%, 30%, 0.9)
   );
@@ -1460,7 +1444,6 @@ footer {
 .iconHTML {
   background-image: linear-gradient(
     135deg,
-    hsla(0, 100%, 71%, 0.9),
     hsla(0, 100%, 50%, 0.9),
     hsla(0, 100%, 27%, 0.9)
   );
@@ -1477,7 +1460,8 @@ footer {
 }
 
 .iconJS_HTML_CSS {
-  font-size: 80px;
+  margin-top: 10px;
+  font-size: 70px;
   filter: grayscale(8%);
 }
 .language-switch_portfolio {
@@ -1537,28 +1521,11 @@ footer {
   .menu-responsive.show {
     font-size: 1rem;
   }
-  .javascript-label {
+  [class$="-label"] {
     display: none;
   }
-  .javascript-label-short {
-    display: inline;
-  }
-  .vsc-label {
-    display: none;
-  }
-  .vsc-label-short {
-    display: inline;
-  }
-  .ij-label {
-    display: none;
-  }
-  .ij-label-short {
-    display: inline;
-  }
-  .xml-ls-label {
-    display: none;
-  }
-  .xml-ls-label-short {
+
+  [class$="-label-short"] {
     display: inline;
   }
 }
