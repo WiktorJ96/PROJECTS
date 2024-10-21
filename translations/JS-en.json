@@ -33,7 +33,7 @@
   "skill_destructuring_desc": "Destructuring objects and arrays, rest and spread operators.",
   "skill_classes_inheritance": "Classes and Inheritance",
   "skill_classes_inheritance_desc": "Defining classes, constructors, methods, inheritance using extends, superclasses.",
-  "skill_prototypes": "Prototypes and Prototypal Inheritance",
+  "skill_prototypes": "Prototypes and Inheritance",
   "skill_prototypes_desc": "Concept of prototype, prototype chain, creating own prototypes.",
   "skill_modules": "ES6 Modules",
   "skill_modules_desc": "Importing and exporting modules, code structuring, best practices.",

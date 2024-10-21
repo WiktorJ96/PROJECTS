@@ -33,7 +33,7 @@
   "skill_destructuring_desc": "Destrukturyzacja obiektów i tablic, operator rest i spread.",
   "skill_classes_inheritance": "Klasy i Dziedziczenie",
   "skill_classes_inheritance_desc": "Definiowanie klas, konstruktory, metody, dziedziczenie za pomocą extends, superklasy.",
-  "skill_prototypes": "Prototypy i Dziedziczenie Prototypowe",
+  "skill_prototypes": "Prototypy i Dziedziczenie",
   "skill_prototypes_desc": "Pojęcie prototypu, łańcuch prototypów, tworzenie własnych prototypów.",
   "skill_modules": "Moduły ES6",
   "skill_modules_desc": "Importowanie i eksportowanie modułów, strukturyzacja kodu, najlepsze praktyki.",
