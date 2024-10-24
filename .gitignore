@@ -3,6 +3,7 @@ node_modules/
 
 # Ignorowanie plików buildów i tymczasowych
 dist/
+build/
 *.log
 *.tmp
 
