@@ -1,0 +1,38 @@
+/my-react-app
+│
+├── /public
+│   ├── index.html               # Główny plik HTML
+│   └── manifest.json            # Plik manifestu aplikacji
+│
+├── /src
+│   ├── /assets                  # Zasoby statyczne (obrazy, fonty, itp.)
+│   │   └── logo.png
+│   │
+│   ├── /components              # Komponenty wielokrotnego użytku
+│   │   ├── Button.js            # Przykładowy komponent przycisku
+│   │   ├── Header.js            # Przykładowy komponent nagłówka
+│   │   └── Footer.js            # Przykładowy komponent stopki
+│   │
+│   ├── /pages                   # Strony aplikacji
+│   │   ├── Home.js              # Strona główna
+│   │   ├── About.js             # Strona "O nas"
+│   │   └── Contact.js           # Strona kontaktowa
+│   │
+│   ├── /services                # Logika biznesowa, np. zapytania API
+│   │   └── api.js               # Funkcje do komunikacji z API
+│   │
+│   ├── /utils                   # Narzędzia pomocnicze (funkcje pomocnicze, formatowanie danych)
+│   │   └── formatDate.js        # Przykład narzędzia do formatowania daty
+│   │
+│   ├── /styles                  # Pliki stylów CSS lub pliki SCSS
+│   │   └── App.css              # Główny plik stylów
+│   │
+│   ├── App.js                   # Główny komponent aplikacji
+│   ├── index.js                 # Punkt wejściowy aplikacji
+│   ├── reportWebVitals.js       # Narzędzie do monitorowania wydajności
+│   ├── setupTests.js            # Konfiguracja testów (np. Jest)
+│   └── App.test.js              # Testy dla głównego komponentu App
+│
+├── .gitignore                   # Plik .gitignore, ignorujący pliki i foldery np. node_modules
+├── package.json                 # Informacje o projekcie i zależności
+└── README.md                    # Dokumentacja projektu
