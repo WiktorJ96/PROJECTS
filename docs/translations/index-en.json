@@ -20,6 +20,8 @@
   "contact_me": "Contact me",
   "js_projects": "JavaScript Projects",
   "based_on_js_html_css": "Projects based on JS, HTML, and CSS",
+  "react_projects": "React Projects",
+  "based_on_react_html_css": "Projects based on React, JSX, and CSS",
   "figma_projects": "Projects Figma",
   "figma_based": "Projects based on Figma",
   "all_rights_reserved": "All rights reserved",

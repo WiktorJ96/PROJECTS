@@ -1,5 +1,6 @@
 {
     "title_js": "JavaScript, HTML, CSS Projects",
+    "title_react": "React, JSX, CSS Projects",
     "form_desc": "Responsive form with validation.",
     "notebook_desc": "Responsive notebook with the option to save notes to a file on disk.",
     "stopwatch_desc": "Responsive elegant clock, stopwatch and timer in advertising style.",
