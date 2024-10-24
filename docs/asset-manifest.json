@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/PROJECTS/SmartPick/static/css/main.57e2b8bd.css",
+    "main.js": "/PROJECTS/SmartPick/static/js/main.750e3b42.js",
+    "static/js/453.e3127692.chunk.js": "/PROJECTS/SmartPick/static/js/453.e3127692.chunk.js",
+    "index.html": "/PROJECTS/SmartPick/index.html",
+    "main.57e2b8bd.css.map": "/PROJECTS/SmartPick/static/css/main.57e2b8bd.css.map",
+    "main.750e3b42.js.map": "/PROJECTS/SmartPick/static/js/main.750e3b42.js.map",
+    "453.e3127692.chunk.js.map": "/PROJECTS/SmartPick/static/js/453.e3127692.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.57e2b8bd.css",
+    "static/js/main.750e3b42.js"
+  ]
+}
