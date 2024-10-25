@@ -6,10 +6,9 @@ const cors = require("cors");
 const app = express();
 const db = new sqlite3.Database("./shop.db");
 
-app.use(bodyParser.json()); // Parsowanie JSON w ciele żądania
-app.use(cors()); // Obsługa CORS
+app.use(bodyParser.json()); 
+app.use(cors()); 
 
-// Stworzenie tabeli (jeśli jeszcze nie istnieje)
 db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS shops (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,7 +16,6 @@ db.serialize(() => {
   )`);
 });
 
-// Endpoint do dodania sklepu (POST)
 app.post("/api/shops", (req, res) => {
   const { name } = req.body;
   if (!name || name.length > 100) {
@@ -36,7 +34,6 @@ app.post("/api/shops", (req, res) => {
   stmt.finalize();
 });
 
-// Endpoint do aktualizacji sklepu (PUT)
 app.put("/api/shops/:id", (req, res) => {
   const { name } = req.body;
   const { id } = req.params;
@@ -52,7 +49,6 @@ app.put("/api/shops/:id", (req, res) => {
   });
 });
 
-// Endpoint do usunięcia sklepu (DELETE)
 app.delete("/api/shops/:id", (req, res) => {
   const { id } = req.params;
 
@@ -67,10 +63,6 @@ app.delete("/api/shops/:id", (req, res) => {
   });
 });
 
-
-
-
-// Endpoint do pobrania wszystkich sklepów (GET)
 app.get("/api/shops", (req, res) => {
   db.all(`SELECT * FROM shops`, [], (err, rows) => {
     if (err) {
@@ -80,7 +72,10 @@ app.get("/api/shops", (req, res) => {
   });
 });
 
-// Uruchomienie serwera
+app.get("/", (req, res) => {
+  res.send("Serwer działa poprawnie. Użyj /api/shops, aby uzyskać dostęp do listy sklepów.");
+});
+
 app.listen(5000, () => {
   console.log("Serwer nasłuchuje na porcie 5000");
 });

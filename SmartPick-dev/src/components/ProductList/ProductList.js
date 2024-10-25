@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import AddProductModal from "../AddProductModal/AddProductModal";
 
@@ -13,29 +13,56 @@ const ProductList = ({
   const products = shop.products || [];
 
   const [productToDelete, setProductToDelete] = useState(null);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Modal potwierdzający usunięcie produktu
-  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false); // Modal dodawania produktu
-  const [editedShopName, setEditedShopName] = useState(shop.name); // Przechowuje edytowaną nazwę sklepu
-  const [isShopDeleteModalOpen, setIsShopDeleteModalOpen] = useState(false); // Modal potwierdzający usunięcie sklepu
-  const [shopToDelete, setShopToDelete] = useState(null); // Przechowuje sklep do usunięcia
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+  const [editedShopName, setEditedShopName] = useState(shop.name);
+  const [isShopDeleteModalOpen, setIsShopDeleteModalOpen] = useState(false);
+  const [shopToDelete, setShopToDelete] = useState(null);
 
+  // Funkcja do zapisu nowej nazwy sklepu
+  const handleEditShopName = useCallback(() => {
+    setIsEditingShop(false);
+    onUpdateShopName(editedShopName);
+  }, [editedShopName, onUpdateShopName, setIsEditingShop]);
+
+  // Funkcja do potwierdzenia usunięcia sklepu
+  const handleConfirmDeleteShop = useCallback(() => {
+    if (shopToDelete) {
+      onDeleteShop(shopToDelete.id);
+      setIsShopDeleteModalOpen(false);
+    }
+  }, [shopToDelete, onDeleteShop]);
+
+  // Funkcja do usunięcia produktu
+  const handleDeleteProduct = useCallback(() => {
+    if (productToDelete) {
+      const updatedProducts = products.filter(
+        (p) => p.name !== productToDelete.name
+      );
+      onUpdateProducts(updatedProducts);
+      setProductToDelete(null);
+      setIsDeleteModalOpen(false);
+    }
+  }, [productToDelete, products, onUpdateProducts]);
+
+  // Funkcja do obsługi klawiszy (Enter i Escape)
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (event.key === "Enter") {
         if (isEditingShop && editedShopName.trim() !== "") {
-          handleEditShopName(); // Zapisz zmiany w nazwie sklepu
+          handleEditShopName();
         } else if (isDeleteModalOpen && productToDelete) {
-          handleDeleteProduct(); // Potwierdź usunięcie produktu
+          handleDeleteProduct();
         } else if (isShopDeleteModalOpen) {
-          handleConfirmDeleteShop(); // Potwierdź usunięcie sklepu
+          handleConfirmDeleteShop();
         }
       } else if (event.key === "Escape") {
         if (isEditingShop) {
-          setIsEditingShop(false); // Wyjdź z trybu edycji
+          setIsEditingShop(false);
         } else if (isDeleteModalOpen) {
-          setIsDeleteModalOpen(false); // Zamknij modal usunięcia produktu
+          setIsDeleteModalOpen(false);
         } else if (isShopDeleteModalOpen) {
-          setIsShopDeleteModalOpen(false); // Zamknij modal usunięcia sklepu
+          setIsShopDeleteModalOpen(false);
         }
       }
     };
@@ -49,28 +76,16 @@ const ProductList = ({
     isEditingShop,
     isDeleteModalOpen,
     isShopDeleteModalOpen,
-    productToDelete,
     editedShopName,
+    handleEditShopName,
+    handleDeleteProduct,
+    handleConfirmDeleteShop,
   ]);
-
-  // Funkcja do zapisu nowej nazwy sklepu
-  const handleEditShopName = () => {
-    setIsEditingShop(false);
-    onUpdateShopName(editedShopName); // Zaktualizuj nazwę sklepu
-  };
 
   // Funkcja do otwarcia modala potwierdzającego usunięcie sklepu
   const openDeleteModalForShop = (shop) => {
     setShopToDelete(shop);
-    setIsShopDeleteModalOpen(true); // Otwórz modal
-  };
-
-  // Funkcja do potwierdzenia usunięcia sklepu
-  const handleConfirmDeleteShop = () => {
-    if (shopToDelete) {
-      onDeleteShop(shopToDelete.id); // Wywołaj funkcję usuwania z ID sklepu
-      setIsShopDeleteModalOpen(false); // Zamknij modal po usunięciu
-    }
+    setIsShopDeleteModalOpen(true);
   };
 
   // Funkcja do otwarcia modala potwierdzającego usunięcie produktu
@@ -79,21 +94,8 @@ const ProductList = ({
     setIsDeleteModalOpen(true);
   };
 
-  // Funkcja do usunięcia produktu
-  const handleDeleteProduct = () => {
-    if (productToDelete) {
-      const updatedProducts = products.filter(
-        (p) => p.name !== productToDelete.name
-      );
-      onUpdateProducts(updatedProducts);
-      setProductToDelete(null); // Wyczyść produkt do usunięcia po operacji
-      setIsDeleteModalOpen(false); // Zamknij modal
-    }
-  };
-
   // Funkcja do dodania produktu
   const handleAddProduct = (product) => {
-    // Upewniamy się, że dodajemy nowy produkt do listy
     const updatedProducts = [
       ...products,
       { name: product.name, price: product.price, link: product.link },
@@ -125,7 +127,7 @@ const ProductList = ({
             </button>
             <button
               className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-              onClick={() => openDeleteModalForShop(shop)} // Otwórz modal do usunięcia sklepu
+              onClick={() => openDeleteModalForShop(shop)}
             >
               Usuń
             </button>
@@ -143,7 +145,7 @@ const ProductList = ({
 
       <button
         className="btn-primary px-4 py-2 rounded mb-4"
-        onClick={() => setIsAddProductModalOpen(true)} // Otwórz modal dodawania produktu
+        onClick={() => setIsAddProductModalOpen(true)}
       >
         Dodaj produkt
       </button>
@@ -152,7 +154,6 @@ const ProductList = ({
         {products.length > 0 ? (
           products.map((product, index) => (
             <li key={index} className="flex justify-between items-center">
-              {/* Render product details */}
               <span>
                 {product.name} - {product.price} PLN
               </span>
@@ -177,28 +178,25 @@ const ProductList = ({
         )}
       </ul>
 
-      {/* Modal potwierdzający usunięcie produktu */}
       <DeleteConfirmationModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        onConfirm={handleDeleteProduct} // Wywołujemy funkcję usunięcia produktu
-        item={productToDelete ? productToDelete.name : ""} // Sprawdzamy, czy productToDelete istnieje
+        onConfirm={handleDeleteProduct}
+        item={productToDelete ? productToDelete.name : ""}
         itemType="produkt"
       />
 
-      {/* Modal dodawania produktu */}
       <AddProductModal
         isOpen={isAddProductModalOpen}
         onClose={() => setIsAddProductModalOpen(false)}
         onAddProduct={handleAddProduct}
       />
 
-      {/* Modal potwierdzający usunięcie sklepu */}
       <DeleteConfirmationModal
         isOpen={isShopDeleteModalOpen}
         onClose={() => setIsShopDeleteModalOpen(false)}
-        onConfirm={handleConfirmDeleteShop} // Potwierdź usunięcie sklepu
-        item={shopToDelete ? shopToDelete.name : ""} // Nazwa sklepu do wyświetlenia
+        onConfirm={handleConfirmDeleteShop}
+        item={shopToDelete ? shopToDelete.name : ""}
         itemType="sklep"
       />
     </section>

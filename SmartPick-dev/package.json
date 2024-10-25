@@ -1,6 +1,6 @@
 {
   "homepage": "https://wiktorj96.github.io/PROJECTS/SmartPick",
-  "name": "smartpick-r",
+  "name": "SmartPick",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,7 +16,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3000 react-scripts start --host 0.0.0.0",  
+    "start:backend": "node src/server.js",                     
+    "start:all": "concurrently \"npm start\" \"npm run start:backend\"",  
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -40,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "tailwindcss": "^3.4.14"
   }
 }
