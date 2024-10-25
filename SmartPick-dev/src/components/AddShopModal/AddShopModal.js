@@ -1,39 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const AddShopModal = ({ isOpen, onClose, onAddShop }) => {
-  const [shopName, setShopName] = useState(""); // Nazwa nowego sklepu
+  const [shopName, setShopName] = useState("");
 
   const handleSave = () => {
     if (shopName.trim() !== "") {
-      onAddShop(shopName); // Dodaj nowy sklep
-      setShopName(""); // Wyczyść pole input po dodaniu
-      onClose(); // Zamknij modal
+      onAddShop(shopName); // Przekazujemy nazwę sklepu do App.js
+      setShopName(""); // Czyścimy input
+      onClose(); // Zamykamy modal
     }
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      handleSave(); // Zatwierdź zapisanie, jeśli wciśnięto Enter
-    } else if (event.key === "Escape") {
-      onClose(); // Zamknij modal, jeśli wciśnięto Escape
-    }
-  };
-
-  useEffect(() => {
-    // Dodajemy nasłuchiwanie klawiszy na całym dokumencie dla Escape
-    const handleGlobalKeyDown = (event) => {
-      if (event.key === "Escape") {
-        onClose(); // Zamknij modal przy wciśnięciu Escape
-      }
-    };
-    document.addEventListener("keydown", handleGlobalKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleGlobalKeyDown);
-    };
-  }, [onClose]);
-
-  if (!isOpen) return null; // Ukryj modal, jeśli nie jest otwarty
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -43,7 +21,6 @@ const AddShopModal = ({ isOpen, onClose, onAddShop }) => {
           type="text"
           value={shopName}
           onChange={(e) => setShopName(e.target.value)}
-          onKeyDown={handleKeyDown} // Dodaj nasłuch na Enter i Escape
           placeholder="Nazwa sklepu"
           className="w-full p-2 mb-4 border rounded"
         />

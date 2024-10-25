@@ -10,11 +10,14 @@ const ProductList = ({
   onDeleteShop,
   onUpdateProducts,
 }) => {
+  const products = shop.products || [];
+
   const [productToDelete, setProductToDelete] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Modal potwierdzający usunięcie produktu
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false); // Modal dodawania produktu
   const [editedShopName, setEditedShopName] = useState(shop.name); // Przechowuje edytowaną nazwę sklepu
   const [isShopDeleteModalOpen, setIsShopDeleteModalOpen] = useState(false); // Modal potwierdzający usunięcie sklepu
+  const [shopToDelete, setShopToDelete] = useState(null); // Przechowuje sklep do usunięcia
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -57,18 +60,18 @@ const ProductList = ({
   };
 
   // Funkcja do otwarcia modala potwierdzającego usunięcie sklepu
-  const openDeleteModalForShop = () => {
-    setIsShopDeleteModalOpen(true);
+  const openDeleteModalForShop = (shop) => {
+    setShopToDelete(shop);
+    setIsShopDeleteModalOpen(true); // Otwórz modal
   };
 
   // Funkcja do potwierdzenia usunięcia sklepu
   const handleConfirmDeleteShop = () => {
-    // Najpierw usuń sklep, a potem zamknij modal
-    onDeleteShop(shop); // Usuń sklep
-    setIsShopDeleteModalOpen(false); // Zamknij modal po usunięciu sklepu
+    if (shopToDelete) {
+      onDeleteShop(shopToDelete.id); // Wywołaj funkcję usuwania z ID sklepu
+      setIsShopDeleteModalOpen(false); // Zamknij modal po usunięciu
+    }
   };
-
-
 
   // Funkcja do otwarcia modala potwierdzającego usunięcie produktu
   const openDeleteModalForProduct = (product) => {
@@ -77,21 +80,22 @@ const ProductList = ({
   };
 
   // Funkcja do usunięcia produktu
- const handleDeleteProduct = () => {
-   if (productToDelete) {
-     const updatedProducts = shop.products.filter(
-       (p) => p.name !== productToDelete.name
-     );
-     onUpdateProducts(updatedProducts);
-     setIsDeleteModalOpen(false);
-   }
- };
+  const handleDeleteProduct = () => {
+    if (productToDelete) {
+      const updatedProducts = products.filter(
+        (p) => p.name !== productToDelete.name
+      );
+      onUpdateProducts(updatedProducts);
+      setProductToDelete(null); // Wyczyść produkt do usunięcia po operacji
+      setIsDeleteModalOpen(false); // Zamknij modal
+    }
+  };
 
   // Funkcja do dodania produktu
   const handleAddProduct = (product) => {
     // Upewniamy się, że dodajemy nowy produkt do listy
     const updatedProducts = [
-      ...shop.products,
+      ...products,
       { name: product.name, price: product.price, link: product.link },
     ];
     onUpdateProducts(updatedProducts);
@@ -121,7 +125,7 @@ const ProductList = ({
             </button>
             <button
               className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-              onClick={openDeleteModalForShop}
+              onClick={() => openDeleteModalForShop(shop)} // Otwórz modal do usunięcia sklepu
             >
               Usuń
             </button>
@@ -145,27 +149,32 @@ const ProductList = ({
       </button>
 
       <ul className="space-y-2">
-        {shop.products.map((product, index) => (
-          <li key={index} className="flex justify-between items-center">
-            <span>
-              {product.name} - {product.price} PLN
-            </span>
-            <a
-              href={product.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500"
-            >
-              Zobacz produkt
-            </a>
-            <button
-              className="text-red-500"
-              onClick={() => openDeleteModalForProduct(product)}
-            >
-              <i className="fas fa-times"></i>
-            </button>
-          </li>
-        ))}
+        {products.length > 0 ? (
+          products.map((product, index) => (
+            <li key={index} className="flex justify-between items-center">
+              {/* Render product details */}
+              <span>
+                {product.name} - {product.price} PLN
+              </span>
+              <a
+                href={product.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500"
+              >
+                Zobacz produkt
+              </a>
+              <button
+                className="text-red-500"
+                onClick={() => openDeleteModalForProduct(product)}
+              >
+                <i className="fas fa-times"></i>
+              </button>
+            </li>
+          ))
+        ) : (
+          <p>No products available.</p>
+        )}
       </ul>
 
       {/* Modal potwierdzający usunięcie produktu */}
@@ -188,8 +197,8 @@ const ProductList = ({
       <DeleteConfirmationModal
         isOpen={isShopDeleteModalOpen}
         onClose={() => setIsShopDeleteModalOpen(false)}
-        onConfirm={handleConfirmDeleteShop}
-        item={shop.name}
+        onConfirm={handleConfirmDeleteShop} // Potwierdź usunięcie sklepu
+        item={shopToDelete ? shopToDelete.name : ""} // Nazwa sklepu do wyświetlenia
         itemType="sklep"
       />
     </section>
