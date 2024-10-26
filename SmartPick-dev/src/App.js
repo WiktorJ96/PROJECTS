@@ -8,49 +8,49 @@ import AddShopModal from "./components/AddShopModal/AddShopModal";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
-  const apiUrl = "http://localhost:5000";
-  const [shops, setShops] = useState([
-    {
-      id: uuidv4(),
-      name: "Sklep 1",
-      products: [
-        { name: "Produkt 1", price: 10, link: "http://example.com" },
-        { name: "Produkt 2", price: 20, link: "http://example.com" },
-      ],
-    },
-    {
-      id: uuidv4(),
-      name: "Sklep 2",
-      products: [
-        { name: "Produkt A", price: 15, link: "http://example.com" },
-        { name: "Produkt B", price: 25, link: "http://example.com" },
-      ],
-    },
-  ]);
+  const apiUrl = process.env.REACT_APP_API_URL || null;
+  const [useBackend, setUseBackend] = useState(apiUrl !== null);
+  const [notification, setNotification] = useState("");
 
+  const [shops, setShops] = useState(() => {
+    const localShops = localStorage.getItem("shops");
+    return useBackend ? [] : localShops ? JSON.parse(localShops) : [];
+  });
+
+  // Ładowanie sklepów z backendu lub localStorage
   useEffect(() => {
     const fetchShops = async () => {
-      try {
-        const response = await fetch(`${apiUrl}/api/shops`); 
-        if (response.ok) {
-          const shopsFromServer = await response.json();
-
-          const shopsWithProducts = shopsFromServer.map((shop) => ({
-            ...shop,
-            products: shop.products || [],
-          }));
-
-          setShops(shopsWithProducts);
-        } else {
-          console.error("Error fetching shops from server");
+      if (useBackend) {
+        try {
+          const response = await fetch(`${apiUrl}/api/shops`);
+          if (response.ok) {
+            const shopsFromServer = await response.json();
+            const shopsWithProducts = shopsFromServer.map((shop) => ({
+              ...shop,
+              products: shop.products || [],
+            }));
+            setShops(shopsWithProducts);
+          } else {
+            throw new Error("Backend not available");
+          }
+        } catch (error) {
+          console.error("Serwer niedostępny. Przełączanie na localStorage.");
+          setNotification("Serwer niedostępny. Przełączono na tryb offline.");
+          setUseBackend(false);
+          const localShops = localStorage.getItem("shops");
+          setShops(localShops ? JSON.parse(localShops) : []);
         }
-      } catch (error) {
-        console.error("Error connecting to server:", error);
       }
     };
-
     fetchShops();
-  }, [apiUrl]);
+  }, [apiUrl, useBackend]);
+
+  // Zapis do localStorage, gdy backend nie jest używany
+  useEffect(() => {
+    if (!useBackend) {
+      localStorage.setItem("shops", JSON.stringify(shops));
+    }
+  }, [shops, useBackend]);
 
   const [selectedShop, setSelectedShop] = useState(null);
   const [isAddShopModalOpen, setIsAddShopModalOpen] = useState(false);
@@ -62,30 +62,33 @@ function App() {
   };
 
   const handleAddShop = async (newShopName) => {
-    try {
-      const response = await fetch(`${apiUrl}/api/shops`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: newShopName }),
-      });
-
-      if (response.ok) {
-        const newShop = await response.json();
-
-        const shopToAdd = {
-          ...newShop,
-          products: newShop.products || [],
-        };
-
-        setShops([...shops, shopToAdd]);
-        setIsAddShopModalOpen(false);
-      } else {
-        console.error("Error adding shop");
+    const newShop = {
+      id: uuidv4(),
+      name: newShopName,
+      products: [],
+    };
+    if (useBackend) {
+      try {
+        const response = await fetch(`${apiUrl}/api/shops`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: newShopName }),
+        });
+        if (response.ok) {
+          const savedShop = await response.json();
+          setShops([...shops, { ...newShop, id: savedShop.id }]);
+          setIsAddShopModalOpen(false);
+        } else {
+          console.error("Error adding shop");
+        }
+      } catch (error) {
+        console.error("Error connecting to server:", error);
       }
-    } catch (error) {
-      console.error("Error connecting to server:", error);
+    } else {
+      setShops([...shops, newShop]);
+      setIsAddShopModalOpen(false);
     }
   };
 
@@ -101,18 +104,23 @@ function App() {
   };
 
   const handleDeleteShop = async (shopId) => {
-    try {
-      const response = await fetch(`${apiUrl}/api/shops/${shopId}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        setShops((prevShops) => prevShops.filter((shop) => shop.id !== shopId));
-      } else {
-        console.error("Nie udało się usunąć sklepu.");
+    if (useBackend) {
+      try {
+        const response = await fetch(`${apiUrl}/api/shops/${shopId}`, {
+          method: "DELETE",
+        });
+        if (response.ok) {
+          setShops((prevShops) =>
+            prevShops.filter((shop) => shop.id !== shopId)
+          );
+        } else {
+          console.error("Error deleting shop");
+        }
+      } catch (error) {
+        console.error("Error connecting to server:", error);
       }
-    } catch (error) {
-      console.error("Błąd połączenia z serwerem:", error);
+    } else {
+      setShops(shops.filter((shop) => shop.id !== shopId));
     }
   };
 
@@ -129,6 +137,11 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      {notification && (
+        <div className="bg-yellow-200 text-yellow-800 p-3 text-center">
+          {notification}
+        </div>
+      )}
       <main className="flex-grow container mx-auto px-4 py-8">
         <ShopList
           shops={shops}

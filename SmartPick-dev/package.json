@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "express": "^4.21.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -16,9 +17,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "PORT=3000 react-scripts start --host 0.0.0.0",  
-    "start:backend": "node src/server.js",                     
-    "start:all": "concurrently \"npm start\" \"npm run start:backend\"",  
+    "start": "cross-env PORT=3000 react-scripts start --host 0.0.0.0",
+    "start:backend": "node src/server.js",
+    "start:all": "concurrently \"npm start\" \"npm run start:backend\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
