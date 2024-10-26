@@ -1,42 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const AddProductModal = ({ isOpen, onClose, onAddProduct }) => {
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productLink, setProductLink] = useState("");
 
-  const handleAdd = () => {
-    if (productName.trim() && productPrice.trim() && productLink.trim()) {
-      // Dodaj produkt
-      onAddProduct({
-        name: productName,
-        price: productPrice,
-        link: productLink,
-      });
-      onClose(); // Zamknij modal
-      // Wyczyszczenie pól po dodaniu
+  useEffect(() => {
+    if (!isOpen) {
       setProductName("");
       setProductPrice("");
       setProductLink("");
-    } else {
-      alert("Wszystkie pola są wymagane.");
     }
+  }, [isOpen]);
+
+  const validateInputs = () => {
+    if (!productName.trim() || !productPrice.trim() || !productLink.trim()) {
+      alert("Wszystkie pola są wymagane.");
+      return false;
+    }
+    if (isNaN(productPrice)) {
+      alert("Cena powinna być liczbą.");
+      return false;
+    }
+    return true;
+  };
+
+  const handleAdd = () => {
+    if (!validateInputs()) return;
+    onAddProduct({
+      name: productName,
+      price: productPrice,
+      link: productLink,
+    });
+    onClose();
   };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      handleAdd(); // Zatwierdź dodanie produktu po naciśnięciu Enter
+      handleAdd();
     } else if (event.key === "Escape") {
-      onClose(); // Zamknij modal po naciśnięciu Escape
+      onClose();
     }
   };
 
-  if (!isOpen) return null; // Nie renderuj modala, gdy jest zamknięty
+  if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div
+      role="dialog"
+      aria-labelledby="modal-title"
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+    >
       <div className="bg-white rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-2xl font-semibold mb-4">Dodaj produkt</h2>
+        <h2 id="modal-title" className="text-2xl font-semibold mb-4">
+          Dodaj produkt
+        </h2>
         <input
           type="text"
           value={productName}

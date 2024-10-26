@@ -17,84 +17,63 @@ const ProductList = ({
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [editedShopName, setEditedShopName] = useState(shop.name);
   const [isShopDeleteModalOpen, setIsShopDeleteModalOpen] = useState(false);
-  const [shopToDelete, setShopToDelete] = useState(null);
 
-  // Funkcja do zapisu nowej nazwy sklepu
+  useEffect(() => {
+    setEditedShopName(shop.name);
+  }, [shop]);
+
   const handleEditShopName = useCallback(() => {
-    setIsEditingShop(false);
-    onUpdateShopName(editedShopName);
+    if (editedShopName.trim()) {
+      setIsEditingShop(false);
+      onUpdateShopName(editedShopName);
+    }
   }, [editedShopName, onUpdateShopName, setIsEditingShop]);
 
-  // Funkcja do potwierdzenia usunięcia sklepu
   const handleConfirmDeleteShop = useCallback(() => {
-    if (shopToDelete) {
-      onDeleteShop(shopToDelete.id);
-      setIsShopDeleteModalOpen(false);
-    }
-  }, [shopToDelete, onDeleteShop]);
+    onDeleteShop(shop.id);
+    setIsShopDeleteModalOpen(false);
+  }, [shop.id, onDeleteShop]);
 
-  // Funkcja do usunięcia produktu
   const handleDeleteProduct = useCallback(() => {
-    if (productToDelete) {
-      const updatedProducts = products.filter(
-        (p) => p.name !== productToDelete.name
-      );
-      onUpdateProducts(updatedProducts);
-      setProductToDelete(null);
-      setIsDeleteModalOpen(false);
-    }
+    const updatedProducts = products.filter(
+      (p) => p.name !== productToDelete.name
+    );
+    onUpdateProducts(updatedProducts);
+    setProductToDelete(null);
+    setIsDeleteModalOpen(false);
   }, [productToDelete, products, onUpdateProducts]);
 
-  // Funkcja do obsługi klawiszy (Enter i Escape)
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (event.key === "Enter") {
-        if (isEditingShop && editedShopName.trim() !== "") {
-          handleEditShopName();
-        } else if (isDeleteModalOpen && productToDelete) {
-          handleDeleteProduct();
-        } else if (isShopDeleteModalOpen) {
-          handleConfirmDeleteShop();
-        }
+        if (isEditingShop) handleEditShopName();
+        else if (isDeleteModalOpen) handleDeleteProduct();
+        else if (isShopDeleteModalOpen) handleConfirmDeleteShop();
       } else if (event.key === "Escape") {
-        if (isEditingShop) {
-          setIsEditingShop(false);
-        } else if (isDeleteModalOpen) {
-          setIsDeleteModalOpen(false);
-        } else if (isShopDeleteModalOpen) {
-          setIsShopDeleteModalOpen(false);
-        }
+        if (isEditingShop) setIsEditingShop(false);
+        else if (isDeleteModalOpen) setIsDeleteModalOpen(false);
+        else if (isShopDeleteModalOpen) setIsShopDeleteModalOpen(false);
       }
     };
 
     document.addEventListener("keydown", handleKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
+    return () => document.removeEventListener("keydown", handleKeyPress);
   }, [
     isEditingShop,
     isDeleteModalOpen,
     isShopDeleteModalOpen,
-    editedShopName,
     handleEditShopName,
     handleDeleteProduct,
     handleConfirmDeleteShop,
   ]);
 
-  // Funkcja do otwarcia modala potwierdzającego usunięcie sklepu
-  const openDeleteModalForShop = (shop) => {
-    setShopToDelete(shop);
-    setIsShopDeleteModalOpen(true);
-  };
-
-  // Funkcja do otwarcia modala potwierdzającego usunięcie produktu
+  // Funkcja otwierająca modal potwierdzający usunięcie dla produktu
   const openDeleteModalForProduct = (product) => {
     setProductToDelete(product);
     setIsDeleteModalOpen(true);
   };
 
-  // Funkcja do dodania produktu
+  // Funkcja do dodawania nowego produktu
   const handleAddProduct = (product) => {
     const updatedProducts = [
       ...products,
@@ -102,6 +81,50 @@ const ProductList = ({
     ];
     onUpdateProducts(updatedProducts);
   };
+
+  const renderEditButtons = () => (
+    <div className="flex space-x-4">
+      <button
+        className="btn-primary px-4 py-2 rounded"
+        onClick={handleEditShopName}
+      >
+        Zapisz
+      </button>
+      <button
+        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        onClick={() => setIsShopDeleteModalOpen(true)}
+      >
+        Usuń
+      </button>
+    </div>
+  );
+
+  const renderProductList = () =>
+    products.length > 0 ? (
+      products.map((product, index) => (
+        <li key={index} className="flex justify-between items-center">
+          <span>
+            {product.name} - {product.price} PLN
+          </span>
+          <a
+            href={product.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500"
+          >
+            Zobacz produkt
+          </a>
+          <button
+            className="text-red-500"
+            onClick={() => openDeleteModalForProduct(product)}
+          >
+            <i className="fas fa-times"></i>
+          </button>
+        </li>
+      ))
+    ) : (
+      <p>No products available.</p>
+    );
 
   return (
     <section id="productSection" className="bg-white rounded-lg shadow-lg p-6">
@@ -118,25 +141,11 @@ const ProductList = ({
         )}
 
         {isEditingShop ? (
-          <div className="flex space-x-4">
-            <button
-              className="btn-primary px-4 py-2 rounded"
-              onClick={handleEditShopName}
-            >
-              Zapisz
-            </button>
-            <button
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-              onClick={() => openDeleteModalForShop(shop)}
-            >
-              Usuń
-            </button>
-          </div>
+          renderEditButtons()
         ) : (
           <button
             className="btn-secondary px-4 py-2 rounded"
             onClick={() => setIsEditingShop(true)}
-            disabled={isEditingShop}
           >
             <i className="fas fa-edit mr-2"></i>Edytuj sklep
           </button>
@@ -150,33 +159,7 @@ const ProductList = ({
         Dodaj produkt
       </button>
 
-      <ul className="space-y-2">
-        {products.length > 0 ? (
-          products.map((product, index) => (
-            <li key={index} className="flex justify-between items-center">
-              <span>
-                {product.name} - {product.price} PLN
-              </span>
-              <a
-                href={product.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500"
-              >
-                Zobacz produkt
-              </a>
-              <button
-                className="text-red-500"
-                onClick={() => openDeleteModalForProduct(product)}
-              >
-                <i className="fas fa-times"></i>
-              </button>
-            </li>
-          ))
-        ) : (
-          <p>No products available.</p>
-        )}
-      </ul>
+      <ul className="space-y-2">{renderProductList()}</ul>
 
       <DeleteConfirmationModal
         isOpen={isDeleteModalOpen}
@@ -196,7 +179,7 @@ const ProductList = ({
         isOpen={isShopDeleteModalOpen}
         onClose={() => setIsShopDeleteModalOpen(false)}
         onConfirm={handleConfirmDeleteShop}
-        item={shopToDelete ? shopToDelete.name : ""}
+        item={shop.name}
         itemType="sklep"
       />
     </section>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const DeleteConfirmationModal = ({
   isOpen,
@@ -7,12 +7,32 @@ const DeleteConfirmationModal = ({
   item,
   itemType,
 }) => {
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === "Enter") onConfirm();
+      if (event.key === "Escape") onClose();
+    };
+    if (isOpen) {
+      document.addEventListener("keydown", handleKeyPress);
+    } else {
+      document.removeEventListener("keydown", handleKeyPress);
+    }
+    return () => document.removeEventListener("keydown", handleKeyPress);
+  }, [isOpen, onClose, onConfirm]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-2xl font-semibold mb-4">Potwierdź usunięcie</h2>
+    <div
+      role="dialog"
+      aria-labelledby="modal-title"
+      aria-modal="true"
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity duration-300 ease-out"
+    >
+      <div className="bg-white rounded-lg p-8 w-full max-w-md transition-transform transform-gpu duration-300 ease-out">
+        <h2 id="modal-title" className="text-2xl font-semibold mb-4">
+          Potwierdź usunięcie
+        </h2>
         <p className="mb-4">
           Czy na pewno chcesz usunąć {itemType} "{item}"?
         </p>
