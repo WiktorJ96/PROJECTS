@@ -32,13 +32,19 @@
 
 .icon-row {
     display: flex;
-    justify-content: center; /* Wycentrowanie drugiego rzędu */
+    justify-content: center; 
     margin-top: -15px;
 }
 
 .icon-small {
-    font-size: 2rem; /* Rozmiar mniejszych ikon */
+    font-size: 2rem; 
     margin: 10px;
+}
+
+.nodejs-icon{
+    background: linear-gradient(45deg, #3C873A, #68A063); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 
@@ -67,16 +73,20 @@
         </div>
     </h1>
     <!-- Dodanie drugiego rzędu mniejszych ikon -->
-    <div class="icon-row">
+    <div class="icon-row ">
+        
         <div class="icon-container">
-            <img src="../SKILLS/assets/tailwind-logo.png" alt="" width="45" style="margin-top: 15px; margin-left: 30px;" class="icon-small">
+            <i class="fab fa-node-js icon-small nodejs-icon ms-5" aria-hidden="true"></i>
         </div>
-        <!-- <div class="icon-container">
-            
-        </div> -->
+
         <div class="icon-container">
-            <img src="../SKILLS/assets/sqlLite-icon.svg" alt="" width="40" style="margin-left: 30px;" class="icon-small">
+            <img src="../SKILLS/assets/sqlLite-icon.svg" alt="" width="38" style="margin-left: 30px;" class="icon-small">
         </div>
+
+        <div class="icon-container ">
+            <img src="../SKILLS/assets/tailwind-logo.png" alt="" width="44" style="margin-top: 15px; margin-right: 30px;" class="icon-small">
+        </div>
+
     </div>
     <hr class="line">
 </section>
