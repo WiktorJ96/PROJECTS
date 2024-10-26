@@ -1,60 +1,60 @@
-import React, { useState, useEffect } from "react";
+// App.js
+import React, { useState, useEffect, useCallback } from "react";
 import "./styles/App.css";
 import Header from "./components/Header/Header";
 import ShopList from "./components/ShopList/ShopList";
 import ProductList from "./components/ProductList/ProductList";
 import Footer from "./components/Footer/Footer";
 import AddShopModal from "./components/AddShopModal/AddShopModal";
-import { v4 as uuidv4 } from "uuid";
+import {
+  fetchShopsFromBackend,
+  addShopToBackend,
+  deleteShopFromBackend,
+  loadShopsFromLocalStorage,
+  saveShopsToLocalStorage,
+  createNewShop,
+} from "./components/ShopService/ShopService";
 
 function App() {
   const apiUrl = process.env.REACT_APP_API_URL || null;
-  const [useBackend, setUseBackend] = useState(apiUrl !== null);
+  const [isBackendActive, setIsBackendActive] = useState(apiUrl !== null);
   const [notification, setNotification] = useState("");
-
-  const [shops, setShops] = useState(() => {
-    const localShops = localStorage.getItem("shops");
-    return useBackend ? [] : localShops ? JSON.parse(localShops) : [];
-  });
-
-  // Ładowanie sklepów z backendu lub localStorage
-  useEffect(() => {
-    const fetchShops = async () => {
-      if (useBackend) {
-        try {
-          const response = await fetch(`${apiUrl}/api/shops`);
-          if (response.ok) {
-            const shopsFromServer = await response.json();
-            const shopsWithProducts = shopsFromServer.map((shop) => ({
-              ...shop,
-              products: shop.products || [],
-            }));
-            setShops(shopsWithProducts);
-          } else {
-            throw new Error("Backend not available");
-          }
-        } catch (error) {
-          console.error("Serwer niedostępny. Przełączanie na localStorage.");
-          setNotification("Serwer niedostępny. Przełączono na tryb offline.");
-          setUseBackend(false);
-          const localShops = localStorage.getItem("shops");
-          setShops(localShops ? JSON.parse(localShops) : []);
-        }
-      }
-    };
-    fetchShops();
-  }, [apiUrl, useBackend]);
-
-  // Zapis do localStorage, gdy backend nie jest używany
-  useEffect(() => {
-    if (!useBackend) {
-      localStorage.setItem("shops", JSON.stringify(shops));
-    }
-  }, [shops, useBackend]);
-
+  const [shops, setShops] = useState(() =>
+    isBackendActive ? [] : loadShopsFromLocalStorage()
+  );
+  const [loading, setLoading] = useState(true); // Stan wskaźnika ładowania
   const [selectedShop, setSelectedShop] = useState(null);
   const [isAddShopModalOpen, setIsAddShopModalOpen] = useState(false);
   const [isEditingShop, setIsEditingShop] = useState(false);
+
+  const fetchShops = useCallback(async () => {
+    setLoading(true); // Ustawienie ładowania na true
+    if (isBackendActive) {
+      try {
+        const shopsFromServer = await fetchShopsFromBackend(apiUrl);
+        setShops(shopsFromServer);
+      } catch {
+        setNotification("Serwer niedostępny. Przełączono na tryb offline.");
+        setIsBackendActive(false);
+        setShops(loadShopsFromLocalStorage());
+      } finally {
+        setLoading(false); // Ustawienie ładowania na false po zakończeniu
+      }
+    } else {
+      setShops(loadShopsFromLocalStorage());
+      setLoading(false); // Ustawienie ładowania na false, gdy dane są pobrane z localStorage
+    }
+  }, [apiUrl, isBackendActive]);
+
+  useEffect(() => {
+    fetchShops();
+  }, [fetchShops]);
+
+  useEffect(() => {
+    if (!isBackendActive) {
+      saveShopsToLocalStorage(shops);
+    }
+  }, [shops, isBackendActive]);
 
   const handleSelectShop = (shop) => {
     setSelectedShop(shop);
@@ -62,62 +62,35 @@ function App() {
   };
 
   const handleAddShop = async (newShopName) => {
-    const newShop = {
-      id: uuidv4(),
-      name: newShopName,
-      products: [],
-    };
-    if (useBackend) {
+    const newShop = createNewShop(newShopName);
+    if (isBackendActive) {
       try {
-        const response = await fetch(`${apiUrl}/api/shops`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name: newShopName }),
-        });
-        if (response.ok) {
-          const savedShop = await response.json();
-          setShops([...shops, { ...newShop, id: savedShop.id }]);
-          setIsAddShopModalOpen(false);
-        } else {
-          console.error("Error adding shop");
-        }
+        const savedShop = await addShopToBackend(apiUrl, newShopName);
+        setShops([...shops, { ...newShop, id: savedShop.id }]);
       } catch (error) {
-        console.error("Error connecting to server:", error);
+        console.error("Błąd podczas dodawania sklepu:", error);
       }
     } else {
       setShops([...shops, newShop]);
-      setIsAddShopModalOpen(false);
     }
+    setIsAddShopModalOpen(false);
   };
 
   const handleUpdateShopName = (newName) => {
-    const updatedShops = shops.map((shop) => {
-      if (shop.id === selectedShop.id) {
-        return { ...shop, name: newName };
-      }
-      return shop;
-    });
+    const updatedShops = shops.map((shop) =>
+      shop.id === selectedShop.id ? { ...shop, name: newName } : shop
+    );
     setShops(updatedShops);
     setSelectedShop({ ...selectedShop, name: newName });
   };
 
   const handleDeleteShop = async (shopId) => {
-    if (useBackend) {
+    if (isBackendActive) {
       try {
-        const response = await fetch(`${apiUrl}/api/shops/${shopId}`, {
-          method: "DELETE",
-        });
-        if (response.ok) {
-          setShops((prevShops) =>
-            prevShops.filter((shop) => shop.id !== shopId)
-          );
-        } else {
-          console.error("Error deleting shop");
-        }
+        await deleteShopFromBackend(apiUrl, shopId);
+        setShops((prevShops) => prevShops.filter((shop) => shop.id !== shopId));
       } catch (error) {
-        console.error("Error connecting to server:", error);
+        console.error("Błąd podczas usuwania sklepu:", error);
       }
     } else {
       setShops(shops.filter((shop) => shop.id !== shopId));
@@ -143,20 +116,29 @@ function App() {
         </div>
       )}
       <main className="flex-grow container mx-auto px-4 py-8">
-        <ShopList
-          shops={shops}
-          onSelectShop={handleSelectShop}
-          onAddShop={() => setIsAddShopModalOpen(true)}
-        />
-        {selectedShop && (
-          <ProductList
-            shop={selectedShop}
-            isEditingShop={isEditingShop}
-            setIsEditingShop={setIsEditingShop}
-            onUpdateShopName={handleUpdateShopName}
-            onDeleteShop={handleDeleteShop}
-            onUpdateProducts={handleUpdateProducts}
-          />
+        {loading ? (
+          <div className="text-center">
+            <p>Loading...</p>{" "}
+            {/* Może być też spinner lub inna animacja ładowania */}
+          </div>
+        ) : (
+          <>
+            <ShopList
+              shops={shops}
+              onSelectShop={handleSelectShop}
+              onAddShop={() => setIsAddShopModalOpen(true)}
+            />
+            {selectedShop && (
+              <ProductList
+                shop={selectedShop}
+                isEditingShop={isEditingShop}
+                setIsEditingShop={setIsEditingShop}
+                onUpdateShopName={handleUpdateShopName}
+                onDeleteShop={handleDeleteShop}
+                onUpdateProducts={handleUpdateProducts}
+              />
+            )}
+          </>
         )}
       </main>
       <Footer />
