@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile.frontend
     ports:
       - "3000:3000"
-    env_file: .env.docker.local 
+    env_file: .env.development.local
     depends_on:
       - backend
     networks:

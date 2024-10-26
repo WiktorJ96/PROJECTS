@@ -10,7 +10,8 @@ Ogólna struktura i organizacja
 
 1. Modułowość: Kod JavaScript jest dobrze zorganizowany w klasy (TransactionManager, ChartManager, UIManager, ThemeManager, PWAManager), 
    co sprzyja modułowości i ułatwia utrzymanie.
-2. Separacja logiki: Rozdzielenie logiki biznesowej (TransactionManager) od interfejsu użytkownika (UIManager) i wizualizacji danych (ChartManager).
+2. Separacja logiki: Rozdzielenie logiki biznesowej (TransactionManager) od interfejsu użytkownika (UIManager) i wizualizacji danych
+   (ChartManager).
 3. Struktura HTML: Prawidłowe użycie struktury HTML5 z semantycznymi tagami jak <header>, <main>, <footer>.
 
 Jakość kodu
