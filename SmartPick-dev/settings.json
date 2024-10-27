@@ -1,0 +1,8 @@
+{
+  "testing.defaultTestFramework": "jest",
+  "jest.autoRun": {
+    "watch": false,
+    "onSave": "test-file"
+  },
+  "jest.pathToJest": "node_modules/.bin/jest"
+}

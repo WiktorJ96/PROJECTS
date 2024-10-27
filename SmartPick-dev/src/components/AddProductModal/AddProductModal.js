@@ -13,6 +13,22 @@ const AddProductModal = ({ isOpen, onClose, onAddProduct }) => {
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   const validateInputs = () => {
     if (!productName.trim() || !productPrice.trim() || !productLink.trim()) {
       alert("Wszystkie pola są wymagane.");
@@ -38,8 +54,6 @@ const AddProductModal = ({ isOpen, onClose, onAddProduct }) => {
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       handleAdd();
-    } else if (event.key === "Escape") {
-      onClose();
     }
   };
 

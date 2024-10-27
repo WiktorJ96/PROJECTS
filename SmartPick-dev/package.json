@@ -22,10 +22,14 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "jest": {
+"jest": {
+  "testEnvironment": "jsdom",
   "moduleNameMapper": {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
     "\\.svg$": "<rootDir>/__mocks__/svgMock.js"
+  },
+  "transform": {
+    "^.+\\.(js|jsx)$": "babel-jest"
   }
 },
   "eslintConfig": {
@@ -48,8 +52,12 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-react": "^7.25.9",
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
+    "@types/jest": "^29.5.14",
+    "babel-jest": "^29.7.0",
+    "concurrently": "^9.0.1",
     "jest": "^27.5.1",
     "tailwindcss": "^3.4.14"
   }
