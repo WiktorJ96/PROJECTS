@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import AddProductModal from "../AddProductModal/AddProductModal";
+import { FaHeart, FaRegHeart, FaStickyNote } from "react-icons/fa";
 
 const ProductList = ({
   shop,
@@ -17,6 +18,11 @@ const ProductList = ({
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [editedShopName, setEditedShopName] = useState(shop.name);
   const [isShopDeleteModalOpen, setIsShopDeleteModalOpen] = useState(false);
+
+  // Stan dla notatki
+  const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
+  const [selectedProductForNote, setSelectedProductForNote] = useState(null);
+  const [note, setNote] = useState("");
 
   useEffect(() => {
     setEditedShopName(shop.name);
@@ -67,84 +73,81 @@ const ProductList = ({
     handleConfirmDeleteShop,
   ]);
 
-  // Funkcja otwierająca modal potwierdzający usunięcie dla produktu
   const openDeleteModalForProduct = (product) => {
     setProductToDelete(product);
     setIsDeleteModalOpen(true);
   };
 
-  // Funkcja do dodawania nowego produktu
   const handleAddProduct = (product) => {
     const updatedProducts = [
       ...products,
-      { name: product.name, price: product.price, link: product.link },
+      {
+        name: product.name,
+        price: product.price,
+        link: product.link,
+        note: "",
+      },
     ];
     onUpdateProducts(updatedProducts);
   };
 
-  const renderEditButtons = () => (
-    <div className="flex space-x-4">
-      <button
-        className="btn-primary px-4 py-2 rounded"
-        onClick={handleEditShopName}
-      >
-        Zapisz
-      </button>
-      <button
-        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-        onClick={() => setIsShopDeleteModalOpen(true)}
-      >
-        Usuń
-      </button>
-    </div>
-  );
-
-  const renderProductList = () =>
-    products.length > 0 ? (
-      products.map((product, index) => (
-        <li key={index} className="flex justify-between items-center">
-          <span>
-            {product.name} - {product.price} PLN
-          </span>
-          <a
-            href={product.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500"
-          >
-            Zobacz produkt
-          </a>
-          <button
-            className="text-red-500"
-            onClick={() => openDeleteModalForProduct(product)}
-          >
-            <i className="fas fa-times"></i>
-          </button>
-        </li>
-      ))
-    ) : (
-      <p>No products available.</p>
+  const toggleFavorite = (index) => {
+    const updatedProducts = products.map((product, i) =>
+      i === index ? { ...product, isFavorite: !product.isFavorite } : product
     );
+    onUpdateProducts(updatedProducts);
+  };
+
+  const openNoteModal = (product) => {
+    setSelectedProductForNote(product);
+    setNote(product.note || "");
+    setIsNoteModalOpen(true);
+  };
+
+  const saveNote = () => {
+    const updatedProducts = products.map((p) =>
+      p.name === selectedProductForNote.name ? { ...p, note } : p
+    );
+    onUpdateProducts(updatedProducts);
+    setIsNoteModalOpen(false);
+  };
 
   return (
-    <section id="productSection" className="bg-white rounded-lg shadow-lg p-6">
+    <section
+      id="productSection"
+      className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg shadow-lg p-8"
+    >
       <div className="flex justify-between items-center mb-4">
         {isEditingShop ? (
           <input
             type="text"
             value={editedShopName}
             onChange={(e) => setEditedShopName(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border border-gray-300 rounded"
           />
         ) : (
-          <h2 className="text-2xl font-semibold">Produkty w {shop.name}</h2>
+          <h2 className="text-3xl font-bold text-gray-800">
+            Produkty w {shop.name}
+          </h2>
         )}
-
         {isEditingShop ? (
-          renderEditButtons()
+          <div className="flex space-x-4">
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-200"
+              onClick={handleEditShopName}
+            >
+              Zapisz
+            </button>
+            <button
+              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-200"
+              onClick={() => setIsShopDeleteModalOpen(true)}
+            >
+              Usuń
+            </button>
+          </div>
         ) : (
           <button
-            className="btn-secondary px-4 py-2 rounded"
+            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-200"
             onClick={() => setIsEditingShop(true)}
           >
             <i className="fas fa-edit mr-2"></i>Edytuj sklep
@@ -153,13 +156,82 @@ const ProductList = ({
       </div>
 
       <button
-        className="btn-primary px-4 py-2 rounded mb-4"
+        className="bg-blue-500 text-white px-4 py-2 rounded mb-4 hover:bg-blue-600 transition-colors duration-200"
         onClick={() => setIsAddProductModalOpen(true)}
       >
         Dodaj produkt
       </button>
 
-      <ul className="space-y-2">{renderProductList()}</ul>
+      <div className="w-full overflow-x-auto">
+        <table className="w-full bg-white shadow-lg rounded-lg overflow-hidden border">
+          <thead>
+            <tr className="bg-gray-200 text-gray-700 border-b">
+              <th className="py-3 px-4 text-left font-semibold">
+                Nazwa produktu
+              </th>
+              <th className="py-3 px-4 text-left font-semibold">Cena</th>
+              <th className="py-3 px-4 text-left font-semibold">Link</th>
+              <th className="py-3 px-4 text-center font-semibold">Notatka</th>
+              <th className="py-3 px-4 text-center font-semibold">Ulubione</th>
+              <th className="py-3 px-4 text-center font-semibold">Usuń</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.length > 0 ? (
+              products.map((product, index) => (
+                <tr
+                  key={index}
+                  className="border-b hover:bg-gray-50 transition duration-150"
+                >
+                  <td className="py-3 px-4">{product.name}</td>
+                  <td className="py-3 px-4">{product.price} PLN</td>
+                  <td className="py-3 px-4">
+                    <a
+                      href={product.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:underline transition-colors duration-150"
+                    >
+                      Zobacz produkt
+                    </a>
+                  </td>
+                  <td className="py-3 px-4 text-center">
+                    <button onClick={() => openNoteModal(product)}>
+                      <FaStickyNote className="text-gray-600 hover:text-blue-500" />
+                    </button>
+                  </td>
+                  <td className="py-3 px-4 text-center">
+                    <button
+                      onClick={() => toggleFavorite(index)}
+                      className="focus:outline-none"
+                    >
+                      {product.isFavorite ? (
+                        <FaHeart className="text-red-500" />
+                      ) : (
+                        <FaRegHeart />
+                      )}
+                    </button>
+                  </td>
+                  <td className="py-3 px-4 text-center">
+                    <button
+                      className="text-red-500 hover:text-red-700 transition-colors duration-150"
+                      onClick={() => openDeleteModalForProduct(product)}
+                    >
+                      <i className="fas fa-times"></i>
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" className="py-4 text-center text-gray-500">
+                  Brak dostępnych produktów.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
 
       <DeleteConfirmationModal
         isOpen={isDeleteModalOpen}
@@ -182,6 +254,35 @@ const ProductList = ({
         item={shop.name}
         itemType="sklep"
       />
+
+      {isNoteModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full relative">
+            <h2 className="text-2xl font-semibold mb-4">Dodaj notatkę</h2>
+            <textarea
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded mb-4"
+              rows="4"
+              placeholder="Wpisz swoją notatkę..."
+            ></textarea>
+            <div className="flex justify-end space-x-4">
+              <button
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-200"
+                onClick={saveNote}
+              >
+                Zapisz
+              </button>
+              <button
+                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-200"
+                onClick={() => setIsNoteModalOpen(false)}
+              >
+                Anuluj
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
