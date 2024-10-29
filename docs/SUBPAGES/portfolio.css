@@ -609,6 +609,10 @@ h2 {
   background: linear-gradient(90deg, #563d7c, #6f42c1, #7952b3);
 }
 
+#sass-skill .progress-bar {
+  background: linear-gradient(90deg, #cf649a, #f7a8c1, #c76494);
+}
+
 .icon {
   font-size: 35px;
   margin-right: 8px;
@@ -1434,8 +1438,7 @@ footer {
   background-image: linear-gradient(
     135deg,
     hsla(204, 86%, 53%, 0.9),
-    /* Odcień niebieskiego zbliżony do logo Reacta */ hsla(207, 100%, 72%, 0.9)
-      /* Jaśniejszy niebieski */
+    hsla(207, 100%, 72%, 0.9)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1468,6 +1471,17 @@ footer {
   background-image: linear-gradient(135deg, #0db7ed, #0087c9, #006494);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.iconSass {
+  background-image: linear-gradient(
+    135deg,
+    hsla(340, 80%, 70%, 0.9),
+    hsla(340, 80%, 50%, 0.9)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   color: transparent;
 }
 
