@@ -6,6 +6,7 @@ import ShopList from "./components/ShopList/ShopList";
 import ProductList from "./components/ProductList/ProductList";
 import Footer from "./components/Footer/Footer";
 import AddShopModal from "./components/AddShopModal/AddShopModal";
+import AddCardModal from "./components/Header/AddCardModal";
 import {
   fetchShopsFromBackend,
   addShopToBackend,
@@ -17,6 +18,7 @@ import {
 
 function App() {
   const apiUrl = process.env.REACT_APP_API_URL || null;
+  const [isAddCardModalOpen, setIsAddCardModalOpen] = useState(false);
   const [isBackendActive, setIsBackendActive] = useState(apiUrl !== null);
   const [notification, setNotification] = useState("");
   const [shops, setShops] = useState(() =>
@@ -109,7 +111,14 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header openAddCardModal={() => setIsAddCardModalOpen(true)} />
+
+      {/* Modal dodawania karty */}
+      <AddCardModal
+        isOpen={isAddCardModalOpen}
+        onClose={() => setIsAddCardModalOpen(false)}
+        isBackendActive={isBackendActive}
+      />
       {notification && (
         <div className="bg-yellow-200 text-yellow-800 p-3 text-center">
           {notification}

@@ -1,17 +1,22 @@
 import React from "react";
 import { ReactComponent as MyIcon } from "./SmartPick-logo.svg";
+import HamburgerMenu from "./HamburgerMenu";
 
-const Header = () => {
+const Header = ({ openAddCardModal }) => {
   return (
     <header
       className="header shadow-md p-4 bg-gradient-to-r from-blue-500 to-purple-700"
       aria-label="SmartPick header"
     >
-      <div className="flex items-center justify-center">
-        <a href="/" className="flex items-center space-x-4">
+      <div className="flex items-center justify-between">
+        {/* Hamburger Menu Button and Sidebar */}
+        <HamburgerMenu openAddCardModal={openAddCardModal} />
+
+        {/* Logo and App Name */}
+        <a href="/" className="flex items-center space-x-4 ml-4">
           <MyIcon
-            width="120"
-            height="120"
+            width="80"
+            height="80"
             className="header-icon"
             aria-label="SmartPick logo"
           />
@@ -19,6 +24,9 @@ const Header = () => {
             SmartPick
           </h1>
         </a>
+
+        {/* Placeholder div to center the logo */}
+        <div className="w-10"></div>
       </div>
     </header>
   );

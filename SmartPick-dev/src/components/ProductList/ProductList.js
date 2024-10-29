@@ -19,7 +19,6 @@ const ProductList = ({
   const [editedShopName, setEditedShopName] = useState(shop.name);
   const [isShopDeleteModalOpen, setIsShopDeleteModalOpen] = useState(false);
 
-  // Stan dla notatki
   const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
   const [selectedProductForNote, setSelectedProductForNote] = useState(null);
   const [note, setNote] = useState("");
