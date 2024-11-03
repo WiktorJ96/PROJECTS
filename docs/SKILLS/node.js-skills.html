@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="page-title">Umiejętności Node.js</title>
+    <link rel="icon" type="image/png" href="assets/node-logo.png" sizes="16x16">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="skills.css">
+    <style>
+        .nodejs-hr {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, #68A063, rgba(104, 160, 99, 0), #3C873A);
+            margin: 40px 0;
+            position: relative;
+            overflow: visible;
+        }
+
+        .nodejs-hr::before {
+            content: 'NODE.JS';
+            display: block;
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #68A063;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+        }
+    </style>
+</head>
+
+<body data-page="node.js">
+    <div class="language-switch">
+        <button id="lang-pl" >PL</button>
+        <button id="lang-en" >EN</button>
+    </div>
+    <div class="container py-5">
+
+        <i class="fab fa-node-js icon iconNode mb-4"></i>
+
+        <hr class="nodejs-hr">
+
+        <!-- Zawartość kart umiejętności -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+            <!-- Podstawowe Umiejętności -->
+            <div class="col" data-difficulty="Dobry" data-category="podstawy-nodejs">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-terminal skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="basic-nodejs-title">Podstawy Node.js</h5>
+                        <p class="card-text" data-lang-key="basic-nodejs-desc">Instalacja Node.js, podstawowe komendy, użycie REPL, zarządzanie wersjami.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                            <i class="fas fa-smile" data-bs-toggle="tooltip"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Dobry" data-category="moduly-pakiety">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-box-open skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="modules-packages-title">Moduły i Pakiety</h5>
+                        <p class="card-text" data-lang-key="modules-packages-desc">Użycie <code>require</code>, <code>module.exports</code>, tworzenie własnych modułów, korzystanie z npm.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                            <i class="fas fa-smile" data-bs-toggle="tooltip"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Dobry" data-category="zarzadzanie-pakietami">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-boxes skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="package-management-title">Zarządzanie Pakietami</h5>
+                        <p class="card-text" data-lang-key="package-management-desc">Użycie npm i yarn, tworzenie <code>package.json</code>, zarządzanie zależnościami.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                            <i class="fas fa-smile" data-bs-toggle="tooltip"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="http-server">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-server skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="http-server-title">HTTP Server</h5>
+                        <p class="card-text" data-lang-key="http-server-desc">Tworzenie serwera HTTP, obsługa request/response, routing podstawowy.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Średniozaawansowane Umiejętności -->
+            <div class="col" data-difficulty="Średni" data-category="asynchronicznosc">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-sync-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="async-title">Asynchroniczność</h5>
+                        <p class="card-text" data-lang-key="async-desc">Callbacks, Promises, <code>async/await</code>, obsługa operacji asynchronicznych.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="praca-z-plikami">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-file-code skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="file-handling-title">Praca z Plikami</h5>
+                        <p class="card-text" data-lang-key="file-handling-desc">Użycie modułu <code>fs</code>, operacje na plikach, strumienie, obsługa błędów I/O.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="expressjs">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-route skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="expressjs-title">Express.js</h5>
+                        <p class="card-text" data-lang-key="expressjs-desc">Tworzenie aplikacji webowych z użyciem Express.js, middleware, routing.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="bazy-danych">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-database skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="databases-title">Praca z Bazami Danych</h5>
+                        <p class="card-text" data-lang-key="databases-desc">Korzystanie z MongoDB (Mongoose), MySQL, PostgreSQL, operacje CRUD.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="debugging">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-bug skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="debugging-title">Debugging</h5>
+                        <p class="card-text" data-lang-key="debugging-desc">Użycie narzędzi do debugowania, takich jak <code>console.log</code>, <code>debugger</code>, narzędzia IDE.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Średni" data-category="event-loop">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-sync skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="event-loop-title">Event Loop</h5>
+                        <p class="card-text" data-lang-key="event-loop-desc">Zrozumienie mechanizmu Event Loop, obsługa zdarzeń i asynchroniczności.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zaawansowane Umiejętności -->
+            <div class="col" data-difficulty="Słaby" data-category="websockets">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-exchange-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="websockets-title">WebSockets</h5>
+                        <p class="card-text" data-lang-key="websockets-desc">Realizacja komunikacji w czasie rzeczywistym za pomocą WebSockets.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip"  title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="testowanie">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-vial skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="testing-title">Testowanie</h5>
+                        <p class="card-text" data-lang-key="testing-desc">Pisanie testów jednostkowych za pomocą Mocha, Chai, Jest, pokrycie kodu testami.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip"  title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="bezpieczenstwo">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-shield-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="security-title">Bezpieczeństwo</h5>
+                        <p class="card-text" data-lang-key="security-desc">Praktyki bezpiecznego kodowania, obsługa danych, unikanie podatności.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip"  title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="deployment">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-cloud-upload-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="deployment-title">Deployment</h5>
+                        <p class="card-text" data-lang-key="deployment-desc">Wdrażanie aplikacji Node.js na serwery, użycie Heroku, AWS, Docker.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip"  title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" data-difficulty="Słaby" data-category="clustering">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-network-wired skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="clustering-title">Clustering i Skalowanie</h5>
+                        <p class="card-text" data-lang-key="clustering-desc">Użycie modułu <code>cluster</code>, skalowanie aplikacji Node.js na wiele rdzeni.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip"  title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="../translations/translates.js"></script>
+    <script src="skills.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Inicjalizacja tooltipów
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerElement) {
+                return new bootstrap.Tooltip(tooltipTriggerElement)
+            })
+        });
+    </script>
+</body>
+
+</html>

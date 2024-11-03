@@ -1,0 +1,48 @@
+{
+  "page-title": "Node.js Skills",
+
+  "basic-nodejs-title": "Node.js Basics",
+  "basic-nodejs-desc": "Node.js installation, basic commands, REPL usage, version management.",
+
+  "modules-packages-title": "Modules & Packages",
+  "modules-packages-desc": "Using require, module.exports, creating custom modules, npm usage.",
+
+  "package-management-title": "Package Management",
+  "package-management-desc": "Using npm and yarn, creating package.json, dependency management.",
+
+  "http-server-title": "HTTP Server",
+  "http-server-desc": "Creating HTTP server, handling requests/responses, basic routing.",
+
+  "async-title": "Asynchronous Programming",
+  "async-desc": "Callbacks, Promises, async/await, handling asynchronous operations.",
+
+  "file-handling-title": "File Handling",
+  "file-handling-desc": "Using fs module, file operations, streams, I/O error handling.",
+
+  "expressjs-title": "Express.js",
+  "expressjs-desc": "Creating web applications with Express.js, middleware, routing.",
+
+  "databases-title": "Database Operations",
+  "databases-desc": "Working with MongoDB (Mongoose), MySQL, PostgreSQL, CRUD operations.",
+
+  "debugging-title": "Debugging",
+  "debugging-desc": "Using debugging tools like console.log, debugger, IDE tools.",
+
+  "event-loop-title": "Event Loop",
+  "event-loop-desc": "Understanding Event Loop mechanism, handling events and asynchronicity.",
+
+  "websockets-title": "WebSockets",
+  "websockets-desc": "Implementing real-time communication using WebSockets.",
+
+  "testing-title": "Testing",
+  "testing-desc": "Writing unit tests using Mocha, Chai, Jest, code coverage.",
+
+  "security-title": "Security",
+  "security-desc": "Secure coding practices, data handling, vulnerability prevention.",
+
+  "deployment-title": "Deployment",
+  "deployment-desc": "Deploying Node.js applications to servers, using Heroku, AWS, Docker.",
+
+  "clustering-title": "Clustering & Scaling",
+  "clustering-desc": "Using cluster module, scaling Node.js applications across multiple cores."
+}

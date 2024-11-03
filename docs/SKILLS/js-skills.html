@@ -13,24 +13,26 @@
         .js-hr {
             border: none;
             height: 3px;
-            background: linear-gradient(to right, hsla(51, 100%, 50%, 0.9), rgba(255, 223, 0, 0), rgba(255, 223, 0));
+            background: linear-gradient(to right, hsl(51, 100%, 50%), rgba(255, 223, 0, 0), rgba(255, 223, 0));
             margin: 40px 0;
             position: relative;
             overflow: visible;
         }
 
         .js-hr::before {
-            content: '(...JS)';
+            content: 'JAVASCRIPT';
             display: block;
             position: absolute;
             top: -14px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 20px;
+            font-size: 24px;
             letter-spacing: 10px;
-            color: rgb(253, 220, 2);
+            color: rgb(255, 213, 0);
             font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
         }
+
     </style>
 </head>
 

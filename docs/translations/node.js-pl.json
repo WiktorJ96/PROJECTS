@@ -1,0 +1,48 @@
+{
+  "page-title": "Umiejętności Node.js",
+
+  "basic-nodejs-title": "Podstawy Node.js",
+  "basic-nodejs-desc": "Instalacja Node.js, podstawowe komendy, użycie REPL, zarządzanie wersjami.",
+
+  "modules-packages-title": "Moduły i Pakiety",
+  "modules-packages-desc": "Użycie require, module.exports, tworzenie własnych modułów, korzystanie z npm.",
+
+  "package-management-title": "Zarządzanie Pakietami",
+  "package-management-desc": "Użycie npm i yarn, tworzenie package.json, zarządzanie zależnościami.",
+
+  "http-server-title": "HTTP Server",
+  "http-server-desc": "Tworzenie serwera HTTP, obsługa request/response, routing podstawowy.",
+
+  "async-title": "Asynchroniczność",
+  "async-desc": "Callbacks, Promises, async/await, obsługa operacji asynchronicznych.",
+
+  "file-handling-title": "Praca z Plikami",
+  "file-handling-desc": "Użycie modułu fs, operacje na plikach, strumienie, obsługa błędów I/O.",
+
+  "expressjs-title": "Express.js",
+  "expressjs-desc": "Tworzenie aplikacji webowych z użyciem Express.js, middleware, routing.",
+
+  "databases-title": "Praca z Bazami Danych",
+  "databases-desc": "Korzystanie z MongoDB (Mongoose), MySQL, PostgreSQL, operacje CRUD.",
+
+  "debugging-title": "Debugging",
+  "debugging-desc": "Użycie narzędzi do debugowania, takich jak console.log, debugger, narzędzia IDE.",
+
+  "event-loop-title": "Event Loop",
+  "event-loop-desc": "Zrozumienie mechanizmu Event Loop, obsługa zdarzeń i asynchroniczności.",
+
+  "websockets-title": "WebSockets",
+  "websockets-desc": "Realizacja komunikacji w czasie rzeczywistym za pomocą WebSockets.",
+
+  "testing-title": "Testowanie",
+  "testing-desc": "Pisanie testów jednostkowych za pomocą Mocha, Chai, Jest, pokrycie kodu testami.",
+
+  "security-title": "Bezpieczeństwo",
+  "security-desc": "Praktyki bezpiecznego kodowania, obsługa danych, unikanie podatności.",
+
+  "deployment-title": "Deployment",
+  "deployment-desc": "Wdrażanie aplikacji Node.js na serwery, użycie Heroku, AWS, Docker.",
+
+  "clustering-title": "Clustering i Skalowanie",
+  "clustering-desc": "Użycie modułu cluster, skalowanie aplikacji Node.js na wiele rdzeni."
+}

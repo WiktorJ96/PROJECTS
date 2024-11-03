@@ -11,6 +11,7 @@
   "wallet_desc": "Responsywny portfel z wykresem salda i opcja zmiany motywu.",
   "todo_desc": "Responsywna TODO lista z opcją zapisywania tasków w pliku PDF.",
   "Dashboard": "Dashboard",
-  "Dashboard_desc": "Minimalistyczny Dashboard z wykresem",
-  "title_figma": "Projekty Figma"
+  "Dashboard_desc": "Minimalistyczny Dashboard z wykresem.",
+  "title_figma": "Projekty Figma",
+  "smartpick-describe": "Aplikacja która pomoże Ci zapanować nad swoimi zakupami w internecie."
 }
