@@ -1429,7 +1429,7 @@ footer {
   border: none;
   height: 1px;
   background-image: linear-gradient(to right, transparent, #333, transparent);
-  margin: 10px 0;
+  margin: 15px 0 20px 0;
 }
 .iconCSS {
   background-image: linear-gradient(
@@ -1481,6 +1481,11 @@ footer {
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
+.iconBootstrap {
+  background: linear-gradient(45deg, #7952b3, #7709e6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .iconSass {
   background-image: linear-gradient(
     135deg,
@@ -1507,11 +1512,21 @@ footer {
   background-clip: text;
   color: transparent;
 }
-
-.iconJS_HTML_CSS {
-  margin-top: 10px;
-  font-size: 70px;
+.icon-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: -15px;
+  background: hsla(0, 0%, 100%, 0.7);
+  border-radius: 10px;
+}
+.iconsBig {
+  margin-top: 5px;
+  font-size: 4.5rem;
   filter: grayscale(8%);
+}
+.iconsMedium {
+  font-size: 1.8rem;
 }
 .language-switch_portfolio {
   display: none;
