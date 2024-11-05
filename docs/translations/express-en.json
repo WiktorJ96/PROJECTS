@@ -1,0 +1,19 @@
+{
+  "title": "Express.js Skills",
+  "express-basics-title": "Express.js Basics",
+  "express-basics-description": "Creating a server, handling requests and responses.",
+  "routing-title": "Routing",
+  "routing-description": "Defining and handling routes, dynamic parameters, and wildcards.",
+  "middleware-title": "Middleware",
+  "middleware-description": "Creating and using middleware functions in Express.js applications.",
+  "auth-title": "Authorization and Authentication",
+  "auth-description": "Implementing JWT, authentication middleware.",
+  "error-handling-title": "Error Handling",
+  "error-handling-description": "Creating middleware for error handling, sending appropriate messages.",
+  "database-integration-title": "Database Integration",
+  "database-integration-description": "Connecting to databases (MongoDB, MySQL), handling queries.",
+  "websockets-title": "WebSockets",
+  "websockets-description": "Building real-time applications using WebSockets.",
+  "scalability-title": "Scalability and Optimization",
+  "scalability-description": "Application optimization techniques, server load management."
+}

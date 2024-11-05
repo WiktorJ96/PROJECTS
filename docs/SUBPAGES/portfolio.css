@@ -620,6 +620,11 @@ h2 {
 #react-skill .progress-bar {
   background: linear-gradient(90deg, #2d9cdb, #61dafb);
 }
+#express-skill .progress-bar {
+  background: linear-gradient(90deg, #7aae76, #333332, #212121, hsla(0, 0%, 0%, 0.92));
+}
+
+
 
 .icon {
   font-size: 35px;

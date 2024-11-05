@@ -28,5 +28,7 @@
   "languages": "Języki programowania",
   "frameworks": "Frameworki",
   "data_formats": "Formaty danych",
-  "programs-editors": "IDE/Edytory"
+  "programs-editors": "IDE/Edytory",
+  "js-tech": "JavaScript - Technologie",
+  "node-frames": "Node.js - Frameworki"
 }

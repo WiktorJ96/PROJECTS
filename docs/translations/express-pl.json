@@ -1,0 +1,19 @@
+{
+  "title":"Umiejętności Express.js",
+  "express-basics-title": "Podstawy Express.js",
+  "express-basics-description": "Tworzenie serwera, obsługa żądań i odpowiedzi.",
+  "routing-title": "Routing",
+  "routing-description": "Definiowanie i obsługa tras, dynamiczne parametry i wildcardy.",
+  "middleware-title": "Middleware",
+  "middleware-description": "Tworzenie i używanie funkcji middleware w aplikacjach Express.js.",
+  "auth-title": "Autoryzacja i Uwierzytelnianie",
+  "auth-description": "Implementacja JWT, middleware uwierzytelniania.",
+  "error-handling-title": "Obsługa Błędów",
+  "error-handling-description": "Tworzenie middleware do obsługi błędów, wysyłanie odpowiednich komunikatów.",
+  "database-integration-title": "Integracja z Bazą Danych",
+  "database-integration-description": "Podłączanie do baz danych (MongoDB, MySQL), obsługa zapytań.",
+  "websockets-title": "WebSockety",
+  "websockets-description": "Tworzenie aplikacji w czasie rzeczywistym przy użyciu WebSocketów.",
+  "scalability-title": "Skalowalność i Optymalizacja",
+  "scalability-description": "Techniki optymalizacji aplikacji, zarządzanie obciążeniem serwera."
+}
