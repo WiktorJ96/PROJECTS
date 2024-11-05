@@ -621,10 +621,14 @@ h2 {
   background: linear-gradient(90deg, #2d9cdb, #61dafb);
 }
 #express-skill .progress-bar {
-  background: linear-gradient(90deg, #7aae76, #333332, #212121, hsla(0, 0%, 0%, 0.92));
+  background: linear-gradient(
+    90deg,
+    #7aae76,
+    #333332,
+    #212121,
+    hsla(0, 0%, 0%, 0.92)
+  );
 }
-
-
 
 .icon {
   font-size: 35px;
@@ -1490,6 +1494,8 @@ footer {
   background: linear-gradient(45deg, #7952b3, #7709e6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  padding: 0;
+  margin: 0;
 }
 .iconSass {
   background-image: linear-gradient(
@@ -1519,9 +1525,10 @@ footer {
 }
 .icon-row {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  margin-top: -15px;
+  margin: 0 0 5px 0;
+  padding: 3px;
   background: hsla(0, 0%, 100%, 0.7);
   border-radius: 10px;
 }
