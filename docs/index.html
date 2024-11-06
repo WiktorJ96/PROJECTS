@@ -133,6 +133,84 @@
         <button class="scroll-button right" aria-label="Przewiń kategorie w prawo">
             <i class="fas fa-chevron-right" aria-hidden="true"></i>
         </button>
+        <i class="fas fa-info-circle fs-4" style="right: 50px; position: absolute; margin-bottom: 30px; cursor: help;" data-bs-toggle="modal" data-bs-target="#infoModal"></i>
+        <!-- Modal Bootstrapowy -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content bg-dark border-1">
+      <div class="modal-header">
+        <h5 class="modal-title" id="infoModalLabel">Informacja</h5>
+        <button type="button" class="btn-close text-bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start d-flex flex-column justify-content-start align-items-start">
+        <h5>1.Metodologia oceny umiejętności</h5>
+        <p>*Procent jest obliczany na podstawie kart umiejętności zawartych na stronach przypisanych do danej technologii, nie uwzględniłem szerszej perspektywy umiejętności, które zapewnia dana technologia.</p>
+        <h6>a) Klasyfikacja umiejętności według ważności</h6>
+        <p>Umiejętności są podzielone na trzy kategorie:</p>
+        <ul>
+          <li><strong>Podstawowe (Essential)</strong> – kluczowe umiejętności niezbędne w codziennej pracy.</li>
+          <li><strong>Ważne (Important)</strong> – umiejętności często używane, które znacząco rozszerzają możliwości.</li>
+          <li><strong>Zaawansowane (Advanced)</strong> – specjalistyczne umiejętności używane w specyficznych sytuacjach.</li>
+        </ul>
+
+        <h6>b) Przypisanie wag do kategorii ważności</h6>
+        <ul>
+          <li><strong>Podstawowe (Essential)</strong>: waga 1 (maksymalnie 4 punktów na umiejętność)</li>
+          <li><strong>Ważne (Important)</strong>: waga 2 (maksymalnie 3 punkty na umiejętność)</li>
+          <li><strong>Zaawansowane (Advanced)</strong>: waga 3 (maksymalnie 2 punkty na umiejętność)</li>
+        </ul>
+
+        <h6>c) Przypisanie punktów za poziom znajomości</h6>
+        <ul>
+          <li><strong>Dobry</strong>: pełna liczba punktów <i class="fas fa-smile text-success" data-bs-toggle="tooltip"  title="Dobry"></i></li>
+          <li><strong>Średni</strong>: połowa maksymalnej liczby punktów <i class="fas fa-meh text-warning" data-bs-toggle="tooltip"  title="Średni"></i></li>
+          <li><strong>Słaby</strong>: 0 punktów <i class="fas fa-frown text-danger" data-bs-toggle="tooltip"  title="Słaby"></i></li>
+        </ul>
+
+        <h6>d) Obliczanie punktów dla każdej umiejętności</h6>
+        <p>Dla każdej umiejętności obliczam maksymalną liczbę punktów oraz punkty zdobyte, uwzględniając ważność umiejętności i poziom znajomości. Następnie liczba zdobytych punktów jest dzielona przez maksymalną liczbę punktów i wynik jest mnożony przez 100%.</p>
+
+        <h5>Kategoryzacja umiejętności na podstawie kilku kluczowych czynników:</h5>
+        <ul>
+          <li>Częstotliwość użycia w praktyce</li>
+          <li>Znaczenie dla podstawowej funkcjonalności technologii</li>
+          <li>Poziom trudności zrozumienia i opanowania</li>
+          <li>Standardy branżowe i wymagania rynku pracy</li>
+        </ul>
+
+        <h5>2. Szczegółowe kryteria kategoryzacji</h5>
+
+        <h6>a) Umiejętności Podstawowe (Essential)</h6>
+        <p>Umiejętności podstawowe to te, które są niezbędne do rozpoczęcia pracy z technologią i stanowią fundament dla dalszego rozwoju.</p>
+        <ul>
+          <li><strong>Niezbędność</strong>: Bez nich trudno byłoby w ogóle pracować z technologią.</li>
+          <li><strong>Częstotliwość użycia</strong>: Są używane w większości projektów i codziennych zadań.</li>
+          <li><strong>Podstawa dla innych umiejętności</strong>: Stanowią bazę dla bardziej zaawansowanych konceptów.</li>
+        </ul>
+
+        <h6>b) Umiejętności Ważne (Important)</h6>
+        <p>Umiejętności ważne rozszerzają możliwości technologii i są często używane w bardziej złożonych projektach.</p>
+        <ul>
+          <li><strong>Częste zastosowanie</strong>: Są powszechnie używane, choć nie zawsze w prostych aplikacjach.</li>
+          <li><strong>Zwiększenie efektywności</strong>: Pozwalają tworzyć bardziej dynamiczne i responsywne aplikacje.</li>
+          <li><strong>Wymagają średniozaawansowanej wiedzy</strong>: Są trudniejsze do opanowania niż podstawy.</li>
+        </ul>
+
+        <h6>c) Umiejętności Zaawansowane (Advanced)</h6>
+        <p>Umiejętności zaawansowane są bardziej specjalistyczne i wymagają głębszego zrozumienia technologii.</p>
+        <ul>
+          <li><strong>Mniejsza częstotliwość użycia w prostych projektach</strong>: Są niezbędne w dużych i skomplikowanych aplikacjach.</li>
+          <li><strong>Wyższy poziom trudności</strong>: Wymagają zaawansowanej wiedzy i doświadczenia.</li>
+          <li><strong>Znaczący wpływ na skalowalność i wydajność</strong>: Pozwalają optymalizować i zabezpieczać aplikacje.</li>
+        </ul>
+      </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+
+</div>
     </div>
     <hr class="line">
     <div class="skills-container">
@@ -154,9 +232,9 @@
                                 <span><i class="fas fa-book click"></i></span>
                             </a>
                         </span>
-                        <span class="skills__percent">76%</span>
+                        <span class="skills__percent">73%</span>
                     </div>
-                    <div class="progress-container" style="--progress: 76%;">
+                    <div class="progress-container" style="--progress: 73%;">
                         <div class="progress-bar"></div>
                     </div>
                 </div>
@@ -178,9 +256,9 @@
                 <i class="bi bi-puzzle"></i>
             </button>
         </span>
-        <span class="skills__percent">39%</span>
+        <span class="skills__percent">35%</span>
     </div>
-    <div class="progress-container" style="--progress: 39%;">
+    <div class="progress-container" style="--progress: 35%;">
         <div class="progress-bar"></div>
     </div>
 </div>
@@ -208,9 +286,9 @@
                                 <span><i class="fas fa-book click"></i></span>
                             </a>
                         </span>
-                        <span class="skills__percent">61%</span>
+                        <span class="skills__percent">58%</span>
                     </div>
-                    <div class="progress-container" style="--progress: 61%;">
+                    <div class="progress-container" style="--progress: 58%;">
                         <div class="progress-bar"></div>
                     </div>
                 </div>
@@ -227,9 +305,9 @@
                                 <span><i class="fas fa-book click"></i></span>
                             </a>
                         </span>
-                        <span class="skills__percent">75%</span>
+                        <span class="skills__percent">72%</span>
                     </div>
-                    <div class="progress-container" style="--progress: 75%;">
+                    <div class="progress-container" style="--progress: 72%;">
                         <div class="progress-bar"></div>
                     </div>
                 </div>
@@ -288,9 +366,9 @@
                                 <i class="bi bi-puzzle"></i>
                             </button>
                         </span>
-                        <span class="skills__percent">57%</span>
+                        <span class="skills__percent">51%</span>
                     </div>
-                    <div class="progress-container" style="--progress: 57%;">
+                    <div class="progress-container" style="--progress: 51%;">
                         <div class="progress-bar"></div>
                     </div>
                 </div>
@@ -307,9 +385,9 @@
                                 <span><i class="fas fa-book click"></i></span>
                             </a>
                         </span>
-                        <span class="skills__percent">57%</span>
+                        <span class="skills__percent">47%</span>
                     </div>
-                    <div class="progress-container" style="--progress: 57%;">
+                    <div class="progress-container" style="--progress: 47%;">
                         <div class="progress-bar"></div>
                     </div>
                 </div>
@@ -344,9 +422,9 @@
                                 <span><i class="fas fa-book click"></i></span>
                             </a>
                         </span>
-                        <span class="skills__percent">63%</span>
+                        <span class="skills__percent">58%</span>
                     </div>
-                    <div class="progress-container" style="--progress: 63%;">
+                    <div class="progress-container" style="--progress: 58%;">
                         <div class="progress-bar"></div>
                     </div>
                 </div>
@@ -376,9 +454,9 @@
                                 <span><i class="fas fa-book click"></i></span>
                             </a>
                         </span>
-                        <span class="skills__percent">41%</span>
+                        <span class="skills__percent">36%</span>
                     </div>
-                    <div class="progress-container" style="--progress: 41%;">
+                    <div class="progress-container" style="--progress: 36%;">
                         <div class="progress-bar"></div>
                     </div>
                 </div>
@@ -400,9 +478,9 @@
                                 <span><i class="fas fa-book click"></i></span>
                             </a>
                         </span>
-                        <span class="skills__percent">65%</span>
+                        <span class="skills__percent">60%</span>
                     </div>
-                    <div class="progress-container" style="--progress: 65%;">
+                    <div class="progress-container" style="--progress: 60%;">
                         <div class="progress-bar"></div>
                     </div>
                 </div>
@@ -425,9 +503,9 @@
                                 <span><i class="fas fa-book click"></i></span>
                             </a>
                         </span>
-                        <span class="skills__percent">26%</span>
+                        <span class="skills__percent">25%</span>
                     </div>
-                    <div class="progress-container" style="--progress: 26%;">
+                    <div class="progress-container" style="--progress: 25%;">
                         <div class="progress-bar"></div>
                     </div>
                 </div>
@@ -443,9 +521,9 @@
                                 <span><i class="fas fa-book click"></i></span>
                             </a>
                         </span>
-                        <span class="skills__percent">76%</span>
+                        <span class="skills__percent">73%</span>
                     </div>
-                    <div class="progress-container" style="--progress: 76%;">
+                    <div class="progress-container" style="--progress: 73%;">
                         <div class="progress-bar"></div>
                     </div>
                 </div>
