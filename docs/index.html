@@ -30,6 +30,23 @@
         ]
     }
     </script>
+    <style>
+.skills-tabs .nav-tabs .nav-link {
+    color: #fff; /* Kolor tekstu */
+    transition: background-color 0.3s, color 0.3s; /* Płynne przejścia */
+}
+
+.skills-tabs .nav-tabs .nav-link:hover {
+    background-color: #e9ecef; /* Kolor tła przy najechaniu */
+}
+
+.skills-tabs .nav-tabs .nav-link.active {
+    color: #fff; /* Kolor tekstu aktywnej zakładki */
+    background-color: hsla(0, 0%, 100%, 0.3); /* Kolor tła aktywnej zakładki */
+    border-color: #fff; /* Obramowanie aktywnej zakładki */
+}
+
+    </style>
 </head>
 <body data-page="index">
     <a href="#main-content" class="skip-link" style="top: -50%;">Przejdź do głównej treści</a>
@@ -126,15 +143,33 @@
 
         <section id="skills" aria-label="Umiejętności">
     <div class="skills-header">
-        <button class="scroll-button left" aria-label="Przewiń kategorie w lewo">
-            <i class="fas fa-chevron-left" aria-hidden="true"></i>
-        </button>
-        <h2 class="mt-3" data-lang-key="skills">Umiejętności</h2>
-        <button class="scroll-button right" aria-label="Przewiń kategorie w prawo">
-            <i class="fas fa-chevron-right" aria-hidden="true"></i>
-        </button>
+        <div class="skills-tabs">
+    <ul class="nav nav-tabs" id="skillsTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="languages-tab" data-bs-toggle="tab" data-bs-target="#languages" type="button" role="tab" aria-controls="languages" aria-selected="true">Języki programowania</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="devops-tab" data-bs-toggle="tab" data-bs-target="#devops" type="button" role="tab" aria-controls="devops" aria-selected="false">DevOps</button>
+        </li>
+        <!-- <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tests-tab" data-bs-toggle="tab" data-bs-target="#tests" type="button" role="tab" aria-controls="tests" aria-selected="false">Testowanie</button>
+        </li> -->
+        <!-- <li class="nav-item" role="presentation">
+            <button class="nav-link" id="no-sql-tab" data-bs-toggle="tab" data-bs-target="#no-sql" type="button" role="tab" aria-controls="no-sql" aria-selected="false">NO SQL DB</button>
+        </li> -->
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="data-formats-tab" data-bs-toggle="tab" data-bs-target="#data-formats" type="button" role="tab" aria-controls="data-formats" aria-selected="false">Formaty danych</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="ide-editors-tab" data-bs-toggle="tab" data-bs-target="#ide-editors" type="button" role="tab" aria-controls="ide-editors" aria-selected="false">IDE/Edytory</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="other-tab" data-bs-toggle="tab" data-bs-target="#other" type="button" role="tab" aria-controls="other" aria-selected="false">Inne</button>
+        </li>
+    </ul>
+</div>
         <i class="fas fa-info-circle fs-4" style="right: 50px; position: absolute; margin-bottom: 30px; cursor: help;" data-bs-toggle="modal" data-bs-target="#infoModal"></i>
-        <!-- Modal Bootstrapowy -->
+        <!-- Modal dla metodologi -->
 <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content bg-dark border-1">
@@ -214,7 +249,10 @@
     </div>
     <hr class="line">
     <div class="skills-container">
+        <div class="tab-content w-100" id="skillsTabContent">
 
+        
+<div class="tab-pane fade show active" id="languages" role="tabpanel" aria-labelledby="languages-tab">
         <div class="skills-page">
             <h3 class="skills-page-title" data-lang-key="languages">Języki programowania</h3>
             <div class="skills-list">
@@ -438,7 +476,9 @@
                 
             </div>
         </div>
+        </div>
 
+<div class="tab-pane fade show " id="devops" role="tabpanel" aria-labelledby="devops-tab">
         <div class="skills-page">
             <h3 class="skills-page-title">DevOps</h3>
             <div class="skills-list">
@@ -461,8 +501,10 @@
                     </div>
                 </div>
             </div>
+            </div>
             </div> 
 
+<div class="tab-pane fade show " id="data-formats" role="tabpanel" aria-labelledby="data-formats-tab">
          <div class="skills-page">
             <h3 class="skills-page-title" data-lang-key="data_formats">Formaty danych</h3>
             <div class="skills-list">
@@ -486,13 +528,14 @@
                 </div>
             </div>
             </div> 
+            </div>
 
-
+<div class="tab-pane fade show " id="ide-editors" role="tabpanel" aria-labelledby="ide-editors-tab">
         <div class="skills-page">
             <h3 class="skills-page-title" data-lang-key="programs-editors">IDE/Edytory</h3>
             <div class="skills-list">
                                                             <!-- FIGMA -->
-                <div class="skill" id="figma-skill">
+                <!-- <div class="skill" id="figma-skill">
                     <div class="skill-header">
                         <span class="skills__name">
                             <i class="fab fa-figma icon" style="color:#F24E1E;"></i>
@@ -508,7 +551,7 @@
                     <div class="progress-container" style="--progress: 25%;">
                         <div class="progress-bar"></div>
                     </div>
-                </div>
+                </div> -->
                                                             <!-- VSC -->
                 <div class="skill" id="vsc-skill">
                     <div class="skill-header">
@@ -549,16 +592,58 @@
                             <span class="xml2-label">XML Liquid Studio</span>
                             <span class="xml2-label-short"></span>
                         </span>
+                        <span class="skills__percent">60%</span>
+                    </div>
+                    <div class="progress-container" style="--progress: 60%;">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <!-- <div class="skill" id="postman-skill">
+                    <div class="skill-header">
+                        <span class="skills__name">
+                            <img src="" alt="" width="35" height="32">
+                            <span class="postman-label">Postman</span>
+                            <span class="postman-label-short"></span>
+                        </span>
                         <span class="skills__percent">80%</span>
                     </div>
                     <div class="progress-container" style="--progress: 80%;">
                         <div class="progress-bar"></div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>
+        </div>
 
+        <div class="tab-pane fade show " id="other" role="tabpanel" aria-labelledby="other-tab">
+         <div class="skills-page">
+            <h3 class="skills-page-title" data-lang-key="data_formats">Inne</h3>
+            <div class="skills-list">
+                                                            <!-- FIGMA -->
+                <div class="skill" id="figma-skill">
+                    <div class="skill-header">
+                        <span class="skills__name">
+                            <i class="fab fa-figma icon" style="color:#F24E1E;"></i>
+                            <span class="figma-label">Figma</span>
+                            <span class="figma-label-short"></span>
+                            <a href="./SKILLS/figma-skills.html" class="skill-button">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <span><i class="fas fa-book click"></i></span>
+                            </a>
+                        </span>
+                        <span class="skills__percent">25%</span>
+                    </div>
+                    <div class="progress-container" style="--progress: 25%;">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+            </div> 
+            </div>
+
+    </div>
     </div>
 </section>
                                                         <!-- PORTFOLIO -->
