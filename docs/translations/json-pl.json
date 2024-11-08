@@ -1,0 +1,15 @@
+{
+    "page_title": "Umiejętności JSON",
+    "basic_title": "Podstawy JSON:",
+    "basic_description": "Definicja JSON, cele i zastosowania JSON, struktura danych JSON, zasady poprawności składniowej",
+    "structure_title": "Struktura i składnia JSON:",
+    "structure_description": "Obiekty, tablice, typy danych, poprawność składniowa, tworzenie poprawnych dokumentów JSON",
+    "parsing_title": "Parsowanie i serializacja JSON:",
+    "parsing_description": "Konwersja między obiektami JavaScript a JSON, metody JSON.parse() i JSON.stringify()",
+    "tools_title": "Narzędzia JSON:",
+    "tools_description": "Praca z edytorami JSON, walidatory JSON, narzędzia do formatowania JSON",
+    "api_title": "JSON w API RESTful:",
+    "api_description": "Wykorzystanie JSON w komunikacji między klientem a serwerem, tworzenie i obsługa JSON w API",
+    "advanced_title": "Zaawansowane koncepcje JSON:",
+    "advanced_description": "JSON Schema, JSON-LD (Linked Data), JSON Web Tokens (JWT)"
+}

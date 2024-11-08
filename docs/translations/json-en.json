@@ -1,0 +1,15 @@
+{
+    "page_title": "JSON Skills",
+    "basic_title": "JSON Basics:",
+    "basic_description": "Definition of JSON, purposes and uses of JSON, JSON data structure, syntax validation rules",
+    "structure_title": "JSON Structure and Syntax:",
+    "structure_description": "Objects, arrays, data types, syntax validation, creating valid JSON documents",
+    "parsing_title": "JSON Parsing and Serialization:",
+    "parsing_description": "Conversion between JavaScript objects and JSON, JSON.parse() and JSON.stringify() methods",
+    "tools_title": "JSON Tools:",
+    "tools_description": "Working with JSON editors, JSON validators, JSON formatting tools",
+    "api_title": "JSON in RESTful API:",
+    "api_description": "Using JSON for communication between client and server, creating and handling JSON in API",
+    "advanced_title": "Advanced JSON Concepts:",
+    "advanced_description": "JSON Schema, JSON-LD (Linked Data), JSON Web Tokens (JWT)"
+}
