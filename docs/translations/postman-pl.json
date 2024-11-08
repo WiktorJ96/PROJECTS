@@ -1,0 +1,21 @@
+{
+  "page-title": "Umiejętności Postman",
+  "podstawy-postman-title": "Podstawy Postman",
+  "podstawy-postman-description": "Wysyłanie żądań HTTP, obsługa różnych metod (GET, POST, PUT, DELETE).",
+  "kolekcje-srodowiska-title": "Kolekcje i Środowiska",
+  "kolekcje-srodowiska-description": "Tworzenie i zarządzanie kolekcjami, konfiguracja zmiennych środowiskowych.",
+  "testowanie-title": "Testowanie",
+  "testowanie-description": "Pisanie testów w JavaScript, użycie bibliotek Chai.js do asercji.",
+  "automatyzacja-title": "Automatyzacja",
+  "automatyzacja-description": "Użycie Newman do uruchamiania testów w linii komend, integracja z CI/CD.",
+  "mockowanie-api-title": "Mockowanie API",
+  "mockowanie-api-description": "Tworzenie serwerów mock API, symulowanie odpowiedzi serwera.",
+  "monitorowanie-title": "Monitorowanie",
+  "monitorowanie-description": "Konfigurowanie monitorów, automatyczne testowanie endpointów.",
+  "pre-request-test-scripts-title": "Pre-request i Test Scripts",
+  "pre-request-test-scripts-description": "Pisanie skryptów wykonywanych przed i po żądaniu, manipulacja zmiennymi.",
+  "dokumentacja-api-title": "Dokumentacja API",
+  "dokumentacja-api-description": "Generowanie i udostępnianie dokumentacji API z poziomu Postman.",
+  "wspolpraca-zespol-title": "Współpraca w Zespole",
+  "wspolpraca-zespol-description": "Użycie funkcji współdzielenia kolekcji, komentarze, kontrola wersji."
+}

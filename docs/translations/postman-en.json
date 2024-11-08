@@ -1,0 +1,21 @@
+{
+  "page-title": "Postman Skills",
+  "podstawy-postman-title": "Postman Basics",
+  "podstawy-postman-description": "Sending HTTP requests, handling various methods (GET, POST, PUT, DELETE).",
+  "kolekcje-srodowiska-title": "Collections and Environments",
+  "kolekcje-srodowiska-description": "Creating and managing collections, configuring environment variables.",
+  "testowanie-title": "Testing",
+  "testowanie-description": "Writing tests in JavaScript, using Chai.js libraries for assertions.",
+  "automatyzacja-title": "Automation",
+  "automatyzacja-description": "Using Newman to run tests in the command line, integration with CI/CD.",
+  "mockowanie-api-title": "API Mocking",
+  "mockowanie-api-description": "Creating mock API servers, simulating server responses.",
+  "monitorowanie-title": "Monitoring",
+  "monitorowanie-description": "Configuring monitors, automatic endpoint testing.",
+  "pre-request-test-scripts-title": "Pre-request and Test Scripts",
+  "pre-request-test-scripts-description": "Writing scripts executed before and after requests, manipulating variables.",
+  "dokumentacja-api-title": "API Documentation",
+  "dokumentacja-api-description": "Generating and sharing API documentation directly from Postman.",
+  "wspolpraca-zespol-title": "Team Collaboration",
+  "wspolpraca-zespol-description": "Using collection sharing, comments, version control."
+}

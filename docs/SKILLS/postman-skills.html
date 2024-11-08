@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="page-title">Umiejętności Postman</title>
+    <link rel="icon" type="image/png" href="assets/postman-icon.png" sizes="16x16">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="skills.css">
+    <style>
+        .postman-hr {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, #FF6C37, rgba(255, 108, 55, 0), #FF3D00);
+            margin: 40px 0;
+            position: relative;
+            overflow: visible;
+        }
+
+        .postman-hr::before {
+            content: 'POSTMAN';
+            display: block;
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            letter-spacing: 3px;
+            color: #fc5a1f;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body data-page="postman">
+    <div class="language-switch">
+        <button id="lang-pl" >PL</button>
+        <button id="lang-en" >EN</button>
+    </div>
+    <div class="container py-5">
+
+        <div class="d-flex justify-content-center align-items-center m-auto">
+            <img src="./assets/postman-icon.png" alt="Postman Logo" width="100">
+        </div>
+
+        <hr class="postman-hr">
+
+        <!-- Zawartość kart umiejętności -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+            <!-- Podstawy Postman -->
+            <div class="col" data-difficulty="Dobry" data-category="podstawy-postman">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-plug skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="podstawy-postman-title">Podstawy Postman</h5>
+                        <p class="card-text" data-lang-key="podstawy-postman-description">Wysyłanie żądań HTTP, obsługa różnych metod (GET, POST, PUT, DELETE).</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                            <i class="fas fa-smile" data-bs-toggle="tooltip"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kolekcje i Środowiska -->
+            <div class="col" data-difficulty="Dobry" data-category="kolekcje-srodowiska">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-folder-open skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="kolekcje-srodowiska-title">Kolekcje i Środowiska</h5>
+                        <p class="card-text" data-lang-key="kolekcje-srodowiska-description">Tworzenie i zarządzanie kolekcjami, konfiguracja zmiennych środowiskowych.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                            <i class="fas fa-smile" data-bs-toggle="tooltip"  title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testowanie -->
+            <div class="col" data-difficulty="Średni" data-category="testowanie">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-vial skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="testowanie-title">Testowanie</h5>
+                        <p class="card-text" data-lang-key="testowanie-description">Pisanie testów w JavaScript, użycie bibliotek Chai.js do asercji.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Automatyzacja -->
+            <div class="col" data-difficulty="Średni" data-category="automatyzacja">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-cogs skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="automatyzacja-title">Automatyzacja</h5>
+                        <p class="card-text" data-lang-key="automatyzacja-description">Użycie Newman do uruchamiania testów w linii komend, integracja z CI/CD.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mockowanie API -->
+            <div class="col" data-difficulty="Średni" data-category="mockowanie-api">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-code skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="mockowanie-api-title">Mockowanie API</h5>
+                        <p class="card-text" data-lang-key="mockowanie-api-description">Tworzenie serwerów mock API, symulowanie odpowiedzi serwera.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monitorowanie -->
+            <div class="col" data-difficulty="Średni" data-category="monitorowanie">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-line skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="monitorowanie-title">Monitorowanie</h5>
+                        <p class="card-text" data-lang-key="monitorowanie-description">Konfigurowanie monitorów, automatyczne testowanie endpointów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pre-request i Test Scripts -->
+            <div class="col" data-difficulty="Średni" data-category="pre-request-test-scripts">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-code skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="pre-request-test-scripts-title">Pre-request i Test Scripts</h5>
+                        <p class="card-text" data-lang-key="pre-request-test-scripts-description">Pisanie skryptów wykonywanych przed i po żądaniu, manipulacja zmiennymi.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dokumentacja API -->
+            <div class="col" data-difficulty="Średni" data-category="dokumentacja-api">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-book skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="dokumentacja-api-title">Dokumentacja API</h5>
+                        <p class="card-text" data-lang-key="dokumentacja-api-description">Generowanie i udostępnianie dokumentacji API z poziomu Postman.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip"  title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Współpraca w Zespole -->
+            <div class="col" data-difficulty="Słaby" data-category="wspolpraca-zespol">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-users skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="wspolpraca-zespol-title">Współpraca w Zespole</h5>
+                        <p class="card-text" data-lang-key="wspolpraca-zespol-description">Użycie funkcji współdzielenia kolekcji, komentarze, kontrola wersji.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip"  title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../translations/translates.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="skills.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Inicjalizacja tooltipów
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerElement) {
+                return new bootstrap.Tooltip(tooltipTriggerElement)
+            })
+        });
+    </script>
+</body>
+
+</html>
