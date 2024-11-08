@@ -178,65 +178,66 @@
         <button type="button" class="btn-close text-bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-start d-flex flex-column justify-content-start align-items-start">
-        <h5>1.Metodologia oceny umiejętności</h5>
-        <p>*Procent jest obliczany na podstawie kart umiejętności zawartych na stronach przypisanych do danej technologii, nie uwzględniłem szerszej perspektywy umiejętności, które zapewnia dana technologia.</p>
-        <h6>a) Klasyfikacja umiejętności według ważności</h6>
-        <p>Umiejętności są podzielone na trzy kategorie:</p>
+        <h5 data-lang-key="skills-methodology-title">1. Metodologia oceny umiejętności</h5>
+        <p data-lang-key="skills-methodology-desc">*Procent jest obliczany na podstawie kart umiejętności zawartych na stronach przypisanych do danej technologii, nie uwzględniłem szerszej perspektywy umiejętności, które zapewnia dana technologia.</p>
+
+        <h6 data-lang-key="skills-classification-title">a) Klasyfikacja umiejętności według ważności</h6>
+        <p data-lang-key="skills-classification-desc">Umiejętności są podzielone na trzy kategorie:</p>
         <ul>
-          <li><strong>Podstawowe (Essential)</strong> – kluczowe umiejętności niezbędne w codziennej pracy.</li>
-          <li><strong>Ważne (Important)</strong> – umiejętności często używane, które znacząco rozszerzają możliwości.</li>
-          <li><strong>Zaawansowane (Advanced)</strong> – specjalistyczne umiejętności używane w specyficznych sytuacjach.</li>
+          <li data-lang-key="skills-essential"><strong>Podstawowe (Essential)</strong> – kluczowe umiejętności niezbędne w codziennej pracy.</li>
+          <li data-lang-key="skills-important"><strong>Ważne (Important)</strong> – umiejętności często używane, które znacząco rozszerzają możliwości.</li>
+          <li data-lang-key="skills-advanced"><strong>Zaawansowane (Advanced)</strong> – specjalistyczne umiejętności używane w specyficznych sytuacjach.</li>
         </ul>
 
-        <h6>b) Przypisanie wag do kategorii ważności</h6>
+        <h6 data-lang-key="weight-assignment-title">b) Przypisanie wag do kategorii ważności</h6>
         <ul>
-          <li><strong>Podstawowe (Essential)</strong>: waga 1 (maksymalnie 4 punktów na umiejętność)</li>
-          <li><strong>Ważne (Important)</strong>: waga 2 (maksymalnie 3 punkty na umiejętność)</li>
-          <li><strong>Zaawansowane (Advanced)</strong>: waga 3 (maksymalnie 2 punkty na umiejętność)</li>
+          <li data-lang-key="weight-essential"><strong>Podstawowe (Essential)</strong>: waga 1 (maksymalnie 4 punktów na umiejętność)</li>
+          <li data-lang-key="weight-important"><strong>Ważne (Important)</strong>: waga 2 (maksymalnie 3 punkty na umiejętność)</li>
+          <li data-lang-key="weight-advanced"><strong>Zaawansowane (Advanced)</strong>: waga 3 (maksymalnie 2 punkty na umiejętność)</li>
         </ul>
 
-        <h6>c) Przypisanie punktów za poziom znajomości</h6>
+        <h6 data-lang-key="point-assignment-title">c) Przypisanie punktów za poziom znajomości</h6>
         <ul>
-          <li><strong>Dobry</strong>: pełna liczba punktów <i class="fas fa-smile text-success" data-bs-toggle="tooltip"  title="Dobry"></i></li>
-          <li><strong>Średni</strong>: połowa maksymalnej liczby punktów <i class="fas fa-meh text-warning" data-bs-toggle="tooltip"  title="Średni"></i></li>
-          <li><strong>Słaby</strong>: 0 punktów <i class="fas fa-frown text-danger" data-bs-toggle="tooltip"  title="Słaby"></i></li>
+          <li data-lang-key="points-good"><strong>Dobry</strong>: pełna liczba punktów <i class="fas fa-smile text-success" data-bs-toggle="tooltip"  title="Dobry"></i></li>
+          <li data-lang-key="points-average"><strong>Średni</strong>: połowa maksymalnej liczby punktów <i class="fas fa-meh text-warning" data-bs-toggle="tooltip"  title="Średni"></i></li>
+          <li data-lang-key="points-weak"><strong>Słaby</strong>: 0 punktów <i class="fas fa-frown text-danger" data-bs-toggle="tooltip"  title="Słaby"></i></li>
         </ul>
 
-        <h6>d) Obliczanie punktów dla każdej umiejętności</h6>
-        <p>Dla każdej umiejętności obliczam maksymalną liczbę punktów oraz punkty zdobyte, uwzględniając ważność umiejętności i poziom znajomości. Następnie liczba zdobytych punktów jest dzielona przez maksymalną liczbę punktów i wynik jest mnożony przez 100%.</p>
+        <h6 data-lang-key="calculation-method-title">d) Obliczanie punktów dla każdej umiejętności</h6>
+        <p data-lang-key="calculation-method-desc">Dla każdej umiejętności obliczam maksymalną liczbę punktów oraz punkty zdobyte, uwzględniając ważność umiejętności i poziom znajomości. Następnie liczba zdobytych punktów jest dzielona przez maksymalną liczbę punktów i wynik jest mnożony przez 100%.</p>
 
-        <h5>Kategoryzacja umiejętności na podstawie kilku kluczowych czynników:</h5>
+        <h5 data-lang-key="skills-categorization-title">Kategoryzacja umiejętności na podstawie kilku kluczowych czynników:</h5>
         <ul>
-          <li>Częstotliwość użycia w praktyce</li>
-          <li>Znaczenie dla podstawowej funkcjonalności technologii</li>
-          <li>Poziom trudności zrozumienia i opanowania</li>
-          <li>Standardy branżowe i wymagania rynku pracy</li>
+          <li data-lang-key="categorization-frequency">Częstotliwość użycia w praktyce</li>
+          <li data-lang-key="categorization-importance">Znaczenie dla podstawowej funkcjonalności technologii</li>
+          <li data-lang-key="categorization-difficulty">Poziom trudności zrozumienia i opanowania</li>
+          <li data-lang-key="categorization-standards">Standardy branżowe i wymagania rynku pracy</li>
         </ul>
 
-        <h5>2. Szczegółowe kryteria kategoryzacji</h5>
+        <h5 data-lang-key="detailed-criteria-title">2. Szczegółowe kryteria kategoryzacji</h5>
 
-        <h6>a) Umiejętności Podstawowe (Essential)</h6>
-        <p>Umiejętności podstawowe to te, które są niezbędne do rozpoczęcia pracy z technologią i stanowią fundament dla dalszego rozwoju.</p>
+        <h6 data-lang-key="essential-skills-title">a) Umiejętności Podstawowe (Essential)</h6>
+        <p data-lang-key="essential-skills-desc">Umiejętności podstawowe to te, które są niezbędne do rozpoczęcia pracy z technologią i stanowią fundament dla dalszego rozwoju.</p>
         <ul>
-          <li><strong>Niezbędność</strong>: Bez nich trudno byłoby w ogóle pracować z technologią.</li>
-          <li><strong>Częstotliwość użycia</strong>: Są używane w większości projektów i codziennych zadań.</li>
-          <li><strong>Podstawa dla innych umiejętności</strong>: Stanowią bazę dla bardziej zaawansowanych konceptów.</li>
+          <li data-lang-key="essential-necessity"><strong>Niezbędność</strong>: Bez nich trudno byłoby w ogóle pracować z technologią.</li>
+          <li data-lang-key="essential-frequency"><strong>Częstotliwość użycia</strong>: Są używane w większości projektów i codziennych zadań.</li>
+          <li data-lang-key="essential-foundation"><strong>Podstawa dla innych umiejętności</strong>: Stanowią bazę dla bardziej zaawansowanych konceptów.</li>
         </ul>
 
-        <h6>b) Umiejętności Ważne (Important)</h6>
-        <p>Umiejętności ważne rozszerzają możliwości technologii i są często używane w bardziej złożonych projektach.</p>
+        <h6 data-lang-key="important-skills-title">b) Umiejętności Ważne (Important)</h6>
+        <p data-lang-key="important-skills-desc">Umiejętności ważne rozszerzają możliwości technologii i są często używane w bardziej złożonych projektach.</p>
         <ul>
-          <li><strong>Częste zastosowanie</strong>: Są powszechnie używane, choć nie zawsze w prostych aplikacjach.</li>
-          <li><strong>Zwiększenie efektywności</strong>: Pozwalają tworzyć bardziej dynamiczne i responsywne aplikacje.</li>
-          <li><strong>Wymagają średniozaawansowanej wiedzy</strong>: Są trudniejsze do opanowania niż podstawy.</li>
+          <li data-lang-key="important-application"><strong>Częste zastosowanie</strong>: Są powszechnie używane, choć nie zawsze w prostych aplikacjach.</li>
+          <li data-lang-key="important-efficiency"><strong>Zwiększenie efektywności</strong>: Pozwalają tworzyć bardziej dynamiczne i responsywne aplikacje.</li>
+          <li data-lang-key="important-knowledge"><strong>Wymagają średniozaawansowanej wiedzy</strong>: Są trudniejsze do opanowania niż podstawy.</li>
         </ul>
 
-        <h6>c) Umiejętności Zaawansowane (Advanced)</h6>
-        <p>Umiejętności zaawansowane są bardziej specjalistyczne i wymagają głębszego zrozumienia technologii.</p>
+        <h6 data-lang-key="advanced-skills-title">c) Umiejętności Zaawansowane (Advanced)</h6>
+        <p data-lang-key="advanced-skills-desc">Umiejętności zaawansowane są bardziej specjalistyczne i wymagają głębszego zrozumienia technologii.</p>
         <ul>
-          <li><strong>Mniejsza częstotliwość użycia w prostych projektach</strong>: Są niezbędne w dużych i skomplikowanych aplikacjach.</li>
-          <li><strong>Wyższy poziom trudności</strong>: Wymagają zaawansowanej wiedzy i doświadczenia.</li>
-          <li><strong>Znaczący wpływ na skalowalność i wydajność</strong>: Pozwalają optymalizować i zabezpieczać aplikacje.</li>
+          <li data-lang-key="advanced-usage"><strong>Mniejsza częstotliwość użycia w prostych projektach</strong>: Są niezbędne w dużych i skomplikowanych aplikacjach.</li>
+          <li data-lang-key="advanced-difficulty"><strong>Wyższy poziom trudności</strong>: Wymagają zaawansowanej wiedzy i doświadczenia.</li>
+          <li data-lang-key="advanced-impact"><strong>Znaczący wpływ na skalowalność i wydajność</strong>: Pozwalają optymalizować i zabezpieczać aplikacje.</li>
         </ul>
       </div>
       </div>
