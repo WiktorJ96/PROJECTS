@@ -1394,7 +1394,6 @@ footer {
 
 .icon-container {
   display: inline-block;
-  margin: 0 15px;
   animation: slideInFromLeft 0.5s ease-out forwards;
   opacity: 0;
 }
@@ -1533,9 +1532,10 @@ footer {
   justify-content: center;
   align-items: center;
   margin: 0 0 5px 0;
-  padding: 3px;
+  padding: 3px 0 0 0;
   background: hsla(0, 0%, 100%, 0.7);
   border-radius: 10px;
+  width: fit-content;
 }
 .iconsBig {
   margin-top: 5px;
@@ -1543,7 +1543,7 @@ footer {
   filter: grayscale(8%);
 }
 .iconsMedium {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 .language-switch_portfolio {
   display: none;
