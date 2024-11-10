@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="page-title">Umiejętności API</title>
+    <link rel="icon" type="image/png" href="assets/api-icon.png" sizes="16x16">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="skills.css">
+    <style>
+        .api-hr {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, #007BFF, rgba(0, 123, 255, 0), #0056b3);
+            margin: 40px 0;
+            position: relative;
+            overflow: visible;
+        }
+
+        .api-hr::before {
+            content: 'API';
+            display: block;
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #007BFF;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+
+<body data-page="api">
+    <div class="language-switch">
+        <button id="lang-pl" >PL</button>
+        <button id="lang-en" >EN</button>
+    </div>
+    <div class="container py-5">
+
+        <i class="fas fa-plug icon iconAPI mb-4"></i>
+
+        <hr class="api-hr">
+
+        <!-- Zawartość kart umiejętności -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+            <!-- RESTful API -->
+            <div class="col" data-difficulty="Dobry" data-category="restful-api">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-cloud skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-restful-title">RESTful API</h5>
+                        <p class="card-text" data-lang-key="skill-restful-text">Projektowanie i implementacja interfejsów API zgodnych z architekturą REST.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                            <i class="fas fa-smile" data-bs-toggle="tooltip" title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HTTP Methods -->
+            <div class="col" data-difficulty="Dobry" data-category="http-methods">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-network-wired skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-http-title">Metody HTTP</h5>
+                        <p class="card-text" data-lang-key="skill-http-text">Znajomość metod HTTP (GET, POST, PUT, DELETE) i ich zastosowanie w API.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                            <i class="fas fa-smile" data-bs-toggle="tooltip" title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Autoryzacja i Uwierzytelnianie -->
+            <div class="col" data-difficulty="Średni" data-category="auth">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-lock skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-auth-title">Autoryzacja i Uwierzytelnianie</h5>
+                        <p class="card-text" data-lang-key="skill-auth-text">Implementacja mechanizmów uwierzytelniania (OAuth, JWT) w API.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dokumentacja API -->
+            <div class="col" data-difficulty="Średni" data-category="api-documentation">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-book skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-doc-title">Dokumentacja API</h5>
+                        <p class="card-text" data-lang-key="skill-doc-text">Tworzenie dokumentacji API przy użyciu Swagger, OpenAPI.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testowanie API -->
+            <div class="col" data-difficulty="Średni" data-category="api-testing">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-vial skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-test-title">Testowanie API</h5>
+                        <p class="card-text" data-lang-key="skill-test-text">Użycie narzędzi takich jak Postman, Newman do testowania endpointów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Obsługa Błędów -->
+            <div class="col" data-difficulty="Średni" data-category="error-handling">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-exclamation-triangle skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-error-title">Obsługa Błędów</h5>
+                        <p class="card-text" data-lang-key="skill-error-text">Implementacja odpowiednich kodów statusu HTTP, komunikatów błędów.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wersjonowanie API -->
+            <div class="col" data-difficulty="Średni" data-category="api-versioning">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-code-branch skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-versioning-title">Wersjonowanie API</h5>
+                        <p class="card-text" data-lang-key="skill-versioning-text">Zarządzanie różnymi wersjami API, strategia wersjonowania.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CORS -->
+            <div class="col" data-difficulty="Średni" data-category="cors">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-exchange-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-cors-title">CORS</h5>
+                        <p class="card-text" data-lang-key="skill-cors-text">Konfiguracja Cross-Origin Resource Sharing w API.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rate Limiting -->
+            <div class="col" data-difficulty="Średni" data-category="rate-limiting">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-tachometer-alt skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-rate-limiting-title">Rate Limiting</h5>
+                        <p class="card-text" data-lang-key="skill-rate-limiting-text">Implementacja ograniczeń liczby żądań do API w określonym czasie.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cache'owanie -->
+            <div class="col" data-difficulty="Średni" data-category="caching">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-save skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-caching-title">Cache'owanie</h5>
+                        <p class="card-text" data-lang-key="skill-caching-text">Zastosowanie mechanizmów cache'owania w celu optymalizacji API.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GraphQL -->
+            <div class="col" data-difficulty="Średni" data-category="graphql">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-project-diagram skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-graphql-title">GraphQL</h5>
+                        <p class="card-text" data-lang-key="skill-graphql-text">Tworzenie API z użyciem GraphQL jako alternatywy dla REST.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monitoring i Logowanie -->
+            <div class="col" data-difficulty="Słaby" data-category="monitoring">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-line skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-monitoring-title">Monitoring i Logowanie</h5>
+                        <p class="card-text" data-lang-key="skill-monitoring-text">Śledzenie działania API, logowanie zdarzeń, analiza wydajności.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../translations/translates.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="skills.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Inicjalizacja tooltipów
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerElement) {
+                return new bootstrap.Tooltip(tooltipTriggerElement)
+            })
+        });
+    </script>
+</body>
+
+</html>

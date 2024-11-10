@@ -634,7 +634,9 @@ h2 {
     hsla(0, 0%, 0%, 0.92)
   );
 }
-
+#api-skill .progress-bar{
+  background: linear-gradient(90deg, #007BFF, #0056b3);
+}
 .icon {
   font-size: 35px;
   margin-right: 8px;
@@ -1522,6 +1524,14 @@ footer {
 
 .iconReact {
   background-image: linear-gradient(135deg, #2d9cdb, #61dafb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.iconAPI{
+  background-image: linear-gradient(135deg, #007BFF, #0056b3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

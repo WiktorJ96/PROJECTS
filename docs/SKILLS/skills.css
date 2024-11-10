@@ -156,7 +156,13 @@ body {
   background-clip: text;
   color: transparent;
 }
-
+.iconAPI{
+  background-image: linear-gradient(135deg, #007BFF, #0056b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
 .icon {
   font-size: 100px;
   display: block;
