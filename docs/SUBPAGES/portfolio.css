@@ -634,8 +634,11 @@ h2 {
     hsla(0, 0%, 0%, 0.92)
   );
 }
-#api-skill .progress-bar{
-  background: linear-gradient(90deg, #007BFF, #0056b3);
+#api-skill .progress-bar {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+}
+#mongo-skill .progress-bar {
+  background: linear-gradient(90deg, #4db33d, #2f5d50);
 }
 .icon {
   font-size: 35px;
@@ -1530,13 +1533,14 @@ footer {
   color: transparent;
 }
 
-.iconAPI{
-  background-image: linear-gradient(135deg, #007BFF, #0056b3);
+.iconAPI {
+  background-image: linear-gradient(135deg, #007bff, #0056b3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
 }
+
 .icon-row {
   display: flex;
   justify-content: center;
