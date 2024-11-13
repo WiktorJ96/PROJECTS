@@ -624,7 +624,6 @@ h2 {
 #postman-skill .progress-bar {
   background: linear-gradient(90deg, #ff6c37, #ff8a00);
 }
-
 #express-skill .progress-bar {
   background: linear-gradient(
     90deg,
@@ -639,6 +638,9 @@ h2 {
 }
 #mongo-skill .progress-bar {
   background: linear-gradient(90deg, #4db33d, #2f5d50);
+}
+#mongoose-skill .progress-bar{
+  background: linear-gradient(90deg, #800000, #4D0000);
 }
 .icon {
   font-size: 35px;

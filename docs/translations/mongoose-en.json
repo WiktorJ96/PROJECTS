@@ -1,0 +1,19 @@
+{
+  "title": "Mongoose Skills",
+  "podstawy-mongoose-title": "Mongoose Basics",
+  "podstawy-mongoose-desc": "Installing and configuring Mongoose, connecting to MongoDB.",
+  "schematy-title": "Schema Definitions",
+  "schematy-desc": "Creating schemas for documents.",
+  "modele-mongoose-title": "Mongoose Models",
+  "modele-mongoose-desc": "Creating models, instance and static methods.",
+  "crud-title": "CRUD Operations",
+  "crud-desc": "Creating, reading, updating, and deleting documents.",
+  "middleware-title": "Middleware",
+  "middleware-desc": "Pre and post middleware, using the next() function.",
+  "populacja-title": "Data Population",
+  "populacja-desc": "Joining documents using the populate() function.",
+  "walidacja-title": "Data Validation",
+  "walidacja-desc": "Creating validation rules in Mongoose schemas.",
+  "agregacje-title": "Aggregations",
+  "agregacje-desc": "Using aggregate() for advanced queries."
+}

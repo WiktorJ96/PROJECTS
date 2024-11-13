@@ -1,0 +1,19 @@
+{
+  "title": "Umiejętności Mongoose",
+  "podstawy-mongoose-title": "Podstawy Mongoose",
+  "podstawy-mongoose-desc": "Instalacja i konfiguracja Mongoose, łączenie z bazą danych MongoDB.",
+  "schematy-title": "Definiowanie Schematów",
+  "schematy-desc": "Tworzenie schematów dla dokumentów",
+  "modele-mongoose-title": "Modele Mongoose",
+  "modele-mongoose-desc": "Tworzenie modeli, metody instancyjne i statyczne.",
+  "crud-title": "Operacje CRUD",
+  "crud-desc": "Tworzenie, odczytywanie, aktualizowanie i usuwanie dokumentów.",
+  "middleware-title": "Middleware",
+  "middleware-desc": "Pre i post middleware, użycie funkcji next().",
+  "populacja-title": "Populacja Danych",
+  "populacja-desc": "Łączenie dokumentów za pomocą funkcji populate().",
+  "walidacja-title": "Walidacja Danych",
+  "walidacja-desc": "Tworzenie reguł walidacyjnych w schematach Mongoose.",
+  "agregacje-title": "Agregacje",
+  "agregacje-desc": "Użycie aggregate() do zaawansowanych zapytań."
+}
