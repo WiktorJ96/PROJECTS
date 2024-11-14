@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { FaBars, FaTimes, FaCreditCard } from "react-icons/fa";
+import {
+  FaBars,
+  FaTimes,
+  FaCreditCard,
+  FaHome,
+  FaUserAlt,
+} from "react-icons/fa";
 
 const HamburgerMenu = ({ openAddCardModal }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +16,7 @@ const HamburgerMenu = ({ openAddCardModal }) => {
 
   return (
     <>
+      {/* Przycisk otwierający menu */}
       <button
         onClick={toggleMenu}
         className="text-white border border-white rounded-full p-2"
@@ -22,18 +29,19 @@ const HamburgerMenu = ({ openAddCardModal }) => {
       <div
         className={`fixed top-0 left-0 h-full w-72 bg-white shadow-lg p-6 z-50 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out rounded-r-3xl`}
+        } transition-transform duration-500 ease-in-out rounded-r-lg`}
       >
         <nav>
           <ul className="flex flex-col space-y-6 text-gray-800">
+            {/* Elementy menu */}
             <li
-              className="flex items-center space-x-4 text-lg font-medium hover:text-blue-500 cursor-pointer"
+              className="flex items-center space-x-4 text-lg font-medium hover:text-blue-500 cursor-pointer transition-transform duration-200 hover:scale-105"
               onClick={() => {
-                openAddCardModal(); 
-                toggleMenu(); 
+                openAddCardModal();
+                toggleMenu();
               }}
             >
-              <FaCreditCard className="text-blue-500" />
+              <FaCreditCard className="text-blue-500 hover:rotate-6 transition-transform duration-300" />
               <span>Dodaj kartę płatniczą</span>
             </li>
           </ul>

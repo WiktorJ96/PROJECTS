@@ -1,7 +1,6 @@
-// shopService.js
 import { v4 as uuidv4 } from "uuid";
 
-// Funkcja pobierająca sklepy z backendu
+// --- Funkcje dla sklepów ---
 export const fetchShopsFromBackend = async (apiUrl) => {
   try {
     const response = await fetch(`${apiUrl}/api/shops`);
@@ -20,7 +19,6 @@ export const fetchShopsFromBackend = async (apiUrl) => {
   }
 };
 
-// Funkcja dodająca sklep do backendu
 export const addShopToBackend = async (apiUrl, shopName) => {
   try {
     const response = await fetch(`${apiUrl}/api/shops`, {
@@ -41,7 +39,6 @@ export const addShopToBackend = async (apiUrl, shopName) => {
   }
 };
 
-// Funkcja usuwająca sklep z backendu
 export const deleteShopFromBackend = async (apiUrl, shopId) => {
   try {
     const response = await fetch(`${apiUrl}/api/shops/${shopId}`, {
@@ -54,7 +51,7 @@ export const deleteShopFromBackend = async (apiUrl, shopId) => {
   }
 };
 
-// Obsługa localStorage
+// Obsługa Local Storage dla sklepów
 export const loadShopsFromLocalStorage = () => {
   const localShops = localStorage.getItem("shops");
   return localShops ? JSON.parse(localShops) : [];
@@ -68,4 +65,69 @@ export const createNewShop = (name) => ({
   id: uuidv4(),
   name,
   products: [],
+});
+
+// --- Funkcje dla przypomnień ---
+export const fetchRemindersFromBackend = async (apiUrl) => {
+  try {
+    const response = await fetch(`${apiUrl}/api/reminders`);
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error("Backend not available");
+    }
+  } catch (error) {
+    console.error("Error fetching reminders from backend:", error);
+    throw error;
+  }
+};
+
+export const addReminderToBackend = async (apiUrl, reminder) => {
+  try {
+    const response = await fetch(`${apiUrl}/api/reminders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reminder),
+    });
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error("Error adding reminder");
+    }
+  } catch (error) {
+    console.error("Error connecting to server:", error);
+    throw error;
+  }
+};
+
+export const deleteReminderFromBackend = async (apiUrl, reminderId) => {
+  try {
+    const response = await fetch(`${apiUrl}/api/reminders/${reminderId}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) throw new Error("Error deleting reminder");
+  } catch (error) {
+    console.error("Error connecting to server:", error);
+    throw error;
+  }
+};
+
+// Obsługa Local Storage dla przypomnień
+export const loadRemindersFromLocalStorage = () => {
+  const localReminders = localStorage.getItem("reminders");
+  return localReminders ? JSON.parse(localReminders) : [];
+};
+
+export const saveRemindersToLocalStorage = (reminders) => {
+  localStorage.setItem("reminders", JSON.stringify(reminders));
+};
+
+export const createNewReminder = (name, frequency) => ({
+  id: uuidv4(),
+  productName: name,
+  frequency,
+  startDate: new Date().toISOString(),
+  remainingDays: parseInt(frequency, 10),
 });

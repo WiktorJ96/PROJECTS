@@ -22,6 +22,9 @@ const DeleteConfirmationModal = ({
 
   if (!isOpen) return null;
 
+  const truncatedItem =
+    item && item.length > 30 ? `${item.substring(0, 30)}...` : item;
+
   return (
     <div
       role="dialog"
@@ -34,7 +37,7 @@ const DeleteConfirmationModal = ({
           Potwierdź usunięcie
         </h2>
         <p className="mb-4">
-          Czy na pewno chcesz usunąć {itemType} "{item}"?
+          Czy na pewno chcesz usunąć {itemType} "{truncatedItem}"?
         </p>
         <div className="flex justify-end space-x-2">
           <button onClick={onClose} className="btn-secondary px-4 py-2 rounded">

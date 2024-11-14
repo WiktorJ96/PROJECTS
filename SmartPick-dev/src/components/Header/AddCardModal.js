@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaCreditCard } from "react-icons/fa";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 
 const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
@@ -44,7 +44,6 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
     }
   }, [isOpen, isBackendActive]);
 
-
   const handleExpiryDateChange = (e) => {
     let value = e.target.value.replace(/\D/g, "");
     if (value.length >= 3) {
@@ -65,7 +64,6 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
         });
         if (response.ok) {
           setCards((prevCards) => [...prevCards, newCard]);
-          console.log("Dane karty zapisane na serwerze.");
         }
       } catch (error) {
         console.error("Błąd zapisu na serwerze:", error);
@@ -74,7 +72,6 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
       const updatedCards = [...cards, newCard];
       localStorage.setItem("cards", JSON.stringify(updatedCards));
       setCards(updatedCards);
-      console.log("Dane karty zapisane lokalnie.");
     }
 
     setCardNumber("");
@@ -101,14 +98,12 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
         .then((response) => {
           if (response.ok) {
             setCards(updatedCards);
-            console.log("Karta usunięta z serwera.");
           }
         })
         .catch((error) => console.error("Błąd usuwania z serwera:", error));
     } else {
       localStorage.setItem("cards", JSON.stringify(updatedCards));
       setCards(updatedCards);
-      console.log("Karta usunięta lokalnie.");
     }
 
     setIsDeleteModalOpen(false);
@@ -116,37 +111,50 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
   };
 
   return isOpen ? (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-      <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="flex justify-between border-b pb-4 mb-4">
-          <button
-            className={`text-lg font-semibold ${
-              activeTab === "add" ? "text-blue-500" : "text-gray-500"
-            }`}
-            onClick={() => setActiveTab("add")}
-          >
-            Dodaj kartę
-          </button>
-          <button
-            className={`text-lg font-semibold ${
-              activeTab === "view" ? "text-blue-500" : "text-gray-500"
-            }`}
-            onClick={() => setActiveTab("view")}
-          >
-            Twoje karty płatnicze
-          </button>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div
+        className={`bg-white rounded-lg shadow-xl p-6 max-w-2xl w-full transition-all duration-300 transform ${
+          isOpen ? "scale-100 opacity-100" : "scale-90 opacity-0"
+        }`}
+      >
+        {/* Nagłówek */}
+        <div className="flex justify-between items-center border-b pb-4 mb-4">
+          <div className="flex space-x-4">
+            <button
+              className={`text-lg font-semibold ${
+                activeTab === "add"
+                  ? "text-blue-500 border-b-2 border-blue-500"
+                  : "text-gray-500"
+              }`}
+              onClick={() => setActiveTab("add")}
+            >
+              Dodaj kartę
+            </button>
+            <button
+              className={`text-lg font-semibold ${
+                activeTab === "view"
+                  ? "text-blue-500 border-b-2 border-blue-500"
+                  : "text-gray-500"
+              }`}
+              onClick={() => setActiveTab("view")}
+            >
+              Twoje karty płatnicze
+            </button>
+          </div>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
-            aria-label="Zamknij modal"
+            className="text-gray-500 hover:text-red-500 transition-colors duration-200"
           >
-            <FaTimes size={20} className="text-gray-500 hover:text-red-500" />
+            <FaTimes size={20} />
           </button>
         </div>
 
+        {/* Dodawanie karty */}
         {activeTab === "add" && (
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Dodaj nową kartę</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-gray-700">
+              Dodaj nową kartę
+            </h2>
             <div className="space-y-4">
               <input
                 type="text"
@@ -154,14 +162,14 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
                 onChange={(e) => setCardNumber(e.target.value)}
                 maxLength="16"
                 placeholder="Numer karty"
-                className="w-full p-2 border rounded"
+                className="w-full p-3 border rounded focus:ring-2 focus:ring-blue-400"
               />
               <input
                 type="text"
                 value={cardHolder}
                 onChange={(e) => setCardHolder(e.target.value)}
                 placeholder="Właściciel karty"
-                className="w-full p-2 border rounded"
+                className="w-full p-3 border rounded focus:ring-2 focus:ring-blue-400"
               />
               <div className="flex space-x-4">
                 <input
@@ -170,7 +178,7 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
                   onChange={handleExpiryDateChange}
                   maxLength="5"
                   placeholder="MM/YY"
-                  className="w-1/2 p-2 border rounded"
+                  className="w-1/2 p-3 border rounded focus:ring-2 focus:ring-blue-400"
                 />
                 <input
                   type="text"
@@ -178,12 +186,12 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
                   onChange={(e) => setCvv(e.target.value)}
                   maxLength="3"
                   placeholder="CVV"
-                  className="w-1/2 p-2 border rounded"
+                  className="w-1/2 p-3 border rounded focus:ring-2 focus:ring-blue-400"
                 />
               </div>
               <button
                 onClick={handleSaveCard}
-                className="w-full bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600"
+                className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition-colors duration-200"
               >
                 Zapisz kartę
               </button>
@@ -191,9 +199,10 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
           </div>
         )}
 
+        {/* Wyświetlanie kart */}
         {activeTab === "view" && (
           <div>
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-700">
               Twoje karty płatnicze
             </h2>
             {cards.length > 0 ? (
@@ -201,37 +210,39 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
                 {cards.map((card, index) => (
                   <li
                     key={index}
-                    className="border p-4 rounded shadow-sm relative"
+                    className="p-4 border rounded shadow-sm flex justify-between items-center"
                   >
+                    <div>
+                      <p className="text-sm text-gray-600">
+                        <FaCreditCard className="inline mr-2 text-blue-500" />
+                        {card.cardNumber}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        Właściciel: {card.cardHolder}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        Ważność: {card.expiryDate}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        CVV: {card.cvv}
+                      </p>
+                    </div>
                     <button
                       onClick={() => openDeleteConfirmationModal(index)}
-                      className="absolute top-2 right-2 text-gray-500 hover:text-red-500"
-                      aria-label="Usuń kartę"
+                      className="text-gray-500 hover:text-red-500 transition-colors duration-200"
                     >
                       <FaTimes />
                     </button>
-                    <p>
-                      <strong>Numer karty:</strong> {card.cardNumber}
-                    </p>
-                    <p>
-                      <strong>Właściciel:</strong> {card.cardHolder}
-                    </p>
-                    <p>
-                      <strong>Data ważności:</strong> {card.expiryDate}
-                    </p>
-                    <p>
-                      <strong>CVV:</strong> {card.cvv}
-                    </p>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p>Brak zapisanych kart.</p>
+              <p className="text-center text-gray-500">Brak zapisanych kart.</p>
             )}
           </div>
         )}
 
-        {/* DeleteConfirmationModal */}
+        {/* Modal potwierdzenia usunięcia */}
         <DeleteConfirmationModal
           isOpen={isDeleteModalOpen}
           onClose={() => setIsDeleteModalOpen(false)}

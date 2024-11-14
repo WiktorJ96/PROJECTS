@@ -48,30 +48,6 @@ const ProductList = ({
     setIsDeleteModalOpen(false);
   }, [productToDelete, products, onUpdateProducts]);
 
-  useEffect(() => {
-    const handleKeyPress = (event) => {
-      if (event.key === "Enter") {
-        if (isEditingShop) handleEditShopName();
-        else if (isDeleteModalOpen) handleDeleteProduct();
-        else if (isShopDeleteModalOpen) handleConfirmDeleteShop();
-      } else if (event.key === "Escape") {
-        if (isEditingShop) setIsEditingShop(false);
-        else if (isDeleteModalOpen) setIsDeleteModalOpen(false);
-        else if (isShopDeleteModalOpen) setIsShopDeleteModalOpen(false);
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyPress);
-    return () => document.removeEventListener("keydown", handleKeyPress);
-  }, [
-    isEditingShop,
-    isDeleteModalOpen,
-    isShopDeleteModalOpen,
-    handleEditShopName,
-    handleDeleteProduct,
-    handleConfirmDeleteShop,
-  ]);
-
   const openDeleteModalForProduct = (product) => {
     setProductToDelete(product);
     setIsDeleteModalOpen(true);
@@ -126,7 +102,10 @@ const ProductList = ({
           />
         ) : (
           <h2 className="text-3xl font-bold text-gray-800">
-            Produkty w {shop.name}
+            Produkty w{" "}
+            {shop.name.length > 25
+              ? `${shop.name.substring(0, 25)}...`
+              : shop.name}
           </h2>
         )}
         {isEditingShop ? (
@@ -182,8 +161,17 @@ const ProductList = ({
                   key={index}
                   className="border-b hover:bg-gray-50 transition duration-150"
                 >
-                  <td className="py-3 px-4">{product.name}</td>
-                  <td className="py-3 px-4">{product.price} PLN</td>
+                  <td className="py-3 px-4">
+                    {product.name.length > 20
+                      ? `${product.name.substring(0, 20)}...`
+                      : product.name}
+                  </td>
+                  <td className="py-3 px-4">
+                    {product.price.length > 20
+                      ? `${product.price.substring(0, 20)}...`
+                      : product.price}{" "}
+                    PLN
+                  </td>
                   <td className="py-3 px-4">
                     <a
                       href={product.link}
@@ -196,7 +184,13 @@ const ProductList = ({
                   </td>
                   <td className="py-3 px-4 text-center">
                     <button onClick={() => openNoteModal(product)}>
-                      <FaStickyNote className="text-gray-600 hover:text-blue-500" />
+                      <FaStickyNote
+                        className={`${
+                          product.note
+                            ? "text-green-500"
+                            : "text-gray-600 hover:text-blue-500"
+                        }`}
+                      />
                     </button>
                   </td>
                   <td className="py-3 px-4 text-center">
