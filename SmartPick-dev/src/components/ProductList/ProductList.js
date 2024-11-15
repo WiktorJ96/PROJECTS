@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import AddProductModal from "../AddProductModal/AddProductModal";
-import { FaHeart, FaRegHeart, FaStickyNote } from "react-icons/fa";
+import {
+  FaHeart,
+  FaRegHeart,
+  FaStickyNote,
+  FaStar,
+  FaRegStar,
+} from "react-icons/fa";
 
 const ProductList = ({
   shop,
@@ -10,6 +16,7 @@ const ProductList = ({
   onUpdateShopName,
   onDeleteShop,
   onUpdateProducts,
+  onUpdateShopFavorite,
 }) => {
   const products = shop.products || [];
 
@@ -73,6 +80,12 @@ const ProductList = ({
     onUpdateProducts(updatedProducts);
   };
 
+  const toggleShopFavorite = () => {
+    const updatedShop = { ...shop, isFavorite: !shop.isFavorite };
+    onUpdateShopFavorite(updatedShop); // Aktualizacja stanu w komponencie nadrzędnym
+  };
+
+
   const openNoteModal = (product) => {
     setSelectedProductForNote(product);
     setNote(product.note || "");
@@ -101,11 +114,24 @@ const ProductList = ({
             className="w-full p-2 border border-gray-300 rounded"
           />
         ) : (
-          <h2 className="text-3xl font-bold text-gray-800">
-            Produkty w{" "}
-            {shop.name.length > 25
-              ? `${shop.name.substring(0, 25)}...`
-              : shop.name}
+          <h2 className="text-3xl font-bold text-gray-800 flex items-center space-x-4">
+            <span>
+              Produkty w{" "}
+              {shop.name.length > 25
+                ? `${shop.name.substring(0, 25)}...`
+                : shop.name}
+            </span>
+            <button
+              onClick={toggleShopFavorite}
+              className="focus:outline-none"
+              aria-label="Mark as favorite shop"
+            >
+              {shop.isFavorite ? (
+                <FaStar className="text-yellow-500 transition-colors duration-200" />
+              ) : (
+                <FaRegStar className="text-gray-400 hover:text-yellow-500 transition-colors duration-200" />
+              )}
+            </button>
           </h2>
         )}
         {isEditingShop ? (

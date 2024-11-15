@@ -29,7 +29,7 @@ function App() {
   const [shops, setShops] = useState(() =>
     isBackendActive ? [] : loadShopsFromLocalStorage()
   );
-  const [reminders, setReminders] = useState([]); // Stan dla przypomnień
+  const [reminders, setReminders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedShop, setSelectedShop] = useState(null);
   const [isAddShopModalOpen, setIsAddShopModalOpen] = useState(false);
@@ -114,6 +114,17 @@ function App() {
     );
     setShops(updatedShops);
     setSelectedShop({ ...selectedShop, name: newName });
+  };
+
+  const handleUpdateShopFavorite = (updatedShop) => {
+    const updatedShops = shops.map((shop) =>
+      shop.id === updatedShop.id ? updatedShop : shop
+    );
+    setShops(updatedShops);
+
+    if (selectedShop && selectedShop.id === updatedShop.id) {
+      setSelectedShop(updatedShop);
+    }
   };
 
   const handleDeleteShop = async (shopId) => {
@@ -216,7 +227,11 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header openAddCardModal={() => setIsAddCardModalOpen(true)} />
+      <Header
+        shops={shops}
+        openAddCardModal={() => setIsAddCardModalOpen(true)}
+        handleSelectShop={handleSelectShop}
+      />
       <AddCardModal
         isOpen={isAddCardModalOpen}
         onClose={() => setIsAddCardModalOpen(false)}
@@ -247,6 +262,7 @@ function App() {
                 onUpdateShopName={handleUpdateShopName}
                 onDeleteShop={handleDeleteShop}
                 onUpdateProducts={handleUpdateProducts}
+                onUpdateShopFavorite={handleUpdateShopFavorite}
               />
             )}
             <RecurringReminders onAddReminder={handleAddReminder} />

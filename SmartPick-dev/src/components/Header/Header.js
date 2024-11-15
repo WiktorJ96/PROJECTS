@@ -2,7 +2,7 @@ import React from "react";
 import { ReactComponent as MyIcon } from "./SmartPick-logo.svg";
 import HamburgerMenu from "./HamburgerMenu";
 
-const Header = ({ openAddCardModal }) => {
+const Header = ({ shops, openAddCardModal, handleSelectShop }) => {
   return (
     <header
       className="header shadow-md p-4 bg-gradient-to-r from-blue-500 to-purple-700"
@@ -10,7 +10,11 @@ const Header = ({ openAddCardModal }) => {
     >
       <div className="flex items-center justify-between">
         {/* Hamburger Menu Button and Sidebar */}
-        <HamburgerMenu openAddCardModal={openAddCardModal} />
+        <HamburgerMenu
+          shops={shops}
+          openAddCardModal={openAddCardModal} // Poprawne przekazanie funkcji
+          handleSelectShop={handleSelectShop} // Przekazanie funkcji do obsługi wyboru sklepu
+        />
 
         {/* Logo and App Name */}
         <a href="/" className="flex items-center space-x-4 ml-4">

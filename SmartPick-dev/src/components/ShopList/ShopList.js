@@ -1,21 +1,7 @@
-import React, { useState } from "react";
-import FavoriteProductsModal from "./FavoriteProductsModal";
-import { FaHeart } from "react-icons/fa";
+import React from "react";
 
 const ShopList = ({ shops, onSelectShop, onAddShop }) => {
   console.log("Lista sklepów:", shops);
-
-  const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
-
-  // Pobieramy ulubione produkty z notatkami
-  const favoriteProducts = shops.flatMap((shop) =>
-    shop.products
-      .filter((product) => product.isFavorite)
-      .map((product) => ({
-        ...product,
-        note: product.note || "", // Dodajemy notatkę (jeśli istnieje)
-      }))
-  );
 
   return (
     <section
@@ -29,13 +15,6 @@ const ShopList = ({ shops, onSelectShop, onAddShop }) => {
           <h2 id="shopListTitle" className="text-3xl font-bold text-blue-800">
             Twoje sklepy
           </h2>
-          <button
-            onClick={() => setIsFavoritesModalOpen(true)}
-            aria-label="Pokaż ulubione produkty"
-            className="text-red-500 hover:text-red-600 transition duration-200 transform hover:scale-110"
-          >
-            <FaHeart size={24} />
-          </button>
         </div>
         <button
           onClick={onAddShop}
@@ -72,14 +51,6 @@ const ShopList = ({ shops, onSelectShop, onAddShop }) => {
           ))}
         </ul>
       </div>
-
-      {/* Modal z ulubionymi produktami */}
-      {isFavoritesModalOpen && (
-        <FavoriteProductsModal
-          onClose={() => setIsFavoritesModalOpen(false)}
-          favoriteProducts={favoriteProducts} // Przekazujemy notatki
-        />
-      )}
     </section>
   );
 };
