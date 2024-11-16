@@ -75,7 +75,9 @@ const ProductList = ({
 
   const toggleFavorite = (index) => {
     const updatedProducts = products.map((product, i) =>
-      i === index ? { ...product, isFavorite: !product.isFavorite } : product
+      i === index
+        ? { ...product, isFavorite: !product.isFavorite, shopName: shop.name }
+        : product
     );
     onUpdateProducts(updatedProducts);
   };
@@ -84,7 +86,6 @@ const ProductList = ({
     const updatedShop = { ...shop, isFavorite: !shop.isFavorite };
     onUpdateShopFavorite(updatedShop); // Aktualizacja stanu w komponencie nadrzędnym
   };
-
 
   const openNoteModal = (product) => {
     setSelectedProductForNote(product);

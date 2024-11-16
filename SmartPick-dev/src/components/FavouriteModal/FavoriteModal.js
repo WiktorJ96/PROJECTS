@@ -14,6 +14,13 @@ const FavoriteProductsModal = ({
     };
   }, [favoriteItems, type]);
 
+  const handleItemClick = (item) => {
+    if (type === "shops" && onSelectShop) {
+      onSelectShop(item); // Navigate to the shop
+      onClose(); // Close the modal
+    }
+  };
+
   const renderContent = () => {
     if (favoriteItems.length > 0) {
       return favoriteItems.map((item, index) => (
@@ -22,13 +29,18 @@ const FavoriteProductsModal = ({
           className={`border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow duration-200 cursor-pointer ${
             type === "shops" ? "hover:bg-gray-100" : ""
           }`}
-          onClick={type === "shops" ? () => onSelectShop(item) : undefined}
+          onClick={type === "shops" ? () => handleItemClick(item) : undefined}
         >
           <h3 className="text-lg font-semibold text-gray-900 truncate">
             {item.name.length > 30
               ? `${item.name.substring(0, 30)}...`
               : item.name}
           </h3>
+          {item.shopName && (
+            <p className="text-sm text-gray-700 mt-1">
+              Sklep: <span className="font-medium">{item.shopName}</span>
+            </p>
+          )}
           {type === "products" && (
             <>
               <p className="text-sm text-gray-700 mt-2">

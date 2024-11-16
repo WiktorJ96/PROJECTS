@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { FaBars, FaTimes, FaCreditCard, FaHeart } from "react-icons/fa";
+import { FaBars, FaTimes, FaCreditCard, FaHeart, FaStar } from "react-icons/fa";
 import FavoriteModal from "../FavouriteModal/FavoriteModal";
 
-const HamburgerMenu = ({ shops = [], openAddCardModal, handleSelectShop }) => {
+const HamburgerMenu = ({
+  shops = [],
+  openAddCardModal,
+  handleSelectShop,
+  closeHamburgerMenu,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
   const [isFavoriteShopsModalOpen, setIsFavoriteShopsModalOpen] =
@@ -12,18 +17,10 @@ const HamburgerMenu = ({ shops = [], openAddCardModal, handleSelectShop }) => {
     setIsOpen(!isOpen);
   };
 
-  console.log("Shops przekazane do HamburgerMenu:", shops);
-
   const favoriteProducts = shops.flatMap((shop) =>
     shop.products.filter((product) => product.isFavorite)
   );
   const favoriteShops = shops.filter((shop) => shop.isFavorite);
-
-  console.log(
-    "Ulubione produkty po filtrowaniu w HamburgerMenu:",
-    favoriteProducts
-  );
-  console.log("Ulubione sklepy:", favoriteShops);
 
   const openFavoritesModal = () => setIsFavoritesModalOpen(true);
   const closeFavoritesModal = () => setIsFavoritesModalOpen(false);
@@ -71,7 +68,7 @@ const HamburgerMenu = ({ shops = [], openAddCardModal, handleSelectShop }) => {
               className="flex items-center space-x-4 text-lg font-medium hover:text-green-500 cursor-pointer transition-transform duration-200 hover:scale-105"
               onClick={openFavoriteShopsModal}
             >
-              <FaHeart className="text-green-500 hover:rotate-6 transition-transform duration-300" />
+              <FaStar className="text-yellow-500 hover:rotate-6 transition-transform duration-300" />
               <span>Ulubione sklepy</span>
             </li>
           </ul>
@@ -102,7 +99,11 @@ const HamburgerMenu = ({ shops = [], openAddCardModal, handleSelectShop }) => {
           onClose={closeFavoriteShopsModal}
           favoriteItems={favoriteShops} // Ulubione sklepy
           type="shops"
-          onSelectShop={handleSelectShop} // Funkcja do obsługi przejścia do sklepu
+          onSelectShop={(shop) => {
+            handleSelectShop(shop);
+            closeFavoriteShopsModal();
+            toggleMenu(); // Zamknięcie menu hamburgerowego
+          }}
         />
       )}
     </>
