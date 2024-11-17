@@ -200,6 +200,7 @@ class ChartManager {
         responsiveAnimationDuration: 300,
       },
     });
+    this.updateLanguage();
   }
 
   getResponsiveFontSize(baseSize) {
@@ -233,26 +234,28 @@ class ChartManager {
   }
 
   updateChart() {
-    const balanceHistory = this.transactionManager.transactions || [];
+    const transactions = this.transactionManager.transactions || [];
 
-    if (balanceHistory.length === 0) {
+    if (transactions.length === 0) {
       console.log("Brak danych do zaktualizowania wykresu.");
       return;
     }
 
-    const labels = balanceHistory.map((entry) => entry.date);
-    const balanceData = balanceHistory.map((entry) => entry.amount);
-    const incomeData = balanceHistory
-      .filter((entry) => entry.amount > 0)
-      .map((entry) => entry.amount);
-    const expensesData = balanceHistory
-      .filter((entry) => entry.amount < 0)
-      .map((entry) => entry.amount);
+    // Obliczanie skumulowanego salda
+    const labels = transactions.map((entry) => entry.date);
+    const balanceData = transactions.reduce((acc, transaction) => {
+      const lastBalance = acc.length > 0 ? acc[acc.length - 1] : 0;
+      acc.push(lastBalance + transaction.amount); // Skumulowane saldo
+      return acc;
+    }, []);
 
-    this.chart.data.labels = labels;
-    this.chart.data.datasets[0].data = balanceData;
-    this.chart.data.datasets[1].data = incomeData;
-    this.chart.data.datasets[2].data = expensesData;
+    console.log("Dane do wykresu (saldo):", balanceData);
+
+    // Aktualizacja danych wykresu
+    this.chart.data.labels = labels; // Daty transakcji jako etykiety
+    this.chart.data.datasets[0].data = balanceData; // Saldo
+    this.chart.data.datasets[1].data = []; // Wyzerowanie innych linii, jeśli nie są używane
+    this.chart.data.datasets[2].data = [];
 
     this.chart.update();
   }

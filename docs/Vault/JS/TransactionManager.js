@@ -1,12 +1,12 @@
 class TransactionManager {
   constructor() {
     this.transactions = [];
-    this.currencyCode = "USD"; // Domyślna waluta
-    this.currencySymbol = "$"; // Domyślny symbol waluty
+    this.currencyCode = "PLN"; // Domyślna waluta
+    this.currencySymbol = "zł"; // Domyślny symbol waluty
     this.initializeIndexedDB();
 
     // Pobierz preferowany język z localStorage
-    const preferredLanguage = localStorage.getItem("preferredLanguage") || "en";
+    const preferredLanguage = localStorage.getItem("preferredLanguage") || "pl";
     this.updateCurrencyBasedOnLanguage(preferredLanguage);
   }
 
@@ -17,7 +17,7 @@ class TransactionManager {
       en: { code: "USD", symbol: "$" },
     };
 
-    const currency = currencies[language] || currencies["en"]; // Domyślnie "en"
+    const currency = currencies[language] || currencies["pl"]; // Domyślnie "en"
     this.currencyCode = currency.code;
     this.currencySymbol = currency.symbol;
   }
@@ -113,9 +113,10 @@ class TransactionManager {
 
   // Obliczenie aktualnego bilansu
   getCurrentBalance() {
-    return this.transactions.reduce((balance, transaction) => {
-      return balance + transaction.amount;
-    }, 0);
+    return this.transactions.reduce(
+      (balance, transaction) => balance + transaction.amount,
+      0
+    );
   }
 
   // Usuwanie wszystkich transakcji z IndexedDB
@@ -161,12 +162,12 @@ class TransactionManager {
 
     const clearRequest = store.clear();
     clearRequest.onsuccess = () => {
-      this.transactions = [];
+      this.transactions = []; // Wyczyszczenie lokalnych transakcji
       console.log("Wszystkie transakcje usunięte z IndexedDB");
 
-      // Powiadomienie o potrzebie odświeżenia UI
+      // Emitowanie zdarzenia dla UI
       const event = new CustomEvent("transactionsCleared");
-      window.dispatchEvent(event); // Emitujemy zdarzenie dla UI
+      window.dispatchEvent(event);
     };
 
     clearRequest.onerror = (event) => {
