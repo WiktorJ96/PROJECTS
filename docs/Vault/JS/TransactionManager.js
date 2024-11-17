@@ -4,19 +4,23 @@ class TransactionManager {
     this.currencyCode = "USD"; // Domyślna waluta
     this.currencySymbol = "$"; // Domyślny symbol waluty
     this.initializeIndexedDB();
+
+    // Pobierz preferowany język z localStorage
+    const preferredLanguage = localStorage.getItem("preferredLanguage") || "en";
+    this.updateCurrencyBasedOnLanguage(preferredLanguage);
   }
 
   // Metoda do zmiany waluty na podstawie wybranego języka
   updateCurrencyBasedOnLanguage(language) {
-    if (language === "pl") {
-      this.currencyCode = "PLN";
-      this.currencySymbol = "zł";
-    } else {
-      this.currencyCode = "USD";
-      this.currencySymbol = "$";
-    }
-  }
+    const currencies = {
+      pl: { code: "PLN", symbol: "zł" },
+      en: { code: "USD", symbol: "$" },
+    };
 
+    const currency = currencies[language] || currencies["en"]; // Domyślnie "en"
+    this.currencyCode = currency.code;
+    this.currencySymbol = currency.symbol;
+  }
 
   // Inicjalizacja IndexedDB
   initializeIndexedDB() {

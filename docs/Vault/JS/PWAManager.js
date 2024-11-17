@@ -18,7 +18,10 @@ export class PWAManager {
       this.showInstallButton();
     });
 
-    if (navigator.standalone === false && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    if (
+      navigator.standalone === false &&
+      /iPhone|iPad|iPod/.test(navigator.userAgent)
+    ) {
       this.showIOSInstallInstructions();
     }
 

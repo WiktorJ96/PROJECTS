@@ -26,7 +26,7 @@ class ThemeManager {
     this.body.classList.add(this.currentTheme + "-theme");
     localStorage.setItem("theme", this.currentTheme);
     this.updateToggleButton();
-    
+
     const event = new CustomEvent("themeChange", {
       detail: { theme: this.currentTheme },
     });

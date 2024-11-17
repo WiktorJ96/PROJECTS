@@ -31,14 +31,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   uiManager.setLanguage(preferredLanguage);
 
   // Obsługa zmiany języka
-document.getElementById("lang-pl").addEventListener("click", () => {
-  uiManager.setLanguage("pl");
-  window.dispatchEvent(new Event("languageChange"));
-});
+  document.getElementById("lang-pl").addEventListener("click", () => {
+    uiManager.setLanguage("pl");
+    window.dispatchEvent(new Event("languageChange"));
+  });
 
-document.getElementById("lang-en").addEventListener("click", () => {
-  uiManager.setLanguage("en");
-  window.dispatchEvent(new Event("languageChange"));
-});
-
+  document.getElementById("lang-en").addEventListener("click", () => {
+    uiManager.setLanguage("en");
+    window.dispatchEvent(new Event("languageChange"));
+  });
 });
