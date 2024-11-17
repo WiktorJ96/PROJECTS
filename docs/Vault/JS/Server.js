@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Połączenie z MongoDB
-const mongoUrl = process.env.MONGO_URL || "mongodb://mongo:27017/mydatabase";
+const mongoUrl = process.env.MONGO_URL || "mongodb://mongo:27017/vaultdatabase";
 mongoose
   .connect(mongoUrl, {
     useNewUrlParser: true,

@@ -3,7 +3,8 @@
   "scripts": {
     "format": "prettier --write .",
     "check-format": "prettier --check .",
-    "test": "node run-tests.mjs"
+    "test": "node run-tests.mjs",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
