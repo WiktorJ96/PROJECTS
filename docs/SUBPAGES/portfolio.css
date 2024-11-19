@@ -639,8 +639,8 @@ h2 {
 #mongo-skill .progress-bar {
   background: linear-gradient(90deg, #4db33d, #2f5d50);
 }
-#mongoose-skill .progress-bar{
-  background: linear-gradient(90deg, #800000, #4D0000);
+#mongoose-skill .progress-bar {
+  background: linear-gradient(90deg, #800000, #4d0000);
 }
 .icon {
   font-size: 35px;
@@ -1550,8 +1550,7 @@ footer {
   margin: 0 0 5px 0;
   padding: 3px 0 0 0;
   background: hsla(0, 0%, 100%, 0.7);
-  border-radius: 10px;
-  width: fit-content;
+  min-width: 300px;
 }
 .iconsBig {
   margin-top: 5px;

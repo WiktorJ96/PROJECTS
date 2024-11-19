@@ -1,16 +1,18 @@
+// TransactionManager.js
+import DatabaseManager from "./DataBaseManager.js";
+
 class TransactionManager {
   constructor() {
+    this.databaseManager = new DatabaseManager();
     this.transactions = [];
     this.currencyCode = "PLN"; // Domyślna waluta
     this.currencySymbol = "zł"; // Domyślny symbol waluty
-    this.initializeIndexedDB();
 
-    // Pobierz preferowany język z localStorage
+    this.loadTransactions();
     const preferredLanguage = localStorage.getItem("preferredLanguage") || "pl";
     this.updateCurrencyBasedOnLanguage(preferredLanguage);
   }
 
-  // Metoda do zmiany waluty na podstawie wybranego języka
   updateCurrencyBasedOnLanguage(language) {
     const currencies = {
       pl: { code: "PLN", symbol: "zł" },
@@ -22,160 +24,68 @@ class TransactionManager {
     this.currencySymbol = currency.symbol;
   }
 
-  // Inicjalizacja IndexedDB
-  initializeIndexedDB() {
-    const request = indexedDB.open("transactionsDB", 1);
-
-    request.onupgradeneeded = (event) => {
-      const db = event.target.result;
-      if (!db.objectStoreNames.contains("transactions")) {
-        db.createObjectStore("transactions", {
-          keyPath: "id",
-          autoIncrement: true,
-        });
-      }
-    };
-
-    request.onsuccess = (event) => {
-      this.db = event.target.result;
-      console.log("Baza danych IndexedDB otwarta pomyślnie.");
-      this.loadFromIndexedDB(); // Ładowanie transakcji po otwarciu bazy
-      this.onTransactionsLoaded(); // Zaktualizuj UI po załadowaniu
-    };
-
-    request.onerror = (event) => {
-      console.error("Błąd podczas otwierania IndexedDB:", event.target.error);
-    };
-  }
-
-  // Ładowanie danych z IndexedDB
-  loadFromIndexedDB() {
-    if (!this.db) return;
-
-    const transaction = this.db.transaction("transactions", "readonly");
-    const store = transaction.objectStore("transactions");
-
-    const getAllRequest = store.getAll();
-    getAllRequest.onsuccess = (event) => {
-      this.transactions = event.target.result || [];
-      console.log("Załadowano transakcje z IndexedDB:", this.transactions);
-
-      // Emituj zdarzenie niezależnie od liczby transakcji
+  async loadTransactions() {
+    try {
+      this.transactions = await this.databaseManager.getTransactions();
+      console.log("Transactions loaded:", this.transactions);
       window.dispatchEvent(new Event("transactionsLoaded"));
-    };
-
-    getAllRequest.onerror = (event) => {
-      console.error(
-        "Błąd podczas ładowania transakcji z IndexedDB:",
-        event.target.error
-      );
-    };
+    } catch (error) {
+      console.error("Error loading transactions:", error);
+    }
   }
 
-  // Dodawanie nowej transakcji do IndexedDB
   async createNewTransaction(name, amount, category) {
-    return new Promise((resolve, reject) => {
-      const newTransaction = {
-        name,
-        amount: parseFloat(amount),
-        category,
-        date: new Date().toISOString().split("T")[0],
-        currencyCode: this.currencyCode,
-      };
-
-      if (!this.db) {
-        console.error("Baza danych nie została jeszcze zainicjowana.");
-        reject("Baza danych nie została jeszcze zainicjowana.");
-        return;
-      }
-
-      const transaction = this.db.transaction("transactions", "readwrite");
-      const store = transaction.objectStore("transactions");
-
-      const addRequest = store.add(newTransaction);
-
-      addRequest.onsuccess = (event) => {
-        newTransaction.id = event.target.result;
-        this.transactions.push(newTransaction);
-        console.log("Dodano nową transakcję do IndexedDB:", newTransaction);
-        resolve(newTransaction);
-      };
-
-      addRequest.onerror = (event) => {
-        console.error(
-          "Błąd podczas dodawania transakcji do IndexedDB:",
-          event.target.error
-        );
-        reject(event.target.error);
-      };
-    });
+    const newTransaction = {
+      name,
+      amount: parseFloat(amount),
+      category,
+      date: new Date().toISOString().split("T")[0],
+      currencyCode: this.currencyCode,
+    };
+    try {
+      const addedTransaction =
+        await this.databaseManager.addTransaction(newTransaction);
+      this.transactions.push(addedTransaction);
+      window.dispatchEvent(new Event("transactionAdded"));
+      return addedTransaction;
+    } catch (error) {
+      console.error("Error adding transaction:", error);
+      throw error;
+    }
   }
 
-  // Obliczenie aktualnego bilansu
-  getCurrentBalance() {
-    return this.transactions.reduce(
-      (balance, transaction) => balance + transaction.amount,
-      0
-    );
-  }
-
-  // Usuwanie wszystkich transakcji z IndexedDB
-  // TransactionManager.js
   async deleteTransaction(id) {
-    if (!this.db) {
-      console.error("Baza danych nie została jeszcze zainicjowana.");
-      return;
-    }
-
-    if (typeof id === "undefined" || id === null) {
-      console.error("Nieprawidłowy identyfikator transakcji do usunięcia:", id);
-      return;
-    }
-
-    const transaction = this.db.transaction("transactions", "readwrite");
-    const store = transaction.objectStore("transactions");
-
-    const deleteRequest = store.delete(id);
-
-    deleteRequest.onsuccess = () => {
-      // Aktualizacja lokalnych transakcji po usunięciu
-      this.transactions = this.transactions.filter(
-        (transaction) => transaction.id !== id
-      );
-      console.log(`Transakcja o ID ${id} została usunięta z IndexedDB.`);
-
-      // Ważne: Zaktualizuj UI po usunięciu
+    try {
+      await this.databaseManager.deleteTransaction(id);
+      this.transactions = this.transactions.filter((tx) => tx.id !== id);
       window.dispatchEvent(new Event("transactionDeleted"));
-    };
-
-    deleteRequest.onerror = (event) => {
-      console.error(
-        "Błąd podczas usuwania transakcji z IndexedDB:",
-        event.target.error
-      );
-    };
+    } catch (error) {
+      console.error("Error deleting transaction:", error);
+    }
   }
 
-  deleteAllTransactions() {
-    const transaction = this.db.transaction("transactions", "readwrite");
-    const store = transaction.objectStore("transactions");
+  async deleteAllTransactions() {
+    try {
+      await this.databaseManager.deleteAllTransactions();
+      this.transactions = [];
+      window.dispatchEvent(new Event("transactionsCleared"));
+    } catch (error) {
+      console.error("Error deleting all transactions:", error);
+    }
+  }
 
-    const clearRequest = store.clear();
-    clearRequest.onsuccess = () => {
-      this.transactions = []; // Wyczyszczenie lokalnych transakcji
-      console.log("Wszystkie transakcje usunięte z IndexedDB");
+  getCurrentBalance() {
+    return this.transactions.reduce((acc, tx) => acc + tx.amount, 0);
+  }
 
-      // Emitowanie zdarzenia dla UI
-      const event = new CustomEvent("transactionsCleared");
-      window.dispatchEvent(event);
-    };
-
-    clearRequest.onerror = (event) => {
-      console.error(
-        "Błąd podczas usuwania transakcji z IndexedDB:",
-        event.target.error
-      );
-    };
+  updateCurrencyBasedOnLanguage(lang) {
+    if (lang === "pl") {
+      this.currencyCode = "PLN";
+      this.currencySymbol = "zł";
+    } else {
+      this.currencyCode = "USD";
+      this.currencySymbol = "$";
+    }
   }
 }
 
