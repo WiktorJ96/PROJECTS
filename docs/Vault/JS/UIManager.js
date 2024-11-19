@@ -148,15 +148,12 @@ class UIManager {
         : -Math.abs(parseFloat(this.amountInput.value));
 
       // Używamy asynchronicznej metody, która obsługuje zarówno MongoDB, jak i IndexedDB
-      const newTransaction = await this.transactionManager.createNewTransaction(
+      await this.transactionManager.createNewTransaction(
         this.nameInput.value,
         amount,
         category
       );
 
-      this.addTransactionToDOM(newTransaction);
-      this.updateBalance();
-      this.chartManager.updateChart();
       this.closePanel();
     } else {
       alert(
@@ -241,8 +238,16 @@ class UIManager {
 
   updateTransactionsDisplay() {
     this.clearTransactionsDisplay();
+
+    const existingIds = new Set(); // Używamy Set do śledzenia ID transakcji w DOM
+
     this.transactionManager.transactions.forEach((transaction) => {
-      this.addTransactionToDOM(transaction);
+      if (!existingIds.has(transaction.id)) {
+        this.addTransactionToDOM(transaction);
+        existingIds.add(transaction.id); // Dodaj ID do Set
+      } else {
+        console.warn(`Transakcja z ID ${transaction.id} już istnieje w DOM.`);
+      }
     });
   }
 
