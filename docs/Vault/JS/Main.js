@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async () => {
    * Sets the preferred language based on the stored value in LocalStorage. // EN
    * @type {string}
    */
-  const preferredLanguage = localStorage.getItem("preferredLanguage") || "en";
+  const preferredLanguage = localStorage.getItem("preferredLanguage") || "pl";
   uiManager.setLanguage(preferredLanguage);
 
   /**

@@ -1,0 +1,1 @@
+netstat -ano | findstr LISTENING  - komenda do sprawdzania uruchomionych portow

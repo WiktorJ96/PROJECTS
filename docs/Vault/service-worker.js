@@ -104,38 +104,26 @@ self.addEventListener("fetch", (event) => {
   );
 });
 
-// Rejestracja synchronizacji w tle
 self.addEventListener("sync", (event) => {
   if (event.tag === "sync-transactions") {
     event.waitUntil(syncTransactions());
   }
 });
 
-// Funkcja synchronizująca transakcje z MongoDB
 async function syncTransactions() {
-  try {
-    const db = await openIndexedDB(); // Otwórz IndexedDB (funkcja powinna być wcześniej zdefiniowana)
-    const transactions = await getUnsyncedTransactions(db); // Pobierz niesynchronizowane transakcje
-
-    for (const transaction of transactions) {
-      try {
-        // Wyślij transakcję do serwera MongoDB
-        const response = await fetch("http://localhost:3000/api/transactions", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(transaction),
-        });
-
-        if (response.ok) {
-          console.log("Transakcja zsynchronizowana z MongoDB:", transaction);
-          // Oznacz transakcję jako zsynchronizowaną
-          markTransactionAsSynced(db, transaction.id);
-        }
-      } catch (error) {
-        console.error("Błąd przy synchronizacji transakcji:", error);
+  const unsyncedTransactions = await getUnsyncedTransactionsFromIndexedDB(); // Funkcja do pobierania transakcji
+  for (const transaction of unsyncedTransactions) {
+    try {
+      const response = await fetch("/api/transactions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(transaction),
+      });
+      if (response.ok) {
+        await markTransactionAsSyncedInIndexedDB(transaction.id);
       }
+    } catch (error) {
+      console.error("Błąd synchronizacji:", error);
     }
-  } catch (error) {
-    console.error("Błąd podczas synchronizacji w tle:", error);
   }
 }

@@ -1,5 +1,5 @@
 // TransactionManager.js
-import DatabaseManager from "./DataBaseManager.js";
+import DatabaseManager from "./DatabaseManager.js";
 
 class TransactionManager {
   constructor() {
@@ -8,9 +8,22 @@ class TransactionManager {
     this.currencyCode = "PLN";
     this.currencySymbol = "zł";
 
-    this.loadTransactions();
     const preferredLanguage = localStorage.getItem("preferredLanguage") || "pl";
     this.updateCurrencyBasedOnLanguage(preferredLanguage);
+
+    // Nasłuchiwanie zmian w dostępności serwera
+    this.serverAvailable = this.databaseManager.serverAvailable;
+    setInterval(() => {
+      if (this.serverAvailable !== this.databaseManager.serverAvailable) {
+        this.serverAvailable = this.databaseManager.serverAvailable;
+        if (this.serverAvailable) {
+          console.log(
+            "Serwer jest teraz dostępny. Rozpoczynam synchronizację..."
+          );
+          this.syncTransactions();
+        }
+      }
+    }, 1000); // Sprawdzanie co 1 sekundę
 
     // Nasłuchiwanie zdarzenia online
     window.addEventListener("online", async () => {
@@ -19,6 +32,19 @@ class TransactionManager {
       );
       await this.syncTransactions();
     });
+    console.log("Czy aplikacja jest online?", navigator.onLine);
+
+    // Nasłuchiwanie na zmianę języka
+    window.addEventListener("languageChange", () => {
+      const preferredLanguage =
+        localStorage.getItem("preferredLanguage") || "pl";
+      this.updateCurrencyBasedOnLanguage(preferredLanguage);
+      // Opcjonalnie: odśwież widok transakcji
+      window.dispatchEvent(new Event("transactionsUpdated"));
+    });
+
+    // Załaduj transakcje po skonfigurowaniu
+    this.loadTransactions();
   }
 
   updateCurrencyBasedOnLanguage(language) {
@@ -34,32 +60,10 @@ class TransactionManager {
 
   async loadTransactions() {
     try {
-      let transactions;
-      console.log("Loading transactions...");
-
-      if (navigator.onLine) {
-        transactions = await this.databaseManager.getTransactions();
-        console.log("Transactions loaded from database:", transactions);
-      } else {
-        transactions =
-          await this.databaseManager.getTransactionsFromIndexedDB();
-        console.log("Transactions loaded from IndexedDB:", transactions);
-      }
-
-      // Filtrujemy nowe transakcje, które jeszcze nie istnieją w liście
-      const currentIds = this.transactions.map((tx) => tx.id);
-      const newTransactions = transactions.filter(
-        (tx) => !currentIds.includes(tx.id)
-      );
-
-      if (newTransactions.length > 0) {
-        this.transactions.push(...newTransactions);
-        console.log("New transactions added to local list:", newTransactions);
-      }
-
+      this.transactions = await this.databaseManager.getTransactions();
       window.dispatchEvent(new Event("transactionsLoaded"));
     } catch (error) {
-      console.error("Error loading transactions:", error);
+      console.error("Błąd podczas ładowania transakcji:", error);
     }
   }
 
@@ -69,105 +73,64 @@ class TransactionManager {
       amount: parseFloat(amount),
       category,
       date: new Date().toISOString().split("T")[0],
-      currencyCode: this.currencyCode,
+      currencyCode: this.currencyCode, // Dodajemy currencyCode
     };
 
     try {
-      let addedTransaction;
-      console.log("Creating new transaction:", newTransaction);
-
-      if (navigator.onLine) {
-        // Online: Zapis w bazie danych
-        addedTransaction =
-          await this.databaseManager.addTransaction(newTransaction);
-        console.log("Transaction added to database:", addedTransaction);
-      } else {
-        // Offline: Zapis w IndexedDB
-        addedTransaction = { ...newTransaction, id: Date.now() }; // Generujemy lokalne ID
-        await this.databaseManager.addToIndexedDB(addedTransaction);
-        console.log("Transaction saved in IndexedDB:", addedTransaction);
-      }
-
-      // Sprawdź, czy transakcja już istnieje w liście
-      const exists = this.transactions.some(
-        (tx) => tx.id === addedTransaction.id
-      );
-      if (!exists) {
-        this.transactions.push(addedTransaction);
-        console.log("Transaction added to local list:", addedTransaction);
-      } else {
-        console.log(
-          "Transaction already exists in local list:",
-          addedTransaction
-        );
-      }
-
+      const addedTransaction =
+        await this.databaseManager.addTransaction(newTransaction);
+      this.transactions.push(addedTransaction);
       window.dispatchEvent(new Event("transactionAdded"));
       return addedTransaction;
     } catch (error) {
-      console.error("Error adding transaction:", error);
+      console.error("Błąd podczas tworzenia transakcji:", error);
       throw error;
     }
   }
 
   async deleteTransaction(id) {
     try {
-      if (navigator.onLine) {
-        // Online: Usuwanie z bazy danych
-        await this.databaseManager.deleteTransaction(id);
-      } else {
-        // Offline: Usuwanie z IndexedDB
-        await this.databaseManager.removeFromIndexedDB(id);
-      }
-
-      // Usunięcie transakcji z lokalnej listy
+      await this.databaseManager.deleteTransaction(id);
       this.transactions = this.transactions.filter((tx) => tx.id !== id);
       window.dispatchEvent(new Event("transactionDeleted"));
     } catch (error) {
-      console.error("Error deleting transaction:", error);
+      console.error("Błąd podczas usuwania transakcji:", error);
     }
   }
 
   async deleteAllTransactions() {
     try {
-      if (navigator.onLine) {
-        // Online: Usuwanie z bazy danych
-        await this.databaseManager.deleteAllTransactions();
-      } else {
-        // Offline: Usuwanie z IndexedDB
-        await this.databaseManager.clearIndexedDB();
-      }
-
-      // Wyczyszczenie lokalnej listy
+      await this.databaseManager.deleteAllTransactions();
       this.transactions = [];
       window.dispatchEvent(new Event("transactionsCleared"));
     } catch (error) {
-      console.error("Error deleting all transactions:", error);
+      console.error("Błąd podczas usuwania wszystkich transakcji:", error);
     }
   }
 
   async syncTransactions() {
-    if (!navigator.onLine) return; // Nie wykonuj synchronizacji, jeśli aplikacja jest offline
+    if (!this.serverAvailable) return;
 
     try {
-      const offlineTransactions =
-        await this.databaseManager.getTransactionsFromIndexedDB();
-
-      for (const transaction of offlineTransactions) {
+      const unsyncedTransactions =
+        await this.databaseManager.getUnsyncedTransactions();
+      for (const transaction of unsyncedTransactions) {
         try {
-          // Zapisz transakcję w bazie danych
-          await this.databaseManager.addTransaction(transaction);
-          console.log("Synchronized transaction:", transaction);
-          await this.databaseManager.removeFromIndexedDB(transaction.id); // Usuń z IndexedDB po synchronizacji
+          const syncedTransaction =
+            await this.databaseManager.mongoDBManager.addTransaction(
+              transaction
+            );
+          await this.databaseManager.markTransactionAsSynced(transaction.id);
+          console.log("Zsynchronizowano transakcję:", syncedTransaction);
         } catch (error) {
-          console.error("Error synchronizing transaction:", transaction, error);
+          console.error("Błąd synchronizacji transakcji:", transaction, error);
         }
       }
 
-      // Odśwież listę transakcji po synchronizacji
+      // Odśwież listę transakcji
       await this.loadTransactions();
     } catch (error) {
-      console.error("Error during synchronization:", error);
+      console.error("Błąd podczas synchronizacji:", error);
     }
   }
 

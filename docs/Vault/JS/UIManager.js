@@ -1,3 +1,4 @@
+// UIManager.js
 class UIManager {
   constructor(transactionManager, chartManager) {
     this.transactionManager = transactionManager;
@@ -33,6 +34,19 @@ class UIManager {
       this.updateTransactionsDisplay();
       this.updateBalance();
       this.chartManager.updateChart();
+    });
+
+    window.addEventListener("transactionsLoaded", () => {
+      this.updateTransactionsDisplay();
+      this.updateBalance();
+      this.chartManager.updateChart();
+    });
+
+    window.addEventListener("online", async () => {
+      console.log(
+        "Połączenie online przywrócone. Rozpoczynam synchronizację..."
+      );
+      await this.transactionManager.syncTransactions();
     });
   }
 
@@ -237,17 +251,16 @@ class UIManager {
   }
 
   updateTransactionsDisplay() {
+    console.log(
+      "Aktualizuję widok transakcji:",
+      this.transactionManager.transactions
+    );
+
     this.clearTransactionsDisplay();
 
-    const existingIds = new Set(); // Używamy Set do śledzenia ID transakcji w DOM
-
     this.transactionManager.transactions.forEach((transaction) => {
-      if (!existingIds.has(transaction.id)) {
-        this.addTransactionToDOM(transaction);
-        existingIds.add(transaction.id); // Dodaj ID do Set
-      } else {
-        console.warn(`Transakcja z ID ${transaction.id} już istnieje w DOM.`);
-      }
+      console.log("Dodaję transakcję do DOM:", transaction);
+      this.addTransactionToDOM(transaction);
     });
   }
 

@@ -12,20 +12,21 @@ class IndexedDBManager {
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
       if (!db.objectStoreNames.contains("transactions")) {
-        db.createObjectStore("transactions", {
+        const store = db.createObjectStore("transactions", {
           keyPath: "id",
           autoIncrement: true,
         });
+        store.createIndex("isSynced", "isSynced", { unique: false });
       }
     };
 
     request.onsuccess = (event) => {
       this.db = event.target.result;
-      console.log("IndexedDB initialized.");
+      console.log("IndexedDB zainicjalizowane.");
     };
 
     request.onerror = (event) => {
-      console.error("IndexedDB initialization error:", event.target.error);
+      console.error("Błąd inicjalizacji IndexedDB:", event.target.error);
     };
   }
 
@@ -61,15 +62,52 @@ class IndexedDBManager {
     });
   }
 
+  async getUnsyncedTransactions() {
+    const db = await this.getDB();
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction("transactions", "readonly");
+      const store = transaction.objectStore("transactions");
+      const index = store.index("isSynced");
+      const request = index.getAll(IDBKeyRange.only(false));
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = (event) => reject(event.target.error);
+    });
+  }
+
+  async markTransactionAsSynced(id) {
+    const db = await this.getDB();
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction("transactions", "readwrite");
+      const store = transaction.objectStore("transactions");
+      const request = store.get(id);
+      request.onsuccess = (event) => {
+        const record = event.target.result;
+        if (record) {
+          record.isSynced = true;
+          const updateRequest = store.put(record);
+          updateRequest.onsuccess = () => resolve();
+          updateRequest.onerror = (error) => reject(error);
+        } else {
+          resolve();
+        }
+      };
+      request.onerror = (event) => reject(event.target.error);
+    });
+  }
+
   async addTransaction(transaction) {
     const db = await this.getDB();
     return new Promise((resolve, reject) => {
       const tx = db.transaction("transactions", "readwrite");
       const store = tx.objectStore("transactions");
-      const request = store.add(transaction);
+      const newTransaction = {
+        ...transaction,
+        isSynced: transaction.isSynced || false,
+      };
+      const request = store.add(newTransaction);
       request.onsuccess = (event) => {
-        transaction.id = event.target.result;
-        resolve(transaction);
+        newTransaction.id = event.target.result;
+        resolve(newTransaction);
       };
       request.onerror = (event) => {
         reject(event.target.error);

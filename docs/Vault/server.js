@@ -1,3 +1,4 @@
+// server.js
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -7,7 +8,10 @@ class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT || 3000;
-    this.mongoUrl = process.env.MONGO_URL || "mongodb://mongo:27017/data/dbvault";
+    this.mongoUrl =
+      process.env.DOCKER_ENV === "true"
+        ? process.env.MONGO_URL
+        : "mongodb://localhost:27017/dbvault";
 
     this.connectToDatabase();
     this.middlewares();
@@ -27,11 +31,9 @@ class Server {
   middlewares() {
     this.app.use(express.json());
     this.app.use(cors());
-
-    // Serwowanie plików statycznych
-    this.app.use(express.static(path.join(__dirname))); // Udostępnia wszystkie pliki w katalogu /app
-    this.app.use("/js", express.static(path.join(__dirname, "JS"))); // Udostępnia katalog JS
-    this.app.use("/assets", express.static(path.join(__dirname, "assets"))); // Udostępnia katalog assets
+    this.app.use(express.static(path.join(__dirname)));
+    this.app.use("/js", express.static(path.join(__dirname, "JS")));
+    this.app.use("/assets", express.static(path.join(__dirname, "assets")));
   }
 
   routes() {
@@ -45,34 +47,46 @@ class Server {
 
     const Transaction = mongoose.model("Transaction", transactionSchema);
 
+    // Endpoint do sprawdzania dostępności serwera
+    this.app.get("/ping", (req, res) => {
+      res.status(200).send("pong");
+    });
+
+    // Pobieranie transakcji
     this.app.get("/api/transactions", async (req, res) => {
       try {
         const transactions = await Transaction.find();
         res.json(transactions);
       } catch (error) {
+        console.error("Błąd podczas pobierania transakcji:", error);
         res.status(500).json({ error: "Błąd podczas pobierania transakcji" });
       }
     });
 
+    // Dodawanie transakcji
     this.app.post("/api/transactions", async (req, res) => {
       try {
         const transaction = new Transaction(req.body);
         await transaction.save();
         res.json(transaction);
       } catch (error) {
+        console.error("Błąd podczas zapisywania transakcji:", error);
         res.status(500).json({ error: "Błąd podczas zapisywania transakcji" });
       }
     });
 
+    // Usuwanie transakcji
     this.app.delete("/api/transactions/:id", async (req, res) => {
       try {
         const result = await Transaction.findByIdAndDelete(req.params.id);
         res.json({ message: "Transakcja usunięta", result });
       } catch (error) {
+        console.error("Błąd podczas usuwania transakcji:", error);
         res.status(500).json({ error: "Błąd podczas usuwania transakcji" });
       }
     });
 
+    // Serwowanie strony głównej
     this.app.get("*", (req, res) => {
       res.sendFile(path.join(__dirname, "Vault.html"));
     });

@@ -1,18 +1,20 @@
 
-
 class MongoDBManager {
   constructor() {
-    this.apiBaseUrl = process.env.API_BASE_URL || "http://localhost:3000";
+    // Bezpośrednie ustawienie adresu URL serwera API
+    this.mongoUrl = "http://localhost:3000";
   }
 
   async getTransactions() {
     try {
-      const response = await axios.get(`${this.apiBaseUrl}/api/transactions`);
-      const transactions = response.data;
-      // Mapowanie _id na id dla spójności z IndexedDB
-      return transactions.map((tx) => ({ ...tx, id: tx._id }));
+      const response = await axios.get(`${this.mongoUrl}/api/transactions`);
+      const transactions = response.data.map((tx) => ({
+        ...tx,
+        id: tx._id,
+      }));
+      return transactions;
     } catch (error) {
-      console.error("Error fetching transactions from MongoDB:", error);
+      console.error("Błąd podczas pobierania transakcji z MongoDB:", error);
       throw error;
     }
   }
@@ -20,23 +22,22 @@ class MongoDBManager {
   async addTransaction(transaction) {
     try {
       const response = await axios.post(
-        `${this.apiBaseUrl}/api/transactions`,
+        `${this.mongoUrl}/api/transactions`,
         transaction
       );
       const addedTransaction = response.data;
-      // Mapowanie _id na id
       return { ...addedTransaction, id: addedTransaction._id };
     } catch (error) {
-      console.error("Error adding transaction to MongoDB:", error);
+      console.error("Błąd podczas dodawania transakcji do MongoDB:", error);
       throw error;
     }
   }
 
   async deleteTransaction(id) {
     try {
-      await axios.delete(`${this.apiBaseUrl}/api/transactions/${id}`);
+      await axios.delete(`${this.mongoUrl}/api/transactions/${id}`);
     } catch (error) {
-      console.error("Error deleting transaction from MongoDB:", error);
+      console.error("Błąd podczas usuwania transakcji z MongoDB:", error);
       throw error;
     }
   }
@@ -49,7 +50,10 @@ class MongoDBManager {
       );
       await Promise.all(deletePromises);
     } catch (error) {
-      console.error("Error deleting all transactions from MongoDB:", error);
+      console.error(
+        "Błąd podczas usuwania wszystkich transakcji z MongoDB:",
+        error
+      );
       throw error;
     }
   }
