@@ -3,11 +3,7 @@ const ASSETS_TO_CACHE = [
   "/",
   "./Vault.html",
   "./Vault.css",
-  "./JS/Main.js",
-  "../translations/Vault-pl.json",
-  "../translations/Vault-en.json",
-  "./assets/vault_icon_manifest.svg",
-  "./assets/Vault_icon.png",
+  "./Main.js",
   "https://cdn.jsdelivr.net/npm/chart.js",
 ];
 

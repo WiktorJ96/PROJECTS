@@ -5,7 +5,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-// Ustawienia dla __dirname w ES6 Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -36,12 +35,7 @@ class Server {
   middlewares() {
     this.app.use(express.json());
     this.app.use(cors());
-    this.app.use(express.static(path.join(__dirname))); // Zmieniono na folder publiczny
-    this.app.use("/js", express.static(path.join(__dirname,"JS")));
-    this.app.use(
-      "/assets",
-      express.static(path.join(__dirname,"assets"))
-    );
+    this.app.use(express.static(path.join(__dirname)));
   }
 
   routes() {
@@ -96,7 +90,11 @@ class Server {
 
     // Serwowanie strony głównej
     this.app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname,"Vault.html"));
+      if (req.accepts("html")) {
+        res.sendFile(path.join(__dirname,"Vault.html"));
+      } else {
+        res.status(404).send("Not Found");
+      }
     });
   }
 
