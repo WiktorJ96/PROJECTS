@@ -1,3 +1,4 @@
+// TransactionManager.js
 import DataBaseManager from "./DataBaseManager.js";
 
 class TransactionManager {
