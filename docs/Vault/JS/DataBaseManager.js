@@ -2,7 +2,7 @@
 import MongoDBManager from "./MongoDBManager.js";
 import IndexedDBManager from "./IndexedDBManager.js";
 
-class DatabaseManager {
+class DataBaseManager {
   constructor() {
     this.mongoDBManager = new MongoDBManager();
     this.indexedDBManager = new IndexedDBManager();
