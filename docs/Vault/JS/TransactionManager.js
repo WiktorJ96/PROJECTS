@@ -1,9 +1,9 @@
 // TransactionManager.js
-import DatabaseManager from "./DatabaseManager.js";
+import DataBaseManager from "./DataBaseManager.js";
 
 class TransactionManager {
   constructor() {
-    this.databaseManager = new DatabaseManager();
+    this.databaseManager = new DataBaseManager();
     this.transactions = [];
     this.currencyCode = "PLN";
     this.currencySymbol = "zł";
