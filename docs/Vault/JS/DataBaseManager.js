@@ -107,4 +107,4 @@ class DatabaseManager {
   }
 }
 
-export default DatabaseManager;
+export default DataBaseManager;
