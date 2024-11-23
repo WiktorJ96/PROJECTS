@@ -7,22 +7,22 @@
   "theme_color": "#4A90E2",
   "icons": [
     {
-      "src": "vault_icon_manifest",
+      "src": "./assets/vault_icon_manifest.svg",
       "sizes": "192x192",
       "type": "image/svg+xml"
     },
     {
-      "src": "vault_icon_manifest",
+      "src": "./assets/vault_icon_manifest.svg",
       "sizes": "256x256",
       "type": "image/svg+xml"
     },
     {
-      "src": "vault_icon_manifest",
+      "src": "./assets/vault_icon_manifest.svg",
       "sizes": "384x384",
       "type": "image/svg+xml"
     },
     {
-      "src": "vault_icon_manifest",
+      "src": "./assets/vault_icon_manifest.svg",
       "sizes": "512x512",
       "type": "image/svg+xml"
     }

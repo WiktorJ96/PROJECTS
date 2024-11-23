@@ -3,13 +3,13 @@
  * Initializes the application and manages its main components. // EN
  * @module App
  */
-
-import DataBaseManager from "./DataBaseManager.js";
-import TransactionManager from "./TransactionManager.js";
-import ChartManager from "./ChartManager.js";
-import UIManager from "./UIManager.js";
-import ThemeManager from "./ThemeManager.js";
-import { PWAManager } from "./PWAManager.js";
+import "./styles/main.css";
+import DataBaseManager from "./scripts/DataBaseManager.js";
+import TransactionManager from "./scripts/TransactionManager.js";
+import ChartManager from "./scripts/ChartManager.js";
+import UIManager from "./scripts/UIManager.js";
+import ThemeManager from "./scripts/ThemeManager.js";
+import { PWAManager } from "./scripts/PWAManager.js";
 
 /**
  * Funkcja główna wykonywana po załadowaniu DOM. // PL

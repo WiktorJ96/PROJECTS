@@ -36,12 +36,10 @@ class Server {
   middlewares() {
     this.app.use(express.json());
     this.app.use(cors());
-    this.app.use(express.static(path.join(__dirname))); // Zmieniono na folder publiczny
-    this.app.use("/js", express.static(path.join(__dirname,"JS")));
-    this.app.use(
-      "/assets",
-      express.static(path.join(__dirname,"assets"))
-    );
+    this.app.use(express.static(path.join(__dirname, "src"))); 
+    this.app.use("/js", express.static(path.join(__dirname, "scripts")));
+    this.app.use("/assets", express.static(path.join(__dirname,"assets")));
+    this.app.use("/styles", express.static(path.join(__dirname,"styles")));
   }
 
   routes() {
@@ -96,7 +94,7 @@ class Server {
 
     // Serwowanie strony głównej
     this.app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname,"Vault.html"));
+      res.sendFile(path.join(__dirname, "src", "Vault.html"));
     });
   }
 
