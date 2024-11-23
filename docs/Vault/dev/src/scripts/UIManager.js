@@ -292,13 +292,10 @@ class UIManager {
 
   async confirmDeleteTransaction() {
     const id = this.deleteTransactionModal.dataset.transactionId;
-
     if (!id) {
       console.error("Invalid transaction ID: ", id);
       return;
     }
-
-    // Asynchronous deletion to handle both MongoDB and IndexedDB
     await this.deleteTransaction(id);
     this.hideDeleteTransactionModal();
   }
@@ -306,7 +303,6 @@ class UIManager {
   async deleteTransaction(id) {
     console.log(`Attempting to delete transaction with ID: ${id}`);
     await this.transactionManager.deleteTransaction(id);
-
     const transactionElement = document.getElementById(id);
     if (transactionElement) {
       transactionElement.remove();
@@ -314,7 +310,6 @@ class UIManager {
     } else {
       console.warn(`Element with ID: ${id} not found`);
     }
-
     this.updateBalance();
     this.chartManager.updateChart();
   }

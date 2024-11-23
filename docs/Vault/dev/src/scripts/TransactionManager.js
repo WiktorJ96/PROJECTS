@@ -95,6 +95,7 @@ class TransactionManager {
   async deleteTransaction(id) {
     try {
       await this.databaseManager.deleteTransaction(id);
+      // IDs are strings, so comparison works correctly
       this.transactions = this.transactions.filter((tx) => tx.id !== id);
       window.dispatchEvent(new Event("transactionDeleted"));
     } catch (error) {

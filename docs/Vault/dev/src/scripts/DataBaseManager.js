@@ -126,8 +126,6 @@ class DataBaseManager {
         }
       }
 
-      // Odśwież listę transakcji
-      await this.loadTransactions();
     } catch (error) {
       console.error("Błąd podczas synchronizacji:", error);
     }

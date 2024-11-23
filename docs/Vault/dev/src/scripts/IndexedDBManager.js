@@ -55,8 +55,13 @@ class IndexedDBManager {
       const request = store.getAll();
 
       request.onsuccess = () => {
-        console.log("Pobrane transakcje z IndexedDB:", request.result);
-        resolve(request.result);
+        // Convert IDs to strings
+        const transactions = request.result.map((tx) => ({
+          ...tx,
+          id: tx.id.toString(),
+        }));
+        console.log("Pobrane transakcje z IndexedDB:", transactions);
+        resolve(transactions);
       };
 
       request.onerror = (event) => {
@@ -76,7 +81,13 @@ class IndexedDBManager {
       const store = transaction.objectStore("transactions");
       const index = store.index("isSynced");
       const request = index.getAll(IDBKeyRange.only(false));
-      request.onsuccess = () => resolve(request.result);
+      request.onsuccess = () => {
+        const transactions = request.result.map((tx) => ({
+          ...tx,
+          id: tx.id.toString(),
+        }));
+        resolve(transactions);
+      };
       request.onerror = (event) => reject(event.target.error);
     });
   }
@@ -86,7 +97,8 @@ class IndexedDBManager {
     return new Promise((resolve, reject) => {
       const transaction = db.transaction("transactions", "readwrite");
       const store = transaction.objectStore("transactions");
-      const request = store.get(id);
+      const idNumber = Number(id); // Convert ID to number
+      const request = store.get(idNumber);
       request.onsuccess = (event) => {
         const record = event.target.result;
         if (record) {
@@ -113,7 +125,8 @@ class IndexedDBManager {
       };
       const request = store.add(newTransaction);
       request.onsuccess = (event) => {
-        newTransaction.id = event.target.result;
+        // Convert the numeric ID to a string
+        newTransaction.id = event.target.result.toString();
         resolve(newTransaction);
       };
       request.onerror = (event) => {
@@ -127,7 +140,8 @@ class IndexedDBManager {
     return new Promise((resolve, reject) => {
       const tx = db.transaction("transactions", "readwrite");
       const store = tx.objectStore("transactions");
-      const request = store.delete(id);
+      const idNumber = Number(id); // Convert ID to number
+      const request = store.delete(idNumber);
       request.onsuccess = () => {
         resolve();
       };
