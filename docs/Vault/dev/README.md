@@ -8,7 +8,7 @@ Vault jest zbudowany jako Progressive Web App (PWA), co łączy w sobie zalety a
 Ogólna struktura i organizacja
 
 1. Modułowość: Kod JavaScript jest dobrze zorganizowany w klasy (Main, TransactionManager, ChartManager, UIManager, ThemeManager, 
-   PWAManager, DataBaseManager, IndexedDBManager, MongoDBManager), 
+   PWAManager, DataBaseManager, IndexedDBManager, MongoDBManager, TranslationManager), 
    co sprzyja modułowości i ułatwia utrzymanie.
 2. Separacja logiki: Rozdzielenie logiki biznesowej (TransactionManager) od interfejsu użytkownika (UIManager) i wizualizacji danych
    (ChartManager).
