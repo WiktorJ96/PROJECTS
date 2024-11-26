@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>TranslationManager - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ChartManager.html">ChartManager</a><ul class='methods'><li data-type='method'><a href="ChartManager.html#getResponsiveFontSize">getResponsiveFontSize</a></li><li data-type='method'><a href="ChartManager.html#getResponsivePadding">getResponsivePadding</a></li><li data-type='method'><a href="ChartManager.html#getResponsiveTicksLimit">getResponsiveTicksLimit</a></li><li data-type='method'><a href="ChartManager.html#initializeChart">initializeChart</a></li><li data-type='method'><a href="ChartManager.html#setTheme">setTheme</a></li><li data-type='method'><a href="ChartManager.html#setupLanguageChangeListener">setupLanguageChangeListener</a></li><li data-type='method'><a href="ChartManager.html#setupResizeListener">setupResizeListener</a></li><li data-type='method'><a href="ChartManager.html#updateChart">updateChart</a></li><li data-type='method'><a href="ChartManager.html#updateLanguage">updateLanguage</a></li><li data-type='method'><a href="ChartManager.html#updateResponsiveSettings">updateResponsiveSettings</a></li></ul></li><li><a href="DataBaseManager.html">DataBaseManager</a><ul class='methods'><li data-type='method'><a href="DataBaseManager.html#addTransaction">addTransaction</a></li><li data-type='method'><a href="DataBaseManager.html#checkServerAvailability">checkServerAvailability</a></li><li data-type='method'><a href="DataBaseManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="DataBaseManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="DataBaseManager.html#getTransactions">getTransactions</a></li><li data-type='method'><a href="DataBaseManager.html#getUnsyncedTransactions">getUnsyncedTransactions</a></li><li data-type='method'><a href="DataBaseManager.html#markTransactionAsSynced">markTransactionAsSynced</a></li><li data-type='method'><a href="DataBaseManager.html#startServerAvailabilityChecks">startServerAvailabilityChecks</a></li><li data-type='method'><a href="DataBaseManager.html#syncTransactions">syncTransactions</a></li></ul></li><li><a href="IndexedDBManager.html">IndexedDBManager</a><ul class='methods'><li data-type='method'><a href="IndexedDBManager.html#addTransaction">addTransaction</a></li><li data-type='method'><a href="IndexedDBManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="IndexedDBManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="IndexedDBManager.html#getDB">getDB</a></li><li data-type='method'><a href="IndexedDBManager.html#getTransactions">getTransactions</a></li><li data-type='method'><a href="IndexedDBManager.html#getUnsyncedTransactions">getUnsyncedTransactions</a></li><li data-type='method'><a href="IndexedDBManager.html#initializeDB">initializeDB</a></li><li data-type='method'><a href="IndexedDBManager.html#markTransactionAsSynced">markTransactionAsSynced</a></li></ul></li><li><a href="MongoDBManager.html">MongoDBManager</a><ul class='methods'><li data-type='method'><a href="MongoDBManager.html#addTransaction">addTransaction</a></li><li data-type='method'><a href="MongoDBManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="MongoDBManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="MongoDBManager.html#getTransactions">getTransactions</a></li></ul></li><li><a href="PWAManager.html">PWAManager</a><ul class='methods'><li data-type='method'><a href="PWAManager.html#hideInstallButton">hideInstallButton</a></li><li data-type='method'><a href="PWAManager.html#init">init</a></li><li data-type='method'><a href="PWAManager.html#installPWA">installPWA</a></li><li data-type='method'><a href="PWAManager.html#showIOSInstallInstructions">showIOSInstallInstructions</a></li><li data-type='method'><a href="PWAManager.html#showInstallButton">showInstallButton</a></li></ul></li><li><a href="ThemeManager.html">ThemeManager</a><ul class='methods'><li data-type='method'><a href="ThemeManager.html#addEventListeners">addEventListeners</a></li><li data-type='method'><a href="ThemeManager.html#initTheme">initTheme</a></li><li data-type='method'><a href="ThemeManager.html#setTheme">setTheme</a></li><li data-type='method'><a href="ThemeManager.html#toggleTheme">toggleTheme</a></li><li data-type='method'><a href="ThemeManager.html#updateToggleButton">updateToggleButton</a></li></ul></li><li><a href="TransactionManager.html">TransactionManager</a><ul class='methods'><li data-type='method'><a href="TransactionManager.html#createNewTransaction">createNewTransaction</a></li><li data-type='method'><a href="TransactionManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="TransactionManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="TransactionManager.html#getCurrentBalance">getCurrentBalance</a></li><li data-type='method'><a href="TransactionManager.html#loadTransactions">loadTransactions</a></li><li data-type='method'><a href="TransactionManager.html#syncTransactions">syncTransactions</a></li><li data-type='method'><a href="TransactionManager.html#updateCurrencyBasedOnLanguage">updateCurrencyBasedOnLanguage</a></li></ul></li><li><a href="TranslationManager.html">TranslationManager</a><ul class='methods'><li data-type='method'><a href="TranslationManager.html#addLanguageListeners">addLanguageListeners</a></li><li data-type='method'><a href="TranslationManager.html#fetchTranslations">fetchTranslations</a></li><li data-type='method'><a href="TranslationManager.html#loadPreferredLanguage">loadPreferredLanguage</a></li><li data-type='method'><a href="TranslationManager.html#loadTranslations">loadTranslations</a></li><li data-type='method'><a href="TranslationManager.html#setLanguage">setLanguage</a></li><li data-type='method'><a href="TranslationManager.html#translatePage">translatePage</a></li><li data-type='method'><a href="TranslationManager.html#updateLanguageButtons">updateLanguageButtons</a></li></ul></li><li><a href="UIManager.html">UIManager</a><ul class='methods'><li data-type='method'><a href="UIManager.html#addTransactionToDOM">addTransactionToDOM</a></li><li data-type='method'><a href="UIManager.html#clearInputs">clearInputs</a></li><li data-type='method'><a href="UIManager.html#clearTransactionsDisplay">clearTransactionsDisplay</a></li><li data-type='method'><a href="UIManager.html#closePanel">closePanel</a></li><li data-type='method'><a href="UIManager.html#confirmDeleteTransaction">confirmDeleteTransaction</a></li><li data-type='method'><a href="UIManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="UIManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="UIManager.html#getCategoryIcon">getCategoryIcon</a></li><li data-type='method'><a href="UIManager.html#handleTransactionTypeChange">handleTransactionTypeChange</a></li><li data-type='method'><a href="UIManager.html#hideDeleteAllModal">hideDeleteAllModal</a></li><li data-type='method'><a href="UIManager.html#hideDeleteTransactionModal">hideDeleteTransactionModal</a></li><li data-type='method'><a href="UIManager.html#initializeElements">initializeElements</a></li><li data-type='method'><a href="UIManager.html#initializeEventListeners">initializeEventListeners</a></li><li data-type='method'><a href="UIManager.html#saveTransaction">saveTransaction</a></li><li data-type='method'><a href="UIManager.html#setLanguage">setLanguage</a></li><li data-type='method'><a href="UIManager.html#showDeleteAllModal">showDeleteAllModal</a></li><li data-type='method'><a href="UIManager.html#showDeleteTransactionModal">showDeleteTransactionModal</a></li><li data-type='method'><a href="UIManager.html#showPanel">showPanel</a></li><li data-type='method'><a href="UIManager.html#updateBalance">updateBalance</a></li><li data-type='method'><a href="UIManager.html#updateLanguage">updateLanguage</a></li><li data-type='method'><a href="UIManager.html#updateTransactionsDisplay">updateTransactionsDisplay</a></li></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">TranslationManager</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        
+            TranslationManager
+        
+        </h2>
+        
+            <div class="class-description usertext"><p>Manages translations for the application.<br>
+Handles fetching, applying translations, and language switching.<br>
+Updates the UI dynamically based on the selected language.</p></div>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="TranslationManager"><span class="type-signature"></span>new TranslationManager<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Creates an instance of TranslationManager.<br>
+Initializes translations, sets the current language, and adds event listeners.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TranslationManager.js.html">TranslationManager.js</a>, <a href="TranslationManager.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="currentLanguage"><span class="type-signature"></span>currentLanguage<span class="type-signature"> :string</span></h4>
+
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>The currently selected language.<br>
+Defaults to 'pl' if no preference is stored in localStorage.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TranslationManager.js.html">TranslationManager.js</a>, <a href="TranslationManager.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>The currently selected language.<br>
+Defaults to 'pl' if no preference is stored in localStorage.</p>
+</div>
+
+
+
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="translations"><span class="type-signature"></span>translations<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Stores the translations for different languages.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TranslationManager.js.html">TranslationManager.js</a>, <a href="TranslationManager.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Translations for Polish.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>en</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Translations for English.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="description usertext">
+    <p>Stores the translations for different languages.</p>
+</div>
+
+
+
+    <h5 class="h5-types">Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="addLanguageListeners"><span class="type-signature"></span>addLanguageListeners<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Adds event listeners for language selection buttons.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TranslationManager.js.html">TranslationManager.js</a>, <a href="TranslationManager.js.html#line139">line 139</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="fetchTranslations"><span class="type-signature type-signature-async">(async) </span>fetchTranslations<span class="signature">(lang)</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Fetches translations from a JSON file based on the given language.<br>
+The file path is determined dynamically based on the current page.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TranslationManager.js.html">TranslationManager.js</a>, <a href="TranslationManager.js.html#line37">line 37</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>lang</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The language code ('pl' or 'en').</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Resolves to the translations object.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Object></span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="loadPreferredLanguage"><span class="type-signature"></span>loadPreferredLanguage<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Loads the preferred language from localStorage and applies its translations.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TranslationManager.js.html">TranslationManager.js</a>, <a href="TranslationManager.js.html#line89">line 89</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="loadTranslations"><span class="type-signature type-signature-async">(async) </span>loadTranslations<span class="signature">(lang)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Loads translations for the specified language and updates the page UI.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TranslationManager.js.html">TranslationManager.js</a>, <a href="TranslationManager.js.html#line60">line 60</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>lang</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The language code ('pl' or 'en').</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Resolves when translations are applied.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="setLanguage"><span class="type-signature"></span>setLanguage<span class="signature">(lang)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Sets the application language, updates UI, and stores the preference in localStorage.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TranslationManager.js.html">TranslationManager.js</a>, <a href="TranslationManager.js.html#line72">line 72</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>lang</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The language code ('pl' or 'en').</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="translatePage"><span class="type-signature"></span>translatePage<span class="signature">(lang)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Translates all elements on the page based on the selected language.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TranslationManager.js.html">TranslationManager.js</a>, <a href="TranslationManager.js.html#line97">line 97</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>lang</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The language code ('pl' or 'en').</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="updateLanguageButtons"><span class="type-signature"></span>updateLanguageButtons<span class="signature">(lang)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Updates the active state of language selection buttons.</p></li></ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TranslationManager.js.html">TranslationManager.js</a>, <a href="TranslationManager.js.html#line159">line 159</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>lang</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The currently selected language ('pl' or 'en').</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Tue Nov 26 2024 01:40:08 GMT+0100 (czas środkowoeuropejski standardowy) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

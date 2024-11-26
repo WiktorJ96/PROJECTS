@@ -178,6 +178,10 @@ body {
   opacity: 0.5;
   z-index: -1;
 }
+.lang-button.active{
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 .col-md-6 button.active {
   color: #222;

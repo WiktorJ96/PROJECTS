@@ -10,7 +10,6 @@
   "add_transaction_button": "<i class='fas fa-plus' aria-hidden='true'></i> Add Transaction",
   "delete_all_button": "<i class='far fa-trash-alt' aria-hidden='true'></i> Delete All",
   "chart_section_title": "Financial Balance Chart",
-
   "add_new_transaction": "Add new transaction",
   "name": "Name:",
   "amount": "Amount:",
@@ -30,7 +29,6 @@
   "other_expense": "Other",
   "add": "<i class='fas fa-save' aria-hidden='true'></i> Save",
   "cancel": "<i class='far fa-window-close' aria-hidden='true'></i> Cancel",
-
   "footer": "2024 W.J Project. All rights reserved.",
   "modal-content-h2": "Confirmation",
   "modal-content-p": "Are you sure you want to delete all transactions?",

@@ -1,18 +1,53 @@
-// TransactionManager.js
 import DataBaseManager from "./DataBaseManager.js";
 
+/**
+ * Manages transactions within the application.
+ * Handles operations such as creating, deleting, and synchronizing transactions,
+ * as well as currency management based on the selected language.
+ */
 class TransactionManager {
+  /**
+   * Initializes a new instance of the TransactionManager class.
+   * Sets up event listeners and loads initial transaction data.
+   *
+   * @constructor
+   */
   constructor() {
+    /**
+     * Instance of DataBaseManager for handling database operations.
+     * @type {DataBaseManager}
+     */
     this.databaseManager = new DataBaseManager();
+
+    /**
+     * List of transactions managed by the application.
+     * @type {Array<Object>}
+     */
     this.transactions = [];
+
+    /**
+     * Current currency code based on the user's language preference.
+     * @type {string}
+     */
     this.currencyCode = "PLN";
+
+    /**
+     * Current currency symbol based on the user's language preference.
+     * @type {string}
+     */
     this.currencySymbol = "zł";
 
+    // Set currency based on the preferred language
     const preferredLanguage = localStorage.getItem("preferredLanguage") || "pl";
     this.updateCurrencyBasedOnLanguage(preferredLanguage);
 
-    // Nasłuchiwanie zmian w dostępności serwera
+    /**
+     * Indicates whether the server is available for syncing transactions.
+     * @type {boolean}
+     */
     this.serverAvailable = this.databaseManager.serverAvailable;
+
+    // Periodically check server availability
     setInterval(() => {
       if (this.serverAvailable !== this.databaseManager.serverAvailable) {
         this.serverAvailable = this.databaseManager.serverAvailable;
@@ -23,30 +58,35 @@ class TransactionManager {
           this.syncTransactions();
         }
       }
-    }, 1000); // Sprawdzanie co 1 sekundę
+    }, 1000);
 
-    // Nasłuchiwanie zdarzenia online
+    // Event listener for online state changes
     window.addEventListener("online", async () => {
       console.log(
         "Połączenie online przywrócone. Rozpoczynam synchronizację..."
       );
       await this.syncTransactions();
     });
+
     console.log("Czy aplikacja jest online?", navigator.onLine);
 
-    // Nasłuchiwanie na zmianę języka
+    // Event listener for language changes
     window.addEventListener("languageChange", () => {
       const preferredLanguage =
         localStorage.getItem("preferredLanguage") || "pl";
       this.updateCurrencyBasedOnLanguage(preferredLanguage);
-      // Opcjonalnie: odśwież widok transakcji
+      // Notify other components about the change
       window.dispatchEvent(new Event("transactionsUpdated"));
     });
 
-    // Załaduj transakcje po skonfigurowaniu
+    // Load initial transactions
     this.loadTransactions();
   }
 
+  /**
+   * Updates the currency code and symbol based on the selected language.
+   * @param {string} language - The selected language (e.g., 'pl', 'en').
+   */
   updateCurrencyBasedOnLanguage(language) {
     const currencies = {
       pl: { code: "PLN", symbol: "zł" },
@@ -58,6 +98,12 @@ class TransactionManager {
     this.currencySymbol = currency.symbol;
   }
 
+  /**
+   * Loads transactions from the database into the application.
+   * Dispatches the "transactionsLoaded" event when completed.
+   * @async
+   * @returns {Promise<void>}
+   */
   async loadTransactions() {
     try {
       console.log("Rozpoczynam ładowanie transakcji...");
@@ -71,13 +117,22 @@ class TransactionManager {
     }
   }
 
+  /**
+   * Creates a new transaction and saves it to the database.
+   * Dispatches the "transactionAdded" event when completed.
+   * @async
+   * @param {string} name - The name of the transaction.
+   * @param {number} amount - The amount of the transaction.
+   * @param {string} category - The category of the transaction.
+   * @returns {Promise<Object>} The created transaction object.
+   */
   async createNewTransaction(name, amount, category) {
     const newTransaction = {
       name,
       amount: parseFloat(amount),
       category,
       date: new Date().toISOString().split("T")[0],
-      currencyCode: this.currencyCode, // Dodajemy currencyCode
+      currencyCode: this.currencyCode,
     };
 
     try {
@@ -92,10 +147,16 @@ class TransactionManager {
     }
   }
 
+  /**
+   * Deletes a transaction by its ID.
+   * Dispatches the "transactionDeleted" event when completed.
+   * @async
+   * @param {string} id - The ID of the transaction to delete.
+   * @returns {Promise<void>}
+   */
   async deleteTransaction(id) {
     try {
       await this.databaseManager.deleteTransaction(id);
-      // IDs are strings, so comparison works correctly
       this.transactions = this.transactions.filter((tx) => tx.id !== id);
       window.dispatchEvent(new Event("transactionDeleted"));
     } catch (error) {
@@ -103,6 +164,12 @@ class TransactionManager {
     }
   }
 
+  /**
+   * Deletes all transactions from the database.
+   * Dispatches the "transactionsCleared" event when completed.
+   * @async
+   * @returns {Promise<void>}
+   */
   async deleteAllTransactions() {
     try {
       await this.databaseManager.deleteAllTransactions();
@@ -113,6 +180,12 @@ class TransactionManager {
     }
   }
 
+  /**
+   * Synchronizes unsynced transactions with the server.
+   * Only runs if the server is available.
+   * @async
+   * @returns {Promise<void>}
+   */
   async syncTransactions() {
     if (!this.serverAvailable) return;
 
@@ -132,13 +205,16 @@ class TransactionManager {
         }
       }
 
-      // Odśwież listę transakcji
       await this.loadTransactions();
     } catch (error) {
       console.error("Błąd podczas synchronizacji:", error);
     }
   }
 
+  /**
+   * Calculates the current balance by summing all transaction amounts.
+   * @returns {number} The current balance.
+   */
   getCurrentBalance() {
     return this.transactions.reduce((acc, tx) => acc + tx.amount, 0);
   }

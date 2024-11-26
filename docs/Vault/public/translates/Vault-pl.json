@@ -10,7 +10,6 @@
   "add_transaction_button": "<i class='fas fa-plus' aria-hidden='true'></i> Dodaj transakcję",
   "delete_all_button": "<i class='far fa-trash-alt' aria-hidden='true'></i> Usuń wszystko",
   "chart_section_title": "Wykres salda finansowego",
-
   "add_new_transaction": "Dodaj nową transakcję",
   "name": "Nazwa:",
   "amount": "Kwota:",
@@ -30,7 +29,6 @@
   "other_expense": "Inne",
   "add": "<i class='fas fa-save' aria-hidden='true'></i> Zapisz",
   "cancel": "<i class='far fa-window-close' aria-hidden='true'></i> Anuluj",
-
   "footer": "2024 W.J Project. Wszelkie prawa zastrzeżone.",
   "modal-content-h2": "Potwierdzenie",
   "modal-content-p": "Czy na pewno chcesz usunąć wszystkie transakcje?",

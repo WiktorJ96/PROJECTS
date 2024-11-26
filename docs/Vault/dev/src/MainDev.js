@@ -1,8 +1,4 @@
-/**
- * Inicjalizuje aplikację i zarządza jej głównymi komponentami. // PL
- * Initializes the application and manages its main components. // EN
- * @module App
- */
+import TranslationManager from "./scripts/TranslationManager.js";
 import DataBaseManager from "./scripts/DataBaseManager.js";
 import TransactionManager from "./scripts/TransactionManager.js";
 import ChartManager from "./scripts/ChartManager.js";
@@ -11,99 +7,115 @@ import ThemeManager from "./scripts/ThemeManager.js";
 import { PWAManager } from "./scripts/PWAManager.js";
 
 /**
- * Funkcja główna wykonywana po załadowaniu DOM. // PL
- * Main function executed after DOM is loaded. // EN
- * Tworzy instancje menedżerów i ustawia preferowany język oraz obsługę PWA. // PL
- * Creates manager instances and sets the preferred language and PWA handling. // EN
- * @event DOMContentLoaded
+ * @class MainDev
+ * @classdesc Main entry point of the application.
+ * Initializes various managers, sets up event listeners, and manages application-wide behaviors
+ * like language selection, theme handling, and PWA support.
  */
-document.addEventListener("DOMContentLoaded", async () => {
+class MainDev {
+  constructor() {
+    /**
+     * @property {TranslationManager} translationManager
+     * Manages translations for the application.
+     */
+    this.translationManager = new TranslationManager();
 
-  const databaseManager = new DataBaseManager();
-  /**
-   * Instancja zarządzająca transakcjami użytkownika. // PL
-   * Instance managing user transactions. // EN
-   * @type {TransactionManager}
-   */
-  const transactionManager = new TransactionManager();
+    /**
+     * @property {DataBaseManager} databaseManager
+     * Handles database operations, including saving and retrieving transactions.
+     */
+    this.databaseManager = new DataBaseManager();
+
+    /**
+     * @property {TransactionManager} transactionManager
+     * Manages transactions, including adding, editing, and deleting them.
+     */
+    this.transactionManager = new TransactionManager();
+
+    /**
+     * @property {ChartManager} chartManager
+     * Manages rendering and updating charts with transaction data.
+     */
+    this.chartManager = new ChartManager(this.transactionManager);
+
+    /**
+     * @property {UIManager} uiManager
+     * Manages the User Interface (UI), including user interactions and dynamic updates.
+     */
+    this.uiManager = new UIManager(this.transactionManager, this.chartManager);
+
+    /**
+     * @property {ThemeManager} themeManager
+     * Manages theme-related functionality, such as light/dark mode toggling.
+     */
+    this.themeManager = new ThemeManager();
+
+    /**
+     * @property {PWAManager} pwaManager
+     * Manages Progressive Web App (PWA) features.
+     */
+    this.pwaManager = new PWAManager();
+
+    this.initLanguageSettings();
+    this.setupEventListeners();
+  }
 
   /**
-   * Instancja zarządzająca wykresem salda. // PL
-   * Instance managing the balance chart. // EN
-   * @type {ChartManager}
+   * Initializes language-related settings and buttons.
+   * Sets the language based on user preferences stored in localStorage.
    */
-  const chartManager = new ChartManager(transactionManager);
+  initLanguageSettings() {
+    // Set the initial language using TranslationManager
+    const initialLanguage = this.translationManager.currentLanguage;
+    this.translationManager.setLanguage(initialLanguage);
+
+    // Update UIManager to use the initial language
+    this.uiManager.setLanguage(initialLanguage);
+
+    // Listen for language change events
+    document.addEventListener("languageChanged", (event) => {
+      const lang = event.detail.language;
+      this.uiManager.setLanguage(lang); // Update UIManager
+      this.chartManager.updateLanguage(); // Update charts
+    });
+  }
 
   /**
-   * Instancja zarządzająca interfejsem użytkownika. // PL
-   * Instance managing the user interface. // EN
-   * @type {UIManager}
+   * Sets up global event listeners for the application.
    */
-  const uiManager = new UIManager(transactionManager, chartManager);
+  setupEventListeners() {
+    window.addEventListener("transactionsLoaded", () => {
+      this.uiManager.updateTransactionsDisplay();
+      this.uiManager.updateBalance();
+      this.chartManager.updateChart();
+    });
+
+    window.addEventListener("themeChange", () => {
+      const isDark = document.body.classList.contains("dark-theme");
+      this.chartManager.setTheme(isDark);
+    });
+  }
 
   /**
-   * Instancja zarządzająca motywami (jasny/ciemny). // PL
-   * Instance managing themes (light/dark). // EN
-   * @type {ThemeManager}
+   * Checks if the application is running in Progressive Web App (PWA) mode.
+   * Determines if the app is opened in "standalone" mode or in a browser tab.
+   *
+   * @returns {boolean} True if running as a PWA, false otherwise.
    */
-  const themeManager = new ThemeManager();
-
-  /**
-   * Instancja zarządzająca funkcjami Progressive Web App (PWA). // PL
-   * Instance managing Progressive Web App (PWA) features. // EN
-   * @type {PWAManager}
-   */
-  const pwaManager = new PWAManager();
-
-  /**
-   * Sprawdza, czy aplikacja działa w trybie PWA. // PL
-   * Checks if the application is running in PWA mode. // EN
-   * @returns {boolean} `true` jeśli aplikacja działa jako PWA, `false` w przeciwnym razie. // PL
-   * `true` if the application runs as PWA, `false` otherwise. // EN
-   */
-  function isPWA() {
+  isPWA() {
     return window.matchMedia("(display-mode: standalone)").matches;
   }
 
   /**
-   * Sprawdza, czy aplikacja działa w środowisku Docker. // PL
-   * Checks if the application is running in a Docker environment. // EN
-   * @returns {boolean} `true` jeśli aplikacja działa w Dockerze, `false` w przeciwnym razie. // PL
-   * `true` if the application is running in Docker, `false` otherwise. // EN
+   * Determines if the application is running inside a Docker container.
+   *
+   * @returns {boolean} True if running in Docker, false otherwise.
    */
-  function isDocker() {
-    return process.env.ENVIRONMENT === "docker";
+  isDocker() {
+    return process.env.ENVIRONMENT === "docker" || false;
   }
+}
 
-  /**
-   * Obsługuje zdarzenie załadowania transakcji. // PL
-   * Handles the transaction load event. // EN
-   * Aktualizuje interfejs użytkownika i wykres. // PL
-   * Updates the user interface and chart. // EN
-   * @event transactionsLoaded
-   */
-  window.addEventListener("transactionsLoaded", () => {
-    uiManager.updateTransactionsDisplay();
-    uiManager.updateBalance();
-    chartManager.updateChart();
-  });
+export default MainDev;
 
-  
-  const langPlButton = document.getElementById("lang-pl");
-  const langEnButton = document.getElementById("lang-en");
-
-  if (langPlButton) {
-    langPlButton.addEventListener("click", () => {
-      uiManager.setLanguage("pl");
-      window.dispatchEvent(new Event("languageChange"));
-    });
-  }
-
-  if (langEnButton) {
-    langEnButton.addEventListener("click", () => {
-      uiManager.setLanguage("en");
-      window.dispatchEvent(new Event("languageChange"));
-    });
-  }
-
-});
+const mainApp = new MainDev();

@@ -1,16 +1,42 @@
+/**
+ * Manages the chart visualization for the application.
+ * Handles chart initialization, updates, responsiveness, theming, and language changes.
+ */
 class ChartManager {
+  /**
+   * Creates an instance of ChartManager.
+   * Initializes the chart and sets up event listeners for theme, language changes, and responsiveness.
+   *
+   * @constructor
+   * @param {Object} transactionManager - Instance of the transaction manager for accessing transaction data.
+   */
   constructor(transactionManager) {
+    /**
+     * Instance of the transaction manager for accessing transaction data.
+     * @type {Object}
+     */
     this.transactionManager = transactionManager;
+
+    /**
+     * Chart.js chart instance.
+     * @type {Chart|null}
+     */
     this.chart = null;
+
     this.initializeChart();
     this.setupLanguageChangeListener();
     this.setupResizeListener();
+
+    // Event listener for theme changes
     window.addEventListener("themeChange", (event) => {
       const isDark = event.detail.theme === "dark";
       this.setTheme(isDark);
     });
   }
 
+  /**
+   * Initializes the Chart.js chart instance.
+   */
   initializeChart() {
     const ctx = document.getElementById("balanceChart").getContext("2d");
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
@@ -20,11 +46,11 @@ class ChartManager {
     this.chart = new Chart(ctx, {
       type: "line",
       data: {
-        labels: [],
+        labels: [], // Labels for the x-axis (dates)
         datasets: [
           {
             label: "Balance",
-            data: [],
+            data: [], // Data points for the balance
             backgroundColor: gradient,
             borderColor: "rgba(52, 152, 219, 1)",
             borderWidth: 2,
@@ -40,7 +66,7 @@ class ChartManager {
           },
           {
             label: "Income",
-            data: [],
+            data: [], // Data points for income
             backgroundColor: "rgba(46, 204, 113, 0.2)",
             borderColor: "rgba(46, 204, 113, 1)",
             borderWidth: 2,
@@ -53,11 +79,11 @@ class ChartManager {
             pointRadius: 4,
             pointHoverRadius: 6,
             pointStyle: "circle",
-            hidden: true,
+            hidden: true, // Initially hidden
           },
           {
             label: "Expenses",
-            data: [],
+            data: [], // Data points for expenses
             backgroundColor: "rgba(231, 76, 60, 0.2)",
             borderColor: "rgba(231, 76, 60, 1)",
             borderWidth: 2,
@@ -70,7 +96,7 @@ class ChartManager {
             pointRadius: 4,
             pointHoverRadius: 6,
             pointStyle: "circle",
-            hidden: true,
+            hidden: true, // Initially hidden
           },
         ],
       },
@@ -82,8 +108,8 @@ class ChartManager {
             display: false,
           },
           legend: {
-            position: "top",
-            align: "center",
+            position: "top", // Position of the legend
+            align: "center", // Alignment of legend items
             onClick: (e, legendItem) => {
               const index = legendItem.datasetIndex;
               const ci = this.chart;
@@ -138,7 +164,7 @@ class ChartManager {
           x: {
             title: {
               display: true,
-              text: "Date",
+              text: "Date", // Title for the x-axis
               font: {
                 size: this.getResponsiveFontSize(14),
                 weight: "600",
@@ -203,6 +229,11 @@ class ChartManager {
     this.updateLanguage();
   }
 
+  /**
+   * Calculates the appropriate font size based on the screen width.
+   * @param {number} baseSize - The base font size to adjust.
+   * @returns {number} Adjusted font size.
+   */
   getResponsiveFontSize(baseSize) {
     const width = window.innerWidth;
     if (width < 768) {
@@ -213,6 +244,11 @@ class ChartManager {
     return baseSize;
   }
 
+  /**
+   * Calculates appropriate padding based on the screen width.
+   * @param {number} basePadding - The base padding to adjust.
+   * @returns {number} Adjusted padding.
+   */
   getResponsivePadding(basePadding) {
     const width = window.innerWidth;
     if (width < 768) {
@@ -223,6 +259,10 @@ class ChartManager {
     return basePadding;
   }
 
+  /**
+   * Determines the maximum number of ticks to display on the x-axis based on screen width.
+   * @returns {number} Maximum ticks limit.
+   */
   getResponsiveTicksLimit() {
     const width = window.innerWidth;
     if (width < 768) {
@@ -233,6 +273,9 @@ class ChartManager {
     return 8;
   }
 
+  /**
+   * Updates the chart data and refreshes the chart display.
+   */
   updateChart() {
     const transactions = this.transactionManager.transactions || [];
 
@@ -241,8 +284,13 @@ class ChartManager {
       return;
     }
 
+    // Formatowanie dat
+    const labels = transactions.map((entry) => {
+      const date = new Date(entry.date); // Konwertuj na obiekt Date
+      return date.toISOString().split("T")[0]; // Format YYYY-MM-DD
+    });
+
     // Obliczanie skumulowanego salda
-    const labels = transactions.map((entry) => entry.date);
     const balanceData = transactions.reduce((acc, transaction) => {
       const lastBalance = acc.length > 0 ? acc[acc.length - 1] : 0;
       acc.push(lastBalance + transaction.amount); // Skumulowane saldo
@@ -252,7 +300,7 @@ class ChartManager {
     console.log("Dane do wykresu (saldo):", balanceData);
 
     // Aktualizacja danych wykresu
-    this.chart.data.labels = labels; // Daty transakcji jako etykiety
+    this.chart.data.labels = labels; // Daty jako etykiety x-axis
     this.chart.data.datasets[0].data = balanceData; // Saldo
     this.chart.data.datasets[1].data = []; // Wyzerowanie innych linii, jeśli nie są używane
     this.chart.data.datasets[2].data = [];
@@ -260,6 +308,10 @@ class ChartManager {
     this.chart.update();
   }
 
+  /**
+   * Updates the chart's theme based on the current mode (light or dark).
+   * @param {boolean} isDark - True if the theme is dark, false otherwise.
+   */
   setTheme(isDark) {
     const textColor = isDark ? "#ecf0f1" : "#34495e";
     const gridColor = isDark
@@ -275,6 +327,7 @@ class ChartManager {
     this.chart.options.scales.x.grid.color = gridColor;
     this.chart.options.scales.y.grid.color = gridColor;
 
+    // Update chart background gradient
     if (isDark) {
       this.chart.data.datasets[0].backgroundColor = (ctx) => {
         const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 400);
@@ -294,11 +347,14 @@ class ChartManager {
     this.chart.update();
   }
 
+  /**
+   * Updates the chart's labels and language-dependent content based on the current language.
+   */
   updateLanguage() {
     const lang = localStorage.getItem("preferredLanguage");
 
+    // Update axis titles and dataset labels
     this.chart.options.scales.x.title.text = lang === "pl" ? "Data" : "Date";
-
     this.chart.data.datasets[0].label = lang === "pl" ? "Saldo" : "Balance";
     this.chart.data.datasets[1].label = lang === "pl" ? "Przychody" : "Income";
     this.chart.data.datasets[2].label = lang === "pl" ? "Wydatki" : "Expenses";
@@ -306,18 +362,27 @@ class ChartManager {
     this.chart.update();
   }
 
+  /**
+   * Sets up a listener to update the chart's language when the language changes.
+   */
   setupLanguageChangeListener() {
     window.addEventListener("languageChange", () => {
       this.updateLanguage();
     });
   }
 
+  /**
+   * Sets up a listener to adjust chart settings on window resize.
+   */
   setupResizeListener() {
     window.addEventListener("resize", () => {
       this.updateResponsiveSettings();
     });
   }
 
+  /**
+   * Updates the chart's settings for responsiveness based on the current window size.
+   */
   updateResponsiveSettings() {
     this.chart.options.plugins.legend.labels.font.size =
       this.getResponsiveFontSize(12);
@@ -338,6 +403,7 @@ class ChartManager {
     this.chart.options.scales.x.ticks.maxTicksLimit =
       this.getResponsiveTicksLimit();
 
+    // Adjust legend position for smaller screens
     const width = window.innerWidth;
     if (width < 768) {
       this.chart.options.plugins.legend.position = "bottom";
@@ -350,3 +416,4 @@ class ChartManager {
 }
 
 export default ChartManager;
+
