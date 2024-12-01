@@ -1,7 +1,7 @@
 const CACHE_NAME = "budget-tracker-cache-v1.0.3";
 const ASSETS_TO_CACHE = [
   "/",
-  "./Vault.html",
+  "./index.html",
   "./styles/main.css",
   "./Main.js",
   "./translates/translates.js",

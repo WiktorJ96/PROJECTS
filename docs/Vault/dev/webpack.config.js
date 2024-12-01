@@ -39,7 +39,7 @@ export default {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/Vault.html", // Oryginalny szablon HTML
+      template: "./src/index.html", // Oryginalny szablon HTML
       filename: "index.html", // Nazwa wynikowego pliku HTML
       inject: "body",
     }),
