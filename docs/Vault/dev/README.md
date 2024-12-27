@@ -59,7 +59,7 @@ Dostępność
 
 Dokumentacja i testowanie
 
-1. Testy jednostkowe: Framework Jasmine został wykorzystany do przeprowadzenia testów jednostkowych.
+1. Testowanie: Testy wykonane za pomoca frameworka Jasmine oraz narzędzia Lighthouse.
 2. Dokumentacja kodu: Aplikacja wykorzystuje JSDoc do generowania szczegółowej dokumentacji klas, metod i testów, co wspiera zarówno
    deweloperów, jak i użytkowników technicznych.
 
@@ -125,6 +125,6 @@ Availability
 
 Documentation and testing
 
-1. Unit Testing: Jasmine framework was used to conduct unit testing.
+1. Testing: Tests performed using the Jasmine framework and the Lighthouse tool.
 2. Code documentation: The application uses JSDoc to generate detailed documentation of classes, methods and tests, which supports
    both developers and technical users.
