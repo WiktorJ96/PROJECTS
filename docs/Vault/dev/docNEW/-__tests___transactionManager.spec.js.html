@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>__tests__/transactionManager.spec.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ChartManager.html">ChartManager</a><ul class='methods'><li data-type='method'><a href="ChartManager.html#getResponsiveFontSize">getResponsiveFontSize</a></li><li data-type='method'><a href="ChartManager.html#getResponsivePadding">getResponsivePadding</a></li><li data-type='method'><a href="ChartManager.html#getResponsiveTicksLimit">getResponsiveTicksLimit</a></li><li data-type='method'><a href="ChartManager.html#initializeChart">initializeChart</a></li><li data-type='method'><a href="ChartManager.html#setTheme">setTheme</a></li><li data-type='method'><a href="ChartManager.html#setupLanguageChangeListener">setupLanguageChangeListener</a></li><li data-type='method'><a href="ChartManager.html#setupResizeListener">setupResizeListener</a></li><li data-type='method'><a href="ChartManager.html#updateChart">updateChart</a></li><li data-type='method'><a href="ChartManager.html#updateLanguage">updateLanguage</a></li><li data-type='method'><a href="ChartManager.html#updateResponsiveSettings">updateResponsiveSettings</a></li></ul></li><li><a href="DataBaseManager.html">DataBaseManager</a><ul class='methods'><li data-type='method'><a href="DataBaseManager.html#addTransaction">addTransaction</a></li><li data-type='method'><a href="DataBaseManager.html#checkServerAvailability">checkServerAvailability</a></li><li data-type='method'><a href="DataBaseManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="DataBaseManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="DataBaseManager.html#getTransactions">getTransactions</a></li><li data-type='method'><a href="DataBaseManager.html#getUnsyncedTransactions">getUnsyncedTransactions</a></li><li data-type='method'><a href="DataBaseManager.html#markTransactionAsSynced">markTransactionAsSynced</a></li><li data-type='method'><a href="DataBaseManager.html#startServerAvailabilityChecks">startServerAvailabilityChecks</a></li><li data-type='method'><a href="DataBaseManager.html#syncTransactions">syncTransactions</a></li></ul></li><li><a href="IndexedDBManager.html">IndexedDBManager</a><ul class='methods'><li data-type='method'><a href="IndexedDBManager.html#addTransaction">addTransaction</a></li><li data-type='method'><a href="IndexedDBManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="IndexedDBManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="IndexedDBManager.html#getDB">getDB</a></li><li data-type='method'><a href="IndexedDBManager.html#getTransactions">getTransactions</a></li><li data-type='method'><a href="IndexedDBManager.html#getUnsyncedTransactions">getUnsyncedTransactions</a></li><li data-type='method'><a href="IndexedDBManager.html#initializeDB">initializeDB</a></li><li data-type='method'><a href="IndexedDBManager.html#markTransactionAsSynced">markTransactionAsSynced</a></li></ul></li><li><a href="MockChart.html">MockChart</a></li><li></li><li><a href="MongoDBManager.html">MongoDBManager</a><ul class='methods'><li data-type='method'><a href="MongoDBManager.html#addTransaction">addTransaction</a></li><li data-type='method'><a href="MongoDBManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="MongoDBManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="MongoDBManager.html#getTransactions">getTransactions</a></li></ul></li><li><a href="PWAManager.html">PWAManager</a><ul class='methods'><li data-type='method'><a href="PWAManager.html#hideInstallButton">hideInstallButton</a></li><li data-type='method'><a href="PWAManager.html#init">init</a></li><li data-type='method'><a href="PWAManager.html#installPWA">installPWA</a></li><li data-type='method'><a href="PWAManager.html#showIOSInstallInstructions">showIOSInstallInstructions</a></li><li data-type='method'><a href="PWAManager.html#showInstallButton">showInstallButton</a></li></ul></li><li><a href="ThemeManager.html">ThemeManager</a><ul class='methods'><li data-type='method'><a href="ThemeManager.html#addEventListeners">addEventListeners</a></li><li data-type='method'><a href="ThemeManager.html#initTheme">initTheme</a></li><li data-type='method'><a href="ThemeManager.html#setTheme">setTheme</a></li><li data-type='method'><a href="ThemeManager.html#toggleTheme">toggleTheme</a></li><li data-type='method'><a href="ThemeManager.html#updateToggleButton">updateToggleButton</a></li></ul></li><li><a href="TransactionManager.html">TransactionManager</a><ul class='methods'><li data-type='method'><a href="TransactionManager.html#createNewTransaction">createNewTransaction</a></li><li data-type='method'><a href="TransactionManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="TransactionManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="TransactionManager.html#getCurrentBalance">getCurrentBalance</a></li><li data-type='method'><a href="TransactionManager.html#loadTransactions">loadTransactions</a></li><li data-type='method'><a href="TransactionManager.html#startServerAvailabilityChecks">startServerAvailabilityChecks</a></li><li data-type='method'><a href="TransactionManager.html#syncTransactions">syncTransactions</a></li><li data-type='method'><a href="TransactionManager.html#updateCurrencyBasedOnLanguage">updateCurrencyBasedOnLanguage</a></li></ul></li><li><a href="TranslationManager.html">TranslationManager</a><ul class='methods'><li data-type='method'><a href="TranslationManager.html#addLanguageListeners">addLanguageListeners</a></li><li data-type='method'><a href="TranslationManager.html#fetchTranslations">fetchTranslations</a></li><li data-type='method'><a href="TranslationManager.html#loadPreferredLanguage">loadPreferredLanguage</a></li><li data-type='method'><a href="TranslationManager.html#loadTranslations">loadTranslations</a></li><li data-type='method'><a href="TranslationManager.html#setLanguage">setLanguage</a></li><li data-type='method'><a href="TranslationManager.html#translatePage">translatePage</a></li><li data-type='method'><a href="TranslationManager.html#updateLanguageButtons">updateLanguageButtons</a></li></ul></li><li><a href="UIManager.html">UIManager</a><ul class='methods'><li data-type='method'><a href="UIManager.html#addTransactionToDOM">addTransactionToDOM</a></li><li data-type='method'><a href="UIManager.html#clearInputs">clearInputs</a></li><li data-type='method'><a href="UIManager.html#clearTransactionsDisplay">clearTransactionsDisplay</a></li><li data-type='method'><a href="UIManager.html#closePanel">closePanel</a></li><li data-type='method'><a href="UIManager.html#confirmDeleteTransaction">confirmDeleteTransaction</a></li><li data-type='method'><a href="UIManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="UIManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="UIManager.html#getCategoryIcon">getCategoryIcon</a></li><li data-type='method'><a href="UIManager.html#handleTransactionTypeChange">handleTransactionTypeChange</a></li><li data-type='method'><a href="UIManager.html#hideDeleteAllModal">hideDeleteAllModal</a></li><li data-type='method'><a href="UIManager.html#hideDeleteTransactionModal">hideDeleteTransactionModal</a></li><li data-type='method'><a href="UIManager.html#initializeElements">initializeElements</a></li><li data-type='method'><a href="UIManager.html#initializeEventListeners">initializeEventListeners</a></li><li data-type='method'><a href="UIManager.html#saveTransaction">saveTransaction</a></li><li data-type='method'><a href="UIManager.html#setLanguage">setLanguage</a></li><li data-type='method'><a href="UIManager.html#showDeleteAllModal">showDeleteAllModal</a></li><li data-type='method'><a href="UIManager.html#showDeleteTransactionModal">showDeleteTransactionModal</a></li><li data-type='method'><a href="UIManager.html#showPanel">showPanel</a></li><li data-type='method'><a href="UIManager.html#updateBalance">updateBalance</a></li><li data-type='method'><a href="UIManager.html#updateLanguage">updateLanguage</a></li><li data-type='method'><a href="UIManager.html#updateTransactionsDisplay">updateTransactionsDisplay</a></li></ul></li><li><a href="global.Chart.html">Chart</a></li></ul><h3>Modules</h3><ul><li><a href="module-ChartManagerTest.html">ChartManagerTest</a><ul class='methods'><li data-type='method'><a href="module-ChartManagerTest.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.initializeChart">initializeChart</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.setThemeDark">setThemeDark</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.setThemeLight">setThemeLight</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.updateChart">updateChart</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.updateLanguageEnglish">updateLanguageEnglish</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.updateLanguagePolish">updateLanguagePolish</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.updateResponsiveSettings">updateResponsiveSettings</a></li></ul></li><li><a href="module-DataBaseManagerTests.html">DataBaseManagerTests</a><ul class='methods'><li data-type='method'><a href="module-DataBaseManagerTests.html#.addTransaction">addTransaction</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.afterAll">afterAll</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.beforeAll">beforeAll</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.getTransactions">getTransactions</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.initializeServerAvailability">initializeServerAvailability</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.syncTransactions">syncTransactions</a></li></ul></li><li><a href="module-IndexedDBManagerTests.html">IndexedDBManagerTests</a><ul class='methods'><li data-type='method'><a href="module-IndexedDBManagerTests.html#.addTransaction">addTransaction</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.afterAll">afterAll</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.beforeAll">beforeAll</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.getTransactions">getTransactions</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.getUnsyncedTransactions">getUnsyncedTransactions</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.initializeDatabase">initializeDatabase</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.markTransactionAsSynced">markTransactionAsSynced</a></li></ul></li><li><a href="module-MongoDBManagerTests.html">MongoDBManagerTests</a><ul class='methods'><li data-type='method'><a href="module-MongoDBManagerTests.html#.addTransaction">addTransaction</a></li><li data-type='method'><a href="module-MongoDBManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-MongoDBManagerTests.html#.deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="module-MongoDBManagerTests.html#.deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="module-MongoDBManagerTests.html#.getTransactions">getTransactions</a></li></ul></li><li><a href="module-PWAManagerTests.html">PWAManagerTests</a><ul class='methods'><li data-type='method'><a href="module-PWAManagerTests.html#.alertIOSInstallInstructions">alertIOSInstallInstructions</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.beforeAll">beforeAll</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.handleBeforeInstallPrompt">handleBeforeInstallPrompt</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.handlePWAInstallation">handlePWAInstallation</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.hideInstallButton">hideInstallButton</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.initPWA">initPWA</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.showIOSInstallInstructions">showIOSInstallInstructions</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.showInstallButton">showInstallButton</a></li></ul></li><li><a href="module-ThemeManagerTests.html">ThemeManagerTests</a><ul class='methods'><li data-type='method'><a href="module-ThemeManagerTests.html#.addEventListeners">addEventListeners</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.dispatchThemeChangeEvent">dispatchThemeChangeEvent</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.initTheme">initTheme</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.persistTheme">persistTheme</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.setTheme">setTheme</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.toggleThemeDarkToLight">toggleThemeDarkToLight</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.toggleThemeLightToDark">toggleThemeLightToDark</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.updateToggleButton">updateToggleButton</a></li></ul></li><li><a href="module-TransactionManagerTests.html">TransactionManagerTests</a><ul class='methods'><li data-type='method'><a href="module-TransactionManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-TransactionManagerTests.html#.createNewTransaction">createNewTransaction</a></li><li data-type='method'><a href="module-TransactionManagerTests.html#.deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="module-TransactionManagerTests.html#.deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="module-TransactionManagerTests.html#.getCurrentBalance">getCurrentBalance</a></li><li data-type='method'><a href="module-TransactionManagerTests.html#.loadTransactions">loadTransactions</a></li><li data-type='method'><a href="module-TransactionManagerTests.html#.syncTransactions">syncTransactions</a></li></ul></li><li><a href="module-TranslationManagerTests.html">TranslationManagerTests</a><ul class='methods'><li data-type='method'><a href="module-TranslationManagerTests.html#.addLanguageListeners">addLanguageListeners</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.dispatchLanguageChangeEvent">dispatchLanguageChangeEvent</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.fetchAndApplyTranslations">fetchAndApplyTranslations</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.handleMissingTranslations">handleMissingTranslations</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.initializeDefaultLanguage">initializeDefaultLanguage</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.loadPreferredLanguage">loadPreferredLanguage</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.setLanguage">setLanguage</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.updateLanguageButtons">updateLanguageButtons</a></li></ul></li><li><a href="module-UIManagerTests.html">UIManagerTests</a><ul class='methods'><li data-type='method'><a href="module-UIManagerTests.html#.addTransactionToDOM">addTransactionToDOM</a></li><li data-type='method'><a href="module-UIManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-UIManagerTests.html#.deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="module-UIManagerTests.html#.deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="module-UIManagerTests.html#.handleLanguageChanges">handleLanguageChanges</a></li><li data-type='method'><a href="module-UIManagerTests.html#.initializeDefaultLanguage">initializeDefaultLanguage</a></li><li data-type='method'><a href="module-UIManagerTests.html#.saveTransaction">saveTransaction</a></li><li data-type='method'><a href="module-UIManagerTests.html#.showTransactionPanel">showTransactionPanel</a></li><li data-type='method'><a href="module-UIManagerTests.html#.updateBalance">updateBalance</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#dom">dom</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">__tests__/transactionManager.spec.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { IDBFactory, IDBKeyRange } from "fake-indexeddb";
+import { JSDOM } from "jsdom";
+import TransactionManager from "../src/scripts/TransactionManager.js";
+
+// Initialize the DOM environment for testing
+const { window } = new JSDOM("&lt;!doctype html>&lt;html>&lt;body>&lt;/body>&lt;/html>", {
+  url: "http://localhost/",
+});
+global.window = window;
+global.document = window.document;
+global.localStorage = {
+  getItem: jasmine.createSpy("getItem").and.returnValue("pl"),
+  setItem: jasmine.createSpy("setItem"),
+};
+global.navigator = { onLine: true };
+global.indexedDB = new IDBFactory();
+global.IDBKeyRange = IDBKeyRange;
+
+/**
+ * Test suite for the TransactionManager class.
+ * Contains unit tests for transaction creation, deletion, synchronization,
+ * and other operations within the TransactionManager.
+ *
+ * @module TransactionManagerTests
+ * @source TransactionManager.test.js
+ */
+describe("TransactionManager", () => {
+  let transactionManager;
+  let mockDataBaseManager;
+
+  /**
+   * Sets up the test environment before each test.
+   * Initializes a mocked DataBaseManager and replaces the original instance in TransactionManager.
+   *
+   * @method beforeEach
+   * @memberof module:TransactionManagerTests
+   * @returns {void}
+   * @source TransactionManager.test.js, line 22
+   */
+  beforeEach(async () => {
+    // Create a mocked DataBaseManager with all necessary methods
+    mockDataBaseManager = jasmine.createSpyObj("DataBaseManager", [
+      "getTransactions",
+      "addTransaction",
+      "deleteTransaction",
+      "deleteAllTransactions",
+      "getUnsyncedTransactions",
+      "markTransactionAsSynced",
+    ]);
+
+    // Set default return values for mocked methods
+    mockDataBaseManager.getTransactions.and.returnValue(
+      Promise.resolve([{ id: "1", name: "Test Transaction", amount: 100 }])
+    );
+    mockDataBaseManager.addTransaction.and.returnValue(
+      Promise.resolve({ id: "2", name: "New Transaction", amount: 200 })
+    );
+    mockDataBaseManager.deleteTransaction.and.returnValue(Promise.resolve());
+    mockDataBaseManager.deleteAllTransactions.and.returnValue(
+      Promise.resolve()
+    );
+    mockDataBaseManager.getUnsyncedTransactions.and.returnValue(
+      Promise.resolve([{ id: "3", name: "Unsynced", amount: 300 }])
+    );
+    mockDataBaseManager.markTransactionAsSynced.and.returnValue(
+      Promise.resolve()
+    );
+
+    // Mock MongoDBManager within DataBaseManager
+    mockDataBaseManager.serverAvailable = true;
+    mockDataBaseManager.mongoDBManager = jasmine.createSpyObj(
+      "mongoDBManager",
+      ["addTransaction"]
+    );
+    mockDataBaseManager.mongoDBManager.addTransaction.and.returnValue(
+      Promise.resolve({ id: "3", name: "Unsynced", amount: 300 })
+    );
+
+    spyOn(window, "dispatchEvent");
+
+    // Initialize TransactionManager and replace its databaseManager with the mock
+    transactionManager = new TransactionManager();
+    transactionManager.databaseManager = mockDataBaseManager;
+
+    // Load initial transactions
+    await transactionManager.loadTransactions();
+  });
+
+  /**
+   * Tests the `loadTransactions` method to ensure transactions are loaded and events dispatched.
+   *
+   * @method loadTransactions
+   * @memberof module:TransactionManagerTests
+   * @returns {void}
+   * @source TransactionManager.test.js, line 55
+   */
+  describe("loadTransactions", () => {
+    it("should load transactions and dispatch 'transactionsLoaded' event", () => {
+      expect(mockDataBaseManager.getTransactions).toHaveBeenCalled();
+      expect(transactionManager.transactions.length).toBe(1);
+      expect(transactionManager.transactions[0].name).toBe("Test Transaction");
+      expect(window.dispatchEvent).toHaveBeenCalledWith(
+        new Event("transactionsLoaded")
+      );
+    });
+  });
+
+  /**
+   * Tests the `createNewTransaction` method to ensure a transaction is created and added.
+   *
+   * @method createNewTransaction
+   * @memberof module:TransactionManagerTests
+   * @returns {void}
+   * @source TransactionManager.test.js, line 69
+   */
+  it("should create a new transaction and dispatch 'transactionAdded' event", async () => {
+    const newTransaction = {
+      id: "2",
+      name: "New Transaction",
+      amount: 200,
+      category: "Test Category",
+      currencyCode: "PLN",
+      date: "2024-01-01T00:00:00.000Z",
+    };
+
+    mockDataBaseManager.addTransaction.and.returnValue(
+      Promise.resolve(newTransaction)
+    );
+
+    const result = await transactionManager.createNewTransaction(
+      newTransaction.name,
+      newTransaction.amount,
+      newTransaction.category
+    );
+
+    expect(transactionManager.transactions).toContain(result);
+    expect(transactionManager.transactions.length).toBe(2);
+    expect(window.dispatchEvent).toHaveBeenCalledWith(
+      new Event("transactionAdded")
+    );
+  });
+
+  /**
+   * Tests the `deleteTransaction` method to ensure a transaction is deleted.
+   *
+   * @method deleteTransaction
+   * @memberof module:TransactionManagerTests
+   * @returns {void}
+   * @source TransactionManager.test.js, line 88
+   */
+  describe("deleteTransaction", () => {
+    it("should delete a transaction by ID and dispatch 'transactionDeleted' event", async () => {
+      await transactionManager.deleteTransaction("1");
+      expect(mockDataBaseManager.deleteTransaction).toHaveBeenCalledWith("1");
+      expect(transactionManager.transactions.length).toBe(0);
+      expect(window.dispatchEvent).toHaveBeenCalledWith(
+        new Event("transactionDeleted")
+      );
+    });
+  });
+
+  /**
+   * Tests the `deleteAllTransactions` method to ensure all transactions are cleared.
+   *
+   * @method deleteAllTransactions
+   * @memberof module:TransactionManagerTests
+   * @returns {void}
+   * @source TransactionManager.test.js, line 98
+   */
+  describe("deleteAllTransactions", () => {
+    it("should delete all transactions and dispatch 'transactionsCleared' event", async () => {
+      await transactionManager.deleteAllTransactions();
+      expect(mockDataBaseManager.deleteAllTransactions).toHaveBeenCalled();
+      expect(transactionManager.transactions.length).toBe(0);
+      expect(window.dispatchEvent).toHaveBeenCalledWith(
+        new Event("transactionsCleared")
+      );
+    });
+  });
+
+  /**
+   * Tests the `syncTransactions` method to ensure unsynced transactions are synchronized.
+   *
+   * @method syncTransactions
+   * @memberof module:TransactionManagerTests
+   * @returns {void}
+   * @source TransactionManager.test.js, line 109
+   */
+  describe("syncTransactions", () => {
+    it("should synchronize unsynced transactions if the server is available", async () => {
+      await transactionManager.syncTransactions();
+      expect(mockDataBaseManager.getUnsyncedTransactions).toHaveBeenCalled();
+      expect(
+        mockDataBaseManager.mongoDBManager.addTransaction
+      ).toHaveBeenCalledWith(
+        jasmine.objectContaining({ name: "Unsynced", amount: 300 })
+      );
+      expect(mockDataBaseManager.markTransactionAsSynced).toHaveBeenCalledWith(
+        "3"
+      );
+      expect(window.dispatchEvent).toHaveBeenCalledWith(
+        new Event("transactionsLoaded")
+      );
+    });
+
+    it("should not synchronize if the server is unavailable", async () => {
+      mockDataBaseManager.serverAvailable = false;
+      await transactionManager.syncTransactions();
+      expect(
+        mockDataBaseManager.getUnsyncedTransactions
+      ).not.toHaveBeenCalled();
+    });
+  });
+
+  /**
+   * Tests the `getCurrentBalance` method to calculate the total balance correctly.
+   *
+   * @method getCurrentBalance
+   * @memberof module:TransactionManagerTests
+   * @returns {void}
+   * @source TransactionManager.test.js, line 132
+   */
+  describe("getCurrentBalance", () => {
+    it("should calculate the total balance correctly", () => {
+      transactionManager.transactions = [
+        { id: "1", amount: 100 },
+        { id: "2", amount: 200 },
+        { id: "3", amount: -50 },
+      ];
+      const balance = transactionManager.getCurrentBalance();
+      expect(balance).toBe(250);
+    });
+  });
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Fri Dec 27 2024 02:21:38 GMT+0100 (czas środkowoeuropejski standardowy) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

@@ -57,6 +57,11 @@ Dostępność
 2. Semantyczne HTML: Prawidłowe użycie znaczników HTML5 dla lepszej struktury i dostępności.
 3. Etykiety formularzy: Poprawne użycie znaczników `<label>` dla pól formularza.
 
+Dokumentacja i testowanie
+
+1. Testy jednostkowe: Framework Jasmine został wykorzystany do przeprowadzenia testów jednostkowych.
+2. Dokumentacja kodu: Aplikacja wykorzystuje JSDoc do generowania szczegółowej dokumentacji klas, metod i testów, co wspiera zarówno
+   deweloperów, jak i użytkowników technicznych.
 
 
 "EN"
@@ -117,3 +122,9 @@ Availability
 1. ARIA: Extensive use of ARIA attributes to improve application accessibility.
 2. Semantic HTML: Proper use of HTML5 tags for better structure and accessibility.
 3. Form labels: Correct use of `<label>` tags for form fields.
+
+Documentation and testing
+
+1. Unit Testing: Jasmine framework was used to conduct unit testing.
+2. Code documentation: The application uses JSDoc to generate detailed documentation of classes, methods and tests, which supports
+   both developers and technical users.

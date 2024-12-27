@@ -37,6 +37,12 @@ class TransactionManager {
      */
     this.currencySymbol = "zł";
 
+    /**
+     * Current balance calculated based on transactions.
+     * @type {number}
+     */
+    this.balance = 0;
+
     // Set currency based on the preferred language
     const preferredLanguage = localStorage.getItem("preferredLanguage") || "pl";
     this.updateCurrencyBasedOnLanguage(preferredLanguage);
@@ -48,17 +54,7 @@ class TransactionManager {
     this.serverAvailable = this.databaseManager.serverAvailable;
 
     // Periodically check server availability
-    setInterval(() => {
-      if (this.serverAvailable !== this.databaseManager.serverAvailable) {
-        this.serverAvailable = this.databaseManager.serverAvailable;
-        if (this.serverAvailable) {
-          console.log(
-            "Serwer jest teraz dostępny. Rozpoczynam synchronizację..."
-          );
-          this.syncTransactions();
-        }
-      }
-    }, 1000);
+    this.startServerAvailabilityChecks();
 
     // Event listener for online state changes
     window.addEventListener("online", async () => {
@@ -80,7 +76,28 @@ class TransactionManager {
     });
 
     // Load initial transactions
-    this.loadTransactions();
+    this.loadTransactions().catch((error) =>
+      console.error("Błąd inicjalizacji transakcji:", error)
+    );
+  }
+
+  /**
+   * Starts periodic checks for server availability.
+   */
+  startServerAvailabilityChecks() {
+    this.serverCheckInterval = setInterval(() => {
+      if (this.serverAvailable !== this.databaseManager.serverAvailable) {
+        this.serverAvailable = this.databaseManager.serverAvailable;
+        if (this.serverAvailable) {
+          console.log(
+            "Serwer jest teraz dostępny. Rozpoczynam synchronizację..."
+          );
+          this.syncTransactions().catch((error) =>
+            console.error("Błąd synchronizacji transakcji:", error)
+          );
+        }
+      }
+    }, 5000);
   }
 
   /**
@@ -114,6 +131,7 @@ class TransactionManager {
       window.dispatchEvent(new Event("transactionsLoaded"));
     } catch (error) {
       console.error("Błąd podczas ładowania transakcji:", error);
+      this.transactions = [];
     }
   }
 
@@ -128,21 +146,22 @@ class TransactionManager {
    */
   async createNewTransaction(name, amount, category) {
     const newTransaction = {
+      id: Date.now().toString(),
       name,
-      amount: parseFloat(amount),
+      amount,
       category,
-      date: new Date().toISOString().split("T")[0],
-      currencyCode: this.currencyCode,
+      currencyCode: this.currencyCode, 
+      date: new Date().toISOString(),
     };
 
     try {
-      const addedTransaction =
+      const savedTransaction =
         await this.databaseManager.addTransaction(newTransaction);
-      this.transactions.push(addedTransaction);
+      this.transactions.push(savedTransaction); 
       window.dispatchEvent(new Event("transactionAdded"));
-      return addedTransaction;
+      return savedTransaction;
     } catch (error) {
-      console.error("Błąd podczas tworzenia transakcji:", error);
+      console.error("Error creating new transaction:", error);
       throw error;
     }
   }
@@ -187,28 +206,26 @@ class TransactionManager {
    * @returns {Promise<void>}
    */
   async syncTransactions() {
-    if (!this.serverAvailable) return;
-
-    try {
-      const unsyncedTransactions =
-        await this.databaseManager.getUnsyncedTransactions();
-      for (const transaction of unsyncedTransactions) {
-        try {
-          const syncedTransaction =
-            await this.databaseManager.mongoDBManager.addTransaction(
-              transaction
-            );
-          await this.databaseManager.markTransactionAsSynced(transaction.id);
-          console.log("Zsynchronizowano transakcję:", syncedTransaction);
-        } catch (error) {
-          console.error("Błąd synchronizacji transakcji:", transaction, error);
-        }
-      }
-
-      await this.loadTransactions();
-    } catch (error) {
-      console.error("Błąd podczas synchronizacji:", error);
+    if (!this.databaseManager.serverAvailable) {
+      console.log("Server unavailable. Skipping synchronization.");
+      return;
     }
+
+    const unsyncedTransactions =
+      await this.databaseManager.getUnsyncedTransactions();
+    for (const transaction of unsyncedTransactions) {
+      try {
+        const syncedTransaction =
+          await this.databaseManager.mongoDBManager.addTransaction(transaction);
+        await this.databaseManager.markTransactionAsSynced(
+          syncedTransaction.id
+        );
+        console.log("Transaction synchronized:", syncedTransaction);
+      } catch (error) {
+        console.error("Error synchronizing transaction:", transaction, error);
+      }
+    }
+    await this.loadTransactions();
   }
 
   /**

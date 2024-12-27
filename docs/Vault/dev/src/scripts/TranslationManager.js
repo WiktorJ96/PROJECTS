@@ -85,6 +85,21 @@ class TranslationManager {
       new CustomEvent("languageChanged", { detail: { language: lang } })
     );
   }
+  /**
+   *  Zmieniona funkcja setLanguage na potrzeby wykonania testów
+   * /
+  async setLanguage(lang) {
+    localStorage.setItem("preferredLanguage", lang);
+    this.currentLanguage = lang;
+
+    await this.loadTranslations(lang);
+    this.updateLanguageButtons(lang);
+
+    // *** ZAMIANA new CustomEvent(...) NA STARE API ***
+    const event = document.createEvent("CustomEvent");
+    event.initCustomEvent("languageChanged", false, false, { language: lang });
+    document.dispatchEvent(event);
+  }
 
   /**
    * Loads the preferred language from localStorage and applies its translations.

@@ -1,3 +1,4 @@
+// import axios from "axios";
 /**
  * Manages MongoDB operations for transaction management.
  * Provides methods for CRUD operations and batch processing of transactions.
@@ -29,7 +30,13 @@ class MongoDBManager {
     try {
       const response = await axios.get(`/api/transactions`);
       const transactions = response.data.map((tx) => {
-        const dateObj = new Date(tx.date);
+        let dateObj = new Date(tx.date);
+
+        if (isNaN(dateObj.getTime())) {
+          console.warn("Invalid or missing date:", tx.date);
+          dateObj = new Date();
+        }
+
         const year = dateObj.getFullYear();
         const month = String(dateObj.getMonth() + 1).padStart(2, "0");
         const day = String(dateObj.getDate()).padStart(2, "0");
@@ -37,8 +44,8 @@ class MongoDBManager {
 
         return {
           ...tx,
-          id: tx._id, // Map MongoDB `_id` to `id`
-          date: formattedDate, // Format date
+          id: tx._id, 
+          date: formattedDate, 
         };
       });
       return transactions;

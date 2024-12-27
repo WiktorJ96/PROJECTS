@@ -1,16 +1,16 @@
 {
   "tags": {
-    "allowUnknownTags": false,
+    "allowUnknownTags": true,
     "dictionaries": ["jsdoc", "closure"]
   },
   "source": {
-    "include": ["src/scripts", "README.md"],
+    "include": ["src/scripts", "README.md","__tests__"],
     "includePattern": ".+\\.js(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_(test|mock)"
   },
   "opts": {
     "encoding": "utf8",
-    "destination": "./doc",
+    "destination": "./docNEW",
     "recurse": true,
     "template": "node_modules/docdash",
     "private": true
@@ -26,5 +26,8 @@
     "hardwrap": true,
     "idInHeadings": true
   },
-  "plugins": ["plugins/markdown", "node_modules/jsdoc-babel"]
+  "plugins": [
+    "plugins/markdown",
+    "node_modules/jsdoc-babel"
+  ]
 }

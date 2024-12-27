@@ -16,7 +16,6 @@ class ChartManager {
      * @type {Object}
      */
     this.transactionManager = transactionManager;
-
     /**
      * Chart.js chart instance.
      * @type {Chart|null}
@@ -27,7 +26,6 @@ class ChartManager {
     this.setupLanguageChangeListener();
     this.setupResizeListener();
 
-    // Event listener for theme changes
     window.addEventListener("themeChange", (event) => {
       const isDark = event.detail.theme === "dark";
       this.setTheme(isDark);
@@ -38,7 +36,16 @@ class ChartManager {
    * Initializes the Chart.js chart instance.
    */
   initializeChart() {
-    const ctx = document.getElementById("balanceChart").getContext("2d");
+    const canvas = document.getElementById("balanceChart");
+    if (!canvas) {
+      throw new Error("Canvas element with ID 'balanceChart' not found");
+    }
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      throw new Error("Unable to get '2d' context from canvas element");
+    }
+
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, "rgba(52, 152, 219, 0.6)");
     gradient.addColorStop(1, "rgba(52, 152, 219, 0.1)");
@@ -46,11 +53,11 @@ class ChartManager {
     this.chart = new Chart(ctx, {
       type: "line",
       data: {
-        labels: [], // Labels for the x-axis (dates)
+        labels: [],
         datasets: [
           {
             label: "Balance",
-            data: [], // Data points for the balance
+            data: [],
             backgroundColor: gradient,
             borderColor: "rgba(52, 152, 219, 1)",
             borderWidth: 2,
@@ -66,7 +73,7 @@ class ChartManager {
           },
           {
             label: "Income",
-            data: [], // Data points for income
+            data: [],
             backgroundColor: "rgba(46, 204, 113, 0.2)",
             borderColor: "rgba(46, 204, 113, 1)",
             borderWidth: 2,
@@ -79,11 +86,11 @@ class ChartManager {
             pointRadius: 4,
             pointHoverRadius: 6,
             pointStyle: "circle",
-            hidden: true, // Initially hidden
+            hidden: true,
           },
           {
             label: "Expenses",
-            data: [], // Data points for expenses
+            data: [],
             backgroundColor: "rgba(231, 76, 60, 0.2)",
             borderColor: "rgba(231, 76, 60, 1)",
             borderWidth: 2,
@@ -96,7 +103,7 @@ class ChartManager {
             pointRadius: 4,
             pointHoverRadius: 6,
             pointStyle: "circle",
-            hidden: true, // Initially hidden
+            hidden: true,
           },
         ],
       },
@@ -108,8 +115,8 @@ class ChartManager {
             display: false,
           },
           legend: {
-            position: "top", // Position of the legend
-            align: "center", // Alignment of legend items
+            position: "top",
+            align: "center",
             onClick: (e, legendItem) => {
               const index = legendItem.datasetIndex;
               const ci = this.chart;
@@ -164,7 +171,7 @@ class ChartManager {
           x: {
             title: {
               display: true,
-              text: "Date", // Title for the x-axis
+              text: "Date",
               font: {
                 size: this.getResponsiveFontSize(14),
                 weight: "600",
@@ -284,16 +291,14 @@ class ChartManager {
       return;
     }
 
-    // Formatowanie dat
     const labels = transactions.map((entry) => {
-      const date = new Date(entry.date); // Konwertuj na obiekt Date
-      return date.toISOString().split("T")[0]; // Format YYYY-MM-DD
+      const date = new Date(entry.date);
+      return date.toISOString().split("T")[0];
     });
 
-    // Obliczanie skumulowanego salda
     const balanceData = transactions.reduce((acc, transaction) => {
       const lastBalance = acc.length > 0 ? acc[acc.length - 1] : 0;
-      acc.push(lastBalance + transaction.amount); // Skumulowane saldo
+      acc.push(lastBalance + transaction.amount);
       return acc;
     }, []);
 
@@ -327,7 +332,6 @@ class ChartManager {
     this.chart.options.scales.x.grid.color = gridColor;
     this.chart.options.scales.y.grid.color = gridColor;
 
-    // Update chart background gradient
     if (isDark) {
       this.chart.data.datasets[0].backgroundColor = (ctx) => {
         const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 400);
@@ -351,9 +355,13 @@ class ChartManager {
    * Updates the chart's labels and language-dependent content based on the current language.
    */
   updateLanguage() {
+    if (!this.chart || !this.chart.options || !this.chart.options.scales) {
+      console.warn("Chart or its scales are not initialized yet.");
+      return;
+    }
+
     const lang = localStorage.getItem("preferredLanguage");
 
-    // Update axis titles and dataset labels
     this.chart.options.scales.x.title.text = lang === "pl" ? "Data" : "Date";
     this.chart.data.datasets[0].label = lang === "pl" ? "Saldo" : "Balance";
     this.chart.data.datasets[1].label = lang === "pl" ? "Przychody" : "Income";
@@ -384,26 +392,56 @@ class ChartManager {
    * Updates the chart's settings for responsiveness based on the current window size.
    */
   updateResponsiveSettings() {
+    if (!this.chart.options.plugins.legend.labels.font) {
+      this.chart.options.plugins.legend.labels.font = {};
+    }
     this.chart.options.plugins.legend.labels.font.size =
       this.getResponsiveFontSize(12);
+
     this.chart.options.plugins.legend.labels.padding =
       this.getResponsivePadding(15);
+
+    if (!this.chart.options.plugins.tooltip) {
+      this.chart.options.plugins.tooltip = { titleFont: {}, bodyFont: {} };
+    }
+    if (!this.chart.options.plugins.tooltip.titleFont) {
+      this.chart.options.plugins.tooltip.titleFont = {};
+    }
+    if (!this.chart.options.plugins.tooltip.bodyFont) {
+      this.chart.options.plugins.tooltip.bodyFont = {};
+    }
     this.chart.options.plugins.tooltip.titleFont.size =
       this.getResponsiveFontSize(14);
     this.chart.options.plugins.tooltip.bodyFont.size =
       this.getResponsiveFontSize(12);
+
+    if (!this.chart.options.scales.x.title.font) {
+      this.chart.options.scales.x.title.font = {};
+    }
     this.chart.options.scales.x.title.font.size =
       this.getResponsiveFontSize(14);
+
+    if (!this.chart.options.scales.x.ticks.font) {
+      this.chart.options.scales.x.ticks.font = {};
+    }
     this.chart.options.scales.x.ticks.font.size =
       this.getResponsiveFontSize(10);
+
+    if (!this.chart.options.scales.y.title.font) {
+      this.chart.options.scales.y.title.font = {};
+    }
     this.chart.options.scales.y.title.font.size =
       this.getResponsiveFontSize(14);
+
+    if (!this.chart.options.scales.y.ticks.font) {
+      this.chart.options.scales.y.ticks.font = {};
+    }
     this.chart.options.scales.y.ticks.font.size =
       this.getResponsiveFontSize(10);
+
     this.chart.options.scales.x.ticks.maxTicksLimit =
       this.getResponsiveTicksLimit();
 
-    // Adjust legend position for smaller screens
     const width = window.innerWidth;
     if (width < 768) {
       this.chart.options.plugins.legend.position = "bottom";
@@ -416,4 +454,3 @@ class ChartManager {
 }
 
 export default ChartManager;
-

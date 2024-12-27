@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="title-jasmine-skills">Umiejętności Jasmine</title>
+    <link rel="icon" type="image/png" href="assets/jasmine-logo.png" sizes="16x16">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="skills.css">
+    <style>
+        .jasmine-hr {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, #8e44ad, rgba(142, 68, 173, 0), #663399);
+            margin: 40px 0;
+            margin-top: 15px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .jasmine-hr::before {
+            content: 'JASMINE';
+            display: block;
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            letter-spacing: 3px;
+            color: #8e44ad;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body data-page="jasmine">
+    <!-- komentarz: przyciski do zmiany języka -->
+    <div class="language-switch">
+        <button id="lang-pl">PL</button>
+        <button id="lang-en">EN</button>
+    </div>
+
+    <!-- komentarz: główny kontener -->
+    <div class="container py-5">
+        <!-- komentarz: logo Jasmine -->
+        <div class="text-center iconJasmine">
+            <img src="assets/jasmine-logo.png" width="100" class="mb-4">
+        </div>
+
+        <hr class="jasmine-hr">
+
+        <!-- komentarz: siatka kart z umiejętnościami -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            
+            <!-- Podstawy Jasmine -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <!-- komentarz: ikona testu -->
+                        <i class="fas fa-vials skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-basic-jasmine-title">Podstawy Jasmine</h5>
+                        <p class="card-text" data-lang-key="skill-basic-jasmine-text">
+                            Konfiguracja, uruchamianie testów, podstawowe struktury (describe, it).
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                            <i class="fas fa-smile" data-bs-toggle="tooltip" title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matchers (dopasowywacze) -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-check-double skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-matchers-title">Matchers (dopasowywacze)</h5>
+                        <p class="card-text" data-lang-key="skill-matchers-text">
+                            Użycie wbudowanych matcherów, rozszerzanie matcherów.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-success">
+                            <i class="fas fa-smile" data-bs-toggle="tooltip" title="Dobry"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spies -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-user-secret skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-spies-title">Spies (szpiedzy)</h5>
+                        <p class="card-text" data-lang-key="skill-spies-text">
+                            Tworzenie spy, śledzenie wywołań, sprawdzanie argumentów.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Asynchroniczne testy -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-clock skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-async-tests-title">Asynchroniczne testy</h5>
+                        <p class="card-text" data-lang-key="skill-async-tests-text">
+                            Testowanie kodu asynchronicznego, done(), async/await.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fixtures -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-folder-open skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-fixtures-title">Fixtures</h5>
+                        <p class="card-text" data-lang-key="skill-fixtures-text">
+                            Załadowanie i testowanie elementów DOM, przygotowanie danych testowych.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Konfiguracja środowiska -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-cog skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-setup-title">Konfiguracja środowiska</h5>
+                        <p class="card-text" data-lang-key="skill-setup-text">
+                            Integracja z npm, Jasmine CLI, ustawienia reporters (raportujących wynik testów).
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mockowanie i Stubbowanie -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-pencil-ruler skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-mocks-stubs-title">Mocki i Stuby</h5>
+                        <p class="card-text" data-lang-key="skill-mocks-stubs-text">
+                            Tworzenie obiektów udających (mock, stub), izolacja testów.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metody Before i After -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-history skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-hooks-title">Metody Before/After</h5>
+                        <p class="card-text" data-lang-key="skill-hooks-text">
+                            Przygotowanie środowiska testowego (beforeAll, afterAll) i czyszczenie po testach.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testy BDD (Behavior-Driven Development) -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-brain skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-bdd-title">Testy BDD</h5>
+                        <p class="card-text" data-lang-key="skill-bdd-text">
+                            Pisanie testów w stylu BDD, czytelne opisy zachowań.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-warning">
+                            <i class="fas fa-meh" data-bs-toggle="tooltip" title="Średni"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integracja z innymi frameworkami -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-plug skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-integration-title">Integracja</h5>
+                        <p class="card-text" data-lang-key="skill-integration-text">
+                            Łączenie Jasmine z frameworkami frontendowymi, np. Angular.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Uruchamianie testów w przeglądarce i CLI -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-play-circle skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-runner-title">Uruchamianie testów</h5>
+                        <p class="card-text" data-lang-key="skill-runner-text">
+                            Konfiguracja testów w przeglądarce, użycie Jasmine CLI do uruchamiania w konsoli.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analiza i optymalizacja testów -->
+            <div class="col">
+                <div class="card skill-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-line skill-icon mb-3"></i>
+                        <h5 class="card-title" data-lang-key="skill-optimization-title">Optymalizacja testów</h5>
+                        <p class="card-text" data-lang-key="skill-optimization-text">
+                            Skuteczna organizacja testów, szybkie wykrywanie błędów, minimalizacja duplikacji.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge bg-danger">
+                            <i class="fas fa-frown" data-bs-toggle="tooltip" title="Słaby"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- komentarz: Skrypt do tłumaczeń -->
+    <script src="../translations/translates.js"></script>
+    <!-- komentarz: bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- komentarz: fontawesome kit -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- komentarz: skrypt obsługujący zmiany języka itp. -->
+    <script src="skills.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerElement) {
+                return new bootstrap.Tooltip(tooltipTriggerElement);
+            });
+        });
+    </script>
+</body>
+</html>

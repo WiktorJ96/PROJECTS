@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>__tests__/uiManager.spec.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ChartManager.html">ChartManager</a><ul class='methods'><li data-type='method'><a href="ChartManager.html#getResponsiveFontSize">getResponsiveFontSize</a></li><li data-type='method'><a href="ChartManager.html#getResponsivePadding">getResponsivePadding</a></li><li data-type='method'><a href="ChartManager.html#getResponsiveTicksLimit">getResponsiveTicksLimit</a></li><li data-type='method'><a href="ChartManager.html#initializeChart">initializeChart</a></li><li data-type='method'><a href="ChartManager.html#setTheme">setTheme</a></li><li data-type='method'><a href="ChartManager.html#setupLanguageChangeListener">setupLanguageChangeListener</a></li><li data-type='method'><a href="ChartManager.html#setupResizeListener">setupResizeListener</a></li><li data-type='method'><a href="ChartManager.html#updateChart">updateChart</a></li><li data-type='method'><a href="ChartManager.html#updateLanguage">updateLanguage</a></li><li data-type='method'><a href="ChartManager.html#updateResponsiveSettings">updateResponsiveSettings</a></li></ul></li><li><a href="DataBaseManager.html">DataBaseManager</a><ul class='methods'><li data-type='method'><a href="DataBaseManager.html#addTransaction">addTransaction</a></li><li data-type='method'><a href="DataBaseManager.html#checkServerAvailability">checkServerAvailability</a></li><li data-type='method'><a href="DataBaseManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="DataBaseManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="DataBaseManager.html#getTransactions">getTransactions</a></li><li data-type='method'><a href="DataBaseManager.html#getUnsyncedTransactions">getUnsyncedTransactions</a></li><li data-type='method'><a href="DataBaseManager.html#markTransactionAsSynced">markTransactionAsSynced</a></li><li data-type='method'><a href="DataBaseManager.html#startServerAvailabilityChecks">startServerAvailabilityChecks</a></li><li data-type='method'><a href="DataBaseManager.html#syncTransactions">syncTransactions</a></li></ul></li><li><a href="IndexedDBManager.html">IndexedDBManager</a><ul class='methods'><li data-type='method'><a href="IndexedDBManager.html#addTransaction">addTransaction</a></li><li data-type='method'><a href="IndexedDBManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="IndexedDBManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="IndexedDBManager.html#getDB">getDB</a></li><li data-type='method'><a href="IndexedDBManager.html#getTransactions">getTransactions</a></li><li data-type='method'><a href="IndexedDBManager.html#getUnsyncedTransactions">getUnsyncedTransactions</a></li><li data-type='method'><a href="IndexedDBManager.html#initializeDB">initializeDB</a></li><li data-type='method'><a href="IndexedDBManager.html#markTransactionAsSynced">markTransactionAsSynced</a></li></ul></li><li><a href="MockChart.html">MockChart</a></li><li></li><li><a href="MongoDBManager.html">MongoDBManager</a><ul class='methods'><li data-type='method'><a href="MongoDBManager.html#addTransaction">addTransaction</a></li><li data-type='method'><a href="MongoDBManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="MongoDBManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="MongoDBManager.html#getTransactions">getTransactions</a></li></ul></li><li><a href="PWAManager.html">PWAManager</a><ul class='methods'><li data-type='method'><a href="PWAManager.html#hideInstallButton">hideInstallButton</a></li><li data-type='method'><a href="PWAManager.html#init">init</a></li><li data-type='method'><a href="PWAManager.html#installPWA">installPWA</a></li><li data-type='method'><a href="PWAManager.html#showIOSInstallInstructions">showIOSInstallInstructions</a></li><li data-type='method'><a href="PWAManager.html#showInstallButton">showInstallButton</a></li></ul></li><li><a href="ThemeManager.html">ThemeManager</a><ul class='methods'><li data-type='method'><a href="ThemeManager.html#addEventListeners">addEventListeners</a></li><li data-type='method'><a href="ThemeManager.html#initTheme">initTheme</a></li><li data-type='method'><a href="ThemeManager.html#setTheme">setTheme</a></li><li data-type='method'><a href="ThemeManager.html#toggleTheme">toggleTheme</a></li><li data-type='method'><a href="ThemeManager.html#updateToggleButton">updateToggleButton</a></li></ul></li><li><a href="TransactionManager.html">TransactionManager</a><ul class='methods'><li data-type='method'><a href="TransactionManager.html#createNewTransaction">createNewTransaction</a></li><li data-type='method'><a href="TransactionManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="TransactionManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="TransactionManager.html#getCurrentBalance">getCurrentBalance</a></li><li data-type='method'><a href="TransactionManager.html#loadTransactions">loadTransactions</a></li><li data-type='method'><a href="TransactionManager.html#startServerAvailabilityChecks">startServerAvailabilityChecks</a></li><li data-type='method'><a href="TransactionManager.html#syncTransactions">syncTransactions</a></li><li data-type='method'><a href="TransactionManager.html#updateCurrencyBasedOnLanguage">updateCurrencyBasedOnLanguage</a></li></ul></li><li><a href="TranslationManager.html">TranslationManager</a><ul class='methods'><li data-type='method'><a href="TranslationManager.html#addLanguageListeners">addLanguageListeners</a></li><li data-type='method'><a href="TranslationManager.html#fetchTranslations">fetchTranslations</a></li><li data-type='method'><a href="TranslationManager.html#loadPreferredLanguage">loadPreferredLanguage</a></li><li data-type='method'><a href="TranslationManager.html#loadTranslations">loadTranslations</a></li><li data-type='method'><a href="TranslationManager.html#setLanguage">setLanguage</a></li><li data-type='method'><a href="TranslationManager.html#translatePage">translatePage</a></li><li data-type='method'><a href="TranslationManager.html#updateLanguageButtons">updateLanguageButtons</a></li></ul></li><li><a href="UIManager.html">UIManager</a><ul class='methods'><li data-type='method'><a href="UIManager.html#addTransactionToDOM">addTransactionToDOM</a></li><li data-type='method'><a href="UIManager.html#clearInputs">clearInputs</a></li><li data-type='method'><a href="UIManager.html#clearTransactionsDisplay">clearTransactionsDisplay</a></li><li data-type='method'><a href="UIManager.html#closePanel">closePanel</a></li><li data-type='method'><a href="UIManager.html#confirmDeleteTransaction">confirmDeleteTransaction</a></li><li data-type='method'><a href="UIManager.html#deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="UIManager.html#deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="UIManager.html#getCategoryIcon">getCategoryIcon</a></li><li data-type='method'><a href="UIManager.html#handleTransactionTypeChange">handleTransactionTypeChange</a></li><li data-type='method'><a href="UIManager.html#hideDeleteAllModal">hideDeleteAllModal</a></li><li data-type='method'><a href="UIManager.html#hideDeleteTransactionModal">hideDeleteTransactionModal</a></li><li data-type='method'><a href="UIManager.html#initializeElements">initializeElements</a></li><li data-type='method'><a href="UIManager.html#initializeEventListeners">initializeEventListeners</a></li><li data-type='method'><a href="UIManager.html#saveTransaction">saveTransaction</a></li><li data-type='method'><a href="UIManager.html#setLanguage">setLanguage</a></li><li data-type='method'><a href="UIManager.html#showDeleteAllModal">showDeleteAllModal</a></li><li data-type='method'><a href="UIManager.html#showDeleteTransactionModal">showDeleteTransactionModal</a></li><li data-type='method'><a href="UIManager.html#showPanel">showPanel</a></li><li data-type='method'><a href="UIManager.html#updateBalance">updateBalance</a></li><li data-type='method'><a href="UIManager.html#updateLanguage">updateLanguage</a></li><li data-type='method'><a href="UIManager.html#updateTransactionsDisplay">updateTransactionsDisplay</a></li></ul></li><li><a href="global.Chart.html">Chart</a></li></ul><h3>Modules</h3><ul><li><a href="module-ChartManagerTest.html">ChartManagerTest</a><ul class='methods'><li data-type='method'><a href="module-ChartManagerTest.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.initializeChart">initializeChart</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.setThemeDark">setThemeDark</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.setThemeLight">setThemeLight</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.updateChart">updateChart</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.updateLanguageEnglish">updateLanguageEnglish</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.updateLanguagePolish">updateLanguagePolish</a></li><li data-type='method'><a href="module-ChartManagerTest.html#.updateResponsiveSettings">updateResponsiveSettings</a></li></ul></li><li><a href="module-DataBaseManagerTests.html">DataBaseManagerTests</a><ul class='methods'><li data-type='method'><a href="module-DataBaseManagerTests.html#.addTransaction">addTransaction</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.afterAll">afterAll</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.beforeAll">beforeAll</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.getTransactions">getTransactions</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.initializeServerAvailability">initializeServerAvailability</a></li><li data-type='method'><a href="module-DataBaseManagerTests.html#.syncTransactions">syncTransactions</a></li></ul></li><li><a href="module-IndexedDBManagerTests.html">IndexedDBManagerTests</a><ul class='methods'><li data-type='method'><a href="module-IndexedDBManagerTests.html#.addTransaction">addTransaction</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.afterAll">afterAll</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.beforeAll">beforeAll</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.getTransactions">getTransactions</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.getUnsyncedTransactions">getUnsyncedTransactions</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.initializeDatabase">initializeDatabase</a></li><li data-type='method'><a href="module-IndexedDBManagerTests.html#.markTransactionAsSynced">markTransactionAsSynced</a></li></ul></li><li><a href="module-MongoDBManagerTests.html">MongoDBManagerTests</a><ul class='methods'><li data-type='method'><a href="module-MongoDBManagerTests.html#.addTransaction">addTransaction</a></li><li data-type='method'><a href="module-MongoDBManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-MongoDBManagerTests.html#.deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="module-MongoDBManagerTests.html#.deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="module-MongoDBManagerTests.html#.getTransactions">getTransactions</a></li></ul></li><li><a href="module-PWAManagerTests.html">PWAManagerTests</a><ul class='methods'><li data-type='method'><a href="module-PWAManagerTests.html#.alertIOSInstallInstructions">alertIOSInstallInstructions</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.beforeAll">beforeAll</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.handleBeforeInstallPrompt">handleBeforeInstallPrompt</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.handlePWAInstallation">handlePWAInstallation</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.hideInstallButton">hideInstallButton</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.initPWA">initPWA</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.showIOSInstallInstructions">showIOSInstallInstructions</a></li><li data-type='method'><a href="module-PWAManagerTests.html#.showInstallButton">showInstallButton</a></li></ul></li><li><a href="module-ThemeManagerTests.html">ThemeManagerTests</a><ul class='methods'><li data-type='method'><a href="module-ThemeManagerTests.html#.addEventListeners">addEventListeners</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.dispatchThemeChangeEvent">dispatchThemeChangeEvent</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.initTheme">initTheme</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.persistTheme">persistTheme</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.setTheme">setTheme</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.toggleThemeDarkToLight">toggleThemeDarkToLight</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.toggleThemeLightToDark">toggleThemeLightToDark</a></li><li data-type='method'><a href="module-ThemeManagerTests.html#.updateToggleButton">updateToggleButton</a></li></ul></li><li><a href="module-TransactionManagerTests.html">TransactionManagerTests</a><ul class='methods'><li data-type='method'><a href="module-TransactionManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-TransactionManagerTests.html#.createNewTransaction">createNewTransaction</a></li><li data-type='method'><a href="module-TransactionManagerTests.html#.deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="module-TransactionManagerTests.html#.deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="module-TransactionManagerTests.html#.getCurrentBalance">getCurrentBalance</a></li><li data-type='method'><a href="module-TransactionManagerTests.html#.loadTransactions">loadTransactions</a></li><li data-type='method'><a href="module-TransactionManagerTests.html#.syncTransactions">syncTransactions</a></li></ul></li><li><a href="module-TranslationManagerTests.html">TranslationManagerTests</a><ul class='methods'><li data-type='method'><a href="module-TranslationManagerTests.html#.addLanguageListeners">addLanguageListeners</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.dispatchLanguageChangeEvent">dispatchLanguageChangeEvent</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.fetchAndApplyTranslations">fetchAndApplyTranslations</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.handleMissingTranslations">handleMissingTranslations</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.initializeDefaultLanguage">initializeDefaultLanguage</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.loadPreferredLanguage">loadPreferredLanguage</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.setLanguage">setLanguage</a></li><li data-type='method'><a href="module-TranslationManagerTests.html#.updateLanguageButtons">updateLanguageButtons</a></li></ul></li><li><a href="module-UIManagerTests.html">UIManagerTests</a><ul class='methods'><li data-type='method'><a href="module-UIManagerTests.html#.addTransactionToDOM">addTransactionToDOM</a></li><li data-type='method'><a href="module-UIManagerTests.html#.beforeEach">beforeEach</a></li><li data-type='method'><a href="module-UIManagerTests.html#.deleteAllTransactions">deleteAllTransactions</a></li><li data-type='method'><a href="module-UIManagerTests.html#.deleteTransaction">deleteTransaction</a></li><li data-type='method'><a href="module-UIManagerTests.html#.handleLanguageChanges">handleLanguageChanges</a></li><li data-type='method'><a href="module-UIManagerTests.html#.initializeDefaultLanguage">initializeDefaultLanguage</a></li><li data-type='method'><a href="module-UIManagerTests.html#.saveTransaction">saveTransaction</a></li><li data-type='method'><a href="module-UIManagerTests.html#.showTransactionPanel">showTransactionPanel</a></li><li data-type='method'><a href="module-UIManagerTests.html#.updateBalance">updateBalance</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#dom">dom</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">__tests__/uiManager.spec.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { JSDOM } from "jsdom";
+import "fake-indexeddb/auto";
+import axios from "axios";
+import UIManager from "../src/scripts/UIManager.js";
+import TransactionManager from "../src/scripts/TransactionManager.js";
+import ChartManager from "../src/scripts/ChartManager.js";
+
+/**
+ * Mock Bootstrapa z getInstance
+ */
+global.bootstrap = {
+  Modal: class {
+    constructor(element) {
+      this._element = element;
+    }
+    static getInstance(element) {
+      return new this(element);
+    }
+    show() {}
+    hide() {}
+  },
+};
+
+/**
+ * Mock localStorage
+ */
+global.localStorage = {
+  getItem: jasmine.createSpy("getItem").and.callFake((key) => {
+    if (key === "preferredLanguage") {
+      return "pl"; // Domyślna wartość, zmień według potrzeb
+    }
+    return null;
+  }),
+  setItem: jasmine.createSpy("setItem"),
+};
+
+/**
+ * Przygotowanie wirtualnego DOM (JSDOM) z identycznymi ID jak w kodzie UIManager
+ */
+const dom = new JSDOM(`
+&lt;!DOCTYPE html>
+&lt;html>
+  &lt;body>
+    &lt;div id="income-area">&lt;/div>
+    &lt;div id="expenses-area">&lt;/div>
+    &lt;div id="available-money">&lt;/div>
+    &lt;div id="addTransactionModal">&lt;/div>
+    &lt;div id="confirmationModal">&lt;/div>
+    &lt;div id="deleteTransactionModal">&lt;/div>
+
+    &lt;button id="add-transaction">&lt;/button>
+    &lt;button id="saveTransaction">&lt;/button>
+    &lt;button id="delete-all">&lt;/button>
+    &lt;select id="transaction-type">
+      &lt;option value="income" selected>Income&lt;/option>
+      &lt;option value="expense">Expense&lt;/option>
+    &lt;/select>
+
+    &lt;div class="mb-3">
+      &lt;select id="income-category">
+        &lt;option>Salary&lt;/option>
+        &lt;option>Bonus&lt;/option>
+      &lt;/select>
+    &lt;/div>
+    &lt;div class="mb-3">
+      &lt;select id="expense-category">
+        &lt;option>Food&lt;/option>
+        &lt;option>Shopping&lt;/option>
+      &lt;/select>
+    &lt;/div>
+
+    &lt;button id="confirmDelete">&lt;/button>
+    &lt;button id="cancelDelete">&lt;/button>
+    &lt;button id="confirmDeleteTransaction">&lt;/button>
+    &lt;button id="cancelDeleteTransaction">&lt;/button>
+
+    &lt;input id="name" />
+    &lt;input id="amount" />
+
+    &lt;button id="light-mode">&lt;/button>
+    &lt;button id="dark-mode">&lt;/button>
+
+    &lt;span id="income-tab">Income&lt;/span>
+    &lt;span id="expenses-tab">Expenses&lt;/span>
+
+    &lt;canvas id="chart">&lt;/canvas>
+    &lt;canvas id="balanceChart">&lt;/canvas>
+  &lt;/body>
+&lt;/html>
+`);
+
+global.window = dom.window;
+global.document = dom.window.document;
+global.navigator = dom.window.navigator;
+
+/**
+ * Mockowanie Canvas
+ */
+if (!global.HTMLCanvasElement) {
+  global.HTMLCanvasElement = class {
+    getContext() {
+      return {
+        clearRect: jasmine.createSpy("clearRect"),
+        fillText: jasmine.createSpy("fillText"),
+        createLinearGradient: jasmine
+          .createSpy("createLinearGradient")
+          .and.returnValue({
+            addColorStop: jasmine.createSpy("addColorStop"),
+          }),
+      };
+    }
+  };
+}
+
+/**
+ * Mockowanie Chart.js
+ */
+global.Chart = class {
+  constructor(ctx, config) {
+    this.ctx = ctx;
+    this.config = config;
+    this.options = {};
+    this.data = { labels: [], datasets: [] };
+    this.update = jasmine.createSpy("update");
+  }
+};
+
+/**
+ * Mockowanie Axios
+ */
+beforeEach(() => {
+  axios.get = jasmine.createSpy("get").and.returnValue(
+    Promise.resolve({
+      data: [
+        {
+          _id: "1",
+          name: "Test Transaction",
+          amount: 100,
+          category: "Salary",
+          date: "2023-12-22T00:00:00Z",
+        },
+      ],
+    })
+  );
+  axios.post = jasmine.createSpy("post").and.returnValue(
+    Promise.resolve({
+      data: {
+        _id: "2",
+        name: "New Transaction",
+        amount: 200,
+        category: "Bonus",
+        date: "2023-12-22T00:00:00Z",
+      },
+    })
+  );
+  axios.delete = jasmine.createSpy("delete").and.returnValue(Promise.resolve());
+});
+
+/**
+ * Test suite for the UIManager class.
+ * Ensures proper functionality of UI interactions, modals, and integration with TransactionManager &amp; ChartManager.
+ *
+ * @module UIManagerTests
+ */
+describe("UIManager", () => {
+  let uiManager;
+  let mockTransactionManager;
+  let mockChartManager;
+
+  /**
+   * Sets up a new instance of UIManager, TransactionManager, and ChartManager before each test.
+   *
+   * @method beforeEach
+   * @memberof module:UIManagerTests
+   * @returns {void}
+   */
+  beforeEach(() => {
+    // Inicjalizacja menedżerów
+    mockTransactionManager = new TransactionManager();
+    mockChartManager = new ChartManager(mockTransactionManager);
+
+    // Zastąpienie realnych metod, by testy nie wykonywały prawdziwych operacji
+    spyOn(mockTransactionManager, "createNewTransaction").and.callFake(() =>
+      Promise.resolve()
+    );
+    spyOn(mockTransactionManager, "deleteTransaction").and.callFake(() =>
+      Promise.resolve()
+    );
+    spyOn(mockTransactionManager, "deleteAllTransactions").and.callFake(() =>
+      Promise.resolve()
+    );
+    spyOn(mockTransactionManager, "getCurrentBalance").and.returnValue(1000);
+    spyOn(mockChartManager, "updateChart").and.callThrough();
+
+    // Tworzymy UIManager
+    uiManager = new UIManager(mockTransactionManager, mockChartManager);
+  });
+
+  /**
+   * Verifies that UIManager initializes the default language from localStorage.
+   *
+   * @method initializeDefaultLanguage
+   * @memberof module:UIManagerTests
+   * @returns {void}
+   */
+  it("should initialize UIManager with the default language", () => {
+    // Według mocka localStorage, preferowany jest "pl"
+    expect(uiManager.language).toBe("pl");
+  });
+
+  /**
+   * Tests showing the add-transaction panel.
+   * Ensures that showPanel can be called without errors and triggers any related UI updates.
+   *
+   * @method showTransactionPanel
+   * @memberof module:UIManagerTests
+   * @returns {void}
+   */
+  it("should show the add transaction panel", () => {
+    spyOn(uiManager, "showPanel").and.callThrough();
+    uiManager.showPanel();
+    expect(uiManager.showPanel).toHaveBeenCalled();
+  });
+
+  /**
+   * Tests saving a new transaction by setting form inputs and invoking saveTransaction.
+   * Confirms that the TransactionManager is called with correct arguments.
+   *
+   * @method saveTransaction
+   * @memberof module:UIManagerTests
+   * @returns {Promise&lt;void>}
+   */
+  it("should save a new transaction", async () => {
+    // Ustawiamy wartości w polach formularza
+    uiManager.nameInput.value = "Test Transaction";
+    uiManager.amountInput.value = "100";
+    uiManager.transactionTypeSelect.value = "income";
+    uiManager.incomeCategorySelect.selectedIndex = 0; // Salary
+
+    await uiManager.saveTransaction();
+
+    expect(mockTransactionManager.createNewTransaction).toHaveBeenCalledWith(
+      "Test Transaction",
+      100,
+      "Salary"
+    );
+  });
+
+  /**
+   * Verifies behavior when changing the language:
+   * - localStorage set to correct language
+   * - UI language updated
+   * - chart updated
+   *
+   * @method handleLanguageChanges
+   * @memberof module:UIManagerTests
+   * @returns {void}
+   */
+  it("should handle language changes", () => {
+    spyOn(uiManager, "updateLanguage").and.callThrough();
+    uiManager.setLanguage("en");
+    expect(localStorage.setItem).toHaveBeenCalledWith(
+      "preferredLanguage",
+      "en"
+    );
+    expect(uiManager.updateLanguage).toHaveBeenCalled();
+    expect(mockChartManager.updateChart).toHaveBeenCalled();
+  });
+
+  /**
+   * Ensures a transaction is correctly added to the DOM, with the correct category icon and formatting.
+   *
+   * @method addTransactionToDOM
+   * @memberof module:UIManagerTests
+   * @returns {void}
+   */
+  it("should add a transaction to the DOM", () => {
+    const transaction = {
+      id: "1",
+      name: "Test",
+      amount: 100,
+      category: "Salary",
+    };
+    spyOn(uiManager, "getCategoryIcon").and.returnValue(
+      '&lt;i class="fas fa-money-bill">&lt;/i>'
+    );
+
+    uiManager.addTransactionToDOM(transaction);
+
+    const transactionElement = document.getElementById("1");
+    expect(transactionElement).toBeTruthy();
+    expect(
+      transactionElement.querySelector(".transaction-title").textContent
+    ).toBe("Test");
+    expect(
+      transactionElement.querySelector(".transaction-amount").textContent
+    ).toContain("100");
+  });
+
+  /**
+   * Tests deleting a transaction via UIManager, ensures TransactionManager is called,
+   * and balance/chart are updated.
+   *
+   * @method deleteTransaction
+   * @memberof module:UIManagerTests
+   * @returns {Promise&lt;void>}
+   */
+  it("should delete a transaction and update UI", async () => {
+    spyOn(uiManager, "updateBalance").and.callThrough();
+    await uiManager.deleteTransaction("1");
+    expect(mockTransactionManager.deleteTransaction).toHaveBeenCalledWith("1");
+    expect(uiManager.updateBalance).toHaveBeenCalled();
+    expect(mockChartManager.updateChart).toHaveBeenCalled();
+  });
+
+  /**
+   * Verifies that the balance is correctly updated in the DOM (including currency symbol).
+   *
+   * @method updateBalance
+   * @memberof module:UIManagerTests
+   * @returns {void}
+   */
+  it("should update the balance display", () => {
+    uiManager.updateBalance();
+    const balanceElement = document.getElementById("available-money");
+    expect(balanceElement.textContent).toBe("1000.00zł");
+  });
+
+  /**
+   * Tests deleting all transactions via UIManager, checks if TransactionManager is called
+   * and UI (balance, chart) are refreshed.
+   *
+   * @method deleteAllTransactions
+   * @memberof module:UIManagerTests
+   * @returns {Promise&lt;void>}
+   */
+  it("should delete all transactions", async () => {
+    spyOn(uiManager, "hideDeleteAllModal").and.callThrough();
+    await uiManager.deleteAllTransactions();
+    expect(mockTransactionManager.deleteAllTransactions).toHaveBeenCalled();
+    expect(mockChartManager.updateChart).toHaveBeenCalled();
+    expect(uiManager.hideDeleteAllModal).toHaveBeenCalled();
+  });
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.4</a> on Fri Dec 27 2024 02:21:38 GMT+0100 (czas środkowoeuropejski standardowy) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

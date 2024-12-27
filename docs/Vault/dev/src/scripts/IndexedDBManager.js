@@ -120,16 +120,21 @@ class IndexedDBManager {
     return new Promise((resolve, reject) => {
       const transaction = db.transaction("transactions", "readonly");
       const store = transaction.objectStore("transactions");
-      const index = store.index("isSynced");
-      const request = index.getAll(IDBKeyRange.only(false));
-      request.onsuccess = () => {
-        const transactions = request.result.map((tx) => ({
-          ...tx,
-          id: tx.id.toString(),
-        }));
-        resolve(transactions);
+      const request = store.getAll();
+
+      request.onsuccess = (event) => {
+        const transactions = event.target.result || [];
+        const unsynced = transactions.filter((tx) => tx.isSynced === false);
+        resolve(unsynced.map((tx) => ({ ...tx, id: tx.id.toString() })));
       };
-      request.onerror = (event) => reject(event.target.error);
+
+      request.onerror = (event) => {
+        console.error(
+          "Error fetching unsynchronized transactions:",
+          event.target.error
+        );
+        reject(event.target.error);
+      };
     });
   }
 
@@ -174,7 +179,7 @@ class IndexedDBManager {
       const store = tx.objectStore("transactions");
       const newTransaction = {
         ...transaction,
-        isSynced: transaction.isSynced || false,
+        isSynced: Boolean(transaction.isSynced),
       };
       const request = store.add(newTransaction);
       request.onsuccess = (event) => {

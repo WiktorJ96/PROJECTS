@@ -1,6 +1,6 @@
 # Ignorowanie folderu z zależnościami
 node_modules/
-
+xxx/
 # Ignorowanie plików buildów i tymczasowych
 dist/
 build/

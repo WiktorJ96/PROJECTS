@@ -6,8 +6,8 @@ const cors = require("cors");
 const app = express();
 const db = new sqlite3.Database("./shop.db");
 
-app.use(bodyParser.json()); 
-app.use(cors()); 
+app.use(bodyParser.json());
+app.use(cors());
 
 db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS shops (
@@ -73,7 +73,9 @@ app.get("/api/shops", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Serwer działa poprawnie. Użyj /api/shops, aby uzyskać dostęp do listy sklepów.");
+  res.send(
+    "Serwer działa poprawnie. Użyj /api/shops, aby uzyskać dostęp do listy sklepów."
+  );
 });
 
 app.listen(5000, () => {
