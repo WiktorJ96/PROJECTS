@@ -596,6 +596,12 @@ footer p {
     border-radius: 0.5px;
   }
 
+  .tools {
+    border-top: 1px solid #ccc; /* Dodaje górną obwódkę, która wygląda jak linia */
+    margin-top: 10px;           /* Oddziela linię od treści zadania */
+    padding-top: 10px;          /* Zapewnia odstęp wewnątrz kontenera narzędzi */
+  }
+
   .header {
     position: fixed;
     border-radius: 0px;
@@ -629,12 +635,11 @@ footer p {
 
   .todo-list li {
     flex-wrap: wrap;
-    padding: 10px;
+    padding: 8px;
   }
 
   .task-text {
     width: 100%;
-    margin-bottom: 10px;
   }
 
   .tools {
