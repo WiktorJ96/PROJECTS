@@ -287,7 +287,11 @@ class ChartManager {
     const transactions = this.transactionManager.transactions || [];
 
     if (transactions.length === 0) {
-      console.log("Brak danych do zaktualizowania wykresu.");
+      this.chart.data.labels = [];
+      this.chart.data.datasets.forEach((dataset) => {
+        dataset.data = [];
+      });
+      this.chart.update();
       return;
     }
 
