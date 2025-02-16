@@ -17,6 +17,7 @@ const HamburgerMenu = ({
     setIsOpen(!isOpen);
   };
 
+  // Zbieramy ulubione produkty i sklepy
   const favoriteProducts = shops.flatMap((shop) =>
     shop.products.filter((product) => product.isFavorite)
   );
@@ -33,7 +34,7 @@ const HamburgerMenu = ({
       {/* Przycisk otwierający menu */}
       <button
         onClick={toggleMenu}
-        className="text-white border border-white rounded-full p-2"
+        className="text-white border border-white rounded-full p-3 shadow-lg hover:shadow-2xl focus:outline-none"
         aria-label="Toggle menu"
       >
         {isOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
@@ -41,14 +42,14 @@ const HamburgerMenu = ({
 
       {/* Menu boczne */}
       <div
-        className={`fixed top-0 left-0 h-full w-72 bg-white shadow-lg p-6 z-50 transform ${
+        className={`fixed top-0 left-0 h-full w-72 bg-white shadow-2xl p-8 z-50 transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-500 ease-in-out rounded-r-lg`}
       >
         <nav>
-          <ul className="flex flex-col space-y-6 text-gray-800">
+          <ul className="flex flex-col space-y-8 text-gray-800">
             <li
-              className="flex items-center space-x-4 text-lg font-medium hover:text-blue-500 cursor-pointer transition-transform duration-200 hover:scale-105"
+              className="flex items-center space-x-4 text-lg font-medium hover:text-blue-600 cursor-pointer transition-transform duration-200 hover:scale-105"
               onClick={() => {
                 openAddCardModal();
                 toggleMenu();
@@ -78,7 +79,7 @@ const HamburgerMenu = ({
       {/* Zaciemnienie tła */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="fixed inset-0 bg-black bg-opacity-40 z-40"
           onClick={toggleMenu}
           aria-label="Close menu by clicking outside"
         ></div>

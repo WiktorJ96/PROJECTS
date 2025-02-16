@@ -20,15 +20,22 @@ const ProductList = ({
 }) => {
   const products = shop.products || [];
 
+  // Modal states
   const [productToDelete, setProductToDelete] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
-  const [editedShopName, setEditedShopName] = useState(shop.name);
   const [isShopDeleteModalOpen, setIsShopDeleteModalOpen] = useState(false);
-
   const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
+
+  // Editing shop state
+  const [editedShopName, setEditedShopName] = useState(shop.name);
+
+  // Note state
   const [selectedProductForNote, setSelectedProductForNote] = useState(null);
   const [note, setNote] = useState("");
+
+  // State for rozwijania kontenera produktów
+  const [isProductsOpen, setIsProductsOpen] = useState(true);
 
   useEffect(() => {
     setEditedShopName(shop.name);
@@ -84,7 +91,7 @@ const ProductList = ({
 
   const toggleShopFavorite = () => {
     const updatedShop = { ...shop, isFavorite: !shop.isFavorite };
-    onUpdateShopFavorite(updatedShop); // Aktualizacja stanu w komponencie nadrzędnym
+    onUpdateShopFavorite(updatedShop);
   };
 
   const openNoteModal = (product) => {
@@ -104,18 +111,19 @@ const ProductList = ({
   return (
     <section
       id="productSection"
-      className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg shadow-lg p-8"
+      className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg shadow-lg p-6 my-8"
     >
-      <div className="flex justify-between items-center mb-4">
+      {/* Nagłówek sklepu i edycji */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
         {isEditingShop ? (
           <input
             type="text"
             value={editedShopName}
             onChange={(e) => setEditedShopName(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full sm:w-auto p-2 border border-gray-300 rounded"
           />
         ) : (
-          <h2 className="text-3xl font-bold text-gray-800 flex items-center space-x-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 flex items-center space-x-4">
             <span>
               Produkty w{" "}
               {shop.name.length > 25
@@ -125,7 +133,7 @@ const ProductList = ({
             <button
               onClick={toggleShopFavorite}
               className="focus:outline-none"
-              aria-label="Mark as favorite shop"
+              aria-label="Oznacz sklep jako ulubiony"
             >
               {shop.isFavorite ? (
                 <FaStar className="text-yellow-500 transition-colors duration-200" />
@@ -136,7 +144,7 @@ const ProductList = ({
           </h2>
         )}
         {isEditingShop ? (
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 mt-4 sm:mt-0">
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-200"
               onClick={handleEditShopName}
@@ -160,99 +168,197 @@ const ProductList = ({
         )}
       </div>
 
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded mb-4 hover:bg-blue-600 transition-colors duration-200"
-        onClick={() => setIsAddProductModalOpen(true)}
-      >
-        Dodaj produkt
-      </button>
+      {/* Akordeon dla produktów */}
+      <div className="mb-6">
+        <div
+          onClick={() => setIsProductsOpen((prev) => !prev)}
+          className="flex justify-between items-center cursor-pointer border-b border-gray-200 pb-2 mb-4"
+        >
+          <h3 className="text-xl font-semibold text-gray-800">Produkty</h3>
+          <span
+            className={`transition-transform duration-300 text-gray-600 ${
+              isProductsOpen ? "rotate-180" : "rotate-0"
+            }`}
+          >
+            <i className="fas fa-chevron-down"></i>
+          </span>
+        </div>
 
-      <div className="w-full overflow-x-auto">
-        <table className="w-full bg-white shadow-lg rounded-lg overflow-hidden border">
-          <thead>
-            <tr className="bg-gray-200 text-gray-700 border-b">
-              <th className="py-3 px-4 text-left font-semibold">
-                Nazwa produktu
-              </th>
-              <th className="py-3 px-4 text-left font-semibold">Cena</th>
-              <th className="py-3 px-4 text-left font-semibold">Link</th>
-              <th className="py-3 px-4 text-center font-semibold">Notatka</th>
-              <th className="py-3 px-4 text-center font-semibold">Ulubione</th>
-              <th className="py-3 px-4 text-center font-semibold">Usuń</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.length > 0 ? (
-              products.map((product, index) => (
-                <tr
-                  key={index}
-                  className="border-b hover:bg-gray-50 transition duration-150"
-                >
-                  <td className="py-3 px-4">
-                    {product.name.length > 20
-                      ? `${product.name.substring(0, 20)}...`
-                      : product.name}
-                  </td>
-                  <td className="py-3 px-4">
-                    {product.price.length > 20
-                      ? `${product.price.substring(0, 20)}...`
-                      : product.price}{" "}
-                    PLN
-                  </td>
-                  <td className="py-3 px-4">
+        {isProductsOpen && (
+          <>
+            {/* Przycisk dodania produktu */}
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded mb-4 hover:bg-blue-600 transition-colors duration-200"
+              onClick={() => setIsAddProductModalOpen(true)}
+            >
+              Dodaj produkt
+            </button>
+
+            {/* Widok mobilny - karty */}
+            <div className="sm:hidden">
+              {products.length > 0 ? (
+                products.map((product, index) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-lg shadow p-4 mb-4"
+                  >
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-lg font-semibold text-gray-700">
+                        {product.name}
+                      </span>
+                      <button
+                        onClick={() => toggleFavorite(index)}
+                        className="focus:outline-none"
+                        aria-label="Przełącz ulubione"
+                      >
+                        {product.isFavorite ? (
+                          <FaHeart className="text-red-500" />
+                        ) : (
+                          <FaRegHeart className="text-gray-400 hover:text-red-500 transition-colors duration-150" />
+                        )}
+                      </button>
+                    </div>
+                    <p className="text-sm text-gray-500 mb-2">
+                      {product.price} PLN
+                    </p>
                     <a
                       href={product.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-500 hover:underline transition-colors duration-150"
+                      className="text-blue-500 hover:underline transition-colors duration-150 block mb-2"
                     >
                       Zobacz produkt
                     </a>
-                  </td>
-                  <td className="py-3 px-4 text-center">
-                    <button onClick={() => openNoteModal(product)}>
-                      <FaStickyNote
-                        className={`${
-                          product.note
-                            ? "text-green-500"
-                            : "text-gray-600 hover:text-blue-500"
-                        }`}
-                      />
-                    </button>
-                  </td>
-                  <td className="py-3 px-4 text-center">
-                    <button
-                      onClick={() => toggleFavorite(index)}
-                      className="focus:outline-none"
-                    >
-                      {product.isFavorite ? (
-                        <FaHeart className="text-red-500" />
-                      ) : (
-                        <FaRegHeart />
-                      )}
-                    </button>
-                  </td>
-                  <td className="py-3 px-4 text-center">
-                    <button
-                      className="text-red-500 hover:text-red-700 transition-colors duration-150"
-                      onClick={() => openDeleteModalForProduct(product)}
-                    >
-                      <i className="fas fa-times"></i>
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6" className="py-4 text-center text-gray-500">
+                    <div className="flex justify-between">
+                      <button
+                        onClick={() => openNoteModal(product)}
+                        className="text-gray-600 hover:text-blue-500 transition-colors duration-150"
+                        aria-label="Edytuj notatkę"
+                      >
+                        <FaStickyNote />
+                      </button>
+                      <button
+                        onClick={() => openDeleteModalForProduct(product)}
+                        className="text-red-500 hover:text-red-700 transition-colors duration-150"
+                        aria-label="Usuń produkt"
+                      >
+                        <i className="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center text-gray-500 py-4">
                   Brak dostępnych produktów.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+                </p>
+              )}
+            </div>
+
+            {/* Widok desktopowy - tabela */}
+            <div className="hidden sm:block overflow-x-auto">
+              <table className="min-w-full bg-white rounded-lg shadow-lg">
+                <thead>
+                  <tr className="bg-gray-200 text-gray-700 border-b">
+                    <th className="py-3 px-4 text-left font-semibold">
+                      Nazwa produktu
+                    </th>
+                    <th className="py-3 px-4 text-left font-semibold">Cena</th>
+                    <th className="py-3 px-4 text-left font-semibold">Link</th>
+                    <th className="py-3 px-4 text-center font-semibold">
+                      Notatka
+                    </th>
+                    <th className="py-3 px-4 text-center font-semibold">
+                      Ulubione
+                    </th>
+                    <th className="py-3 px-4 text-center font-semibold">
+                      Usuń
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.length > 0 ? (
+                    products.map((product, index) => (
+                      <tr
+                        key={index}
+                        className="border-b hover:bg-gray-50 transition duration-150"
+                      >
+                        <td className="py-3 px-4">
+                          {product.name.length > 20
+                            ? `${product.name.substring(0, 20)}...`
+                            : product.name}
+                        </td>
+                        <td className="py-3 px-4">
+                          {product.price.length > 20
+                            ? `${product.price.substring(0, 20)}...`
+                            : product.price}{" "}
+                          PLN
+                        </td>
+                        <td className="py-3 px-4">
+                          <a
+                            href={product.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 hover:underline transition-colors duration-150"
+                          >
+                            Zobacz produkt
+                          </a>
+                        </td>
+                        <td className="py-3 px-4 text-center">
+                          <button
+                            onClick={() => openNoteModal(product)}
+                            aria-label="Edytuj notatkę"
+                          >
+                            <FaStickyNote
+                              className={`${
+                                product.note
+                                  ? "text-green-500"
+                                  : "text-gray-600 hover:text-blue-500 transition-colors duration-150"
+                              }`}
+                            />
+                          </button>
+                        </td>
+                        <td className="py-3 px-4 text-center">
+                          <button
+                            onClick={() => toggleFavorite(index)}
+                            className="focus:outline-none"
+                            aria-label="Przełącz ulubione"
+                          >
+                            {product.isFavorite ? (
+                              <FaHeart className="text-red-500" />
+                            ) : (
+                              <FaRegHeart className="text-gray-400 hover:text-red-500 transition-colors duration-150" />
+                            )}
+                          </button>
+                        </td>
+                        <td className="py-3 px-4 text-center">
+                          <button
+                            onClick={() => openDeleteModalForProduct(product)}
+                            className="text-red-500 hover:text-red-700 transition-colors duration-150"
+                            aria-label="Usuń produkt"
+                          >
+                            <i className="fas fa-times"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan="6"
+                        className="py-4 text-center text-gray-500"
+                      >
+                        Brak dostępnych produktów.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
       </div>
 
+      {/* Modale */}
       <DeleteConfirmationModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}

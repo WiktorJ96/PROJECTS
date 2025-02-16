@@ -6,7 +6,7 @@ import ProductList from "./components/ProductList/ProductList";
 import Footer from "./components/Footer/Footer";
 import AddShopModal from "./components/AddShopModal/AddShopModal";
 import AddCardModal from "./components/Header/AddCardModal";
-import RecurringReminders from "./components/RecurringReminders/RecurringReminders";
+import Reminders from "./components/Reminders/Reminders"; // Używamy nowego komponentu
 import {
   fetchShopsFromBackend,
   addShopToBackend,
@@ -20,6 +20,8 @@ import {
   loadRemindersFromLocalStorage,
   saveRemindersToLocalStorage,
 } from "./components/ShopService/ShopService";
+import "./App.css";
+
 
 function App() {
   const apiUrl = process.env.REACT_APP_API_URL || null;
@@ -121,7 +123,6 @@ function App() {
       shop.id === updatedShop.id ? updatedShop : shop
     );
     setShops(updatedShops);
-
     if (selectedShop && selectedShop.id === updatedShop.id) {
       setSelectedShop(updatedShop);
     }
@@ -177,7 +178,6 @@ function App() {
 
   const handleDeleteReminder = async (index) => {
     const reminderToDelete = reminders[index];
-
     if (isBackendActive) {
       try {
         await deleteReminderFromBackend(apiUrl, reminderToDelete.id);
@@ -203,9 +203,7 @@ function App() {
           const daysPassed = Math.floor(
             (now - startDate) / (1000 * 60 * 60 * 24)
           );
-
           const remainingDays = reminder.frequency - daysPassed;
-
           if (remainingDays <= 0) {
             return {
               ...reminder,
@@ -213,7 +211,6 @@ function App() {
               remainingDays: parseInt(reminder.frequency, 10),
             };
           }
-
           return {
             ...reminder,
             remainingDays: remainingDays > 0 ? remainingDays : 0,
@@ -221,7 +218,6 @@ function App() {
         })
       );
     }, 86400000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -230,7 +226,10 @@ function App() {
       <Header
         shops={shops}
         openAddCardModal={() => setIsAddCardModalOpen(true)}
-        handleSelectShop={handleSelectShop}
+        handleSelectShop={(shop) => {
+          setSelectedShop(shop);
+          setIsEditingShop(false);
+        }}
       />
       <AddCardModal
         isOpen={isAddCardModalOpen}
@@ -251,7 +250,10 @@ function App() {
           <>
             <ShopList
               shops={shops}
-              onSelectShop={handleSelectShop}
+              onSelectShop={(shop) => {
+                setSelectedShop(shop);
+                setIsEditingShop(false);
+              }}
               onAddShop={() => setIsAddShopModalOpen(true)}
             />
             {selectedShop && (
@@ -265,44 +267,12 @@ function App() {
                 onUpdateShopFavorite={handleUpdateShopFavorite}
               />
             )}
-            <RecurringReminders onAddReminder={handleAddReminder} />
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg shadow-lg p-6">
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">
-                Twoje przypomnienia
-              </h2>
-              {reminders.length > 0 ? (
-                <ul className="divide-y divide-gray-200">
-                  {reminders.map((reminder, index) => (
-                    <li
-                      key={index}
-                      className="flex items-center justify-between py-4 px-2 hover:bg-gray-50 transition-colors duration-150"
-                    >
-                      <div>
-                        <p className="text-lg font-medium text-gray-700">
-                          {reminder.productName}
-                        </p>
-                        <p className="text-sm text-gray-500">
-                          Przypomnienie co {reminder.frequency} dni
-                        </p>
-                        <p className="text-sm text-blue-500">
-                          Pozostało: {reminder.remainingDays} dni
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => handleDeleteReminder(index)}
-                        className="text-red-500 hover:text-red-700 transition-colors duration-150"
-                      >
-                        <i className="fas fa-times"></i>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="text-center text-gray-500 py-6">
-                  Nie masz jeszcze przypomnień.
-                </p>
-              )}
-            </div>
+            {/* Używamy zintegrowanego komponentu Reminders */}
+            <Reminders
+              onAddReminder={handleAddReminder}
+              reminders={reminders}
+              onDeleteReminder={handleDeleteReminder}
+            />
           </>
         )}
       </main>
