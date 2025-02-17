@@ -13,6 +13,8 @@ const ASSETS_TO_CACHE = [
   "./assets/ikona_Chorely.png",
   "./assets/Chorely_icon.svg",
   "./manifest.json",
+  "../translations/Chorely-en.json",
+  "../translations/Chorely-pl.json"
 ];
 
 self.addEventListener("install", (event) => {
