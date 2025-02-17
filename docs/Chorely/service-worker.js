@@ -1,4 +1,4 @@
-const CACHE_NAME = "todo-app-cache-v1.0.4";
+const CACHE_NAME = "todo-app-cache-v1.0.5";
 const ASSETS_TO_CACHE = [
   "/",
   "./Chorely.html",
@@ -13,8 +13,6 @@ const ASSETS_TO_CACHE = [
   "./assets/ikona_Chorely.png",
   "./assets/Chorely_icon.svg",
   "./manifest.json",
-  "../translations/Chorely-en.json",
-  "../translations/Chorely-pl.json"
 ];
 
 self.addEventListener("install", (event) => {
