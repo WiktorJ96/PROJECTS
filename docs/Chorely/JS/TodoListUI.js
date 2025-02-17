@@ -31,6 +31,9 @@ export class TodoListUI {
     this.ulList.innerHTML = "";
     const tasks = this.todoList.getAllTasks();
     tasks.forEach((task) => this.createTaskElement(task));
+
+    this.alertInfo.setAttribute("data-lang-key", "alertInfoNoTasks");
+
     if (tasks.length === 0) {
       this.alertInfo.textContent = "Brak zadań na liście.";
     } else {
@@ -135,7 +138,7 @@ export class TodoListUI {
       try {
         const updatedTask = this.todoList.editTask(
           taskId,
-          this.popupInput.value,
+          this.popupInput.value
         );
         if (updatedTask) {
           this.updateTaskAppearance(this.editedTodo, updatedTask);
