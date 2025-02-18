@@ -154,12 +154,11 @@ document.addEventListener("DOMContentLoaded", function () {
   calculateButton.addEventListener("click", obliczWszystko);
   checkFormValidity();
 
-  
   document.getElementById("lang-pl").addEventListener("click", function () {
     localStorage.setItem("preferredLanguage", "pl");
     setActiveLanguageButton();
     if (document.querySelector(".resultcontainer").style.display === "block") {
-      obliczWszystko(); 
+      obliczWszystko();
     }
   });
 
@@ -167,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("preferredLanguage", "en");
     setActiveLanguageButton();
     if (document.querySelector(".resultcontainer").style.display === "block") {
-      obliczWszystko(); 
+      obliczWszystko();
     }
   });
 
@@ -181,5 +180,5 @@ document.addEventListener("DOMContentLoaded", function () {
       .classList.toggle("active", currentLang === "en");
   }
 
-  setActiveLanguageButton(); 
+  setActiveLanguageButton();
 });

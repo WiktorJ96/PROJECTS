@@ -34,7 +34,9 @@ export class TodoListUI {
 
     if (tasks.length === 0) {
       this.alertInfo.setAttribute("data-lang-key", "alertInfoNoTasks");
+      this.alertInfo.textContent = "";
     } else {
+      this.alertInfo.removeAttribute("data-lang-key");
       this.alertInfo.textContent = "";
     }
   }
@@ -45,14 +47,20 @@ export class TodoListUI {
       const newTask = this.todoList.addNewTask(taskText);
       this.createTaskElement(newTask);
       this.todoInput.value = "";
+
+      this.alertInfo.removeAttribute("data-lang-key");
       this.alertInfo.textContent = "";
     } catch (error) {
       if (error.code === "EMPTY_TASK") {
-        this.alertInfo.textContent = "Wprowadź treść zadania.";
+
+        this.alertInfo.setAttribute("data-lang-key", "emptyTaskError");
+        this.alertInfo.textContent = "";
       } else if (error.code === "DUPLICATE_TASK") {
-        this.alertInfo.textContent = "Takie zadanie już istnieje.";
+        this.alertInfo.setAttribute("data-lang-key", "duplicateTaskError");
+        this.alertInfo.textContent = "";
       } else {
-        this.alertInfo.textContent = "Wystąpił błąd podczas dodawania zadania.";
+        this.alertInfo.setAttribute("data-lang-key", "taskAddError");
+        this.alertInfo.textContent = "";
       }
     }
   }
@@ -61,13 +69,13 @@ export class TodoListUI {
     const newTask = document.createElement("li");
     newTask.setAttribute("id", `todo-${task.id}`);
     newTask.innerHTML = `
-            <div class="task-text">${task.id}. ${DOMPurify.sanitize(task.text)}</div>
-            <div class="tools">
-                <button class="complete"><i class="fas fa-check"></i></button>
-                <button class="edit"><i class="fas fa-pen"></i></button>
-                <button class="delete"><i class="fas fa-times"></i></button>
-            </div>
-        `;
+      <div class="task-text">${task.id}. ${DOMPurify.sanitize(task.text)}</div>
+      <div class="tools">
+          <button class="complete"><i class="fas fa-check"></i></button>
+          <button class="edit"><i class="fas fa-pen"></i></button>
+          <button class="delete"><i class="fas fa-times"></i></button>
+      </div>
+    `;
     if (task.completed) {
       newTask.classList.add("completed");
       newTask.querySelector(".complete").classList.add("completed");
@@ -145,13 +153,19 @@ export class TodoListUI {
         }
       } catch (error) {
         if (error.code === "DUPLICATE_TASK") {
-          this.popupInfo.textContent = "Takie zadanie już istnieje.";
+          this.popupInfo.setAttribute(
+            "data-lang-key",
+            "taskEditDuplicateError"
+          );
+          this.popupInfo.textContent = "";
         } else {
-          this.popupInfo.textContent = "Wystąpił błąd podczas edycji zadania.";
+          this.popupInfo.setAttribute("data-lang-key", "taskEditError");
+          this.popupInfo.textContent = "";
         }
       }
     } else {
-      this.popupInfo.textContent = "Musisz podać jakąś treść zadania.";
+      this.popupInfo.setAttribute("data-lang-key", "emptyTaskEdit");
+      this.popupInfo.textContent = "";
     }
   }
 
@@ -168,6 +182,7 @@ export class TodoListUI {
 
   closePopup() {
     this.popup.style.display = "none";
+    this.popupInfo.removeAttribute("data-lang-key");
     this.popupInfo.textContent = "";
   }
 
