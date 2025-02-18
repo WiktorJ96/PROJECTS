@@ -32,10 +32,8 @@ export class TodoListUI {
     const tasks = this.todoList.getAllTasks();
     tasks.forEach((task) => this.createTaskElement(task));
 
-    this.alertInfo.setAttribute("data-lang-key", "alertInfoNoTasks");
-
     if (tasks.length === 0) {
-      this.alertInfo.textContent = "Brak zadań na liście.";
+      this.alertInfo.setAttribute("data-lang-key", "alertInfoNoTasks");
     } else {
       this.alertInfo.textContent = "";
     }
@@ -164,7 +162,7 @@ export class TodoListUI {
       this.updateTaskNumbers();
     }
     if (this.todoList.getAllTasks().length === 0) {
-      this.alertInfo.textContent = "Brak zadań na liście.";
+      window.location.reload();
     }
   }
 
