@@ -597,9 +597,9 @@ footer p {
   }
 
   .tools {
-    border-top: 1px solid #ccc; /* Dodaje górną obwódkę, która wygląda jak linia */
-    margin-top: 10px;           /* Oddziela linię od treści zadania */
-    padding-top: 10px;          /* Zapewnia odstęp wewnątrz kontenera narzędzi */
+    border-top: 1px solid #ccc; 
+    margin-top: 10px;           
+    padding-top: 10px;         
   }
 
   .header {
