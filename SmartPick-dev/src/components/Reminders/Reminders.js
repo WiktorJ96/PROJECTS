@@ -1,9 +1,13 @@
+// Reminders.js
 import React, { useState } from "react";
+import useReminderForm from "../ReminderForm/reminderForm";
 
 function Reminders({ onAddReminder, reminders, onDeleteReminder }) {
-  const [isOpen, setIsOpen] = useState(false); // stan akordeonu (kontener wysuwany)
-  const [isFormOpen, setIsFormOpen] = useState(false); // stan formularza dodawania przypomnienia
-  const [formData, setFormData] = useState({ productName: "", frequency: "" });
+  const [isOpen, setIsOpen] = useState(false); // Stan akordeonu
+  const [isFormOpen, setIsFormOpen] = useState(false); // Stan widoczności formularza
+  // Używamy hooka do obsługi formularza
+  const { formData, handleChange, handleSubmit } =
+    useReminderForm(onAddReminder);
 
   const toggleAccordion = () => {
     setIsOpen((prev) => !prev);
@@ -11,34 +15,6 @@ function Reminders({ onAddReminder, reminders, onDeleteReminder }) {
 
   const toggleForm = () => {
     setIsFormOpen((prev) => !prev);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "productName") {
-      setFormData((prev) => ({ ...prev, productName: value.slice(0, 50) }));
-    } else if (name === "frequency") {
-      const num = parseInt(value || "0", 10);
-      setFormData((prev) => ({
-        ...prev,
-        frequency: num > 0 ? Math.min(num, 1000) : "",
-      }));
-    }
-  };
-
-  const handleSubmit = () => {
-    const { productName, frequency } = formData;
-    if (productName && frequency) {
-      if (frequency > 1000) {
-        alert("Częstotliwość nie może przekraczać 1000 dni.");
-        return;
-      }
-      onAddReminder({ productName, frequency });
-      setFormData({ productName: "", frequency: "" });
-      setIsFormOpen(false);
-    } else {
-      alert("Wypełnij wszystkie pola.");
-    }
   };
 
   return (
@@ -104,7 +80,10 @@ function Reminders({ onAddReminder, reminders, onDeleteReminder }) {
                   />
                 </div>
                 <button
-                  onClick={handleSubmit}
+                  onClick={() => {
+                    handleSubmit();
+                    setIsFormOpen(false);
+                  }}
                   className="w-full px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors duration-200"
                 >
                   Dodaj przypomnienie

@@ -1,27 +1,15 @@
+// RecurringReminders.js
 import React, { useState } from "react";
+import useReminderForm from "../ReminderForm/reminderForm";
 
 function RecurringReminders({ onAddReminder }) {
-  const [productName, setProductName] = useState("");
-  const [frequency, setFrequency] = useState("");
-  const [isOpen, setIsOpen] = useState(false); // Stan informujący, czy formularz jest otwarty
+  const [isOpen, setIsOpen] = useState(false);
+  // Używamy hooka do obsługi formularza
+  const { formData, handleChange, handleSubmit } =
+    useReminderForm(onAddReminder);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleAddReminder = () => {
-    if (productName && frequency) {
-      if (frequency > 1000) {
-        alert("Częstotliwość nie może przekraczać 1000 dni.");
-        return;
-      }
-
-      onAddReminder({ productName, frequency });
-      setProductName("");
-      setFrequency("");
-    } else {
-      alert("Wypełnij wszystkie pola.");
-    }
   };
 
   return (
@@ -50,9 +38,10 @@ function RecurringReminders({ onAddReminder }) {
             </label>
             <input
               type="text"
-              value={productName}
-              onChange={(e) => setProductName(e.target.value.slice(0, 50))} // Ograniczenie do 50 znaków
-              maxLength={50} // Ograniczenie z poziomu HTML
+              name="productName"
+              value={formData.productName}
+              onChange={handleChange}
+              maxLength={50}
               placeholder="Wpisz nazwę produktu (max 50 znaków)"
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 focus:outline-none"
             />
@@ -63,17 +52,15 @@ function RecurringReminders({ onAddReminder }) {
             </label>
             <input
               type="number"
-              value={frequency}
-              onChange={(e) => {
-                const value = Math.min(1000, parseInt(e.target.value || 0, 10));
-                setFrequency(value > 0 ? value : "");
-              }}
+              name="frequency"
+              value={formData.frequency}
+              onChange={handleChange}
               placeholder="Podaj liczbę dni (max 1000)"
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 focus:outline-none"
             />
           </div>
           <button
-            onClick={handleAddReminder}
+            onClick={handleSubmit}
             className="w-full px-4 py-2 bg-blue-500 text-white text-center font-medium rounded-lg hover:bg-blue-600 transition-colors duration-200"
           >
             Dodaj przypomnienie
