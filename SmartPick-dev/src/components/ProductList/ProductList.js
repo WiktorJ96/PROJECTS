@@ -7,6 +7,7 @@ import {
   FaStickyNote,
   FaStar,
   FaRegStar,
+  FaEdit,
 } from "react-icons/fa";
 import { addProductToBackend } from "../ShopService/ShopService";
 
@@ -30,6 +31,14 @@ const ProductList = ({
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [isShopDeleteModalOpen, setIsShopDeleteModalOpen] = useState(false);
   const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
+
+  // Modal state dla edycji produktu
+  const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
+  const [productToEdit, setProductToEdit] = useState(null);
+  const [editProductName, setEditProductName] = useState("");
+  const [editProductPrice, setEditProductPrice] = useState("");
+  const [editProductLink, setEditProductLink] = useState("");
+  const [editProductNote, setEditProductNote] = useState("");
 
   // Editing shop state
   const [editedShopName, setEditedShopName] = useState(shop.name);
@@ -67,6 +76,36 @@ const ProductList = ({
   const openDeleteModalForProduct = (product) => {
     setProductToDelete(product);
     setIsDeleteModalOpen(true);
+  };
+
+  // Funkcja otwierająca modal edycji produktu
+  const openEditModalForProduct = (product) => {
+    setProductToEdit(product);
+    setEditProductName(product.name);
+    setEditProductPrice(product.price);
+    setEditProductLink(product.link);
+    setEditProductNote(product.note || "");
+    setIsEditProductModalOpen(true);
+  };
+
+  // Zapis edytowanych danych produktu
+  const handleSaveEditProduct = () => {
+    if (!editProductName.trim()) {
+      alert("Nazwa produktu jest wymagana.");
+      return;
+    }
+    const updatedProduct = {
+      ...productToEdit,
+      name: editProductName,
+      price: editProductPrice,
+      link: editProductLink,
+      note: editProductNote,
+    };
+    const updatedProducts = products.map((p) =>
+      p.id === updatedProduct.id ? updatedProduct : p
+    );
+    onUpdateProducts(updatedProducts);
+    setIsEditProductModalOpen(false);
   };
 
   // Funkcja dodająca produkt – używa aktualnego shop.id i globalnego apiUrl
@@ -216,17 +255,26 @@ const ProductList = ({
                       <span className="text-lg font-semibold text-gray-700">
                         {product.name}
                       </span>
-                      <button
-                        onClick={() => toggleFavorite(index)}
-                        className="focus:outline-none"
-                        aria-label="Przełącz ulubione"
-                      >
-                        {product.isFavorite ? (
-                          <FaHeart className="text-red-500" />
-                        ) : (
-                          <FaRegHeart className="text-gray-400 hover:text-red-500 transition-colors duration-150" />
-                        )}
-                      </button>
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => toggleFavorite(index)}
+                          className="focus:outline-none"
+                          aria-label="Przełącz ulubione"
+                        >
+                          {product.isFavorite ? (
+                            <FaHeart className="text-red-500" />
+                          ) : (
+                            <FaRegHeart className="text-gray-400 hover:text-red-500 transition-colors duration-150" />
+                          )}
+                        </button>
+                        <button
+                          onClick={() => openEditModalForProduct(product)}
+                          className="text-blue-500 hover:text-blue-700 transition-colors duration-150"
+                          aria-label="Edytuj produkt"
+                        >
+                          <FaEdit />
+                        </button>
+                      </div>
                     </div>
                     <p className="text-sm text-gray-500 mb-2">
                       {product.price} PLN
@@ -281,7 +329,7 @@ const ProductList = ({
                       Ulubione
                     </th>
                     <th className="py-3 px-4 text-center font-semibold">
-                      Usuń
+                      Akcje
                     </th>
                   </tr>
                 </thead>
@@ -342,11 +390,21 @@ const ProductList = ({
                         </td>
                         <td className="py-3 px-4 text-center">
                           <button
+                            onClick={() => openEditModalForProduct(product)}
+                            className="text-blue-500 hover:text-blue-700 transition-colors duration-150"
+                            aria-label="Edytuj produkt"
+                          >
+                            <FaEdit size={20} />
+                          </button>
+                          <button
                             onClick={() => openDeleteModalForProduct(product)}
-                            className="text-red-500 hover:text-red-700 transition-colors duration-150"
+                            className="text-red-500 hover:text-red-700 transition-colors duration-150 ml-5"
                             aria-label="Usuń produkt"
                           >
-                            <i className="fas fa-times"></i>
+                            <i
+                              className="fas fa-times"
+                              style={{ fontSize: "20px" }}
+                            ></i>
                           </button>
                         </td>
                       </tr>
@@ -414,6 +472,66 @@ const ProductList = ({
                 onClick={() => setIsNoteModalOpen(false)}
               >
                 Anuluj
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal edycji produktu */}
+      {isEditProductModalOpen && (
+        <div
+          role="dialog"
+          aria-labelledby="edit-product-modal-title"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+        >
+          <div className="bg-white rounded-lg p-8 w-full max-w-md">
+            <h2
+              id="edit-product-modal-title"
+              className="text-2xl font-semibold mb-4"
+            >
+              Edytuj produkt
+            </h2>
+            <input
+              type="text"
+              value={editProductName}
+              onChange={(e) => setEditProductName(e.target.value)}
+              placeholder="Nazwa produktu"
+              className="w-full p-2 mb-4 border rounded"
+            />
+            <input
+              type="number"
+              value={editProductPrice}
+              onChange={(e) => setEditProductPrice(e.target.value)}
+              placeholder="Cena produktu"
+              className="w-full p-2 mb-4 border rounded"
+            />
+            <input
+              type="text"
+              value={editProductLink}
+              onChange={(e) => setEditProductLink(e.target.value)}
+              placeholder="Link do produktu"
+              className="w-full p-2 mb-4 border rounded"
+            />
+            <input
+              type="text"
+              value={editProductNote}
+              onChange={(e) => setEditProductNote(e.target.value)}
+              placeholder="Notatka (opcjonalnie)"
+              className="w-full p-2 mb-4 border rounded"
+            />
+            <div className="flex justify-end space-x-2">
+              <button
+                className="btn-secondary px-4 py-2 rounded"
+                onClick={() => setIsEditProductModalOpen(false)}
+              >
+                Anuluj
+              </button>
+              <button
+                className="btn-primary px-4 py-2 rounded"
+                onClick={handleSaveEditProduct}
+              >
+                Zapisz zmiany
               </button>
             </div>
           </div>
