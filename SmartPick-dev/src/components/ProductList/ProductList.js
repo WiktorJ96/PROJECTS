@@ -9,7 +9,10 @@ import {
   FaRegStar,
   FaEdit,
 } from "react-icons/fa";
-import { addProductToBackend } from "../ShopService/ShopService";
+import {
+  addProductToBackend,
+  deleteProductFromBackend,
+} from "../ShopService/ShopService";
 
 // Ustawienie adresu API
 const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
@@ -43,11 +46,11 @@ const ProductList = ({
   // Editing shop state
   const [editedShopName, setEditedShopName] = useState(shop.name);
 
-  // Note state
+  // Note state (dla notatek)
   const [selectedProductForNote, setSelectedProductForNote] = useState(null);
   const [note, setNote] = useState("");
 
-  // State for rozwijania kontenera produktów
+  // State dla rozwijania listy produktów
   const [isProductsOpen, setIsProductsOpen] = useState(true);
 
   useEffect(() => {
@@ -66,12 +69,22 @@ const ProductList = ({
     setIsShopDeleteModalOpen(false);
   }, [shop.id, onDeleteShop]);
 
-  const handleDeleteProduct = useCallback(() => {
-    const updatedProducts = products.filter((p) => p.id !== productToDelete.id);
-    onUpdateProducts(updatedProducts);
-    setProductToDelete(null);
-    setIsDeleteModalOpen(false);
-  }, [productToDelete, products, onUpdateProducts]);
+  const handleDeleteProduct = useCallback(async () => {
+    try {
+      // Konwersja identyfikatorów na liczby
+      const shopIdNum = Number(shop.id);
+      const productIdNum = Number(productToDelete.id);
+      await deleteProductFromBackend(apiUrl, shopIdNum, productIdNum);
+      const updatedProducts = products.filter(
+        (p) => Number(p.id) !== productIdNum
+      );
+      onUpdateProducts(updatedProducts);
+      setProductToDelete(null);
+      setIsDeleteModalOpen(false);
+    } catch (error) {
+      console.error("Błąd przy usuwaniu produktu:", error);
+    }
+  }, [productToDelete, products, onUpdateProducts, shop.id]);
 
   const openDeleteModalForProduct = (product) => {
     setProductToDelete(product);
@@ -272,7 +285,7 @@ const ProductList = ({
                           className="text-blue-500 hover:text-blue-700 transition-colors duration-150"
                           aria-label="Edytuj produkt"
                         >
-                          <FaEdit />
+                          <FaEdit size={20} />
                         </button>
                       </div>
                     </div>
@@ -293,14 +306,23 @@ const ProductList = ({
                         className="text-gray-600 hover:text-blue-500 transition-colors duration-150"
                         aria-label="Edytuj notatkę"
                       >
-                        <FaStickyNote />
+                        <FaStickyNote
+                          className={`${
+                            product.note
+                              ? "text-green-500"
+                              : "text-gray-600 hover:text-blue-500 transition-colors duration-150"
+                          }`}
+                        />
                       </button>
                       <button
                         onClick={() => openDeleteModalForProduct(product)}
                         className="text-red-500 hover:text-red-700 transition-colors duration-150"
                         aria-label="Usuń produkt"
                       >
-                        <i className="fas fa-times"></i>
+                        <i
+                          className="fas fa-times"
+                          style={{ fontSize: "20px" }}
+                        ></i>
                       </button>
                     </div>
                   </div>
