@@ -8,6 +8,10 @@ import {
   FaStar,
   FaRegStar,
 } from "react-icons/fa";
+import { addProductToBackend } from "../ShopService/ShopService";
+
+// Ustawienie adresu API
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 const ProductList = ({
   shop,
@@ -54,9 +58,7 @@ const ProductList = ({
   }, [shop.id, onDeleteShop]);
 
   const handleDeleteProduct = useCallback(() => {
-    const updatedProducts = products.filter(
-      (p) => p.name !== productToDelete.name
-    );
+    const updatedProducts = products.filter((p) => p.id !== productToDelete.id);
     onUpdateProducts(updatedProducts);
     setProductToDelete(null);
     setIsDeleteModalOpen(false);
@@ -67,17 +69,25 @@ const ProductList = ({
     setIsDeleteModalOpen(true);
   };
 
-  const handleAddProduct = (product) => {
-    const updatedProducts = [
-      ...products,
-      {
-        name: product.name,
-        price: product.price,
-        link: product.link,
-        note: "",
-      },
-    ];
-    onUpdateProducts(updatedProducts);
+  // Funkcja dodająca produkt – używa aktualnego shop.id i globalnego apiUrl
+  const handleAddProduct = async (product) => {
+    console.log(
+      "Dodawanie produktu dla sklepu o ID:",
+      shop.id,
+      "dane:",
+      product
+    );
+    try {
+      if (!product.name || product.name.trim() === "") {
+        console.error("Brak nazwy produktu!");
+        return;
+      }
+      const addedProduct = await addProductToBackend(apiUrl, shop.id, product);
+      console.log("Odpowiedź z backendu:", addedProduct);
+      onUpdateProducts([...products, addedProduct]);
+    } catch (error) {
+      console.error("Błąd przy dodawaniu produktu:", error);
+    }
   };
 
   const toggleFavorite = (index) => {
@@ -102,7 +112,7 @@ const ProductList = ({
 
   const saveNote = () => {
     const updatedProducts = products.map((p) =>
-      p.name === selectedProductForNote.name ? { ...p, note } : p
+      p.id === selectedProductForNote.id ? { ...p, note } : p
     );
     onUpdateProducts(updatedProducts);
     setIsNoteModalOpen(false);
@@ -199,7 +209,7 @@ const ProductList = ({
               {products.length > 0 ? (
                 products.map((product, index) => (
                   <div
-                    key={index}
+                    key={product.id || index}
                     className="bg-white rounded-lg shadow p-4 mb-4"
                   >
                     <div className="flex justify-between items-center mb-2">
@@ -279,7 +289,7 @@ const ProductList = ({
                   {products.length > 0 ? (
                     products.map((product, index) => (
                       <tr
-                        key={index}
+                        key={product.id || index}
                         className="border-b hover:bg-gray-50 transition duration-150"
                       >
                         <td className="py-3 px-4">
@@ -288,8 +298,8 @@ const ProductList = ({
                             : product.name}
                         </td>
                         <td className="py-3 px-4">
-                          {product.price.length > 20
-                            ? `${product.price.substring(0, 20)}...`
+                          {product.price && product.price.toString().length > 20
+                            ? `${product.price.toString().substring(0, 20)}...`
                             : product.price}{" "}
                           PLN
                         </td>

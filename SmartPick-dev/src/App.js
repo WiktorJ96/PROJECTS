@@ -20,8 +20,6 @@ import {
   loadRemindersFromLocalStorage,
   saveRemindersToLocalStorage,
 } from "./components/ShopService/ShopService";
-import "./App.css";
-
 
 function App() {
   const apiUrl = process.env.REACT_APP_API_URL || null;
@@ -172,24 +170,25 @@ function App() {
         );
       }
     } else {
-      setReminders((prevReminders) => [...prevReminders, reminderWithDate]);
+      // Dla trybu offline przypisujemy unikalny identyfikator (np. za pomocą Date.now())
+      const offlineReminder = { ...reminderWithDate, id: Date.now() };
+      setReminders((prevReminders) => [...prevReminders, offlineReminder]);
     }
   };
 
-  const handleDeleteReminder = async (index) => {
-    const reminderToDelete = reminders[index];
+  const handleDeleteReminder = async (reminderId) => {
     if (isBackendActive) {
       try {
-        await deleteReminderFromBackend(apiUrl, reminderToDelete.id);
+        await deleteReminderFromBackend(apiUrl, reminderId);
         setReminders((prevReminders) =>
-          prevReminders.filter((_, i) => i !== index)
+          prevReminders.filter((reminder) => reminder.id !== reminderId)
         );
       } catch (error) {
         console.error("Błąd podczas usuwania przypomnienia z backendu:", error);
       }
     } else {
       setReminders((prevReminders) =>
-        prevReminders.filter((_, i) => i !== index)
+        prevReminders.filter((reminder) => reminder.id !== reminderId)
       );
     }
   };

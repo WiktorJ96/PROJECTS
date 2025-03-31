@@ -43,9 +43,10 @@ const AddProductModal = ({ isOpen, onClose, onAddProduct }) => {
 
   const handleAdd = () => {
     if (!validateInputs()) return;
+    // Konwersja ceny na liczbę
     onAddProduct({
       name: productName,
-      price: productPrice,
+      price: Number(productPrice),
       link: productLink,
     });
     onClose();
@@ -78,7 +79,7 @@ const AddProductModal = ({ isOpen, onClose, onAddProduct }) => {
           onKeyDown={handleKeyPress}
         />
         <input
-          type="text"
+          type="number"
           value={productPrice}
           onChange={(e) => setProductPrice(e.target.value)}
           placeholder="Cena produktu"

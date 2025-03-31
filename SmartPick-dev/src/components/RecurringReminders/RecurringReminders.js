@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import useReminderForm from "../ReminderForm/reminderForm";
 
 function RecurringReminders({ onAddReminder }) {
+  // Stan do kontroli widoczności formularza (akordeonu)
   const [isOpen, setIsOpen] = useState(false);
-  // Używamy hooka do obsługi formularza
+  // Używamy custom hooka useReminderForm, który zarządza stanem formularza, obsługą zmian oraz wysyłaniem danych
   const { formData, handleChange, handleSubmit } =
     useReminderForm(onAddReminder);
 
+  // Funkcja przełączająca widoczność formularza
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };

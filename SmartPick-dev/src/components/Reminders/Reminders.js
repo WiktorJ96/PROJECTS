@@ -1,10 +1,10 @@
-// Reminders.js
 import React, { useState } from "react";
 import useReminderForm from "../ReminderForm/reminderForm";
 
 function Reminders({ onAddReminder, reminders, onDeleteReminder }) {
   const [isOpen, setIsOpen] = useState(false); // Stan akordeonu
   const [isFormOpen, setIsFormOpen] = useState(false); // Stan widoczności formularza
+
   // Używamy hooka do obsługi formularza
   const { formData, handleChange, handleSubmit } =
     useReminderForm(onAddReminder);
@@ -99,9 +99,9 @@ function Reminders({ onAddReminder, reminders, onDeleteReminder }) {
             </h3>
             {reminders.length > 0 ? (
               <ul className="divide-y divide-gray-200">
-                {reminders.map((reminder, index) => (
+                {reminders.map((reminder) => (
                   <li
-                    key={index}
+                    key={reminder.id} // Używamy unikalnego identyfikatora jako klucza
                     className="flex flex-col sm:flex-row sm:items-center justify-between py-4 px-2 hover:bg-gray-50 transition-colors duration-150"
                   >
                     <div>
@@ -116,7 +116,7 @@ function Reminders({ onAddReminder, reminders, onDeleteReminder }) {
                       </p>
                     </div>
                     <button
-                      onClick={() => onDeleteReminder(index)}
+                      onClick={() => onDeleteReminder(reminder.id)} // Przekazujemy unikalny identyfikator
                       className="mt-2 sm:mt-0 text-red-500 hover:text-red-700 transition-colors duration-150"
                     >
                       <i className="fas fa-times"></i>

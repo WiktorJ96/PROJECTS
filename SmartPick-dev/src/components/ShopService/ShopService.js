@@ -8,13 +8,14 @@ export const fetchShopsFromBackend = async (apiUrl) => {
       const shopsFromServer = await response.json();
       return shopsFromServer.map((shop) => ({
         ...shop,
+        // Jeśli produkty nie są pobierane osobno, ustawiamy domyślnie []
         products: shop.products || [],
       }));
     } else {
-      throw new Error("Backend not available");
+      throw new Error("Error fetching shops");
     }
   } catch (error) {
-    console.error("Serwer niedostępny. Przełączanie na localStorage.");
+    console.error("Error fetching shops from backend:", error);
     throw error;
   }
 };
@@ -51,7 +52,6 @@ export const deleteShopFromBackend = async (apiUrl, shopId) => {
   }
 };
 
-// Obsługa Local Storage dla sklepów
 export const loadShopsFromLocalStorage = () => {
   const localShops = localStorage.getItem("shops");
   return localShops ? JSON.parse(localShops) : [];
@@ -74,7 +74,7 @@ export const fetchRemindersFromBackend = async (apiUrl) => {
     if (response.ok) {
       return await response.json();
     } else {
-      throw new Error("Backend not available");
+      throw new Error("Error fetching reminders");
     }
   } catch (error) {
     console.error("Error fetching reminders from backend:", error);
@@ -114,7 +114,6 @@ export const deleteReminderFromBackend = async (apiUrl, reminderId) => {
   }
 };
 
-// Obsługa Local Storage dla przypomnień
 export const loadRemindersFromLocalStorage = () => {
   const localReminders = localStorage.getItem("reminders");
   return localReminders ? JSON.parse(localReminders) : [];
@@ -131,3 +130,55 @@ export const createNewReminder = (name, frequency) => ({
   startDate: new Date().toISOString(),
   remainingDays: parseInt(frequency, 10),
 });
+
+// --- Funkcje dla produktów ---
+export const fetchProductsFromBackend = async (apiUrl, shopId) => {
+  try {
+    const response = await fetch(`${apiUrl}/api/shops/${shopId}/products`);
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error("Error fetching products");
+    }
+  } catch (error) {
+    console.error("Error fetching products from backend:", error);
+    throw error;
+  }
+};
+
+export const addProductToBackend = async (apiUrl, shopId, product) => {
+  try {
+    const response = await fetch(`${apiUrl}/api/shops/${shopId}/products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    });
+    if (response.ok) {
+      return await response.json();
+    } else {
+      const errorText = await response.text();
+      console.error("Error adding product, response:", errorText);
+      throw new Error("Error adding product");
+    }
+  } catch (error) {
+    console.error("Error connecting to server:", error);
+    throw error;
+  }
+};
+
+export const deleteProductFromBackend = async (apiUrl, shopId, productId) => {
+  try {
+    const response = await fetch(
+      `${apiUrl}/api/shops/${shopId}/products/${productId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!response.ok) throw new Error("Error deleting product");
+  } catch (error) {
+    console.error("Error connecting to server:", error);
+    throw error;
+  }
+};
