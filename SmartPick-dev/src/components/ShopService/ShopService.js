@@ -8,7 +8,7 @@ export const fetchShopsFromBackend = async (apiUrl) => {
       const shopsFromServer = await response.json();
       return shopsFromServer.map((shop) => ({
         ...shop,
-        // Jeśli produkty nie są pobierane osobno, ustawiamy domyślnie []
+        // Upewniamy się, że produkty są zawsze tablicą
         products: shop.products || [],
       }));
     } else {
@@ -24,9 +24,7 @@ export const addShopToBackend = async (apiUrl, shopName) => {
   try {
     const response = await fetch(`${apiUrl}/api/shops`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: shopName }),
     });
     if (response.ok) {
@@ -86,9 +84,7 @@ export const addReminderToBackend = async (apiUrl, reminder) => {
   try {
     const response = await fetch(`${apiUrl}/api/reminders`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(reminder),
     });
     if (response.ok) {
@@ -150,9 +146,7 @@ export const addProductToBackend = async (apiUrl, shopId, product) => {
   try {
     const response = await fetch(`${apiUrl}/api/shops/${shopId}/products`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(product),
     });
     if (response.ok) {
@@ -172,13 +166,20 @@ export const deleteProductFromBackend = async (apiUrl, shopId, productId) => {
   try {
     const response = await fetch(
       `${apiUrl}/api/shops/${shopId}/products/${productId}`,
-      {
-        method: "DELETE",
-      }
+      { method: "DELETE" }
     );
     if (!response.ok) throw new Error("Error deleting product");
   } catch (error) {
     console.error("Error connecting to server:", error);
     throw error;
   }
+};
+
+export const loadProductsFromLocalStorage = () => {
+  const localProducts = localStorage.getItem("products");
+  return localProducts ? JSON.parse(localProducts) : [];
+};
+
+export const saveProductsToLocalStorage = (products) => {
+  localStorage.setItem("products", JSON.stringify(products));
 };

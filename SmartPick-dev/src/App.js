@@ -6,7 +6,7 @@ import ProductList from "./components/ProductList/ProductList";
 import Footer from "./components/Footer/Footer";
 import AddShopModal from "./components/AddShopModal/AddShopModal";
 import AddCardModal from "./components/Header/AddCardModal";
-import Reminders from "./components/Reminders/Reminders"; // Używamy nowego komponentu
+import Reminders from "./components/Reminders/Reminders";
 import {
   fetchShopsFromBackend,
   addShopToBackend,
@@ -23,70 +23,58 @@ import {
 
 function App() {
   const apiUrl = process.env.REACT_APP_API_URL || null;
-  const [isAddCardModalOpen, setIsAddCardModalOpen] = useState(false);
   const [isBackendActive, setIsBackendActive] = useState(apiUrl !== null);
   const [notification, setNotification] = useState("");
-  const [shops, setShops] = useState(() =>
-    isBackendActive ? [] : loadShopsFromLocalStorage()
-  );
+  const [shops, setShops] = useState(loadShopsFromLocalStorage());
   const [reminders, setReminders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedShop, setSelectedShop] = useState(null);
   const [isAddShopModalOpen, setIsAddShopModalOpen] = useState(false);
+  const [isAddCardModalOpen, setIsAddCardModalOpen] = useState(false);
   const [isEditingShop, setIsEditingShop] = useState(false);
 
-  // Pobieranie sklepów
   const fetchShops = useCallback(async () => {
     setLoading(true);
-    if (isBackendActive) {
-      try {
-        const shopsFromServer = await fetchShopsFromBackend(apiUrl);
-        setShops(shopsFromServer);
-      } catch {
-        setNotification("Serwer niedostępny. Przełączono na tryb offline.");
-        setIsBackendActive(false);
-        setShops(loadShopsFromLocalStorage());
-      } finally {
-        setLoading(false);
-      }
-    } else {
+    try {
+      const shopsFromServer = await fetchShopsFromBackend(apiUrl);
+      setShops(shopsFromServer);
+      saveShopsToLocalStorage(shopsFromServer);
+    } catch (error) {
+      console.error("Błąd pobierania sklepów:", error);
+      setNotification(
+        "Błąd połączenia z serwerem. Dane pobrane z pamięci lokalnej."
+      );
       setShops(loadShopsFromLocalStorage());
+    } finally {
       setLoading(false);
     }
-  }, [apiUrl, isBackendActive]);
+  }, [apiUrl]);
 
-  // Pobieranie przypomnień
   useEffect(() => {
     const loadReminders = async () => {
-      if (isBackendActive) {
-        try {
-          const remindersFromServer = await fetchRemindersFromBackend(apiUrl);
-          setReminders(remindersFromServer);
-        } catch (error) {
-          console.error(
-            "Błąd podczas ładowania przypomnień z backendu:",
-            error
-          );
-          setReminders(loadRemindersFromLocalStorage());
-        }
-      } else {
+      try {
+        const remindersFromServer = await fetchRemindersFromBackend(apiUrl);
+        setReminders(remindersFromServer);
+        saveRemindersToLocalStorage(remindersFromServer);
+      } catch (error) {
+        console.error("Błąd podczas ładowania przypomnień z backendu:", error);
+        setNotification(
+          "Błąd połączenia z serwerem. Dane przypomnień pobrane z pamięci lokalnej."
+        );
         setReminders(loadRemindersFromLocalStorage());
       }
     };
     loadReminders();
-  }, [isBackendActive, apiUrl]);
+  }, [apiUrl]);
 
   useEffect(() => {
     fetchShops();
   }, [fetchShops]);
 
-  // Zapis do Local Storage
   useEffect(() => {
-    if (!isBackendActive) {
-      saveShopsToLocalStorage(shops);
-      saveRemindersToLocalStorage(reminders);
-    }
-  }, [shops, reminders, isBackendActive]);
+    saveShopsToLocalStorage(shops);
+    saveRemindersToLocalStorage(reminders);
+  }, [shops, reminders]);
 
   const handleSelectShop = (shop) => {
     setSelectedShop(shop);
@@ -95,15 +83,16 @@ function App() {
 
   const handleAddShop = async (newShopName) => {
     const newShop = createNewShop(newShopName);
-    if (isBackendActive) {
-      try {
-        const savedShop = await addShopToBackend(apiUrl, newShopName);
-        setShops([...shops, { ...newShop, id: savedShop.id }]);
-      } catch (error) {
-        console.error("Błąd podczas dodawania sklepu:", error);
-      }
-    } else {
-      setShops([...shops, newShop]);
+    try {
+      const savedShop = await addShopToBackend(apiUrl, newShopName);
+      const updatedShops = [...shops, { ...newShop, id: savedShop.id }];
+      setShops(updatedShops);
+      saveShopsToLocalStorage(updatedShops);
+    } catch (error) {
+      console.error("Błąd podczas dodawania sklepu:", error);
+      const updatedShops = [...shops, newShop];
+      setShops(updatedShops);
+      saveShopsToLocalStorage(updatedShops);
     }
     setIsAddShopModalOpen(false);
   };
@@ -114,6 +103,7 @@ function App() {
     );
     setShops(updatedShops);
     setSelectedShop({ ...selectedShop, name: newName });
+    saveShopsToLocalStorage(updatedShops);
   };
 
   const handleUpdateShopFavorite = (updatedShop) => {
@@ -124,18 +114,20 @@ function App() {
     if (selectedShop && selectedShop.id === updatedShop.id) {
       setSelectedShop(updatedShop);
     }
+    saveShopsToLocalStorage(updatedShops);
   };
 
   const handleDeleteShop = async (shopId) => {
-    if (isBackendActive) {
-      try {
-        await deleteShopFromBackend(apiUrl, shopId);
-        setShops((prevShops) => prevShops.filter((shop) => shop.id !== shopId));
-      } catch (error) {
-        console.error("Błąd podczas usuwania sklepu:", error);
-      }
-    } else {
-      setShops(shops.filter((shop) => shop.id !== shopId));
+    try {
+      await deleteShopFromBackend(apiUrl, shopId);
+      const updatedShops = shops.filter((shop) => shop.id !== shopId);
+      setShops(updatedShops);
+      saveShopsToLocalStorage(updatedShops);
+    } catch (error) {
+      console.error("Błąd podczas usuwania sklepu:", error);
+      const updatedShops = shops.filter((shop) => shop.id !== shopId);
+      setShops(updatedShops);
+      saveShopsToLocalStorage(updatedShops);
     }
   };
 
@@ -147,6 +139,7 @@ function App() {
     );
     setShops(updatedShops);
     setSelectedShop({ ...selectedShop, products: updatedProducts });
+    saveShopsToLocalStorage(updatedShops);
   };
 
   const handleAddReminder = async (newReminder) => {
@@ -156,40 +149,38 @@ function App() {
       remainingDays: parseInt(newReminder.frequency, 10),
     };
 
-    if (isBackendActive) {
-      try {
-        const savedReminder = await addReminderToBackend(
-          apiUrl,
-          reminderWithDate
-        );
-        setReminders((prevReminders) => [...prevReminders, savedReminder]);
-      } catch (error) {
-        console.error(
-          "Błąd podczas zapisywania przypomnienia w backendzie:",
-          error
-        );
-      }
-    } else {
-      // Dla trybu offline przypisujemy unikalny identyfikator (np. za pomocą Date.now())
+    try {
+      const savedReminder = await addReminderToBackend(
+        apiUrl,
+        reminderWithDate
+      );
+      const updatedReminders = [...reminders, savedReminder];
+      setReminders(updatedReminders);
+      saveRemindersToLocalStorage(updatedReminders);
+    } catch (error) {
+      console.error("Błąd podczas zapisywania przypomnienia:", error);
       const offlineReminder = { ...reminderWithDate, id: Date.now() };
-      setReminders((prevReminders) => [...prevReminders, offlineReminder]);
+      const updatedReminders = [...reminders, offlineReminder];
+      setReminders(updatedReminders);
+      saveRemindersToLocalStorage(updatedReminders);
     }
   };
 
   const handleDeleteReminder = async (reminderId) => {
-    if (isBackendActive) {
-      try {
-        await deleteReminderFromBackend(apiUrl, reminderId);
-        setReminders((prevReminders) =>
-          prevReminders.filter((reminder) => reminder.id !== reminderId)
-        );
-      } catch (error) {
-        console.error("Błąd podczas usuwania przypomnienia z backendu:", error);
-      }
-    } else {
-      setReminders((prevReminders) =>
-        prevReminders.filter((reminder) => reminder.id !== reminderId)
+    try {
+      await deleteReminderFromBackend(apiUrl, reminderId);
+      const updatedReminders = reminders.filter(
+        (reminder) => reminder.id !== reminderId
       );
+      setReminders(updatedReminders);
+      saveRemindersToLocalStorage(updatedReminders);
+    } catch (error) {
+      console.error("Błąd podczas usuwania przypomnienia:", error);
+      const updatedReminders = reminders.filter(
+        (reminder) => reminder.id !== reminderId
+      );
+      setReminders(updatedReminders);
+      saveRemindersToLocalStorage(updatedReminders);
     }
   };
 
@@ -257,6 +248,7 @@ function App() {
             />
             {selectedShop && (
               <ProductList
+                key={selectedShop.id}
                 shop={selectedShop}
                 isEditingShop={isEditingShop}
                 setIsEditingShop={setIsEditingShop}
@@ -266,7 +258,6 @@ function App() {
                 onUpdateShopFavorite={handleUpdateShopFavorite}
               />
             )}
-            {/* Używamy zintegrowanego komponentu Reminders */}
             <Reminders
               onAddReminder={handleAddReminder}
               reminders={reminders}

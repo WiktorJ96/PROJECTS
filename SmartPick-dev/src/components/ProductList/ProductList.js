@@ -14,7 +14,6 @@ import {
   deleteProductFromBackend,
 } from "../ShopService/ShopService";
 
-// Ustawienie adresu API
 const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 const ProductList = ({
@@ -28,14 +27,12 @@ const ProductList = ({
 }) => {
   const products = shop.products || [];
 
-  // Modal states
   const [productToDelete, setProductToDelete] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [isShopDeleteModalOpen, setIsShopDeleteModalOpen] = useState(false);
   const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
 
-  // Modal state dla edycji produktu
   const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
   const [editProductName, setEditProductName] = useState("");
@@ -43,14 +40,11 @@ const ProductList = ({
   const [editProductLink, setEditProductLink] = useState("");
   const [editProductNote, setEditProductNote] = useState("");
 
-  // Editing shop state
   const [editedShopName, setEditedShopName] = useState(shop.name);
 
-  // Note state (dla notatek)
   const [selectedProductForNote, setSelectedProductForNote] = useState(null);
   const [note, setNote] = useState("");
 
-  // State dla rozwijania listy produktów
   const [isProductsOpen, setIsProductsOpen] = useState(true);
 
   useEffect(() => {
@@ -71,18 +65,18 @@ const ProductList = ({
 
   const handleDeleteProduct = useCallback(async () => {
     try {
-      // Konwersja identyfikatorów na liczby
       const shopIdNum = Number(shop.id);
       const productIdNum = Number(productToDelete.id);
       await deleteProductFromBackend(apiUrl, shopIdNum, productIdNum);
+    } catch (error) {
+      console.error("Błąd przy usuwaniu produktu:", error);
+    } finally {
       const updatedProducts = products.filter(
-        (p) => Number(p.id) !== productIdNum
+        (p) => Number(p.id) !== Number(productToDelete.id)
       );
       onUpdateProducts(updatedProducts);
       setProductToDelete(null);
       setIsDeleteModalOpen(false);
-    } catch (error) {
-      console.error("Błąd przy usuwaniu produktu:", error);
     }
   }, [productToDelete, products, onUpdateProducts, shop.id]);
 
@@ -91,7 +85,6 @@ const ProductList = ({
     setIsDeleteModalOpen(true);
   };
 
-  // Funkcja otwierająca modal edycji produktu
   const openEditModalForProduct = (product) => {
     setProductToEdit(product);
     setEditProductName(product.name);
@@ -101,7 +94,6 @@ const ProductList = ({
     setIsEditProductModalOpen(true);
   };
 
-  // Zapis edytowanych danych produktu
   const handleSaveEditProduct = () => {
     if (!editProductName.trim()) {
       alert("Nazwa produktu jest wymagana.");
@@ -121,24 +113,36 @@ const ProductList = ({
     setIsEditProductModalOpen(false);
   };
 
-  // Funkcja dodająca produkt – używa aktualnego shop.id i globalnego apiUrl
+  // Optymistyczna aktualizacja przy dodawaniu produktu
   const handleAddProduct = async (product) => {
-    console.log(
-      "Dodawanie produktu dla sklepu o ID:",
-      shop.id,
-      "dane:",
-      product
-    );
+    if (!product.name || product.name.trim() === "") {
+      console.error("Brak nazwy produktu!");
+      return;
+    }
+
+    // Tworzymy tymczasowy produkt z unikalnym id
+    const temporaryProduct = { ...product, id: Date.now(), isLoading: true };
+
+    // Aktualizujemy interfejs natychmiast
+    const updatedProducts = [...products, temporaryProduct];
+    onUpdateProducts(updatedProducts);
+    // Zamykamy modal natychmiast
+    setIsAddProductModalOpen(false);
+
     try {
-      if (!product.name || product.name.trim() === "") {
-        console.error("Brak nazwy produktu!");
-        return;
-      }
       const addedProduct = await addProductToBackend(apiUrl, shop.id, product);
-      console.log("Odpowiedź z backendu:", addedProduct);
-      onUpdateProducts([...products, addedProduct]);
+      // Zamieniamy tymczasowy produkt na ostateczne dane z backendu
+      const finalProducts = updatedProducts.map((p) =>
+        p.id === temporaryProduct.id ? addedProduct : p
+      );
+      onUpdateProducts(finalProducts);
     } catch (error) {
       console.error("Błąd przy dodawaniu produktu:", error);
+      // Usuwamy tymczasowy produkt, jeśli wystąpi błąd
+      const finalProducts = updatedProducts.filter(
+        (p) => p.id !== temporaryProduct.id
+      );
+      onUpdateProducts(finalProducts);
     }
   };
 
@@ -248,7 +252,6 @@ const ProductList = ({
 
         {isProductsOpen && (
           <>
-            {/* Przycisk dodania produktu */}
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded mb-4 hover:bg-blue-600 transition-colors duration-200"
               onClick={() => setIsAddProductModalOpen(true)}
@@ -256,7 +259,7 @@ const ProductList = ({
               Dodaj produkt
             </button>
 
-            {/* Widok mobilny - karty */}
+            {/* Widok mobilny */}
             <div className="sm:hidden">
               {products.length > 0 ? (
                 products.map((product, index) => (
@@ -334,7 +337,7 @@ const ProductList = ({
               )}
             </div>
 
-            {/* Widok desktopowy - tabela */}
+            {/* Widok desktopowy */}
             <div className="hidden sm:block overflow-x-auto">
               <table className="min-w-full bg-white rounded-lg shadow-lg">
                 <thead>
@@ -448,7 +451,6 @@ const ProductList = ({
         )}
       </div>
 
-      {/* Modale */}
       <DeleteConfirmationModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
@@ -500,7 +502,6 @@ const ProductList = ({
         </div>
       )}
 
-      {/* Modal edycji produktu */}
       {isEditProductModalOpen && (
         <div
           role="dialog"
