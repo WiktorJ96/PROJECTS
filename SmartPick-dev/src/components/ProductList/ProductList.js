@@ -113,34 +113,30 @@ const ProductList = ({
     setIsEditProductModalOpen(false);
   };
 
-  // Optymistyczna aktualizacja przy dodawaniu produktu
+  // Optymistyczna aktualizacja przy dodawaniu produktu z oznaczeniem offline w przypadku błędu
   const handleAddProduct = async (product) => {
     if (!product.name || product.name.trim() === "") {
       console.error("Brak nazwy produktu!");
       return;
     }
 
-    // Tworzymy tymczasowy produkt z unikalnym id
     const temporaryProduct = { ...product, id: Date.now(), isLoading: true };
-
-    // Aktualizujemy interfejs natychmiast
     const updatedProducts = [...products, temporaryProduct];
     onUpdateProducts(updatedProducts);
-    // Zamykamy modal natychmiast
     setIsAddProductModalOpen(false);
 
     try {
       const addedProduct = await addProductToBackend(apiUrl, shop.id, product);
-      // Zamieniamy tymczasowy produkt na ostateczne dane z backendu
       const finalProducts = updatedProducts.map((p) =>
         p.id === temporaryProduct.id ? addedProduct : p
       );
       onUpdateProducts(finalProducts);
     } catch (error) {
       console.error("Błąd przy dodawaniu produktu:", error);
-      // Usuwamy tymczasowy produkt, jeśli wystąpi błąd
-      const finalProducts = updatedProducts.filter(
-        (p) => p.id !== temporaryProduct.id
+      // Dodajemy flagę unsynced, by oznaczyć, że produkt nie został zsynchronizowany
+      const fallbackProduct = { ...product, id: Date.now(), unsynced: true };
+      const finalProducts = updatedProducts.map((p) =>
+        p.id === temporaryProduct.id ? fallbackProduct : p
       );
       onUpdateProducts(finalProducts);
     }

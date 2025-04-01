@@ -33,12 +33,19 @@ function App() {
   const [isAddCardModalOpen, setIsAddCardModalOpen] = useState(false);
   const [isEditingShop, setIsEditingShop] = useState(false);
 
+  // Pobieramy dane ze serwera i scalamy je z rekordami offline (unsynced)
   const fetchShops = useCallback(async () => {
     setLoading(true);
     try {
       const shopsFromServer = await fetchShopsFromBackend(apiUrl);
-      setShops(shopsFromServer);
-      saveShopsToLocalStorage(shopsFromServer);
+      // Pobieramy sklepy zapisane lokalnie
+      const localShops = loadShopsFromLocalStorage();
+      // Wyodrębniamy te, które zostały dodane offline (unsynced)
+      const offlineShops = localShops.filter((shop) => shop.unsynced);
+      // Łączymy dane z serwera i offline – dane offline mają priorytet, bo nie udało się ich wysłać
+      const mergedShops = [...shopsFromServer, ...offlineShops];
+      setShops(mergedShops);
+      saveShopsToLocalStorage(mergedShops);
     } catch (error) {
       console.error("Błąd pobierania sklepów:", error);
       setNotification(
@@ -82,17 +89,29 @@ function App() {
   };
 
   const handleAddShop = async (newShopName) => {
-    const newShop = createNewShop(newShopName);
-    try {
-      const savedShop = await addShopToBackend(apiUrl, newShopName);
-      const updatedShops = [...shops, { ...newShop, id: savedShop.id }];
-      setShops(updatedShops);
-      saveShopsToLocalStorage(updatedShops);
-    } catch (error) {
-      console.error("Błąd podczas dodawania sklepu:", error);
+    let newShop = createNewShop(newShopName);
+    // Jeśli backend nie jest aktywny, dodajemy flagę unsynced
+    if (!isBackendActive) {
+      newShop = { ...newShop, unsynced: true };
       const updatedShops = [...shops, newShop];
       setShops(updatedShops);
       saveShopsToLocalStorage(updatedShops);
+    } else {
+      try {
+        const savedShop = await addShopToBackend(apiUrl, newShopName);
+        // Aktualizujemy rekord, aby usunąć flagę unsynced
+        const updatedShop = { ...newShop, id: savedShop.id };
+        const updatedShops = [...shops, updatedShop];
+        setShops(updatedShops);
+        saveShopsToLocalStorage(updatedShops);
+      } catch (error) {
+        console.error("Błąd podczas dodawania sklepu:", error);
+        // W przypadku błędu oznaczamy rekord jako unsynced
+        newShop = { ...newShop, unsynced: true };
+        const updatedShops = [...shops, newShop];
+        setShops(updatedShops);
+        saveShopsToLocalStorage(updatedShops);
+      }
     }
     setIsAddShopModalOpen(false);
   };
@@ -159,7 +178,11 @@ function App() {
       saveRemindersToLocalStorage(updatedReminders);
     } catch (error) {
       console.error("Błąd podczas zapisywania przypomnienia:", error);
-      const offlineReminder = { ...reminderWithDate, id: Date.now() };
+      const offlineReminder = {
+        ...reminderWithDate,
+        id: Date.now(),
+        unsynced: true,
+      };
       const updatedReminders = [...reminders, offlineReminder];
       setReminders(updatedReminders);
       saveRemindersToLocalStorage(updatedReminders);

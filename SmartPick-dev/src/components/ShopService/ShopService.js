@@ -8,7 +8,6 @@ export const fetchShopsFromBackend = async (apiUrl) => {
       const shopsFromServer = await response.json();
       return shopsFromServer.map((shop) => ({
         ...shop,
-        // Upewniamy się, że produkty są zawsze tablicą
         products: shop.products || [],
       }));
     } else {
