@@ -26,7 +26,9 @@ function App() {
   const [isBackendActive, setIsBackendActive] = useState(apiUrl !== null);
   const [notification, setNotification] = useState("");
   const [shops, setShops] = useState(loadShopsFromLocalStorage());
-  const [reminders, setReminders] = useState([]);
+  const [reminders, setReminders] = useState(
+    loadRemindersFromLocalStorage() || []
+  );
   const [loading, setLoading] = useState(true);
   const [selectedShop, setSelectedShop] = useState(null);
   const [isAddShopModalOpen, setIsAddShopModalOpen] = useState(false);
@@ -38,11 +40,8 @@ function App() {
     setLoading(true);
     try {
       const shopsFromServer = await fetchShopsFromBackend(apiUrl);
-      // Pobieramy sklepy zapisane lokalnie
       const localShops = loadShopsFromLocalStorage();
-      // Wyodrębniamy te, które zostały dodane offline (unsynced)
       const offlineShops = localShops.filter((shop) => shop.unsynced);
-      // Łączymy dane z serwera i offline – dane offline mają priorytet, bo nie udało się ich wysłać
       const mergedShops = [...shopsFromServer, ...offlineShops];
       setShops(mergedShops);
       saveShopsToLocalStorage(mergedShops);
@@ -78,6 +77,7 @@ function App() {
     fetchShops();
   }, [fetchShops]);
 
+  // Przy każdej zmianie listy sklepów i przypomnień zapisujemy je w localStorage
   useEffect(() => {
     saveShopsToLocalStorage(shops);
     saveRemindersToLocalStorage(reminders);
@@ -90,7 +90,6 @@ function App() {
 
   const handleAddShop = async (newShopName) => {
     let newShop = createNewShop(newShopName);
-    // Jeśli backend nie jest aktywny, dodajemy flagę unsynced
     if (!isBackendActive) {
       newShop = { ...newShop, unsynced: true };
       const updatedShops = [...shops, newShop];
@@ -99,14 +98,12 @@ function App() {
     } else {
       try {
         const savedShop = await addShopToBackend(apiUrl, newShopName);
-        // Aktualizujemy rekord, aby usunąć flagę unsynced
         const updatedShop = { ...newShop, id: savedShop.id };
         const updatedShops = [...shops, updatedShop];
         setShops(updatedShops);
         saveShopsToLocalStorage(updatedShops);
       } catch (error) {
         console.error("Błąd podczas dodawania sklepu:", error);
-        // W przypadku błędu oznaczamy rekord jako unsynced
         newShop = { ...newShop, unsynced: true };
         const updatedShops = [...shops, newShop];
         setShops(updatedShops);
@@ -207,6 +204,7 @@ function App() {
     }
   };
 
+  // Aktualizacja przypomnień – co 24 godziny
   useEffect(() => {
     const interval = setInterval(() => {
       setReminders((prevReminders) =>

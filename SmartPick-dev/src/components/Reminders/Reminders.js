@@ -3,9 +3,8 @@ import useReminderForm from "../ReminderForm/reminderForm";
 
 function Reminders({ onAddReminder, reminders, onDeleteReminder }) {
   const [isOpen, setIsOpen] = useState(false); // Stan akordeonu
-  const [isFormOpen, setIsFormOpen] = useState(false); // Stan widoczności formularza
+  const [isFormOpen, setIsFormOpen] = useState(false); // Widoczność formularza
 
-  // Używamy hooka do obsługi formularza
   const { formData, handleChange, handleSubmit } =
     useReminderForm(onAddReminder);
 
@@ -22,7 +21,7 @@ function Reminders({ onAddReminder, reminders, onDeleteReminder }) {
       {/* Nagłówek akordeonu */}
       <div
         onClick={toggleAccordion}
-        className="px-6 py-4 from-gray-50 to-gray-100 cursor-pointer flex justify-between items-center"
+        className="px-6 py-4 cursor-pointer flex justify-between items-center"
       >
         <h2 className="text-3xl font-bold text-gray-800">Przypomnienia</h2>
         <span
@@ -80,8 +79,8 @@ function Reminders({ onAddReminder, reminders, onDeleteReminder }) {
                   />
                 </div>
                 <button
-                  onClick={() => {
-                    handleSubmit();
+                  onClick={async () => {
+                    await handleSubmit();
                     setIsFormOpen(false);
                   }}
                   className="w-full px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors duration-200"
@@ -101,7 +100,7 @@ function Reminders({ onAddReminder, reminders, onDeleteReminder }) {
               <ul className="divide-y divide-gray-200">
                 {reminders.map((reminder) => (
                   <li
-                    key={reminder.id} // Używamy unikalnego identyfikatora jako klucza
+                    key={reminder.id}
                     className="flex flex-col sm:flex-row sm:items-center justify-between py-4 px-2 hover:bg-gray-50 transition-colors duration-150"
                   >
                     <div>
@@ -114,9 +113,12 @@ function Reminders({ onAddReminder, reminders, onDeleteReminder }) {
                       <p className="text-sm text-blue-500">
                         Pozostało: {reminder.remainingDays} dni
                       </p>
+                      {reminder.unsynced && (
+                        <p className="text-xs text-red-500">Offline</p>
+                      )}
                     </div>
                     <button
-                      onClick={() => onDeleteReminder(reminder.id)} // Przekazujemy unikalny identyfikator
+                      onClick={() => onDeleteReminder(reminder.id)}
                       className="mt-2 sm:mt-0 text-red-500 hover:text-red-700 transition-colors duration-150"
                     >
                       <i className="fas fa-times"></i>

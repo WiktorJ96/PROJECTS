@@ -1,4 +1,3 @@
-// useReminderForm.js
 import { useState } from "react";
 
 function useReminderForm(
@@ -9,18 +8,16 @@ function useReminderForm(
 ) {
   const [formData, setFormData] = useState(initialValues);
 
-  // Obsługuje zmiany w polach formularza
+  // Obsługa zmian w formularzu
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "productName") {
-      // Ograniczenie do określonej liczby znaków
       setFormData((prev) => ({
         ...prev,
         productName: value.slice(0, maxChars),
       }));
     } else if (name === "frequency") {
       const num = parseInt(value || "0", 10);
-      // Jeśli liczba jest większa od 0, ograniczamy do maxFrequency
       setFormData((prev) => ({
         ...prev,
         frequency: num > 0 ? Math.min(num, maxFrequency) : "",
@@ -28,16 +25,26 @@ function useReminderForm(
     }
   };
 
-  // Obsługuje wysyłanie formularza z walidacją
-  const handleSubmit = () => {
+  // Obsługa wysłania formularza
+  const handleSubmit = async () => {
     const { productName, frequency } = formData;
     if (productName && frequency) {
       if (frequency > maxFrequency) {
         alert(`Częstotliwość nie może przekraczać ${maxFrequency} dni.`);
         return;
       }
-      onAddReminder({ productName, frequency });
-      setFormData(initialValues); // Reset formularza
+      // Tworzymy tymczasowy rekord przypomnienia
+      const temporaryReminder = {
+        productName,
+        frequency,
+        id: Date.now(), // tymczasowe id
+        startDate: new Date().toISOString(),
+        remainingDays: parseInt(frequency, 10),
+        isLoading: true,
+      };
+      // Wywołujemy funkcję onAddReminder z parametrem informującym o optymistycznej aktualizacji
+      await onAddReminder(temporaryReminder, true);
+      setFormData(initialValues);
     } else {
       alert("Wypełnij wszystkie pola.");
     }
