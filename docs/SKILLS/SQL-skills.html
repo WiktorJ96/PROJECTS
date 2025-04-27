@@ -4,15 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title data-lang-key="title-sql-skills">Umiejętności SQL</title>
-  <link rel="icon" type="image/png" href="assets/sql-logo.png" sizes="16x16" />
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-  />
+  <link rel="icon" type="image/png" href="assets/sql-database-generic.svg" sizes="16x16" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link rel="stylesheet" href="skills.css" />
   <style>
     .sql-hr {
@@ -25,11 +19,9 @@
         #00b4d8
       );
       margin: 40px 0;
-      margin-top: 15px;
       position: relative;
       overflow: visible;
     }
-
     .sql-hr::before {
       content: 'SQL';
       display: block;
@@ -48,18 +40,13 @@
 </head>
 <body data-page="sql">
   <div class="language-switch">
-    <button id="lang-pl">PL</button>
-    <button id="lang-en">EN</button>
+    <button id="lang-pl" data-lang-key="button-lang-pl">PL</button>
+    <button id="lang-en" data-lang-key="button-lang-en">EN</button>
   </div>
 
   <div class="container py-5">
-    <div class="text-center iconSQL">
-      <img
-        src="assets/sql-logo.png"
-        alt="SQL Logo"
-        style="width: 130px; height: 100px;"
-        class="mb-4"
-      />
+    <div class="text-center">
+      <i class="fas fa-database icon iconSQL"></i>
     </div>
 
     <hr class="sql-hr" />
@@ -70,9 +57,9 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-seedling skill-icon mb-3"></i>
-            <h5 class="card-title">Podstawy SQL</h5>
-            <p class="card-text">
-            Podstawowe komendy SELECT, FROM, WHERE, itd. podstawowa składnia, zasady korzystania z bazy danych.
+            <h5 class="card-title" data-lang-key="basic-sql-title">Podstawy SQL</h5>
+            <p class="card-text" data-lang-key="basic-sql-text">
+              Podstawowe komendy SELECT, FROM, WHERE, itd. podstawowa składnia, zasady korzystania z bazy danych.
             </p>
           </div>
           <div class="card-footer">
@@ -88,8 +75,8 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-layer-group skill-icon mb-3"></i>
-            <h5 class="card-title">Agregacje i Grupowanie</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="aggregation-title">Agregacje i Grupowanie</h5>
+            <p class="card-text" data-lang-key="aggregation-text">
               GROUP BY, HAVING, funkcje agregujące (MIN, MAX, SUM, COUNT, AVG), filtry.
             </p>
           </div>
@@ -106,8 +93,8 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-link skill-icon mb-3"></i>
-            <h5 class="card-title">Łączenia (JOINy)</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="joins-title">Łączenia (JOINy)</h5>
+            <p class="card-text" data-lang-key="joins-text">
               INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL JOIN, CROSS JOIN; kiedy i jak stosować.
             </p>
           </div>
@@ -124,8 +111,8 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-level-down-alt skill-icon mb-3"></i>
-            <h5 class="card-title">Podzapytania (Subqueries)</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="subqueries-title">Podzapytania (Subqueries)</h5>
+            <p class="card-text" data-lang-key="subqueries-text">
               Wbudowane zapytania w klauzulach SELECT, FROM, WHERE, użycie EXISTS i IN.
             </p>
           </div>
@@ -142,8 +129,8 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-bookmark skill-icon mb-3"></i>
-            <h5 class="card-title">Klauzule Zaawansowane</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="advanced-clauses-title">Klauzule Zaawansowane</h5>
+            <p class="card-text" data-lang-key="advanced-clauses-text">
               WITH (CTE), klauzule rekurencyjne, PARTITION BY, OVER, funkcje okienkowe (window functions).
             </p>
           </div>
@@ -160,8 +147,8 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-exchange-alt skill-icon mb-3"></i>
-            <h5 class="card-title">Transakcje</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="transactions-title">Transakcje</h5>
+            <p class="card-text" data-lang-key="transactions-text">
               ACID, START TRANSACTION, COMMIT, ROLLBACK, poziomy izolacji, zarządzanie blokadami.
             </p>
           </div>
@@ -178,8 +165,8 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-search skill-icon mb-3"></i>
-            <h5 class="card-title">Indeksy i Optymalizacja</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="indexes-title">Indeksy i Optymalizacja</h5>
+            <p class="card-text" data-lang-key="indexes-text">
               Tworzenie indeksów, EXPLAIN (plan zapytania), sposoby przyspieszania zapytań, statystyki.
             </p>
           </div>
@@ -196,8 +183,8 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-balance-scale skill-icon mb-3"></i>
-            <h5 class="card-title">Normalizacja</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="normalization-title">Normalizacja</h5>
+            <p class="card-text" data-lang-key="normalization-text">
               Formy normalne (1NF, 2NF, 3NF, BCNF), zasady projektowania struktur tabel dla minimalizacji duplikacji danych.
             </p>
           </div>
@@ -209,13 +196,13 @@
         </div>
       </div>
 
-      <!-- Funkcje (Date, String, itd.) -->
+      <!-- Funkcje SQL (Date, String, itd.) -->
       <div class="col">
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-calendar-alt skill-icon mb-3"></i>
-            <h5 class="card-title">Funkcje SQL (Date, String, itd.)</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="functions-title">Funkcje SQL (Date, String, itd.)</h5>
+            <p class="card-text" data-lang-key="functions-text">
               Funkcje daty (DATE, TIME, TIMESTAMP), manipulacja ciągami znaków (CONCAT, SUBSTRING), konwersje typów.
             </p>
           </div>
@@ -232,8 +219,8 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-eye skill-icon mb-3"></i>
-            <h5 class="card-title">Widoki (Views)</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="views-title">Widoki (Views)</h5>
+            <p class="card-text" data-lang-key="views-text">
               Tworzenie widoków, złożone zapytania jako widok, widoki z możliwością aktualizacji (updatable views).
             </p>
           </div>
@@ -250,8 +237,8 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-code-branch skill-icon mb-3"></i>
-            <h5 class="card-title">Procedury i Funkcje Użytkownika</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="procedures-title">Procedury i Funkcje Użytkownika</h5>
+            <p class="card-text" data-lang-key="procedures-text">
               CREATE PROCEDURE, CREATE FUNCTION, parametry, pętle, warunki, zarządzanie logiką po stronie bazy.
             </p>
           </div>
@@ -268,8 +255,8 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-user-shield skill-icon mb-3"></i>
-            <h5 class="card-title">Bezpieczeństwo i Uprawnienia</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="security-title">Bezpieczeństwo i Uprawnienia</h5>
+            <p class="card-text" data-lang-key="security-text">
               CREATE USER, GRANT, REVOKE, kontrola dostępu, szyfrowanie danych, audyt.
             </p>
           </div>
@@ -281,13 +268,13 @@
         </div>
       </div>
 
-      <!-- Replikacja i HA (High Availability) -->
+      <!-- Replikacja i HA -->
       <div class="col">
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-copy skill-icon mb-3"></i>
-            <h5 class="card-title">Replikacja i HA</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="replication-title">Replikacja i HA</h5>
+            <p class="card-text" data-lang-key="replication-text">
               Replikacja master-slave, failover, sharding, klastrowanie (np. Galera Cluster).
             </p>
           </div>
@@ -304,8 +291,8 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-database skill-icon mb-3"></i>
-            <h5 class="card-title">Zaawansowane Typy Danych</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="data-types-title">Zaawansowane Typy Danych</h5>
+            <p class="card-text" data-lang-key="data-types-text">
               JSON, ARRAY, ENUM, typy przestrzenne (GIS), obsługa i indeksowanie danych specyficznych.
             </p>
           </div>
@@ -322,8 +309,8 @@
         <div class="card skill-card h-100">
           <div class="card-body text-center">
             <i class="fas fa-tachometer-alt skill-icon mb-3"></i>
-            <h5 class="card-title">Performance Monitoring i Tuning</h5>
-            <p class="card-text">
+            <h5 class="card-title" data-lang-key="performance-title">Performance Monitoring i Tuning</h5>
+            <p class="card-text" data-lang-key="performance-text">
               Narzędzia monitorujące (np. Performance Schema, pg_stat_statements), parametry konfiguracyjne, analiza logów.
             </p>
           </div>
@@ -339,13 +326,8 @@
   </div>
 
   <script src="../translations/translates.js"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-  ></script>
-  <script
-    src="https://kit.fontawesome.com/a076d05399.js"
-    crossorigin="anonymous"
-  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <script src="skills.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {

@@ -569,6 +569,10 @@ h2 {
   background: linear-gradient(90deg, #ffd700, #ffea00, #ffc400);
 }
 
+#sql-skill .progress-bar {
+  background: linear-gradient(90deg, #2980b9, #6dd5fa);
+}
+
 #react-skill .progress-bar {
   background: linear-gradient(90deg, #00c9ff, #92fe9d, #00c9ff);
 }
@@ -1483,6 +1487,17 @@ footer {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+}
+.iconSQL {
+  background-image: linear-gradient(
+    135deg,
+    hsla(210, 100%, 56%, 0.9), 
+    hsla(220, 80%, 40%, 0.9)   
+  );
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+  background-clip: text; 
+  color: transparent; 
 }
 .iconHTML {
   background-image: linear-gradient(

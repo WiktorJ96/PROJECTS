@@ -111,6 +111,17 @@ body {
   background-clip: text;
   color: transparent;
 }
+.iconSQL {
+  background-image: linear-gradient(
+    135deg,
+    hsla(210, 100%, 56%, 0.9), 
+    hsla(220, 80%, 40%, 0.9)   
+  );
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+  background-clip: text; 
+  color: transparent; 
+}
 .iconHTML {
   background-image: linear-gradient(
     135deg,
