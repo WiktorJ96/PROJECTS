@@ -49,7 +49,7 @@ Wydajność i kompatybilność
 1. Zewnętrzne zasoby: Linkowanie do zewnętrznych zasobów CSS i JavaScript z CDN dla poprawy wydajności.
 2. Responsywność: Zastosowanie meta viewport i responsywnego designu dla dostosowania do urządzeń mobilnych.
 3. Service Worker: Implementacja Service Worker dla obsługi funkcji offline i cachowania, co jest kluczowe dla PWA.
-4. Docker: Aplikacja jest skonfigurowana do działania w kontenerze Dockera.
+4. Docker: Aplikacja jest skonfigurowana do działania w kontenerze Dockera. W folderze projektu znajduje się przygotowany plik wsadowy (start-vault.bat), który automatyzuje proces uruchamiania aplikacji Vault w kontenerze Dockera.
 
 Dostępność
 
