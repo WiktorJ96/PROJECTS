@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/PROJECTS/SmartPick/static/css/main.dd7b12a1.css",
-    "main.js": "/PROJECTS/SmartPick/static/js/main.9c96df06.js",
+    "main.js": "/PROJECTS/SmartPick/static/js/main.4932130b.js",
     "static/js/453.389d50f6.chunk.js": "/PROJECTS/SmartPick/static/js/453.389d50f6.chunk.js",
     "static/media/SmartPick-logo.svg": "/PROJECTS/SmartPick/static/media/SmartPick-logo.e9101d023a7c35ffc8b818fc4235cccb.svg",
     "index.html": "/PROJECTS/SmartPick/index.html",
     "main.dd7b12a1.css.map": "/PROJECTS/SmartPick/static/css/main.dd7b12a1.css.map",
-    "main.9c96df06.js.map": "/PROJECTS/SmartPick/static/js/main.9c96df06.js.map",
+    "main.4932130b.js.map": "/PROJECTS/SmartPick/static/js/main.4932130b.js.map",
     "453.389d50f6.chunk.js.map": "/PROJECTS/SmartPick/static/js/453.389d50f6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dd7b12a1.css",
-    "static/js/main.9c96df06.js"
+    "static/js/main.4932130b.js"
   ]
 }
