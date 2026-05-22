@@ -29,3 +29,49 @@ volumes:
 
 networks:
   app_network:
+
+
+
+
+
+# services:
+#   app:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       - DOCKER_ENV=true
+#       - MONGO_URL=mongodb://container-mongo:27017/dbvault
+#     depends_on:
+#       mongo:
+#         condition: service_healthy
+#     networks:
+#       - app_network
+#     restart: unless-stopped
+
+#   mongo:
+#     image: mongo:4.4
+#     container_name: container-mongo
+#     ports:
+#       - "27017:27017"   
+#     volumes:
+#       - mongo_data:/data/db
+#     networks:
+#       - app_network
+#     healthcheck:
+#       test: ["CMD-SHELL", "mongo --quiet --eval 'db.adminCommand({ ping: 1 }).ok' | grep 1"]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 5
+#       start_period: 10s
+#     restart: unless-stopped
+
+# volumes:
+#   mongo_data:
+
+# networks:
+#   app_network:
+
+

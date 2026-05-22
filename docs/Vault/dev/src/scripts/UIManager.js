@@ -34,8 +34,13 @@ class UIManager {
 
     this.initializeElements();
     this.initializeEventListeners();
+
     this.body = document.body;
+
     this.updateLanguage();
+
+    // Detect LinkedIn browser
+    this.checkInAppBrowser();
 
     // Event listeners for UI updates
     window.addEventListener("languageChange", () => {
@@ -133,12 +138,109 @@ class UIManager {
       if (this[elementKey]) {
         this[elementKey].addEventListener(
           "change" in this[elementKey] ? "change" : "click",
-          handler.bind(this)
+          handler.bind(this),
         );
       } else {
         console.warn(`Element ${elementKey} not found`);
       }
     });
+  }
+
+  /**
+   * Detects LinkedIn in-app browser
+   * and shows recommendation popup.
+   *
+   * @returns {void}
+   */
+  checkInAppBrowser() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    const isLinkedInBrowser = userAgent.includes("LinkedInApp");
+
+    if (!isLinkedInBrowser) {
+      return;
+    }
+
+    // Prevent showing popup multiple times
+    if (localStorage.getItem("browserPopupShown")) {
+      return;
+    }
+
+    localStorage.setItem("browserPopupShown", "true");
+
+    this.showBrowserRecommendationModal();
+  }
+
+  /**
+   * Shows popup recommending opening
+   * the application in Chrome or Safari.
+   *
+   * @returns {void}
+   */
+  showBrowserRecommendationModal() {
+    const modalHTML = `
+      <div 
+        class="modal fade" 
+        id="browserRecommendationModal" 
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-dark text-white border-0 rounded-4">
+
+            <div class="modal-header border-0">
+              <h5 class="modal-title">
+                Better experience available
+              </h5>
+            </div>
+
+            <div class="modal-body">
+              This portfolio may not display correctly inside the LinkedIn browser.
+              <br><br>
+              Please open it in
+              <strong>Chrome</strong> or
+              <strong>Safari</strong>
+              for the best experience.
+            </div>
+
+            <div class="modal-footer border-0">
+
+              <button
+                type="button"
+                class="btn btn-light"
+                id="openExternalBrowser"
+              >
+                Open in browser
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Stay here
+              </button>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+    const modalElement = document.getElementById("browserRecommendationModal");
+
+    const modal = new bootstrap.Modal(modalElement);
+
+    modal.show();
+
+    document
+      .getElementById("openExternalBrowser")
+      .addEventListener("click", () => {
+        window.open(window.location.href, "_blank");
+      });
   }
 
   /**
@@ -149,13 +251,16 @@ class UIManager {
    */
   setLanguage(lang) {
     this.language = lang;
+
     localStorage.setItem("preferredLanguage", lang);
 
     // Update currency and UI
     this.transactionManager.updateCurrencyBasedOnLanguage(lang);
+
     this.updateLanguage();
     this.updateBalance();
     this.updateTransactionsDisplay();
+
     this.chartManager.updateChart();
   }
 
@@ -166,7 +271,9 @@ class UIManager {
    */
   showPanel() {
     const modal = new bootstrap.Modal(this.addTransactionPanel);
+
     modal.show();
+
     this.handleTransactionTypeChange();
   }
 
@@ -177,9 +284,11 @@ class UIManager {
    */
   closePanel() {
     const modal = bootstrap.Modal.getInstance(this.addTransactionPanel);
+
     if (modal) {
       modal.hide();
     }
+
     this.clearInputs();
   }
 
@@ -190,9 +299,11 @@ class UIManager {
    */
   handleTransactionTypeChange() {
     const isIncome = this.transactionTypeSelect.value === "income";
+
     this.incomeCategorySelect.closest(".mb-3").style.display = isIncome
       ? "block"
       : "none";
+
     this.expenseCategorySelect.closest(".mb-3").style.display = isIncome
       ? "none"
       : "block";
@@ -210,9 +321,11 @@ class UIManager {
       this.transactionTypeSelect.value
     ) {
       const isIncome = this.transactionTypeSelect.value === "income";
+
       const categorySelect = isIncome
         ? this.incomeCategorySelect
         : this.expenseCategorySelect;
+
       const category =
         categorySelect.options[categorySelect.selectedIndex].text;
 
@@ -220,17 +333,16 @@ class UIManager {
         ? Math.abs(parseFloat(this.amountInput.value))
         : -Math.abs(parseFloat(this.amountInput.value));
 
-      // Save the transaction
       await this.transactionManager.createNewTransaction(
         this.nameInput.value,
         amount,
-        category
+        category,
       );
 
       this.closePanel();
     } else {
       alert(
-        this.language === "pl" ? "Wprowadź wszystkie dane" : "Enter all data"
+        this.language === "pl" ? "Wprowadź wszystkie dane" : "Enter all data",
       );
     }
   }
@@ -260,7 +372,11 @@ class UIManager {
    */
   updateBalance() {
     const balance = this.transactionManager.getCurrentBalance();
-    this.money.textContent = `${balance.toFixed(2)}${this.transactionManager.currencySymbol}`;
+
+    this.money.textContent = `
+      ${balance.toFixed(2)}
+      ${this.transactionManager.currencySymbol}
+    `;
   }
 
   /**
@@ -283,40 +399,60 @@ class UIManager {
     const categoryName = transaction.category;
 
     const newTransactionElement = document.createElement("div");
+
     newTransactionElement.classList.add("transaction-item");
+
     newTransactionElement.classList.add(
-      transaction.amount > 0 ? "income-item" : "expense-item"
+      transaction.amount > 0 ? "income-item" : "expense-item",
     );
+
     newTransactionElement.setAttribute("id", transaction.id);
 
     const categoryIcon = this.getCategoryIcon(transaction.category);
 
     newTransactionElement.innerHTML = `
-    <div class="transaction-details">
-      <div class="transaction-name">
-        <span class="category-icon">${categoryIcon}</span>
-        <span class="transaction-title">${transaction.name}</span>
-      </div>
-      <div class="transaction-category" data-lang-key="${categoryName}">${categoryName}</div>
-    </div>
-    <div class="transaction-amount ${transaction.amount > 0 ? "income" : "expense"}">
-      ${Math.abs(transaction.amount).toFixed(2)}${this.transactionManager.currencySymbol}
-    </div>
-    <button class="delete-transaction" aria-label="Usuń transakcję">
-      <i class="fas fa-times"></i>
-    </button>
-  `;
+      <div class="transaction-details">
+        <div class="transaction-name">
+          <span class="category-icon">
+            ${categoryIcon}
+          </span>
 
-    // Event listener for delete button
+          <span class="transaction-title">
+            ${transaction.name}
+          </span>
+        </div>
+
+        <div 
+          class="transaction-category"
+          data-lang-key="${categoryName}"
+        >
+          ${categoryName}
+        </div>
+      </div>
+
+      <div class="transaction-amount ${
+        transaction.amount > 0 ? "income" : "expense"
+      }">
+        ${Math.abs(transaction.amount).toFixed(2)}
+        ${this.transactionManager.currencySymbol}
+      </div>
+
+      <button
+        class="delete-transaction"
+        aria-label="Usuń transakcję"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+    `;
+
     newTransactionElement
       .querySelector(".delete-transaction")
       .addEventListener("click", () => {
         this.showDeleteTransactionModal(transaction.id);
       });
 
-    // Append transaction to the appropriate container
     (transaction.amount > 0 ? this.income : this.outcome).appendChild(
-      newTransactionElement
+      newTransactionElement,
     );
   }
 
@@ -327,6 +463,7 @@ class UIManager {
    */
   clearInputs() {
     [this.nameInput, this.amountInput].forEach((input) => (input.value = ""));
+
     this.transactionTypeSelect.selectedIndex = 0;
   }
 
@@ -337,6 +474,7 @@ class UIManager {
    */
   showDeleteAllModal() {
     const modal = new bootstrap.Modal(this.deleteAllModal);
+
     modal.show();
   }
 
@@ -347,6 +485,7 @@ class UIManager {
    */
   hideDeleteAllModal() {
     const modal = bootstrap.Modal.getInstance(this.deleteAllModal);
+
     if (modal) {
       modal.hide();
     }
@@ -359,9 +498,13 @@ class UIManager {
    */
   async deleteAllTransactions() {
     await this.transactionManager.deleteAllTransactions();
+
     this.clearTransactionsDisplay();
+
     this.updateBalance();
+
     this.chartManager.updateChart();
+
     this.hideDeleteAllModal();
   }
 
@@ -378,7 +521,9 @@ class UIManager {
     }
 
     this.deleteTransactionModal.dataset.transactionId = id;
+
     const modal = new bootstrap.Modal(this.deleteTransactionModal);
+
     modal.show();
   }
 
@@ -389,6 +534,7 @@ class UIManager {
    */
   hideDeleteTransactionModal() {
     const modal = bootstrap.Modal.getInstance(this.deleteTransactionModal);
+
     if (modal) {
       modal.hide();
     }
@@ -401,12 +547,14 @@ class UIManager {
    */
   async confirmDeleteTransaction() {
     const id = this.deleteTransactionModal.dataset.transactionId;
+
     if (!id) {
       console.error("Invalid transaction ID:", id);
       return;
     }
 
     await this.deleteTransaction(id);
+
     this.hideDeleteTransactionModal();
   }
 
@@ -418,11 +566,15 @@ class UIManager {
    */
   async deleteTransaction(id) {
     await this.transactionManager.deleteTransaction(id);
+
     const transactionElement = document.getElementById(id);
+
     if (transactionElement) {
       transactionElement.remove();
     }
+
     this.updateBalance();
+
     this.chartManager.updateChart();
   }
 
@@ -443,9 +595,13 @@ class UIManager {
    */
   getCategoryIcon(category) {
     if (!category || typeof category !== "string") {
-      return `<i class="fas fa-question-circle"></i>`;
+      return `
+        <i class="fas fa-question-circle"></i>
+      `;
     }
+
     const lowerCategory = category.toLowerCase();
+
     const iconMap = {
       wypłata: "fa-money-bill-wave",
       salary: "fa-money-bill-wave",
@@ -464,7 +620,9 @@ class UIManager {
       transport: "fa-bus",
     };
 
-    return `<i class="me-1 fas ${iconMap[lowerCategory] || "fa-question-circle"}"></i>`;
+    return `
+      <i class="me-1 fas ${iconMap[lowerCategory] || "fa-question-circle"}"></i>
+    `;
   }
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import AddProductModal from "../AddProductModal/AddProductModal";
+import NoteModal from "../AddNoteModal/AddNoteModal";
 import {
   FaHeart,
   FaRegHeart,
@@ -31,7 +32,6 @@ const ProductList = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [isShopDeleteModalOpen, setIsShopDeleteModalOpen] = useState(false);
-  const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
 
   const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
@@ -44,6 +44,7 @@ const ProductList = ({
 
   const [selectedProductForNote, setSelectedProductForNote] = useState(null);
   const [note, setNote] = useState("");
+  const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
 
   const [isProductsOpen, setIsProductsOpen] = useState(true);
 
@@ -71,10 +72,10 @@ const ProductList = ({
     } catch (error) {
       console.error("Błąd przy usuwaniu produktu:", error);
     } finally {
-      const updatedProducts = products.filter(
+      const updated = products.filter(
         (p) => Number(p.id) !== Number(productToDelete.id)
       );
-      onUpdateProducts(updatedProducts);
+      onUpdateProducts(updated);
       setProductToDelete(null);
       setIsDeleteModalOpen(false);
     }
@@ -106,16 +107,16 @@ const ProductList = ({
       link: editProductLink,
       note: editProductNote,
     };
-    const updatedProducts = products.map((p) =>
+    const updated = products.map((p) =>
       p.id === updatedProduct.id ? updatedProduct : p
     );
-    onUpdateProducts(updatedProducts);
+    onUpdateProducts(updated);
     setIsEditProductModalOpen(false);
   };
 
-  // Optymistyczna aktualizacja przy dodawaniu produktu z oznaczeniem offline w przypadku błędu
+  // Poprawiona funkcja dodawania produktu – korzysta zawsze z tej samej, rozszerzonej listy
   const handleAddProduct = async (product) => {
-    if (!product.name || product.name.trim() === "") {
+    if (!product.name?.trim()) {
       console.error("Brak nazwy produktu!");
       return;
     }
@@ -133,7 +134,6 @@ const ProductList = ({
       onUpdateProducts(finalProducts);
     } catch (error) {
       console.error("Błąd przy dodawaniu produktu:", error);
-      // Dodajemy flagę unsynced, by oznaczyć, że produkt nie został zsynchronizowany
       const fallbackProduct = { ...product, id: Date.now(), unsynced: true };
       const finalProducts = updatedProducts.map((p) =>
         p.id === temporaryProduct.id ? fallbackProduct : p
@@ -143,17 +143,16 @@ const ProductList = ({
   };
 
   const toggleFavorite = (index) => {
-    const updatedProducts = products.map((product, i) =>
+    const updated = products.map((prod, i) =>
       i === index
-        ? { ...product, isFavorite: !product.isFavorite, shopName: shop.name }
-        : product
+        ? { ...prod, isFavorite: !prod.isFavorite, shopName: shop.name }
+        : prod
     );
-    onUpdateProducts(updatedProducts);
+    onUpdateProducts(updated);
   };
 
   const toggleShopFavorite = () => {
-    const updatedShop = { ...shop, isFavorite: !shop.isFavorite };
-    onUpdateShopFavorite(updatedShop);
+    onUpdateShopFavorite({ ...shop, isFavorite: !shop.isFavorite });
   };
 
   const openNoteModal = (product) => {
@@ -162,11 +161,11 @@ const ProductList = ({
     setIsNoteModalOpen(true);
   };
 
-  const saveNote = () => {
-    const updatedProducts = products.map((p) =>
-      p.id === selectedProductForNote.id ? { ...p, note } : p
+  const handleSaveNote = (newNote) => {
+    const updated = products.map((p) =>
+      p.id === selectedProductForNote.id ? { ...p, note: newNote } : p
     );
-    onUpdateProducts(updatedProducts);
+    onUpdateProducts(updated);
     setIsNoteModalOpen(false);
   };
 
@@ -198,9 +197,9 @@ const ProductList = ({
               aria-label="Oznacz sklep jako ulubiony"
             >
               {shop.isFavorite ? (
-                <FaStar className="text-yellow-500 transition-colors duration-200" />
+                <FaStar className="text-yellow-500" />
               ) : (
-                <FaRegStar className="text-gray-400 hover:text-yellow-500 transition-colors duration-200" />
+                <FaRegStar className="text-gray-400 hover:text-yellow-500" />
               )}
             </button>
           </h2>
@@ -208,13 +207,13 @@ const ProductList = ({
         {isEditingShop ? (
           <div className="flex space-x-4 mt-4 sm:mt-0">
             <button
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-200"
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
               onClick={handleEditShopName}
             >
               Zapisz
             </button>
             <button
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-200"
+              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
               onClick={() => setIsShopDeleteModalOpen(true)}
             >
               Usuń
@@ -222,10 +221,11 @@ const ProductList = ({
           </div>
         ) : (
           <button
-            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-200"
+            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
             onClick={() => setIsEditingShop(true)}
           >
-            <i className="fas fa-edit mr-2"></i>Edytuj sklep
+            <FaEdit className="inline-block mr-2" />
+            Edytuj sklep
           </button>
         )}
       </div>
@@ -233,7 +233,7 @@ const ProductList = ({
       {/* Akordeon dla produktów */}
       <div className="mb-6">
         <div
-          onClick={() => setIsProductsOpen((prev) => !prev)}
+          onClick={() => setIsProductsOpen((p) => !p)}
           className="flex justify-between items-center cursor-pointer border-b border-gray-200 pb-2 mb-4"
         >
           <h3 className="text-xl font-semibold text-gray-800">Produkty</h3>
@@ -249,7 +249,7 @@ const ProductList = ({
         {isProductsOpen && (
           <>
             <button
-              className="bg-blue-500 text-white px-4 py-2 rounded mb-4 hover:bg-blue-600 transition-colors duration-200"
+              className="bg-blue-500 text-white px-4 py-2 rounded mb-4 hover:bg-blue-600"
               onClick={() => setIsAddProductModalOpen(true)}
             >
               Dodaj produkt
@@ -258,9 +258,9 @@ const ProductList = ({
             {/* Widok mobilny */}
             <div className="sm:hidden">
               {products.length > 0 ? (
-                products.map((product, index) => (
+                products.map((product, idx) => (
                   <div
-                    key={product.id || index}
+                    key={product.id || idx}
                     className="bg-white rounded-lg shadow p-4 mb-4"
                   >
                     <div className="flex justify-between items-center mb-2">
@@ -269,19 +269,19 @@ const ProductList = ({
                       </span>
                       <div className="flex space-x-2">
                         <button
-                          onClick={() => toggleFavorite(index)}
+                          onClick={() => toggleFavorite(idx)}
                           className="focus:outline-none"
                           aria-label="Przełącz ulubione"
                         >
                           {product.isFavorite ? (
                             <FaHeart className="text-red-500" />
                           ) : (
-                            <FaRegHeart className="text-gray-400 hover:text-red-500 transition-colors duration-150" />
+                            <FaRegHeart className="text-gray-400 hover:text-red-500" />
                           )}
                         </button>
                         <button
                           onClick={() => openEditModalForProduct(product)}
-                          className="text-blue-500 hover:text-blue-700 transition-colors duration-150"
+                          className="text-blue-500 hover:text-blue-700"
                           aria-label="Edytuj produkt"
                         >
                           <FaEdit size={20} />
@@ -295,33 +295,29 @@ const ProductList = ({
                       href={product.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-500 hover:underline transition-colors duration-150 block mb-2"
+                      className="text-blue-500 hover:underline block mb-2"
                     >
                       Zobacz produkt
                     </a>
                     <div className="flex justify-between">
                       <button
                         onClick={() => openNoteModal(product)}
-                        className="text-gray-600 hover:text-blue-500 transition-colors duration-150"
                         aria-label="Edytuj notatkę"
                       >
                         <FaStickyNote
                           className={`${
                             product.note
                               ? "text-green-500"
-                              : "text-gray-600 hover:text-blue-500 transition-colors duration-150"
+                              : "text-gray-600 hover:text-blue-500"
                           }`}
                         />
                       </button>
                       <button
                         onClick={() => openDeleteModalForProduct(product)}
-                        className="text-red-500 hover:text-red-700 transition-colors duration-150"
+                        className="text-red-500 hover:text-red-700"
                         aria-label="Usuń produkt"
                       >
-                        <i
-                          className="fas fa-times"
-                          style={{ fontSize: "20px" }}
-                        ></i>
+                        <i className="fas fa-times" style={{ fontSize: 20 }} />
                       </button>
                     </div>
                   </div>
@@ -356,10 +352,10 @@ const ProductList = ({
                 </thead>
                 <tbody>
                   {products.length > 0 ? (
-                    products.map((product, index) => (
+                    products.map((product, idx) => (
                       <tr
-                        key={product.id || index}
-                        className="border-b hover:bg-gray-50 transition duration-150"
+                        key={product.id || idx}
+                        className="border-b hover:bg-gray-50"
                       >
                         <td className="py-3 px-4">
                           {product.name.length > 20
@@ -367,7 +363,7 @@ const ProductList = ({
                             : product.name}
                         </td>
                         <td className="py-3 px-4">
-                          {product.price && product.price.toString().length > 20
+                          {product.price?.toString().length > 20
                             ? `${product.price.toString().substring(0, 20)}...`
                             : product.price}{" "}
                           PLN
@@ -377,7 +373,7 @@ const ProductList = ({
                             href={product.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-blue-500 hover:underline transition-colors duration-150"
+                            className="text-blue-500 hover:underline"
                           >
                             Zobacz produkt
                           </a>
@@ -391,41 +387,41 @@ const ProductList = ({
                               className={`${
                                 product.note
                                   ? "text-green-500"
-                                  : "text-gray-600 hover:text-blue-500 transition-colors duration-150"
+                                  : "text-gray-600 hover:text-blue-500"
                               }`}
                             />
                           </button>
                         </td>
                         <td className="py-3 px-4 text-center">
                           <button
-                            onClick={() => toggleFavorite(index)}
+                            onClick={() => toggleFavorite(idx)}
                             className="focus:outline-none"
                             aria-label="Przełącz ulubione"
                           >
                             {product.isFavorite ? (
                               <FaHeart className="text-red-500" />
                             ) : (
-                              <FaRegHeart className="text-gray-400 hover:text-red-500 transition-colors duration-150" />
+                              <FaRegHeart className="text-gray-400 hover:text-red-500" />
                             )}
                           </button>
                         </td>
                         <td className="py-3 px-4 text-center">
                           <button
                             onClick={() => openEditModalForProduct(product)}
-                            className="text-blue-500 hover:text-blue-700 transition-colors duration-150"
+                            className="text-blue-500 hover:text-blue-700"
                             aria-label="Edytuj produkt"
                           >
                             <FaEdit size={20} />
                           </button>
                           <button
                             onClick={() => openDeleteModalForProduct(product)}
-                            className="text-red-500 hover:text-red-700 transition-colors duration-150 ml-5"
+                            className="text-red-500 hover:text-red-700 ml-5"
                             aria-label="Usuń produkt"
                           >
                             <i
                               className="fas fa-times"
-                              style={{ fontSize: "20px" }}
-                            ></i>
+                              style={{ fontSize: 20 }}
+                            />
                           </button>
                         </td>
                       </tr>
@@ -447,11 +443,12 @@ const ProductList = ({
         )}
       </div>
 
+      {/* Potwierdzenia i inne modale */}
       <DeleteConfirmationModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleDeleteProduct}
-        item={productToDelete ? productToDelete.name : ""}
+        item={productToDelete?.name || ""}
         itemType="produkt"
       />
 
@@ -469,35 +466,15 @@ const ProductList = ({
         itemType="sklep"
       />
 
-      {isNoteModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full relative">
-            <h2 className="text-2xl font-semibold mb-4">Dodaj notatkę</h2>
-            <textarea
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded mb-4"
-              rows="4"
-              placeholder="Wpisz swoją notatkę..."
-            ></textarea>
-            <div className="flex justify-end space-x-4">
-              <button
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-200"
-                onClick={saveNote}
-              >
-                Zapisz
-              </button>
-              <button
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-200"
-                onClick={() => setIsNoteModalOpen(false)}
-              >
-                Anuluj
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* NoteModal jako komponent */}
+      <NoteModal
+        isOpen={isNoteModalOpen}
+        initialNote={note}
+        onSave={handleSaveNote}
+        onClose={() => setIsNoteModalOpen(false)}
+      />
 
+      {/* Edycja produktu */}
       {isEditProductModalOpen && (
         <div
           role="dialog"
