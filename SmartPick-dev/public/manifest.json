@@ -1,0 +1,16 @@
+{
+  "short_name": "SmartPick",
+  "name": "SmartPick",
+  "description": "Lista sklepow, produktow i przypomnien zakupowych.",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#3b82f6",
+  "background_color": "#f0f4f8",
+  "icons": [
+    {
+      "src": "static/media/SmartPick-logo.e9101d023a7c35ffc8b818fc4235cccb.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

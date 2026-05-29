@@ -23,7 +23,7 @@ import {
 
 function App() {
   const apiUrl = process.env.REACT_APP_API_URL || null;
-  const [isBackendActive, setIsBackendActive] = useState(apiUrl !== null);
+  const isBackendActive = Boolean(apiUrl);
   const [notification, setNotification] = useState("");
   const [shops, setShops] = useState(loadShopsFromLocalStorage());
   const [reminders, setReminders] = useState(
@@ -38,6 +38,12 @@ function App() {
   // Pobieramy dane ze serwera i scalamy je z rekordami offline (unsynced)
   const fetchShops = useCallback(async () => {
     setLoading(true);
+    if (!isBackendActive) {
+      setShops(loadShopsFromLocalStorage());
+      setLoading(false);
+      return;
+    }
+
     try {
       const shopsFromServer = await fetchShopsFromBackend(apiUrl);
       const localShops = loadShopsFromLocalStorage();
@@ -54,10 +60,15 @@ function App() {
     } finally {
       setLoading(false);
     }
-  }, [apiUrl]);
+  }, [apiUrl, isBackendActive]);
 
   useEffect(() => {
     const loadReminders = async () => {
+      if (!isBackendActive) {
+        setReminders(loadRemindersFromLocalStorage());
+        return;
+      }
+
       try {
         const remindersFromServer = await fetchRemindersFromBackend(apiUrl);
         setReminders(remindersFromServer);
@@ -71,7 +82,7 @@ function App() {
       }
     };
     loadReminders();
-  }, [apiUrl]);
+  }, [apiUrl, isBackendActive]);
 
   useEffect(() => {
     fetchShops();
@@ -83,10 +94,10 @@ function App() {
     saveRemindersToLocalStorage(reminders);
   }, [shops, reminders]);
 
-  const handleSelectShop = (shop) => {
+  const handleSelectShop = useCallback((shop) => {
     setSelectedShop(shop);
     setIsEditingShop(false);
-  };
+  }, []);
 
   const handleAddShop = async (newShopName) => {
     let newShop = createNewShop(newShopName);
@@ -134,6 +145,13 @@ function App() {
   };
 
   const handleDeleteShop = async (shopId) => {
+    if (!isBackendActive) {
+      const updatedShops = shops.filter((shop) => shop.id !== shopId);
+      setShops(updatedShops);
+      saveShopsToLocalStorage(updatedShops);
+      return;
+    }
+
     try {
       await deleteShopFromBackend(apiUrl, shopId);
       const updatedShops = shops.filter((shop) => shop.id !== shopId);
@@ -165,6 +183,18 @@ function App() {
       remainingDays: parseInt(newReminder.frequency, 10),
     };
 
+    if (!isBackendActive) {
+      const offlineReminder = {
+        ...reminderWithDate,
+        id: Date.now(),
+        unsynced: true,
+      };
+      const updatedReminders = [...reminders, offlineReminder];
+      setReminders(updatedReminders);
+      saveRemindersToLocalStorage(updatedReminders);
+      return;
+    }
+
     try {
       const savedReminder = await addReminderToBackend(
         apiUrl,
@@ -187,6 +217,15 @@ function App() {
   };
 
   const handleDeleteReminder = async (reminderId) => {
+    if (!isBackendActive) {
+      const updatedReminders = reminders.filter(
+        (reminder) => reminder.id !== reminderId
+      );
+      setReminders(updatedReminders);
+      saveRemindersToLocalStorage(updatedReminders);
+      return;
+    }
+
     try {
       await deleteReminderFromBackend(apiUrl, reminderId);
       const updatedReminders = reminders.filter(
@@ -237,10 +276,7 @@ function App() {
       <Header
         shops={shops}
         openAddCardModal={() => setIsAddCardModalOpen(true)}
-        handleSelectShop={(shop) => {
-          setSelectedShop(shop);
-          setIsEditingShop(false);
-        }}
+        handleSelectShop={handleSelectShop}
       />
       <AddCardModal
         isOpen={isAddCardModalOpen}
@@ -261,10 +297,7 @@ function App() {
           <>
             <ShopList
               shops={shops}
-              onSelectShop={(shop) => {
-                setSelectedShop(shop);
-                setIsEditingShop(false);
-              }}
+              onSelectShop={handleSelectShop}
               onAddShop={() => setIsAddShopModalOpen(true)}
             />
             {selectedShop && (

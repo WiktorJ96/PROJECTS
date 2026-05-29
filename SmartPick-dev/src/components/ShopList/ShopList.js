@@ -1,7 +1,6 @@
 import React from "react";
 
 const ShopList = ({ shops, onSelectShop, onAddShop }) => {
-  console.log("Lista sklepów:", shops);
 
   return (
     <section
@@ -9,7 +8,7 @@ const ShopList = ({ shops, onSelectShop, onAddShop }) => {
       className="bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 rounded-lg shadow-lg p-6 sm:p-8 mb-8 text-base font-medium"
       aria-labelledby="shopListTitle"
     >
-      {/* Nagłówek sekcji */}
+      {/* Naglowek sekcji */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
         <h2
           id="shopListTitle"
@@ -27,7 +26,7 @@ const ShopList = ({ shops, onSelectShop, onAddShop }) => {
         </button>
       </div>
 
-      {/* Lista sklepów w responsywnej siatce */}
+      {/* Lista sklepow w responsywnej siatce */}
       <div className="overflow-auto">
         <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
           {shops.map((shop) => (

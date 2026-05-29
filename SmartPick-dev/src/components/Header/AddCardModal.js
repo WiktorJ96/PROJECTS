@@ -1,20 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { FaTimes, FaCreditCard } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import { FaCreditCard, FaTimes } from "react-icons/fa";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 
-const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
+const STORAGE_KEY = "paymentMethods";
+const LEGACY_STORAGE_KEY = "cards";
+
+const normalizeMethod = (method) => {
+  if (!method) return null;
+  const last4Source = method.last4 || method.cardNumber || "";
+  const last4 = String(last4Source).replace(/\D/g, "").slice(-4);
+
+  return {
+    id: method.id || `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    label: method.label || "Karta platnicza",
+    cardHolder: method.cardHolder || "",
+    expiryDate: method.expiryDate || "",
+    last4,
+  };
+};
+
+const loadPaymentMethods = () => {
+  const savedMethods = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  const legacyCards = JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY)) || [];
+  const migratedCards = legacyCards.map(normalizeMethod).filter(Boolean);
+  const methods = [...savedMethods, ...migratedCards].map(normalizeMethod).filter(Boolean);
+
+  if (legacyCards.length > 0) {
+    localStorage.removeItem(LEGACY_STORAGE_KEY);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(methods));
+  }
+
+  return methods;
+};
+
+const AddCardModal = ({ isOpen, onClose }) => {
   const [activeTab, setActiveTab] = useState("add");
-  const [cards, setCards] = useState([]);
-  const [cardNumber, setCardNumber] = useState("");
+  const [methods, setMethods] = useState([]);
+  const [label, setLabel] = useState("");
   const [cardHolder, setCardHolder] = useState("");
+  const [last4, setLast4] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
-  const [cvv, setCvv] = useState("");
+  const [error, setError] = useState("");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedCardIndex, setSelectedCardIndex] = useState(null);
+  const [selectedMethodIndex, setSelectedMethodIndex] = useState(null);
 
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("overflow-hidden");
+      setMethods(loadPaymentMethods());
     } else {
       document.body.classList.remove("overflow-hidden");
     }
@@ -24,100 +57,64 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    if (isOpen) {
-      if (isBackendActive) {
-        const fetchCards = async () => {
-          try {
-            const response = await fetch("/api/get-cards");
-            const data = await response.json();
-            setCards(data);
-          } catch (error) {
-            console.error("Błąd połączenia z serwerem:", error);
-          }
-        };
-        fetchCards();
-      } else {
-        const storedCards = JSON.parse(localStorage.getItem("cards")) || [];
-        setCards(storedCards);
-      }
-    }
-  }, [isOpen, isBackendActive]);
+  const saveMethods = (nextMethods) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(nextMethods));
+    setMethods(nextMethods);
+  };
 
-  const handleExpiryDateChange = (e) => {
-    let value = e.target.value.replace(/\D/g, "");
+  const handleExpiryDateChange = (event) => {
+    let value = event.target.value.replace(/\D/g, "");
     if (value.length >= 3) {
       value = `${value.slice(0, 2)}/${value.slice(2, 4)}`;
     }
     setExpiryDate(value);
+    setError("");
   };
 
-  const handleSaveCard = async () => {
-    const newCard = { cardNumber, cardHolder, expiryDate, cvv };
-
-    if (isBackendActive) {
-      try {
-        const response = await fetch("/api/save-card", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newCard),
-        });
-        if (response.ok) {
-          setCards((prevCards) => [...prevCards, newCard]);
-        }
-      } catch (error) {
-        console.error("Błąd zapisu na serwerze:", error);
-      }
-    } else {
-      const updatedCards = [...cards, newCard];
-      localStorage.setItem("cards", JSON.stringify(updatedCards));
-      setCards(updatedCards);
+  const handleSaveMethod = () => {
+    if (!label.trim() || !last4.trim() || !expiryDate.trim()) {
+      setError("Nazwa metody, ostatnie 4 cyfry i waznosc sa wymagane.");
+      return;
     }
 
-    setCardNumber("");
+    if (!/^\d{4}$/.test(last4)) {
+      setError("Podaj dokladnie ostatnie 4 cyfry karty.");
+      return;
+    }
+
+    const nextMethod = {
+      id: `${Date.now()}`,
+      label: label.trim(),
+      cardHolder: cardHolder.trim(),
+      last4,
+      expiryDate,
+    };
+    saveMethods([...methods, nextMethod]);
+    setLabel("");
     setCardHolder("");
+    setLast4("");
     setExpiryDate("");
-    setCvv("");
+    setError("");
     setActiveTab("view");
   };
 
   const openDeleteConfirmationModal = (index) => {
-    setSelectedCardIndex(index);
+    setSelectedMethodIndex(index);
     setIsDeleteModalOpen(true);
   };
 
-  const handleDeleteCard = () => {
-    const updatedCards = cards.filter(
-      (_, cardIndex) => cardIndex !== selectedCardIndex
-    );
-
-    if (isBackendActive) {
-      fetch(`/api/delete-card/${cards[selectedCardIndex].id}`, {
-        method: "DELETE",
-      })
-        .then((response) => {
-          if (response.ok) {
-            setCards(updatedCards);
-          }
-        })
-        .catch((error) => console.error("Błąd usuwania z serwera:", error));
-    } else {
-      localStorage.setItem("cards", JSON.stringify(updatedCards));
-      setCards(updatedCards);
-    }
-
+  const handleDeleteMethod = () => {
+    const nextMethods = methods.filter((_, index) => index !== selectedMethodIndex);
+    saveMethods(nextMethods);
     setIsDeleteModalOpen(false);
-    setSelectedCardIndex(null);
+    setSelectedMethodIndex(null);
   };
 
-  return isOpen ? (
+  if (!isOpen) return null;
+
+  return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div
-        className={`bg-white rounded-lg shadow-xl p-6 max-w-2xl w-full transition-all duration-300 transform ${
-          isOpen ? "scale-100 opacity-100" : "scale-90 opacity-0"
-        }`}
-      >
-        {/* Nagłówek */}
+      <div className="bg-white rounded-lg shadow-xl p-6 max-w-2xl w-full transition-all duration-300 transform scale-100 opacity-100">
         <div className="flex justify-between items-center border-b pb-4 mb-4">
           <div className="flex space-x-4">
             <button
@@ -128,7 +125,7 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
               }`}
               onClick={() => setActiveTab("add")}
             >
-              Dodaj kartę
+              Dodaj metode
             </button>
             <button
               className={`text-lg font-semibold ${
@@ -138,40 +135,54 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
               }`}
               onClick={() => setActiveTab("view")}
             >
-              Twoje karty płatnicze
+              Metody platnosci
             </button>
           </div>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-red-500 transition-colors duration-200"
+            aria-label="Zamknij"
           >
             <FaTimes size={20} />
           </button>
         </div>
 
-        {/* Dodawanie karty */}
         {activeTab === "add" && (
           <div>
             <h2 className="text-2xl font-semibold mb-4 text-gray-700">
-              Dodaj nową kartę
+              Dodaj metode platnosci
             </h2>
             <div className="space-y-4">
               <input
                 type="text"
-                value={cardNumber}
-                onChange={(e) => setCardNumber(e.target.value)}
-                maxLength="16"
-                placeholder="Numer karty"
+                value={label}
+                onChange={(event) => {
+                  setLabel(event.target.value);
+                  setError("");
+                }}
+                placeholder="Nazwa metody, np. Karta prywatna"
                 className="w-full p-3 border rounded focus:ring-2 focus:ring-blue-400"
               />
               <input
                 type="text"
                 value={cardHolder}
-                onChange={(e) => setCardHolder(e.target.value)}
-                placeholder="Właściciel karty"
+                onChange={(event) => setCardHolder(event.target.value)}
+                placeholder="Wlasciciel (opcjonalnie)"
                 className="w-full p-3 border rounded focus:ring-2 focus:ring-blue-400"
               />
               <div className="flex space-x-4">
+                <input
+                  type="text"
+                  value={last4}
+                  onChange={(event) => {
+                    setLast4(event.target.value.replace(/\D/g, "").slice(0, 4));
+                    setError("");
+                  }}
+                  inputMode="numeric"
+                  maxLength="4"
+                  placeholder="Ostatnie 4 cyfry"
+                  className="w-1/2 p-3 border rounded focus:ring-2 focus:ring-blue-400"
+                />
                 <input
                   type="text"
                   value={expiryDate}
@@ -180,56 +191,48 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
                   placeholder="MM/YY"
                   className="w-1/2 p-3 border rounded focus:ring-2 focus:ring-blue-400"
                 />
-                <input
-                  type="text"
-                  value={cvv}
-                  onChange={(e) => setCvv(e.target.value)}
-                  maxLength="3"
-                  placeholder="CVV"
-                  className="w-1/2 p-3 border rounded focus:ring-2 focus:ring-blue-400"
-                />
               </div>
+              {error && <p className="text-sm text-red-500">{error}</p>}
               <button
-                onClick={handleSaveCard}
+                onClick={handleSaveMethod}
                 className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition-colors duration-200"
               >
-                Zapisz kartę
+                Zapisz metode
               </button>
             </div>
           </div>
         )}
 
-        {/* Wyświetlanie kart */}
         {activeTab === "view" && (
           <div>
             <h2 className="text-2xl font-semibold mb-4 text-gray-700">
-              Twoje karty płatnicze
+              Metody platnosci
             </h2>
-            {cards.length > 0 ? (
+            {methods.length > 0 ? (
               <ul className="space-y-4 max-h-60 overflow-y-auto">
-                {cards.map((card, index) => (
+                {methods.map((method, index) => (
                   <li
-                    key={index}
+                    key={method.id || index}
                     className="p-4 border rounded shadow-sm flex justify-between items-center"
                   >
                     <div>
                       <p className="text-sm text-gray-600">
                         <FaCreditCard className="inline mr-2 text-blue-500" />
-                        {card.cardNumber}
+                        {method.label} **** {method.last4}
                       </p>
+                      {method.cardHolder && (
+                        <p className="text-sm text-gray-600">
+                          Wlasciciel: {method.cardHolder}
+                        </p>
+                      )}
                       <p className="text-sm text-gray-600">
-                        Właściciel: {card.cardHolder}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        Ważność: {card.expiryDate}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        CVV: {card.cvv}
+                        Waznosc: {method.expiryDate}
                       </p>
                     </div>
                     <button
                       onClick={() => openDeleteConfirmationModal(index)}
                       className="text-gray-500 hover:text-red-500 transition-colors duration-200"
+                      aria-label="Usun metode platnosci"
                     >
                       <FaTimes />
                     </button>
@@ -237,22 +240,23 @@ const AddCardModal = ({ isOpen, onClose, isBackendActive }) => {
                 ))}
               </ul>
             ) : (
-              <p className="text-center text-gray-500">Brak zapisanych kart.</p>
+              <p className="text-center text-gray-500">
+                Brak zapisanych metod platnosci.
+              </p>
             )}
           </div>
         )}
 
-        {/* Modal potwierdzenia usunięcia */}
         <DeleteConfirmationModal
           isOpen={isDeleteModalOpen}
           onClose={() => setIsDeleteModalOpen(false)}
-          onConfirm={handleDeleteCard}
-          item="kartę płatniczą"
-          itemType="kartę"
+          onConfirm={handleDeleteMethod}
+          item="metode platnosci"
+          itemType="metode"
         />
       </div>
     </div>
-  ) : null;
+  );
 };
 
 export default AddCardModal;

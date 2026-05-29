@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import AddProductModal from "../AddProductModal/AddProductModal";
 import NoteModal from "../AddNoteModal/AddNoteModal";
@@ -26,7 +26,7 @@ const ProductList = ({
   onUpdateProducts,
   onUpdateShopFavorite,
 }) => {
-  const products = shop.products || [];
+  const products = useMemo(() => shop.products || [], [shop.products]);
 
   const [productToDelete, setProductToDelete] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);

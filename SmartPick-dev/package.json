@@ -24,7 +24,10 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/src/**/__tests__/**/*.{js,jsx}",
+      "**/src/**/*.{spec,test}.{js,jsx}"
+    ],
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy",
       "\\.svg$": "<rootDir>/__mocks__/svgMock.js"

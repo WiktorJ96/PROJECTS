@@ -27,6 +27,7 @@ const DeleteConfirmationModal = ({
 
   return (
     <div
+      data-testid="delete-confirmation-modal"
       role="dialog"
       aria-labelledby="modal-title"
       aria-modal="true"

@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const AddProductModal = ({ isOpen, onClose, onAddProduct }) => {
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productLink, setProductLink] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (!isOpen) {
       setProductName("");
       setProductPrice("");
       setProductLink("");
+      setError("");
     }
   }, [isOpen]);
 
@@ -31,23 +33,36 @@ const AddProductModal = ({ isOpen, onClose, onAddProduct }) => {
 
   const validateInputs = () => {
     if (!productName.trim() || !productPrice.trim() || !productLink.trim()) {
-      alert("Wszystkie pola są wymagane.");
+      setError("Wszystkie pola sa wymagane.");
       return false;
     }
-    if (isNaN(productPrice)) {
-      alert("Cena powinna być liczbą.");
+
+    const price = Number(productPrice);
+    if (!Number.isFinite(price) || price < 0) {
+      setError("Cena powinna byc liczba wieksza lub rowna 0.");
       return false;
     }
+
+    try {
+      const url = new URL(productLink);
+      if (!["http:", "https:"].includes(url.protocol)) {
+        throw new Error("Invalid protocol");
+      }
+    } catch (validationError) {
+      setError("Link powinien byc poprawnym adresem http lub https.");
+      return false;
+    }
+
     return true;
   };
 
   const handleAdd = () => {
     if (!validateInputs()) return;
-    // Konwersja ceny na liczbę
+
     onAddProduct({
-      name: productName,
+      name: productName.trim(),
       price: Number(productPrice),
-      link: productLink,
+      link: productLink.trim(),
     });
     onClose();
   };
@@ -64,6 +79,7 @@ const AddProductModal = ({ isOpen, onClose, onAddProduct }) => {
     <div
       role="dialog"
       aria-labelledby="modal-title"
+      aria-modal="true"
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
     >
       <div className="bg-white rounded-lg p-8 w-full max-w-md">
@@ -73,27 +89,39 @@ const AddProductModal = ({ isOpen, onClose, onAddProduct }) => {
         <input
           type="text"
           value={productName}
-          onChange={(e) => setProductName(e.target.value)}
+          onChange={(event) => {
+            setProductName(event.target.value);
+            setError("");
+          }}
           placeholder="Nazwa produktu"
           className="w-full p-2 mb-4 border rounded"
           onKeyDown={handleKeyPress}
         />
         <input
           type="number"
+          min="0"
+          step="0.01"
           value={productPrice}
-          onChange={(e) => setProductPrice(e.target.value)}
+          onChange={(event) => {
+            setProductPrice(event.target.value);
+            setError("");
+          }}
           placeholder="Cena produktu"
           className="w-full p-2 mb-4 border rounded"
           onKeyDown={handleKeyPress}
         />
         <input
-          type="text"
+          type="url"
           value={productLink}
-          onChange={(e) => setProductLink(e.target.value)}
+          onChange={(event) => {
+            setProductLink(event.target.value);
+            setError("");
+          }}
           placeholder="Link do produktu"
           className="w-full p-2 mb-4 border rounded"
           onKeyDown={handleKeyPress}
         />
+        {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className="flex justify-end space-x-2">
           <button className="btn-secondary px-4 py-2 rounded" onClick={onClose}>
             Anuluj

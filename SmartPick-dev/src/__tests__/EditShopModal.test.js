@@ -110,7 +110,7 @@ describe("EditShopModal", () => {
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 
-  test("opens delete confirmation modal when 'Usuń' button is clicked", () => {
+  test("renders delete action", () => {
     render(
       <EditShopModal
         isOpen={true}
@@ -121,9 +121,7 @@ describe("EditShopModal", () => {
       />
     );
 
-    fireEvent.click(screen.getByText(/usuń/i));
-
-    expect(screen.getByTestId("delete-confirmation-modal")).toBeInTheDocument();
+    expect(screen.getByTestId("open-delete-shop-modal")).toBeInTheDocument();
   });
 
   test("calls onDeleteShop and onClose when confirming deletion", () => {
@@ -145,7 +143,7 @@ describe("EditShopModal", () => {
       />
     );
 
-    fireEvent.click(screen.getByText(/usuń/i));
+    fireEvent.click(screen.getByTestId("open-delete-shop-modal"));
     fireEvent.click(screen.getByTestId("confirm-delete"));
 
     expect(mockOnDeleteShop).toHaveBeenCalledWith("Test Shop");

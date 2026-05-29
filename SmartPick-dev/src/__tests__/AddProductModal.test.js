@@ -74,8 +74,7 @@ describe("AddProductModal component", () => {
     expect(screen.getByPlaceholderText(/link do produktu/i).value).toBe("");
   });
 
-  test("validates empty inputs and shows alert when fields are missing", () => {
-    window.alert = jest.fn();
+  test("validates empty inputs and shows an inline error when fields are missing", () => {
     render(
       <AddProductModal
         isOpen={true}
@@ -86,12 +85,11 @@ describe("AddProductModal component", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /dodaj produkt/i }));
 
-    expect(window.alert).toHaveBeenCalledWith("Wszystkie pola są wymagane.");
+    expect(screen.getByText("Wszystkie pola sa wymagane.")).toBeInTheDocument();
     expect(onAddProduct).not.toHaveBeenCalled();
   });
 
   test("validates that product price is a number", () => {
-    window.alert = jest.fn();
     render(
       <AddProductModal
         isOpen={true}
@@ -104,7 +102,7 @@ describe("AddProductModal component", () => {
       target: { value: "Test Product" },
     });
     fireEvent.change(screen.getByPlaceholderText(/cena produktu/i), {
-      target: { value: "not a number" },
+      target: { value: "-1" },
     });
     fireEvent.change(screen.getByPlaceholderText(/link do produktu/i), {
       target: { value: "http://example.com" },
@@ -112,7 +110,9 @@ describe("AddProductModal component", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /dodaj produkt/i }));
 
-    expect(window.alert).toHaveBeenCalledWith("Cena powinna być liczbą.");
+    expect(
+      screen.getByText("Cena powinna byc liczba wieksza lub rowna 0.")
+    ).toBeInTheDocument();
     expect(onAddProduct).not.toHaveBeenCalled();
   });
 
@@ -139,7 +139,7 @@ describe("AddProductModal component", () => {
 
     expect(onAddProduct).toHaveBeenCalledWith({
       name: "Test Product",
-      price: "100",
+      price: 100,
       link: "http://example.com",
     });
     expect(onClose).toHaveBeenCalled();
@@ -187,7 +187,7 @@ describe("AddProductModal component", () => {
 
     expect(onAddProduct).toHaveBeenCalledWith({
       name: "Test Product",
-      price: "100",
+      price: 100,
       link: "http://example.com",
     });
     expect(onClose).toHaveBeenCalled();

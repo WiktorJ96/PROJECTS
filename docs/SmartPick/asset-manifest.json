@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/PROJECTS/SmartPick/static/css/main.dd7b12a1.css",
-    "main.js": "/PROJECTS/SmartPick/static/js/main.4932130b.js",
+    "main.css": "/PROJECTS/SmartPick/static/css/main.cef9f014.css",
+    "main.js": "/PROJECTS/SmartPick/static/js/main.427797a3.js",
     "static/js/453.389d50f6.chunk.js": "/PROJECTS/SmartPick/static/js/453.389d50f6.chunk.js",
     "static/media/SmartPick-logo.svg": "/PROJECTS/SmartPick/static/media/SmartPick-logo.e9101d023a7c35ffc8b818fc4235cccb.svg",
     "index.html": "/PROJECTS/SmartPick/index.html",
-    "main.dd7b12a1.css.map": "/PROJECTS/SmartPick/static/css/main.dd7b12a1.css.map",
-    "main.4932130b.js.map": "/PROJECTS/SmartPick/static/js/main.4932130b.js.map",
+    "main.cef9f014.css.map": "/PROJECTS/SmartPick/static/css/main.cef9f014.css.map",
+    "main.427797a3.js.map": "/PROJECTS/SmartPick/static/js/main.427797a3.js.map",
     "453.389d50f6.chunk.js.map": "/PROJECTS/SmartPick/static/js/453.389d50f6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dd7b12a1.css",
-    "static/js/main.4932130b.js"
+    "static/css/main.cef9f014.css",
+    "static/js/main.427797a3.js"
   ]
 }
