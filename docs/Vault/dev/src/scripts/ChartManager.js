@@ -40,6 +40,7 @@ class ChartManager {
     if (!canvas) {
       throw new Error("Canvas element with ID 'balanceChart' not found");
     }
+    this.emptyState = document.getElementById("chart-empty-state");
 
     const ctx = canvas.getContext("2d");
     if (!ctx) {
@@ -291,9 +292,11 @@ class ChartManager {
       this.chart.data.datasets.forEach((dataset) => {
         dataset.data = [];
       });
+      this.setEmptyStateVisibility(true);
       this.chart.update();
       return;
     }
+    this.setEmptyStateVisibility(false);
 
     const labels = transactions.map((entry) => {
       const date = new Date(entry.date);
@@ -315,6 +318,29 @@ class ChartManager {
     this.chart.data.datasets[2].data = [];
 
     this.chart.update();
+  }
+
+  /**
+   * Toggles the chart empty state.
+   *
+   * @param {boolean} isEmpty - Whether chart has no data.
+   * @returns {void}
+   */
+  setEmptyStateVisibility(isEmpty) {
+    const canvas = document.getElementById("balanceChart");
+
+    if (canvas) {
+      canvas.classList.toggle("d-none", isEmpty);
+    }
+
+    if (this.emptyState) {
+      const lang = localStorage.getItem("preferredLanguage");
+      this.emptyState.textContent =
+        lang === "en"
+          ? "Add a transaction to see the chart."
+          : "Dodaj transakcję, aby zobaczyć wykres.";
+      this.emptyState.classList.toggle("d-none", !isEmpty);
+    }
   }
 
   /**
@@ -371,6 +397,7 @@ class ChartManager {
     this.chart.data.datasets[1].label = lang === "pl" ? "Przychody" : "Income";
     this.chart.data.datasets[2].label = lang === "pl" ? "Wydatki" : "Expenses";
 
+    this.setEmptyStateVisibility((this.transactionManager.transactions || []).length === 0);
     this.chart.update();
   }
 

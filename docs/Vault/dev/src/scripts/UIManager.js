@@ -112,6 +112,7 @@ class UIManager {
       cancelDeleteTransactionBtn: "#cancelDeleteTransaction",
       incomeTitle: "#income-tab",
       expensesTitle: "#expenses-tab",
+      chartEmptyState: "#chart-empty-state",
     };
 
     Object.entries(selectors).forEach(([key, selector]) => {
@@ -318,9 +319,13 @@ class UIManager {
    * @returns {Promise<void>}
    */
   async saveTransaction() {
+    const name = this.nameInput.value.trim();
+    const rawAmount = parseFloat(this.amountInput.value);
+
     if (
-      this.nameInput.value &&
-      this.amountInput.value &&
+      name &&
+      Number.isFinite(rawAmount) &&
+      rawAmount > 0 &&
       this.transactionTypeSelect.value
     ) {
       const isIncome = this.transactionTypeSelect.value === "income";
@@ -329,24 +334,23 @@ class UIManager {
         ? this.incomeCategorySelect
         : this.expenseCategorySelect;
 
-      const category =
-        categorySelect.options[categorySelect.selectedIndex].text;
+      const category = categorySelect.value;
 
       const amount = isIncome
-        ? Math.abs(parseFloat(this.amountInput.value))
-        : -Math.abs(parseFloat(this.amountInput.value));
+        ? Math.abs(rawAmount)
+        : -Math.abs(rawAmount);
 
       await this.transactionManager.createNewTransaction(
-        this.nameInput.value,
+        name,
         amount,
         category,
       );
 
       this.closePanel();
     } else {
-      alert(
-        this.language === "pl" ? "Wprowadź wszystkie dane" : "Enter all data",
-      );
+      this.nameInput.value = name;
+      this.nameInput.reportValidity();
+      this.amountInput.reportValidity();
     }
   }
 
@@ -412,6 +416,7 @@ class UIManager {
       "transaction-section-hidden",
       !hasTransactions,
     );
+    this.deleteAllBtn?.classList.toggle("d-none", !hasTransactions);
 
     [
       this.income,
@@ -450,6 +455,42 @@ class UIManager {
   }
 
   /**
+   * Gets a localized category label from a stored category key.
+   *
+   * @param {string} category - Stored category key or legacy label.
+   * @returns {string} Localized category label.
+   */
+  getCategoryLabel(category) {
+    const labels = {
+      pl: {
+        salary: "Wypłata",
+        bonus: "Premia",
+        gift: "Prezent",
+        "other-income": "Inne",
+        shopping: "Zakupy",
+        food: "Jedzenie",
+        cinema: "Kino",
+        transport: "Transport",
+        "other-expense": "Inne",
+      },
+      en: {
+        salary: "Salary",
+        bonus: "Bonus",
+        gift: "Gift",
+        "other-income": "Other",
+        shopping: "Shopping",
+        food: "Food",
+        cinema: "Cinema",
+        transport: "Transport",
+        "other-expense": "Other",
+      },
+    };
+
+    const language = this.language === "en" ? "en" : "pl";
+    return labels[language][category] || category;
+  }
+
+  /**
    * Adds a transaction to the DOM.
    *
    * @param {Object} transaction - The transaction object containing details to display.
@@ -457,6 +498,7 @@ class UIManager {
    */
   addTransactionToDOM(transaction) {
     const categoryName = transaction.category;
+    const categoryLabel = this.getCategoryLabel(categoryName);
 
     const newTransactionElement = document.createElement("div");
 
@@ -486,7 +528,7 @@ class UIManager {
           class="transaction-category"
           data-lang-key="${categoryName}"
         >
-          ${categoryName}
+          ${categoryLabel}
         </div>
 
         <div class="transaction-date">
@@ -702,6 +744,8 @@ class UIManager {
       gift: "fa-gift",
       inne: "fa-question-circle",
       other: "fa-question-circle",
+      "other-income": "fa-question-circle",
+      "other-expense": "fa-question-circle",
       zakupy: "fa-cart-arrow-down",
       shopping: "fa-cart-arrow-down",
       jedzenie: "fa-hamburger",

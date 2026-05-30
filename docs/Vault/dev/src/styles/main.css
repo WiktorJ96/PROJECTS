@@ -168,6 +168,18 @@ body {
   max-height: 300px;
 }
 
+.chart-empty-state {
+  align-items: center;
+  color: var(--accent-color);
+  display: flex;
+  flex: 1;
+  font-size: 0.95rem;
+  justify-content: center;
+  min-height: 220px;
+  opacity: 0.65;
+  text-align: center;
+}
+
 .footer-bg {
   background-color: var(--footer-color);
   position: relative;
