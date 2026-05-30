@@ -33,6 +33,14 @@ npm run build
 
 The production build is configured for `/PROJECTS/SmartPick` through the `homepage` field in `package.json`.
 
+## Docker
+
+```bash
+docker compose --env-file .env.docker.local up --build
+```
+
+The frontend is served by nginx at `http://localhost:3000`. The backend is available at `http://localhost:5000`, and SQLite data is stored in the `smartpick-data` Docker volume.
+
 ## Notes
 
 Payment methods store only a label, card owner, expiry date and the last four digits. Full card numbers and CVV values must not be stored in this project.

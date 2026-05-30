@@ -84,6 +84,9 @@ class TranslationManager {
     document.dispatchEvent(
       new CustomEvent("languageChanged", { detail: { language: lang } })
     );
+    window.dispatchEvent(
+      new CustomEvent("languageChange", { detail: { language: lang } })
+    );
   }
   /**
    *  Zmieniona funkcja setLanguage na potrzeby wykonania testów

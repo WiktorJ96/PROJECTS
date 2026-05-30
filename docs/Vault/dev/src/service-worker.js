@@ -3,8 +3,7 @@ const ASSETS_TO_CACHE = [
   "/",
   "./index.html",
   "./styles/main.css",
-  "./Main.js",
-  "./translates/translates.js",
+  "./scripts/bundle.js",
   "./translates/Vault-en.json",
   "./translates/Vault-pl.json",
   "./assets/vault_icon_manifest.svg",
@@ -108,6 +107,13 @@ self.addEventListener("sync", (event) => {
 });
 
 async function syncTransactions() {
+  if (
+    typeof getUnsyncedTransactionsFromIndexedDB !== "function" ||
+    typeof markTransactionAsSyncedInIndexedDB !== "function"
+  ) {
+    return;
+  }
+
   const unsyncedTransactions = await getUnsyncedTransactionsFromIndexedDB(); // Funkcja do pobierania transakcji
   for (const transaction of unsyncedTransactions) {
     try {

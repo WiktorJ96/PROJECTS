@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import path from "path";
+import { existsSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
@@ -17,6 +18,9 @@ class Server {
       process.env.DOCKER_ENV === "true"
         ? process.env.MONGO_URL
         : "mongodb://localhost:27017/dbvault";
+    this.staticRoot = existsSync(path.join(__dirname, "src"))
+      ? path.join(__dirname, "src")
+      : __dirname;
 
     this.connectToDatabase();
     this.middlewares();
@@ -36,10 +40,10 @@ class Server {
   middlewares() {
     this.app.use(express.json());
     this.app.use(cors());
-    this.app.use(express.static(path.join(__dirname, "src")));
-    this.app.use("/js", express.static(path.join(__dirname, "scripts")));
-    this.app.use("/assets", express.static(path.join(__dirname,"assets")));
-    this.app.use("/styles", express.static(path.join(__dirname,"styles")));
+    this.app.use(express.static(this.staticRoot));
+    this.app.use("/js", express.static(path.join(this.staticRoot, "scripts")));
+    this.app.use("/assets", express.static(path.join(this.staticRoot, "assets")));
+    this.app.use("/styles", express.static(path.join(this.staticRoot, "styles")));
   }
 
   routes() {
@@ -94,7 +98,7 @@ class Server {
 
     // Serwowanie strony głównej
     this.app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "src", "Vault.html"));
+      res.sendFile(path.join(this.staticRoot, "index.html"));
     });
   }
 

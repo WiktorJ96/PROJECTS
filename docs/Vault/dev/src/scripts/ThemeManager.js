@@ -50,6 +50,10 @@ class ThemeManager {
    * @returns {void}
    */
   addEventListeners() {
+    if (!this.themeToggle) {
+      return;
+    }
+
     this.themeToggle.addEventListener("click", () => this.toggleTheme());
   }
 
@@ -104,6 +108,10 @@ class ThemeManager {
    * @returns {void}
    */
   updateToggleButton() {
+    if (!this.themeToggle) {
+      return;
+    }
+
     if (this.currentTheme === "dark") {
       this.themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
       this.themeToggle.setAttribute("aria-label", "Switch to light mode");

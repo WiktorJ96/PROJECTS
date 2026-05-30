@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "test": "node --experimental-vm-modules node_modules/jasmine/bin/jasmine.js",
+    "test": "node --experimental-vm-modules node_modules/jasmine/bin/jasmine.js --config=jasmine.json",
     "build": "webpack",
     "dev": "webpack --mode development",
     "prod": "webpack --mode production"

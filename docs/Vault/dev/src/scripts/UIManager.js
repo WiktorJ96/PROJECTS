@@ -357,12 +357,15 @@ class UIManager {
 
     if (!this.transactionManager.transactions.length) {
       console.log("No transactions to display.");
+      this.updateTransactionListVisibility();
       return;
     }
 
     this.transactionManager.transactions.forEach((transaction) => {
       this.addTransactionToDOM(transaction);
     });
+
+    this.updateTransactionListVisibility();
   }
 
   /**
@@ -387,6 +390,30 @@ class UIManager {
   clearTransactionsDisplay() {
     this.income.innerHTML = "";
     this.outcome.innerHTML = "";
+    this.updateTransactionListVisibility();
+  }
+
+  /**
+   * Shows transaction list cards only when they contain transactions.
+   *
+   * @returns {void}
+   */
+  updateTransactionListVisibility() {
+    [
+      this.income,
+      this.outcome,
+    ].forEach((list) => {
+      const card = list?.closest(".card");
+
+      if (!card) {
+        return;
+      }
+
+      card.classList.toggle(
+        "transaction-list-card-hidden",
+        list.children.length === 0,
+      );
+    });
   }
 
   /**
@@ -454,6 +481,8 @@ class UIManager {
     (transaction.amount > 0 ? this.income : this.outcome).appendChild(
       newTransactionElement,
     );
+
+    this.updateTransactionListVisibility();
   }
 
   /**
@@ -572,6 +601,8 @@ class UIManager {
     if (transactionElement) {
       transactionElement.remove();
     }
+
+    this.updateTransactionListVisibility();
 
     this.updateBalance();
 

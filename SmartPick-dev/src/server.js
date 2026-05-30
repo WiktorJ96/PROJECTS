@@ -4,11 +4,12 @@ const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const DB_PATH = process.env.DB_PATH || "./shop.db";
 
 app.use(express.json());
 app.use(cors());
 
-const db = new sqlite3.Database("./shop.db", (err) => {
+const db = new sqlite3.Database(DB_PATH, (err) => {
   if (err) {
     console.error("Błąd przy otwieraniu bazy danych:", err);
   } else {
