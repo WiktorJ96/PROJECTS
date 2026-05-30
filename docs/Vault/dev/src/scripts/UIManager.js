@@ -38,6 +38,7 @@ class UIManager {
     this.body = document.body;
 
     this.updateLanguage();
+    this.updateTransactionListVisibility();
 
     // Detect LinkedIn browser
     this.checkInAppBrowser();
@@ -104,6 +105,7 @@ class UIManager {
       expenseCategorySelect: "#expense-category",
       deleteAllModal: "#confirmationModal",
       deleteTransactionModal: "#deleteTransactionModal",
+      transactionSection: "#transaction-section",
       confirmDeleteBtn: "#confirmDelete",
       cancelDeleteBtn: "#cancelDelete",
       confirmDeleteTransactionBtn: "#confirmDeleteTransaction",
@@ -273,6 +275,7 @@ class UIManager {
     const modal = new bootstrap.Modal(this.addTransactionPanel);
 
     modal.show();
+    this.nameInput.focus();
 
     this.handleTransactionTypeChange();
   }
@@ -358,6 +361,7 @@ class UIManager {
     if (!this.transactionManager.transactions.length) {
       console.log("No transactions to display.");
       this.updateTransactionListVisibility();
+      this.updateTransactionTabCounts();
       return;
     }
 
@@ -366,6 +370,7 @@ class UIManager {
     });
 
     this.updateTransactionListVisibility();
+    this.updateTransactionTabCounts();
   }
 
   /**
@@ -391,6 +396,7 @@ class UIManager {
     this.income.innerHTML = "";
     this.outcome.innerHTML = "";
     this.updateTransactionListVisibility();
+    this.updateTransactionTabCounts();
   }
 
   /**
@@ -399,6 +405,14 @@ class UIManager {
    * @returns {void}
    */
   updateTransactionListVisibility() {
+    const hasTransactions =
+      this.income.children.length > 0 || this.outcome.children.length > 0;
+
+    this.transactionSection?.classList.toggle(
+      "transaction-section-hidden",
+      !hasTransactions,
+    );
+
     [
       this.income,
       this.outcome,
@@ -414,6 +428,25 @@ class UIManager {
         list.children.length === 0,
       );
     });
+  }
+
+  /**
+   * Updates income and expense tab counters.
+   *
+   * @returns {void}
+   */
+  updateTransactionTabCounts() {
+    const incomeCount = this.income?.children.length || 0;
+    const expenseCount = this.outcome?.children.length || 0;
+    const isPolish = this.language !== "en";
+
+    if (this.incomeTitle) {
+      this.incomeTitle.textContent = `${isPolish ? "Przychód" : "Income"} (${incomeCount})`;
+    }
+
+    if (this.expensesTitle) {
+      this.expensesTitle.textContent = `${isPolish ? "Wydatki" : "Expenses"} (${expenseCount})`;
+    }
   }
 
   /**
@@ -455,6 +488,10 @@ class UIManager {
         >
           ${categoryName}
         </div>
+
+        <div class="transaction-date">
+          ${this.formatTransactionDate(transaction.date)}
+        </div>
       </div>
 
       <div class="transaction-amount ${
@@ -483,6 +520,27 @@ class UIManager {
     );
 
     this.updateTransactionListVisibility();
+    this.updateTransactionTabCounts();
+  }
+
+  /**
+   * Formats transaction date for list display.
+   *
+   * @param {string} date - Transaction date.
+   * @returns {string} Formatted date.
+   */
+  formatTransactionDate(date) {
+    const parsedDate = new Date(date);
+
+    if (Number.isNaN(parsedDate.getTime())) {
+      return "";
+    }
+
+    return new Intl.DateTimeFormat(this.language === "en" ? "en-US" : "pl-PL", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }).format(parsedDate);
   }
 
   /**
@@ -603,6 +661,7 @@ class UIManager {
     }
 
     this.updateTransactionListVisibility();
+    this.updateTransactionTabCounts();
 
     this.updateBalance();
 
@@ -616,6 +675,7 @@ class UIManager {
    */
   updateLanguage() {
     this.language = localStorage.getItem("preferredLanguage");
+    this.updateTransactionTabCounts();
   }
 
   /**
