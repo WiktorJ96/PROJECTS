@@ -31,22 +31,22 @@ function useReminderForm(
     if (productName && frequency) {
       if (frequency > maxFrequency) {
         alert(`Częstotliwość nie może przekraczać ${maxFrequency} dni.`);
-        return;
+        return false;
       }
-      // Tworzymy tymczasowy rekord przypomnienia
       const temporaryReminder = {
         productName,
         frequency,
-        id: Date.now(), // tymczasowe id
+        id: Date.now(),
         startDate: new Date().toISOString(),
         remainingDays: parseInt(frequency, 10),
         isLoading: true,
       };
-      // Wywołujemy funkcję onAddReminder z parametrem informującym o optymistycznej aktualizacji
       await onAddReminder(temporaryReminder, true);
       setFormData(initialValues);
+      return true;
     } else {
       alert("Wypełnij wszystkie pola.");
+      return false;
     }
   };
 

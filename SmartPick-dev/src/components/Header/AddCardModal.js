@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { FaCreditCard, FaTimes } from "react-icons/fa";
+import { FaCreditCard, FaTrash } from "react-icons/fa";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
+import Modal from "../Modal/Modal";
 
 const STORAGE_KEY = "paymentMethods";
 const LEGACY_STORAGE_KEY = "cards";
@@ -12,7 +13,7 @@ const normalizeMethod = (method) => {
 
   return {
     id: method.id || `${Date.now()}-${Math.random().toString(36).slice(2)}`,
-    label: method.label || "Karta platnicza",
+    label: method.label || "Karta płatnicza",
     cardHolder: method.cardHolder || "",
     expiryDate: method.expiryDate || "",
     last4,
@@ -46,14 +47,7 @@ const AddCardModal = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (isOpen) {
-      document.body.classList.add("overflow-hidden");
       setMethods(loadPaymentMethods());
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-
-    return () => {
-      document.body.classList.remove("overflow-hidden");
     };
   }, [isOpen]);
 
@@ -73,12 +67,12 @@ const AddCardModal = ({ isOpen, onClose }) => {
 
   const handleSaveMethod = () => {
     if (!label.trim() || !last4.trim() || !expiryDate.trim()) {
-      setError("Nazwa metody, ostatnie 4 cyfry i waznosc sa wymagane.");
+      setError("Nazwa metody, ostatnie 4 cyfry i ważność są wymagane.");
       return;
     }
 
     if (!/^\d{4}$/.test(last4)) {
-      setError("Podaj dokladnie ostatnie 4 cyfry karty.");
+      setError("Podaj dokładnie ostatnie 4 cyfry karty.");
       return;
     }
 
@@ -110,49 +104,39 @@ const AddCardModal = ({ isOpen, onClose }) => {
     setSelectedMethodIndex(null);
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white rounded-lg shadow-xl p-6 max-w-2xl w-full transition-all duration-300 transform scale-100 opacity-100">
-        <div className="flex justify-between items-center border-b pb-4 mb-4">
-          <div className="flex space-x-4">
+    <Modal isOpen={isOpen} title="Metody płatności" onClose={onClose} maxWidth="max-w-2xl">
+      <div>
+        <div className="mb-4 border-b border-slate-200">
+          <div className="flex gap-2">
             <button
-              className={`text-lg font-semibold ${
+              type="button"
+              className={`rounded-t-md px-4 py-2 text-sm font-semibold ${
                 activeTab === "add"
-                  ? "text-blue-500 border-b-2 border-blue-500"
-                  : "text-gray-500"
+                  ? "border-b-2 border-sky-600 text-sky-700"
+                  : "text-slate-500 hover:text-slate-900"
               }`}
               onClick={() => setActiveTab("add")}
             >
-              Dodaj metode
+              Dodaj metodę
             </button>
             <button
-              className={`text-lg font-semibold ${
+              type="button"
+              className={`rounded-t-md px-4 py-2 text-sm font-semibold ${
                 activeTab === "view"
-                  ? "text-blue-500 border-b-2 border-blue-500"
-                  : "text-gray-500"
+                  ? "border-b-2 border-sky-600 text-sky-700"
+                  : "text-slate-500 hover:text-slate-900"
               }`}
               onClick={() => setActiveTab("view")}
             >
-              Metody platnosci
+              Zapisane metody
             </button>
           </div>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-red-500 transition-colors duration-200"
-            aria-label="Zamknij"
-          >
-            <FaTimes size={20} />
-          </button>
         </div>
 
         {activeTab === "add" && (
           <div>
-            <h2 className="text-2xl font-semibold mb-4 text-gray-700">
-              Dodaj metode platnosci
-            </h2>
-            <div className="space-y-4">
+            <div className="space-y-3">
               <input
                 type="text"
                 value={label}
@@ -161,16 +145,16 @@ const AddCardModal = ({ isOpen, onClose }) => {
                   setError("");
                 }}
                 placeholder="Nazwa metody, np. Karta prywatna"
-                className="w-full p-3 border rounded focus:ring-2 focus:ring-blue-400"
+                className="form-input"
               />
               <input
                 type="text"
                 value={cardHolder}
                 onChange={(event) => setCardHolder(event.target.value)}
-                placeholder="Wlasciciel (opcjonalnie)"
-                className="w-full p-3 border rounded focus:ring-2 focus:ring-blue-400"
+                placeholder="Właściciel (opcjonalnie)"
+                className="form-input"
               />
-              <div className="flex space-x-4">
+              <div className="grid grid-cols-2 gap-3">
                 <input
                   type="text"
                   value={last4}
@@ -181,7 +165,7 @@ const AddCardModal = ({ isOpen, onClose }) => {
                   inputMode="numeric"
                   maxLength="4"
                   placeholder="Ostatnie 4 cyfry"
-                  className="w-1/2 p-3 border rounded focus:ring-2 focus:ring-blue-400"
+                  className="form-input"
                 />
                 <input
                   type="text"
@@ -189,15 +173,16 @@ const AddCardModal = ({ isOpen, onClose }) => {
                   onChange={handleExpiryDateChange}
                   maxLength="5"
                   placeholder="MM/YY"
-                  className="w-1/2 p-3 border rounded focus:ring-2 focus:ring-blue-400"
+                  className="form-input"
                 />
               </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
+              {error && <p className="text-sm font-medium text-rose-600">{error}</p>}
               <button
+                type="button"
                 onClick={handleSaveMethod}
-                className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition-colors duration-200"
+                className="btn-primary w-full px-4 py-2"
               >
-                Zapisz metode
+                Zapisz metodę
               </button>
             </div>
           </div>
@@ -205,43 +190,41 @@ const AddCardModal = ({ isOpen, onClose }) => {
 
         {activeTab === "view" && (
           <div>
-            <h2 className="text-2xl font-semibold mb-4 text-gray-700">
-              Metody platnosci
-            </h2>
             {methods.length > 0 ? (
-              <ul className="space-y-4 max-h-60 overflow-y-auto">
+              <ul className="max-h-72 space-y-3 overflow-y-auto">
                 {methods.map((method, index) => (
                   <li
                     key={method.id || index}
-                    className="p-4 border rounded shadow-sm flex justify-between items-center"
+                    className="flex items-center justify-between rounded-lg border border-slate-200 p-4"
                   >
                     <div>
-                      <p className="text-sm text-gray-600">
-                        <FaCreditCard className="inline mr-2 text-blue-500" />
+                      <p className="text-sm font-semibold text-slate-900">
+                        <FaCreditCard className="mr-2 inline text-sky-600" />
                         {method.label} **** {method.last4}
                       </p>
                       {method.cardHolder && (
-                        <p className="text-sm text-gray-600">
-                          Wlasciciel: {method.cardHolder}
+                        <p className="text-sm text-slate-600">
+                          Właściciel: {method.cardHolder}
                         </p>
                       )}
-                      <p className="text-sm text-gray-600">
-                        Waznosc: {method.expiryDate}
+                      <p className="text-sm text-slate-600">
+                        Ważność: {method.expiryDate}
                       </p>
                     </div>
                     <button
+                      type="button"
                       onClick={() => openDeleteConfirmationModal(index)}
-                      className="text-gray-500 hover:text-red-500 transition-colors duration-200"
-                      aria-label="Usun metode platnosci"
+                      className="icon-button text-rose-600 hover:bg-rose-50 hover:text-rose-700"
+                      aria-label="Usuń metodę płatności"
                     >
-                      <FaTimes />
+                      <FaTrash />
                     </button>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-center text-gray-500">
-                Brak zapisanych metod platnosci.
+              <p className="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-600">
+                Brak zapisanych metod płatności.
               </p>
             )}
           </div>
@@ -251,11 +234,11 @@ const AddCardModal = ({ isOpen, onClose }) => {
           isOpen={isDeleteModalOpen}
           onClose={() => setIsDeleteModalOpen(false)}
           onConfirm={handleDeleteMethod}
-          item="metode platnosci"
-          itemType="metode"
+          item="metodę płatności"
+          itemType="metodę"
         />
       </div>
-    </div>
+    </Modal>
   );
 };
 

@@ -85,7 +85,7 @@ describe("AddProductModal component", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /dodaj produkt/i }));
 
-    expect(screen.getByText("Wszystkie pola sa wymagane.")).toBeInTheDocument();
+    expect(screen.getByText("Wszystkie pola są wymagane.")).toBeInTheDocument();
     expect(onAddProduct).not.toHaveBeenCalled();
   });
 
@@ -111,7 +111,7 @@ describe("AddProductModal component", () => {
     fireEvent.click(screen.getByRole("button", { name: /dodaj produkt/i }));
 
     expect(
-      screen.getByText("Cena powinna byc liczba wieksza lub rowna 0.")
+      screen.getByText("Cena powinna być liczbą większą lub równą 0.")
     ).toBeInTheDocument();
     expect(onAddProduct).not.toHaveBeenCalled();
   });

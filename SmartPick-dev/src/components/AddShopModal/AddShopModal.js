@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Modal from "../Modal/Modal";
 
 const AddShopModal = ({ isOpen, onClose, onAddShop }) => {
   const [shopName, setShopName] = useState("");
@@ -9,49 +10,47 @@ const AddShopModal = ({ isOpen, onClose, onAddShop }) => {
       setError("Nazwa sklepu jest wymagana.");
       return;
     }
-    onAddShop(shopName);
-    setShopName(""); // Czyścimy input
-    onClose(); // Zamykamy modal
+    onAddShop(shopName.trim());
+    setShopName("");
+    onClose();
   };
 
-  const handleInputChange = (e) => {
-    setShopName(e.target.value);
-    if (error) setError(""); // Usuwamy błąd po rozpoczęciu wpisywania
+  const handleInputChange = (event) => {
+    setShopName(event.target.value);
+    if (error) setError("");
   };
-
-  if (!isOpen) return null;
 
   return (
-    <div
-      role="dialog"
-      aria-labelledby="modal-title"
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+    <Modal
+      isOpen={isOpen}
+      title="Dodaj sklep"
+      onClose={onClose}
+      footer={
+        <>
+          <button type="button" onClick={onClose} className="btn-secondary px-4 py-2">
+            Anuluj
+          </button>
+          <button type="button" onClick={handleSave} className="btn-primary px-4 py-2">
+            Zapisz
+          </button>
+        </>
+      }
     >
-      <div className="bg-white rounded-lg p-8 w-full max-w-md">
-        <h2 id="modal-title" className="text-2xl font-semibold mb-4">
-          Dodaj sklep
-        </h2>
+      <label className="block">
+        <span className="form-label">Nazwa sklepu</span>
         <input
           type="text"
           value={shopName}
           onChange={handleInputChange}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") handleSave();
+          }}
+          className="form-input mt-1"
           placeholder="Nazwa sklepu"
-          className="w-full p-2 mb-2 border rounded"
         />
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        <div className="flex justify-end space-x-2">
-          <button onClick={onClose} className="btn-secondary px-4 py-2 rounded">
-            Anuluj
-          </button>
-          <button
-            onClick={handleSave}
-            className="btn-primary px-4 py-2 rounded"
-          >
-            Zapisz
-          </button>
-        </div>
-      </div>
-    </div>
+      </label>
+      {error && <p className="mt-3 text-sm font-medium text-rose-600">{error}</p>}
+    </Modal>
   );
 };
 

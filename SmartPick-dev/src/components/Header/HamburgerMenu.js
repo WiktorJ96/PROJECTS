@@ -17,9 +17,10 @@ const HamburgerMenu = ({
     setIsOpen(!isOpen);
   };
 
-  // Zbieramy ulubione produkty i sklepy
   const favoriteProducts = shops.flatMap((shop) =>
-    shop.products.filter((product) => product.isFavorite)
+    (shop.products || [])
+      .filter((product) => product.isFavorite)
+      .map((product) => ({ ...product, shopName: product.shopName || shop.name }))
   );
   const favoriteShops = shops.filter((shop) => shop.isFavorite);
 
@@ -33,44 +34,78 @@ const HamburgerMenu = ({
     <>
       {/* Przycisk otwierający menu */}
       <button
+        type="button"
         onClick={toggleMenu}
-        className="text-white border border-white rounded-full p-3 shadow-lg hover:shadow-2xl focus:outline-none"
-        aria-label="Toggle menu"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-slate-300 text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-sky-500"
+        aria-label={isOpen ? "Zamknij menu" : "Otwórz menu"}
+        aria-expanded={isOpen}
       >
-        {isOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
+        {isOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
       </button>
 
       {/* Menu boczne */}
       <div
-        className={`fixed top-0 left-0 h-full w-72 bg-white shadow-2xl p-8 z-50 transform ${
+        className={`fixed top-0 left-0 z-50 h-full w-72 transform border-r border-slate-200 bg-white p-5 shadow-xl ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-500 ease-in-out rounded-r-lg`}
+        } transition-transform duration-300 ease-in-out`}
       >
-        <nav>
-          <ul className="flex flex-col space-y-8 text-gray-800">
-            <li
-              className="flex items-center space-x-4 text-lg font-medium hover:text-blue-600 cursor-pointer transition-transform duration-200 hover:scale-105"
+        <nav aria-label="Menu aplikacji">
+          <div className="mb-6 flex items-center justify-between">
+            <span className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+              Menu
+            </span>
+            <button
+              type="button"
+              onClick={toggleMenu}
+              className="icon-button"
+              aria-label="Zamknij menu"
+            >
+              <FaTimes aria-hidden="true" />
+            </button>
+          </div>
+          <ul className="flex flex-col gap-2 text-slate-800">
+            <li>
+              <button
+                type="button"
+                className="flex w-full items-center gap-3 rounded-md px-3 py-3 text-left text-base font-medium transition hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500"
               onClick={() => {
                 openAddCardModal();
                 toggleMenu();
               }}
             >
-              <FaCreditCard className="text-blue-500 hover:rotate-6 transition-transform duration-300" />
+              <FaCreditCard className="text-sky-600" aria-hidden="true" />
               <span>Dodaj kartę płatniczą</span>
+              </button>
             </li>
-            <li
-              className="flex items-center space-x-4 text-lg font-medium hover:text-red-500 cursor-pointer transition-transform duration-200 hover:scale-105"
-              onClick={openFavoritesModal}
-            >
-              <FaHeart className="text-red-500 hover:rotate-6 transition-transform duration-300" />
-              <span>Ulubione produkty</span>
+            <li>
+              <button
+                type="button"
+                className="flex w-full items-center justify-between gap-3 rounded-md px-3 py-3 text-left text-base font-medium transition hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                onClick={openFavoritesModal}
+              >
+                <span className="flex items-center gap-3">
+                  <FaHeart className="text-rose-500" aria-hidden="true" />
+                  <span>Ulubione produkty</span>
+                </span>
+                <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-600">
+                  {favoriteProducts.length}
+                </span>
+              </button>
             </li>
-            <li
-              className="flex items-center space-x-4 text-lg font-medium hover:text-green-500 cursor-pointer transition-transform duration-200 hover:scale-105"
-              onClick={openFavoriteShopsModal}
-            >
-              <FaStar className="text-yellow-500 hover:rotate-6 transition-transform duration-300" />
-              <span>Ulubione sklepy</span>
+            <li>
+              <button
+                type="button"
+                className="flex w-full items-center justify-between gap-3 rounded-md px-3 py-3 text-left text-base font-medium transition hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                onClick={openFavoriteShopsModal}
+              >
+                <span className="flex items-center gap-3">
+                  <FaStar className="text-amber-400" aria-hidden="true" />
+                  <span>Ulubione sklepy</span>
+                </span>
+                <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-600">
+                  {favoriteShops.length}
+                </span>
+              </button>
             </li>
           </ul>
         </nav>
@@ -81,7 +116,7 @@ const HamburgerMenu = ({
         <div
           className="fixed inset-0 bg-black bg-opacity-40 z-40"
           onClick={toggleMenu}
-          aria-label="Close menu by clicking outside"
+          aria-label="Zamknij menu klikając poza nim"
         ></div>
       )}
 

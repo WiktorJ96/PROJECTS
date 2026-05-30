@@ -148,6 +148,7 @@ function App() {
     if (!isBackendActive) {
       const updatedShops = shops.filter((shop) => shop.id !== shopId);
       setShops(updatedShops);
+      if (selectedShop?.id === shopId) setSelectedShop(null);
       saveShopsToLocalStorage(updatedShops);
       return;
     }
@@ -156,11 +157,13 @@ function App() {
       await deleteShopFromBackend(apiUrl, shopId);
       const updatedShops = shops.filter((shop) => shop.id !== shopId);
       setShops(updatedShops);
+      if (selectedShop?.id === shopId) setSelectedShop(null);
       saveShopsToLocalStorage(updatedShops);
     } catch (error) {
       console.error("Błąd podczas usuwania sklepu:", error);
       const updatedShops = shops.filter((shop) => shop.id !== shopId);
       setShops(updatedShops);
+      if (selectedShop?.id === shopId) setSelectedShop(null);
       saveShopsToLocalStorage(updatedShops);
     }
   };
@@ -272,7 +275,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-slate-50">
       <Header
         shops={shops}
         openAddCardModal={() => setIsAddCardModalOpen(true)}
@@ -284,23 +287,24 @@ function App() {
         isBackendActive={isBackendActive}
       />
       {notification && (
-        <div className="bg-yellow-200 text-yellow-800 p-3 text-center">
+        <div className="border-b border-amber-200 bg-amber-50 p-3 text-center text-sm font-medium text-amber-800">
           {notification}
         </div>
       )}
-      <main className="flex-grow container mx-auto px-4 py-8">
+      <main className="mx-auto w-full max-w-6xl flex-grow px-4 py-6">
         {loading ? (
-          <div className="text-center">
-            <p>Loading...</p>
+          <div className="rounded-lg border border-slate-200 bg-white p-8 text-center text-slate-600">
+            <p>Ładowanie danych...</p>
           </div>
         ) : (
-          <>
+          <div className="space-y-6">
             <ShopList
               shops={shops}
+              selectedShopId={selectedShop?.id}
               onSelectShop={handleSelectShop}
               onAddShop={() => setIsAddShopModalOpen(true)}
             />
-            {selectedShop && (
+            {selectedShop ? (
               <ProductList
                 key={selectedShop.id}
                 shop={selectedShop}
@@ -310,14 +314,21 @@ function App() {
                 onDeleteShop={handleDeleteShop}
                 onUpdateProducts={handleUpdateProducts}
                 onUpdateShopFavorite={handleUpdateShopFavorite}
+                onAddReminder={handleAddReminder}
               />
+            ) : (
+              shops.length > 0 && (
+                <div className="rounded-lg border border-dashed border-slate-300 bg-white p-6 text-center text-sm text-slate-600">
+                  Wybierz sklep, aby zobaczyć produkty i akcje zakupowe.
+                </div>
+              )
             )}
             <Reminders
               onAddReminder={handleAddReminder}
               reminders={reminders}
               onDeleteReminder={handleDeleteReminder}
             />
-          </>
+          </div>
         )}
       </main>
       <Footer />

@@ -1,111 +1,99 @@
-import React, { useEffect } from "react";
+import React from "react";
+import Modal from "../Modal/Modal";
+import { FaExternalLinkAlt, FaStore } from "react-icons/fa";
 
-const FavoriteProductsModal = ({
-  onClose,
-  favoriteItems,
-  type,
-  onSelectShop,
-}) => {
-  useEffect(() => {
-    console.log(`Dane ulubionych ${type} w modalu:`, favoriteItems);
-    document.body.classList.add("overflow-hidden");
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-    };
-  }, [favoriteItems, type]);
-
-  const handleItemClick = (item) => {
-    if (type === "shops" && onSelectShop) {
-      onSelectShop(item); // Navigate to the shop
-      onClose(); // Close the modal
-    }
-  };
+const FavoriteProductsModal = ({ onClose, favoriteItems, type, onSelectShop }) => {
+  const isProducts = type === "products";
 
   const renderContent = () => {
-    if (favoriteItems.length > 0) {
-      return favoriteItems.map((item, index) => (
-        <div
-          key={index}
-          className={`border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow duration-200 cursor-pointer ${
-            type === "shops" ? "hover:bg-gray-100" : ""
-          }`}
-          onClick={type === "shops" ? () => handleItemClick(item) : undefined}
-        >
-          <h3 className="text-lg font-semibold text-gray-900 truncate">
-            {item.name.length > 30
-              ? `${item.name.substring(0, 30)}...`
-              : item.name}
-          </h3>
-          {item.shopName && (
-            <p className="text-sm text-gray-700 mt-1">
-              Sklep: <span className="font-medium">{item.shopName}</span>
-            </p>
-          )}
-          {type === "products" && (
+    if (favoriteItems.length === 0) {
+      return (
+        <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-600">
+          Brak ulubionych {isProducts ? "produktów" : "sklepów"}.
+        </div>
+      );
+    }
+
+    return (
+      <div className="max-h-96 space-y-3 overflow-y-auto pr-1">
+        {favoriteItems.map((item, index) => {
+          const content = (
             <>
-              <p className="text-sm text-gray-700 mt-2">
-                Cena: <span className="font-medium">{item.price} PLN</span>
-              </p>
-              {item.link && (
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block mt-2 text-blue-500 hover:text-blue-700 hover:underline text-sm"
-                >
-                  Zobacz produkt
-                </a>
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="min-w-0 truncate text-base font-semibold text-slate-900">
+                  {item.name}
+                </h3>
+                {!isProducts && <FaStore className="mt-1 text-sky-600" aria-hidden="true" />}
+              </div>
+              {item.shopName && (
+                <p className="mt-1 text-sm text-slate-600">
+                  Sklep: <span className="font-medium">{item.shopName}</span>
+                </p>
+              )}
+              {isProducts && (
+                <div className="mt-3 flex flex-wrap items-center gap-3">
+                  <span className="price-badge">{item.price} PLN</span>
+                  {item.link && (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-sky-700 hover:text-sky-900 hover:underline"
+                    >
+                      Otwórz
+                      <FaExternalLinkAlt aria-hidden="true" />
+                    </a>
+                  )}
+                </div>
               )}
               {item.note && (
-                <p className="text-sm text-gray-600 bg-gray-100 p-2 rounded mt-3">
-                  <span className="font-semibold">Notatka:</span> {item.note}
+                <p className="mt-3 rounded-md bg-slate-50 p-3 text-sm text-slate-600">
+                  {item.note}
                 </p>
               )}
             </>
-          )}
-        </div>
-      ));
-    }
-    return (
-      <p className="text-center text-gray-500">
-        Brak ulubionych {type === "products" ? "produktów" : "sklepów"}.
-      </p>
+          );
+
+          if (!isProducts) {
+            return (
+              <button
+                key={item.id || index}
+                type="button"
+                onClick={() => onSelectShop?.(item)}
+                className="w-full rounded-lg border border-slate-200 bg-white p-4 text-left transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-sky-500"
+              >
+                {content}
+              </button>
+            );
+          }
+
+          return (
+            <article
+              key={item.id || index}
+              className="rounded-lg border border-slate-200 bg-white p-4"
+            >
+              {content}
+            </article>
+          );
+        })}
+      </div>
     );
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-60 z-50">
-      <div className="bg-white rounded-xl shadow-2xl p-6 max-w-xl w-full relative">
-        {/* Header modala */}
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">
-            Ulubione {type === "products" ? "produkty" : "sklepy"}
-          </h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-800 transition-colors duration-150"
-            aria-label="Zamknij modal"
-          >
-            ✕
-          </button>
-        </div>
-
-        {/* Lista ulubionych */}
-        <div className="space-y-4 max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-          {renderContent()}
-        </div>
-
-        {/* Stopka modala */}
-        <div className="mt-6 flex justify-end">
-          <button
-            onClick={onClose}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200"
-          >
-            Zamknij
-          </button>
-        </div>
-      </div>
-    </div>
+    <Modal
+      isOpen
+      title={`Ulubione ${isProducts ? "produkty" : "sklepy"}`}
+      onClose={onClose}
+      maxWidth="max-w-xl"
+      footer={
+        <button type="button" onClick={onClose} className="btn-primary px-4 py-2">
+          Zamknij
+        </button>
+      }
+    >
+      {renderContent()}
+    </Modal>
   );
 };
 

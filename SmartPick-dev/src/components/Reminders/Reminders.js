@@ -1,140 +1,146 @@
 import React, { useState } from "react";
+import { FaBell, FaChevronDown, FaPlus, FaTrash } from "react-icons/fa";
 import useReminderForm from "../ReminderForm/reminderForm";
 
 function Reminders({ onAddReminder, reminders, onDeleteReminder }) {
-  const [isOpen, setIsOpen] = useState(false); // Stan akordeonu
-  const [isFormOpen, setIsFormOpen] = useState(false); // Widoczność formularza
+  const [isOpen, setIsOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const { formData, handleChange, handleSubmit } = useReminderForm(onAddReminder);
 
-  const { formData, handleChange, handleSubmit } =
-    useReminderForm(onAddReminder);
-
-  const toggleAccordion = () => {
-    setIsOpen((prev) => !prev);
-  };
-
-  const toggleForm = () => {
-    setIsFormOpen((prev) => !prev);
+  const submitReminder = async () => {
+    const didSubmit = await handleSubmit();
+    if (didSubmit !== false) setIsFormOpen(false);
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg shadow-lg overflow-hidden mb-8">
-      {/* Nagłówek akordeonu */}
-      <div
-        onClick={toggleAccordion}
-        className="px-6 py-4 cursor-pointer flex justify-between items-center"
+    <section className="mb-8 rounded-lg border border-slate-200 bg-white shadow-sm">
+      <button
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left focus:outline-none focus:ring-2 focus:ring-sky-500"
+        aria-expanded={isOpen}
       >
-        <h2 className="text-3xl font-bold text-gray-800">Przypomnienia</h2>
-        <span
-          className={`transition-transform duration-300 text-xl text-gray-600 ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
-        >
-          <i className="fas fa-chevron-down"></i>
+        <span className="flex items-center gap-3">
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-sky-50 text-sky-700">
+            <FaBell aria-hidden="true" />
+          </span>
+          <span>
+            <span className="block text-xl font-semibold text-slate-900">
+              Przypomnienia
+            </span>
+            <span className="text-sm text-slate-500">
+              {reminders.length} aktywnych
+            </span>
+          </span>
         </span>
-      </div>
+        <FaChevronDown
+          className={`text-slate-500 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          aria-hidden="true"
+        />
+      </button>
 
-      {/* Zawartość akordeonu */}
       {isOpen && (
-        <div className="px-6 py-4">
-          {/* Sekcja dodawania przypomnienia */}
-          <div className="mb-8 border-b border-gray-300 pb-4">
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-2xl font-semibold text-gray-800">
-                Dodaj przypomnienie
-              </span>
-              <button
-                onClick={toggleForm}
-                className="text-blue-500 hover:text-blue-700 transition-colors duration-200"
-              >
-                {isFormOpen ? "Ukryj formularz" : "Pokaż formularz"}
-              </button>
-            </div>
-            {isFormOpen && (
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Nazwa produktu
-                  </label>
+        <div className="border-t border-slate-200 px-5 py-4">
+          <div className="mb-5 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+            <h3 className="text-base font-semibold text-slate-900">
+              Lista przypomnień
+            </h3>
+            <button
+              type="button"
+              onClick={() => setIsFormOpen((prev) => !prev)}
+              className="btn-primary px-4 py-2"
+            >
+              <FaPlus aria-hidden="true" />
+              {isFormOpen ? "Ukryj formularz" : "Dodaj przypomnienie"}
+            </button>
+          </div>
+
+          {isFormOpen && (
+            <div className="mb-5 rounded-lg border border-slate-200 bg-slate-50 p-4">
+              <div className="grid gap-3 sm:grid-cols-[1fr_180px_auto] sm:items-end">
+                <label className="block">
+                  <span className="form-label">Nazwa produktu</span>
                   <input
                     type="text"
                     name="productName"
                     value={formData.productName}
                     onChange={handleChange}
                     maxLength={50}
-                    placeholder="Wpisz nazwę produktu (max 50 znaków)"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 focus:outline-none"
+                    placeholder="Np. kawa, karma, filtr"
+                    className="form-input mt-1"
                   />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Częstotliwość (dni)
-                  </label>
+                </label>
+                <label className="block">
+                  <span className="form-label">Co ile dni</span>
                   <input
                     type="number"
                     name="frequency"
+                    min="1"
+                    max="1000"
                     value={formData.frequency}
                     onChange={handleChange}
-                    placeholder="Podaj liczbę dni (max 1000)"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 focus:outline-none"
+                    placeholder="30"
+                    className="form-input mt-1"
                   />
-                </div>
-                <button
-                  onClick={async () => {
-                    await handleSubmit();
-                    setIsFormOpen(false);
-                  }}
-                  className="w-full px-4 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors duration-200"
-                >
-                  Dodaj przypomnienie
+                </label>
+                <button type="button" onClick={submitReminder} className="btn-primary px-4 py-2">
+                  Zapisz
                 </button>
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
-          {/* Sekcja wyświetlania przypomnień */}
-          <div>
-            <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-              Lista przypomnień
-            </h3>
-            {reminders.length > 0 ? (
-              <ul className="divide-y divide-gray-200">
-                {reminders.map((reminder) => (
-                  <li
-                    key={reminder.id}
-                    className="flex flex-col sm:flex-row sm:items-center justify-between py-4 px-2 hover:bg-gray-50 transition-colors duration-150"
-                  >
-                    <div>
-                      <p className="text-lg font-medium text-gray-700">
-                        {reminder.productName}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        Przypomnienie co {reminder.frequency} dni
-                      </p>
-                      <p className="text-sm text-blue-500">
+          {reminders.length > 0 ? (
+            <ul className="divide-y divide-slate-200 rounded-lg border border-slate-200">
+              {reminders.map((reminder) => (
+                <li
+                  key={reminder.id}
+                  className="flex flex-col justify-between gap-3 p-4 sm:flex-row sm:items-center"
+                >
+                  <div className="min-w-0">
+                    <p className="truncate text-base font-semibold text-slate-900">
+                      {reminder.productName}
+                    </p>
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
+                      <span className="status-badge bg-sky-50 text-sky-700 ring-sky-200">
+                        Co {reminder.frequency} dni
+                      </span>
+                      <span className="status-badge bg-emerald-50 text-emerald-700 ring-emerald-200">
                         Pozostało: {reminder.remainingDays} dni
-                      </p>
-                      {reminder.unsynced && (
-                        <p className="text-xs text-red-500">Offline</p>
-                      )}
+                      </span>
+                      {reminder.unsynced && <span className="status-badge">Offline</span>}
                     </div>
-                    <button
-                      onClick={() => onDeleteReminder(reminder.id)}
-                      className="mt-2 sm:mt-0 text-red-500 hover:text-red-700 transition-colors duration-150"
-                    >
-                      <i className="fas fa-times"></i>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-center text-gray-500 py-6">
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => onDeleteReminder(reminder.id)}
+                    className="icon-button self-end text-rose-600 hover:bg-rose-50 hover:text-rose-700 sm:self-auto"
+                    aria-label={`Usuń przypomnienie ${reminder.productName}`}
+                    title="Usuń"
+                  >
+                    <FaTrash aria-hidden="true" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-6 text-center">
+              <p className="text-sm text-slate-600">
                 Nie masz jeszcze przypomnień.
               </p>
-            )}
-          </div>
+              <button
+                type="button"
+                onClick={() => setIsFormOpen(true)}
+                className="btn-primary mx-auto mt-4 px-4 py-2"
+              >
+                <FaPlus aria-hidden="true" />
+                Dodaj pierwsze przypomnienie
+              </button>
+            </div>
+          )}
         </div>
       )}
-    </div>
+    </section>
   );
 }
 
