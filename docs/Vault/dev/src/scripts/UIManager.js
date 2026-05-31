@@ -513,42 +513,48 @@ class UIManager {
     const categoryIcon = this.getCategoryIcon(transaction.category);
 
     newTransactionElement.innerHTML = `
-      <div class="transaction-details">
-        <div class="transaction-name">
-          <span class="category-icon">
-            ${categoryIcon}
-          </span>
+      <div class="transaction-delete-action" aria-hidden="true">
+        <i class="far fa-trash-alt"></i>
+      </div>
 
-          <span class="transaction-title">
-            ${transaction.name}
-          </span>
+      <div class="transaction-swipe-content">
+        <div class="transaction-details">
+          <div class="transaction-name">
+            <span class="category-icon">
+              ${categoryIcon}
+            </span>
+
+            <span class="transaction-title">
+              ${transaction.name}
+            </span>
+          </div>
+
+          <div 
+            class="transaction-category"
+            data-lang-key="${categoryName}"
+          >
+            ${categoryLabel}
+          </div>
+
+          <div class="transaction-date">
+            ${this.formatTransactionDate(transaction.date)}
+          </div>
         </div>
 
-        <div 
-          class="transaction-category"
-          data-lang-key="${categoryName}"
+        <div class="transaction-amount ${
+          transaction.amount > 0 ? "income" : "expense"
+        }">
+          ${Math.abs(transaction.amount).toFixed(2)}
+          ${this.transactionManager.currencySymbol}
+        </div>
+
+        <button
+          class="delete-transaction"
+          aria-label="Usuń transakcję"
         >
-          ${categoryLabel}
-        </div>
-
-        <div class="transaction-date">
-          ${this.formatTransactionDate(transaction.date)}
-        </div>
+          <i class="far fa-trash-alt"></i>
+        </button>
       </div>
-
-      <div class="transaction-amount ${
-        transaction.amount > 0 ? "income" : "expense"
-      }">
-        ${Math.abs(transaction.amount).toFixed(2)}
-        ${this.transactionManager.currencySymbol}
-      </div>
-
-      <button
-        class="delete-transaction"
-        aria-label="Usuń transakcję"
-      >
-        <i class="fas fa-times"></i>
-      </button>
     `;
 
     newTransactionElement
@@ -557,12 +563,118 @@ class UIManager {
         this.showDeleteTransactionModal(transaction.id);
       });
 
+    this.initializeSwipeToDelete(newTransactionElement, transaction.id);
+
     (transaction.amount > 0 ? this.income : this.outcome).appendChild(
       newTransactionElement,
     );
 
     this.updateTransactionListVisibility();
     this.updateTransactionTabCounts();
+  }
+
+  /**
+   * Enables left-swipe deletion on touch devices.
+   *
+   * @param {HTMLElement} element - Rendered transaction element.
+   * @param {string} transactionId - Transaction ID.
+   * @returns {void}
+   */
+  initializeSwipeToDelete(element, transactionId) {
+    const content = element.querySelector(".transaction-swipe-content");
+    const isTouchDevice =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(pointer: coarse)").matches;
+
+    if (!content || !isTouchDevice) {
+      return;
+    }
+
+    if (!localStorage.getItem("swipeDeleteHintShown")) {
+      element.classList.add("swipe-hint");
+      localStorage.setItem("swipeDeleteHintShown", "true");
+
+      window.setTimeout(() => {
+        element.classList.remove("swipe-hint");
+      }, 2200);
+    }
+
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let isDragging = false;
+    let isHorizontalSwipe = false;
+
+    const resetSwipe = () => {
+      element.style.setProperty("--swipe-x", "0px");
+      element.classList.remove("is-swiping");
+    };
+
+    element.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse") {
+        return;
+      }
+
+      startX = event.clientX;
+      startY = event.clientY;
+      currentX = 0;
+      isDragging = true;
+      isHorizontalSwipe = false;
+      element.classList.remove("swipe-hint");
+      element.setPointerCapture(event.pointerId);
+    });
+
+    element.addEventListener("pointermove", (event) => {
+      if (!isDragging) {
+        return;
+      }
+
+      const deltaX = event.clientX - startX;
+      const deltaY = event.clientY - startY;
+
+      if (!isHorizontalSwipe && Math.abs(deltaY) > Math.abs(deltaX)) {
+        return;
+      }
+
+      if (Math.abs(deltaX) > 10) {
+        isHorizontalSwipe = true;
+      }
+
+      if (!isHorizontalSwipe) {
+        return;
+      }
+
+      event.preventDefault();
+      currentX = Math.max(Math.min(deltaX, 0), -96);
+      element.classList.add("is-swiping");
+      element.style.setProperty("--swipe-x", `${currentX}px`);
+    });
+
+    const finishSwipe = (event) => {
+      if (!isDragging) {
+        return;
+      }
+
+      isDragging = false;
+
+      if (event.pointerId && element.hasPointerCapture(event.pointerId)) {
+        element.releasePointerCapture(event.pointerId);
+      }
+
+      if (currentX <= -72) {
+        element.style.setProperty("--swipe-x", "-96px");
+        window.setTimeout(() => {
+          resetSwipe();
+          this.showDeleteTransactionModal(transactionId);
+        }, 160);
+        return;
+      }
+
+      resetSwipe();
+    };
+
+    element.addEventListener("pointerup", finishSwipe);
+    element.addEventListener("pointercancel", finishSwipe);
   }
 
   /**

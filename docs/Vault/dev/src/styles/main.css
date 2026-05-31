@@ -249,13 +249,43 @@ body {
 .transaction-item {
   background-color: var(--card-bg);
   border-radius: 10px;
-  padding: 15px;
   margin-bottom: 15px;
+  overflow: hidden;
+  position: relative;
+  --swipe-x: 0px;
   transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-swipe-content {
+  align-items: center;
+  background-color: var(--card-bg);
   display: flex;
   justify-content: space-between;
+  min-height: 84px;
+  padding: 15px;
+  position: relative;
+  transform: translateX(var(--swipe-x));
+  transition: transform 0.22s ease;
+  width: 100%;
+  z-index: 1;
+}
+
+.transaction-item.is-swiping .transaction-swipe-content {
+  transition: none;
+}
+
+.transaction-delete-action {
   align-items: center;
+  background-color: var(--danger-color);
+  color: white;
+  display: flex;
+  font-size: 1.35rem;
+  inset: 0 0 0 auto;
+  justify-content: center;
+  position: absolute;
+  width: 96px;
+  z-index: 0;
 }
 
 .transaction-item:hover {
@@ -318,6 +348,11 @@ body {
   background: none;
   border: none;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+  height: 36px;
   padding: 5px;
   margin-left: 10px;
   transition: all 0.3s ease;
@@ -422,20 +457,56 @@ body {
     font-size: 1.75rem;
   }
 
-  .transaction-item {
-    flex-wrap: wrap;
+  .transaction-list {
+    padding-right: 0;
   }
 
-  .transaction-amount {
-    margin-top: 10px;
+  .transaction-swipe-content {
+    gap: 10px;
+    touch-action: pan-y;
   }
 
   .delete-transaction {
-    align-self: flex-end;
-    margin-top: 10px;
+    display: none;
   }
+
+  .transaction-details {
+    min-width: 0;
+  }
+
+  .transaction-title {
+    overflow-wrap: anywhere;
+  }
+
+  .transaction-amount {
+    flex: 0 0 auto;
+    font-size: 1rem;
+    margin-left: 8px;
+    text-align: right;
+  }
+
+  .transaction-item.swipe-hint .transaction-swipe-content {
+    animation: swipe-delete-hint 1.55s ease 0.35s 1;
+  }
+
+  .transaction-item:hover {
+    transform: none;
+  }
+
   .btn1 {
     min-width: 80%;
+  }
+}
+
+@keyframes swipe-delete-hint {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  38%,
+  62% {
+    transform: translateX(-72px);
   }
 }
 

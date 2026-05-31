@@ -74,10 +74,10 @@ class TranslationManager {
    *
    * @param {string} lang - The language code ('pl' or 'en').
    */
-  setLanguage(lang) {
+  async setLanguage(lang) {
     localStorage.setItem("preferredLanguage", lang);
     this.currentLanguage = lang;
-    this.loadTranslations(lang);
+    await this.loadTranslations(lang);
     this.updateLanguageButtons(lang);
 
     // Dispatch a custom event to notify other parts of the app
