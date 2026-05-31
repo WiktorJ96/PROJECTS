@@ -402,7 +402,7 @@ const ProductList = ({
                   type="search"
                   value={searchTerm}
                   onChange={(event) => setSearchTerm(event.target.value)}
-                  className="form-input pl-10"
+                  className="form-input form-input-with-icon"
                   placeholder="Szukaj po nazwie lub notatce"
                 />
               </label>
@@ -415,7 +415,7 @@ const ProductList = ({
                 <select
                   value={filter}
                   onChange={(event) => setFilter(event.target.value)}
-                  className="form-input min-w-40 pl-10"
+                  className="form-input form-input-with-icon min-w-40"
                 >
                   {PRODUCT_FILTERS.map((item) => (
                     <option key={item.value} value={item.value}>
@@ -433,7 +433,7 @@ const ProductList = ({
                 <select
                   value={sortBy}
                   onChange={(event) => setSortBy(event.target.value)}
-                  className="form-input min-w-44 pl-10"
+                  className="form-input form-input-with-icon min-w-44"
                 >
                   {PRODUCT_SORTS.map((item) => (
                     <option key={item.value} value={item.value}>

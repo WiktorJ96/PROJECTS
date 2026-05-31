@@ -124,6 +124,10 @@ body {
     outline: none;
 }
 
+.form-input-with-icon {
+    padding-left: 2.5rem;
+}
+
 .price-badge {
     background-color: #ecfeff;
     border-radius: 0.375rem;
